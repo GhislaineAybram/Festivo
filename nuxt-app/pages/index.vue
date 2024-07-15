@@ -1,8 +1,12 @@
 <script setup lang="ts">
+const config = useRuntimeConfig();
+const { data } = await useFetch(`${config.public.apiUrl}`);
 </script>
 
 <template>
-    <h1>This is the homepage</h1>
+  <main class="main">
+    <h1>This is the homepage {{ data }}</h1>
+  </main>
 </template>
   
 <style>

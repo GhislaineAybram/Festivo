@@ -12,6 +12,12 @@ export default defineNuxtConfig({
     // 'nuxt-primevue'
   ],
 
+  runtimeConfig: {
+    public: {
+      apiUrl: process.env.API_URL
+    }
+  },
+
   primevue: {
     usePrimeVue: true,
     options: {
