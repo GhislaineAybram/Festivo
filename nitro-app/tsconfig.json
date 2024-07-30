@@ -1,4 +1,13 @@
 // https://nitro.unjs.io/guide/typescript
 {
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es2015",        // ou "esnext", ou "preserve"
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"]
+    },
   "extends": "./.nitro/types/tsconfig.json"
 }

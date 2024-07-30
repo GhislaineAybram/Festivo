@@ -8,5 +8,12 @@
   },
   "devDependencies": {
     "nitropack": "latest"
+  },
+  "dependencies": {
+    "@types/node": "^20.14.11",
+    "@types/pg": "^8.11.6",
+    "cors": "^2.8.5",
+    "db0": "^0.1.4",
+    "pg": "^8.12.0"
   }
 }

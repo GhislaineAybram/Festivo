@@ -50,12 +50,12 @@ const items = ref([
       {
         label: 'Pot de départ Rémi',
         icon: 'pi pi-chevron-right',
-        command: () => router.push({ path: '/eventpage' }),
+        command: () => router.push({ path: '/event/1' }),
       },
       {
         label: 'Anniversaire 3 ans Léopold',
         icon: 'pi pi-chevron-right',
-        command: () => router.push({ path: '/eventpage' }),
+        command: () => router.push({ path: '/event/2' }),
       },
     ],
   },
@@ -66,12 +66,12 @@ const items = ref([
       {
         label: 'Anniversaire 40 ans',
         icon: 'pi pi-chevron-right',
-        command: () => router.push({ path: '/eventadmin' }),
+        command: () => router.push({ path: '/eventadmin/1' }),
       },
       {
         label: 'Baby shower',
         icon: 'pi pi-chevron-right',
-        command: () => router.push({ path: '/eventadmin' }),
+        command: () => router.push({ path: '/eventadmin/2' }),
       },
     ],
   },
