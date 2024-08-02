@@ -8,8 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module', 
-    'nuxt-icons', 
-    // 'nuxt-primevue'
+    'nuxt-icons'
   ],
 
   runtimeConfig: {
@@ -31,8 +30,12 @@ export default defineNuxtConfig({
             cssLayer: false
           }
         }
-    }
+    },
   },
+
+  css: [
+    'primeicons/primeicons.css'
+  ],
 
   compatibilityDate: '2024-07-12',
 });

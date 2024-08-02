@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const config = useRuntimeConfig();
-const { data } = await useFetch(`${config.public.apiUrl}`);
+const runtimeConfig = useRuntimeConfig();
+const { data } = await useFetch(`${runtimeConfig.public.apiUrl}`);
 </script>
 
 <template>
