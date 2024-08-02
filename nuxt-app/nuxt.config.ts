@@ -5,6 +5,10 @@ import { defineNuxtConfig } from 'nuxt/config';
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  devServer: {
+    port: Number(process.env.PORT_FRONT),
+  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module', 

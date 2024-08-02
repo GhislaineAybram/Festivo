@@ -6,9 +6,11 @@ dotenv.config();
 
 export default defineNitroConfig({
   srcDir: "server",
+
   experimental: {
     database: true,
   },
+
   runtimeConfig: {
     database: {
       user: process.env.DB_USER,
@@ -17,8 +19,5 @@ export default defineNitroConfig({
       password: process.env.DB_PASSWORD,
       port: process.env.DB_PORT,
     },
-    // public: {
-    //   apiBase: '/api',
-    // }
   },
 });
