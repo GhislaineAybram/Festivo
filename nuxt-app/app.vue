@@ -5,7 +5,7 @@
         <div class="main">
           <slot />
         </div>
-        <Footer />
+        <!-- <Footer /> -->
   </NuxtLayout>
 </template>
 
