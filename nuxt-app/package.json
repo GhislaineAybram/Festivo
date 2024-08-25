@@ -10,16 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@primevue/themes": "^4.0.0",
+    "@types/pg": "^8.11.6",
+    "nuxt": "latest",
     "nuxt-icons": "^3.2.1",
     "nuxt-primevue": "^3.0.0",
+    "pg": "^8.12.0",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.0",
     "rollup": "^3.20.3-0",
     "tailwindcss-primeui": "^0.3.4",
-    "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue": "latest",
+    "vue-router": "latest"
   },
   "devDependencies": {
     "@primevue/nuxt-module": "^4.0.0",

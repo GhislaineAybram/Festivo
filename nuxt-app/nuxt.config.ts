@@ -9,6 +9,18 @@ export default defineNuxtConfig({
     port: Number(process.env.PORT_FRONT),
   },
 
+  nitro: {
+    experimental: {
+      database: true
+    },
+    database: {
+      default: {
+        connector: 'sqlite',
+        options: { name: 'db' }
+      },
+    },
+  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module', 
@@ -18,7 +30,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: process.env.API_URL
-    }
+    },
+    database: {
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      name: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
+      port: process.env.DB_PORT,
+    },
   },
 
   primevue: {
