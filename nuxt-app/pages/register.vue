@@ -19,7 +19,7 @@ const registerNewUser = async () => {
   }
 
   try {
-    const response = await fetch(`${runtimeConfig.public.apiUrl}/register`, {
+    const response = await fetch(`${runtimeConfig.public.apiUrl}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,26 +1,50 @@
 // routes.ts
-// import { findUserByEmail } from "~~/db-queries";
+import { getUserByEmail } from "~~/db-queries";
 
-// export default eventHandler(async (event) => {
-//     const session = await setUserSession(event);
-//     const { email, password } = await readBody(event);
-//     const user = await findUserByEmail(email);
-//     if (!user) {
-//       throw createError({
-//         message: "Email not found! Please register.",
-//         statusCode: 401,
-//       });
-//     }
-//     if (!user.password || user.password !== (await hash(password))) {
-//       throw createError({
-//         message: "Incorrect password!",
-//         statusCode: 401,
-//       });
-//     }
-//     await session.update({
-//         id: user.id,
-//         name: user.name,
-//         email: user.email,
-//     });
-//     return session;
-//   });
+async function handleUserValidation(email: string, password: string) {
+    // verify the user, email password etc
+    const user = await getUserByEmail(email);
+
+    if (!user || user.password !== password) {
+        return null; // Utilisateur non trouvé ou mot de passe invalide
+    }
+
+    return {
+      email: user.email,
+    }
+}
+  
+export default defineEventHandler(async (event) => {
+    try {
+      const { email, password } = await readBody(event);
+      const user = await handleUserValidation(email, password);
+       
+      if (!user) {
+        throw createError({
+          statusCode: 401,
+          statusMessage: "Invalid email or password.",
+        });
+      }
+
+      await setUserSession(event, { user });
+
+      return { success: true, message: "Login successful" };
+
+    } catch (error) {
+      console.log(error);
+
+      // Vérifier si l'erreur est un objet avec une propriété `statusCode`
+      if (error instanceof Error && 'statusCode' in error) {
+        return {
+            statusCode: error.statusCode,
+            message: error.message,
+          };
+      }
+  
+      // Si l'erreur n'a pas de `statusCode`, créer une erreur avec un code d'état 500
+      throw createError({
+        statusCode: 500,
+        statusMessage: "Internal Server Error",
+      });
+    }
+  });
