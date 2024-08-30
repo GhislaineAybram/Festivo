@@ -1,11 +1,18 @@
 <script setup lang="ts">
-const runtimeConfig = useRuntimeConfig();
-const { data } = await useFetch(`${runtimeConfig.public.apiUrl}`);
+const { loggedIn, user, session, fetch, clear } = useUserSession()
 </script>
 
 <template>
   <main class="main">
-    <h1>This is the homepage {{ data }}</h1>
+    <div>
+    <div v-if="loggedIn">
+      <h1>Welcome {{ user?.firstname }}!</h1>
+    </div>
+    <div v-else>
+      <h1>Not logged in</h1>
+      <NuxtLink to="login">Login with password</NuxtLink>
+    </div>
+  </div>
   </main>
 </template>
   

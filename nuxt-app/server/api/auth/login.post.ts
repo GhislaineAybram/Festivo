@@ -11,6 +11,7 @@ async function handleUserValidation(email: string, password: string) {
 
     return {
       email: user.email,
+      firstname: user.firstname,
     }
 }
   
@@ -28,7 +29,11 @@ export default defineEventHandler(async (event) => {
 
       await setUserSession(event, { user });
 
-      return { success: true, message: "Login successful" };
+      return { 
+        success: true, 
+        message: "Login successful",
+        user: user 
+    };
 
     } catch (error) {
       console.log(error);
