@@ -23,8 +23,10 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/tailwindcss',
-    '@primevue/nuxt-module', 
-    'nuxt-icons'
+    '@primevue/nuxt-module',
+    'nuxt-icons',
+    'nuxt-auth-utils',
+    "@nuxt/eslint"
   ],
 
   runtimeConfig: {
@@ -38,6 +40,13 @@ export default defineNuxtConfig({
       password: process.env.DB_PASSWORD,
       port: process.env.DB_PORT,
     },
+    session: {
+      name: 'nuxt-session',
+      password: process.env.NUXT_SESSION_PASSWORD || '',
+      cookie: {
+        sameSite: 'lax'
+      }
+    }
   },
 
   primevue: {

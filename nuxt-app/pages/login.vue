@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 const username = ref();
 const password = ref();
-const accept = ref(false);
+// const accept = ref(false);
 </script>
 
 <template>
@@ -28,7 +28,12 @@ const accept = ref(false);
             <Button type="submit" label="Submit" class="mt-2" />
         </div>
     </div>
-    <p><NuxtLink to="/register">Don't have an account yes ? Go register</NuxtLink></p>
+    <div class="w-full md:w-5/12 flex items-center justify-center py-5">
+      <p>Don't have an account yes ?</p>
+      <NuxtLink to="/register">
+        <Button label="Sign Up" icon="pi pi-user-plus" severity="success" class="w-full max-w-[17.35rem] mx-auto"/>
+      </NuxtLink>
+    </div>
   </main>
 </template>
 
@@ -36,6 +41,7 @@ const accept = ref(false);
 @media (min-width: 1024px) {
   .main {
     margin-top: 59px;
+    display: flex;
   }
   #login {
     border-radius: 2rem;

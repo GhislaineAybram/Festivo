@@ -53,7 +53,7 @@ const registerNewUser = async () => {
   <main class="main">
     <h1>Page registration</h1>
     <div id="login" class="card flex justify-center">
-        <form @submit.prevent="registerNewUser" class="w-full sm:w-80 flex flex-col gap-6">
+        <form class="w-full sm:w-80 flex flex-col gap-6" @submit.prevent="registerNewUser">
             <IconField>
                 <InputIcon>
                     <i class="pi pi-user" />

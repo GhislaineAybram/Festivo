@@ -36,7 +36,7 @@ import SupportIcon from './icons/IconSupport.vue'
       >Cypress Component Testing</a
     >.
 
-    <br />
+    <br >
 
     More instructions are available in <code>README.md</code>.
   </WelcomeItem>

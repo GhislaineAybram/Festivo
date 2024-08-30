@@ -2,7 +2,7 @@
 // import { findUserByEmail } from "~~/db-queries";
 
 // export default eventHandler(async (event) => {
-//     const session = await useAuthSession(event);
+//     const session = await setUserSession(event);
 //     const { email, password } = await readBody(event);
 //     const user = await findUserByEmail(email);
 //     if (!user) {

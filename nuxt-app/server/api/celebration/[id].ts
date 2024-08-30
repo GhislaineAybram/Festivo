@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Convertir l'ID en nombre
-    const celebrationId = parseInt(id as string, 10);
+    const celebrationId = parseInt(String(id), 10);
 
     if (isNaN(celebrationId)) {
       return {
