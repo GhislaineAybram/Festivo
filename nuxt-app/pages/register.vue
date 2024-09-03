@@ -50,9 +50,9 @@ const registerNewUser = async () => {
 </script>
 
 <template>
-  <main class="main">
-    <h1>Page registration</h1>
-    <div id="login" class="card flex justify-center">
+  <main class="main flex flex-col items-center">
+    <h1 class="text-3xl font-bold sm:text-4xl">Page registration</h1>
+    <div id="login" class="card w-full sm:w-80 p-6 mb-6">
         <form class="w-full sm:w-80 flex flex-col gap-6" @submit.prevent="registerNewUser">
             <IconField>
                 <InputIcon>
@@ -94,26 +94,43 @@ const registerNewUser = async () => {
                 <label for="accept">I agree to the terms and conditions.</label>
             </div>
 
-            <Button type="submit" label="Send" class="mt-2" />
+        <Button type="submit" id="sign-up-button" label="Sign Up" icon="pi pi-user-plus" class="mt-2" />
+
         </form>
     </div>
   </main>
 </template>
 
 <style>
+#sign-up-button {
+  background-color: #180161;
+  color: #ffa96a;
+  border-color: #180161;
+}
+#sign-up-button:hover {
+  background-color: #ffa96a;
+  color: #180161;
+  border-color: #180161;
+}
+
 @media (min-width: 1024px) {
   .main {
     margin-top: 59px;
-  }
-  #login {
-    border-radius: 2rem;
-    padding: 2rem;
-    margin-top: 59px;
-    border-width: 2px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+    flex-direction: column; /* Ajoutez cette ligne pour s'assurer que les éléments enfants soient en colonne */
+    align-items: center; /* Centrer horizontalement les enfants */
+    max-width: 1024px; /* Limitez la largeur maximale à 1024px */
+    margin-left: auto; /* Centre horizontalement le conteneur */
+    margin-right: auto; /* Centre horizontalement le conteneur */
+    padding: 1rem;
+    width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .main {
+    width: 80%; /* Définit la largeur à 80% de l'écran sur les smartphones */
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 </style>

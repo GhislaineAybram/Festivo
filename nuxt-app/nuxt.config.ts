@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import Aura from '@primevue/themes/aura';
+import MyPreset from './assets/primevue-theme';
 import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
@@ -55,7 +56,7 @@ export default defineNuxtConfig({
         ripple: true,
         inputVariant: 'filled',
         theme: {
-          preset: Aura,
+          preset: MyPreset,
           options: {
             prefix: 'p',
             darkModeSelector: 'system',
@@ -66,7 +67,7 @@ export default defineNuxtConfig({
   },
 
   css: [
-    'primeicons/primeicons.css'
+    'primeicons/primeicons.css',
   ],
 
   compatibilityDate: '2024-07-12',
