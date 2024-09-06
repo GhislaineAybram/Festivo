@@ -16,7 +16,7 @@ const { loggedIn, user, session, fetch, clear } = useUserSession()
   </main>
 </template>
   
-<style>
+<style  lang="scss" scoped>
   @media (min-width: 1024px) {
     .about {
       min-height: 100vh;

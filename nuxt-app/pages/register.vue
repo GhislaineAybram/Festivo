@@ -52,7 +52,7 @@ const registerNewUser = async () => {
 <template>
   <main class="main flex flex-col items-center">
     <h1 class="text-3xl font-bold sm:text-4xl">Page registration</h1>
-    <div id="login" class="card w-full sm:w-80 p-6 mb-6">
+    <div id="register" class="card w-full sm:w-80 p-6 mb-6">
         <form class="w-full sm:w-80 flex flex-col gap-6" @submit.prevent="registerNewUser">
             <IconField>
                 <InputIcon>
@@ -101,20 +101,38 @@ const registerNewUser = async () => {
   </main>
 </template>
 
-<style>
+<style  lang="scss" scoped>
+#register {
+    border-radius: 1rem;
+    border-color: $tangerine;
+    padding: 2rem;
+    margin-top: 59px;
+    border-width: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
 #sign-up-button {
-  background-color: #180161;
-  color: #ffa96a;
-  border-color: #180161;
+  background-color: $indigo;
+  color: $seashell;
+  border-color: $indigo;
 }
 #sign-up-button:hover {
-  background-color: #ffa96a;
-  color: #180161;
-  border-color: #180161;
+  background-color: $tangerine;
+  color: $indigo;
+  border-color: $indigo;
 }
-
+h1 {
+  background-color: $tangerine;
+  color: $indigo;
+  width: 100%;
+  height: 100px;
+  align-content: center;
+  text-align: center;
+}
 @media (min-width: 1024px) {
-  .main {
+  #register {
     margin-top: 59px;
     display: flex;
     flex-direction: column; /* Ajoutez cette ligne pour s'assurer que les éléments enfants soient en colonne */
@@ -127,7 +145,7 @@ const registerNewUser = async () => {
   }
 }
 @media (max-width: 600px) {
-  .main {
+  #register {
     width: 80%; /* Définit la largeur à 80% de l'écran sur les smartphones */
     margin-left: auto;
     margin-right: auto;

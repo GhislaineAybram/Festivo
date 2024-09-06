@@ -49,6 +49,15 @@ export default defineNuxtConfig({
       }
     }
   },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/_colors.scss" as *;'
+        }
+      }
+    }
+  },
 
   primevue: {
     usePrimeVue: true,
@@ -68,6 +77,7 @@ export default defineNuxtConfig({
 
   css: [
     'primeicons/primeicons.css',
+    '~/assets/css/main.css'
   ],
 
   compatibilityDate: '2024-07-12',

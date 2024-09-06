@@ -82,20 +82,20 @@ const items = ref([
   </div>
 </template>
 
-<style scoped>
+<style  lang="scss" scoped>
 :root {
-  --p-menubar-background: #180161; /* Couleur de fond de la barre de navigation */
-  --p-menubar-item-color: #ffa96a; /* Couleur du texte des éléments du menu */
-  --p-menubar-item-hover-background: #ffa96a; /* Couleur de fond au survol des éléments du menu */
-  --p-menubar-item-hover-color: #180161; /* Couleur du texte au survol des éléments du menu */
-  --p-menubar-item-border: #180161; /* Couleur des bordures des éléments du menu */
-  --p-menubar-icon-color: #ffa96a;
+  --p-menubar-background: $indigo; /* Couleur de fond de la barre de navigation */
+  --p-menubar-item-color: $tangerine; /* Couleur du texte des éléments du menu */
+  --p-menubar-item-hover-background: $tangerine; /* Couleur de fond au survol des éléments du menu */
+  --p-menubar-item-hover-color: $indigo; /* Couleur du texte au survol des éléments du menu */
+  --p-menubar-item-border: $indigo; /* Couleur des bordures des éléments du menu */
+  --p-menubar-icon-color: $tangerine;
 }
 #menuBar {
   position: absolute;
   top: 0;
   width: 100%;
-  background-color: #180161;
-  color: #ffa96a;
+  background-color: $indigo;
+  color: $tangerine;
 }
 </style>

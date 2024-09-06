@@ -71,10 +71,10 @@ const submitRegisterForm = async () => {
   </main>
 </template>
 
-<style>
+<style  lang="scss" scoped>
 #login {
     border-radius: 1rem;
-    border-color: #ffa96a;
+    border-color: $tangerine;
     padding: 2rem;
     margin-top: 59px;
     border-width: 2px;
@@ -94,43 +94,44 @@ const submitRegisterForm = async () => {
   gap: 0.5rem;
 }
 h1 {
-  background-color: #ffa96a;
-  color: #180161;
+  background-color: $tangerine;
+  color: $indigo;
   width: 100%;
   height: 100px;
   align-content: center;
+  text-align: center;
 }
 #sign-in {
-  background-color: #180161;
-  color: #ffa96a;
-  border-color: #180161;
+  background-color: $indigo;
+  color: $seashell;
+  border-color: $indigo;
 }
 #sign-in:hover {
-  background-color: #ffa96a;
-  color: #180161;
-  border-color: #180161;
+  background-color: $tangerine;
+  color: $indigo;
+  border-color: $indigo;
 }
 #sign-up-link {
   font-weight: bold;
-  color: #180161;
+  color: $indigo;
 }
   
 @media (min-width: 1024px) {
-  .main {
+  #login {
     margin-top: 59px;
     display: flex;
-    flex-direction: column; /* Ajoutez cette ligne pour s'assurer que les éléments enfants soient en colonne */
-    align-items: center; /* Centrer horizontalement les enfants */
-    max-width: 1024px; /* Limitez la largeur maximale à 1024px */
-    margin-left: auto; /* Centre horizontalement le conteneur */
-    margin-right: auto; /* Centre horizontalement le conteneur */
+    flex-direction: column;
+    align-items: center;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 1rem;
     width: 100%;
   }
 }
 @media (max-width: 600px) {
-  .main {
-    width: 80%; /* Définit la largeur à 80% de l'écran sur les smartphones */
+  #login {
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
   }

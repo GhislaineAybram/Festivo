@@ -26,7 +26,7 @@ if (error.value) {
   </main>
 </template>
 
-<style>
+<style  lang="scss" scoped>
 @media (min-width: 1024px) {
   .main {
     margin-top: 59px;
