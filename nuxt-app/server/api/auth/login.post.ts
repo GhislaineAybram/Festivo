@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
     try {
       const { email, password } = await readBody(event);
       const user = await handleUserValidation(email, password);
+      const session = await getUserSession(event);
        
       if (!user) {
         throw createError({

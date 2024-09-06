@@ -1,18 +1,28 @@
 <script setup lang="ts">
-const { loggedIn, user, session, fetch, clear } = useUserSession()
+const runtimeConfig = useRuntimeConfig();
+
+const { data: session, pending, error } = await useFetch(`${runtimeConfig.public.apiUrl}/auth/session`, {
+  headers: useRequestHeaders(['cookie']),
+});
+
+const loggedIn = computed(() => !!session.value?.user);
+const userFirstname = computed(() => session.value?.user?.firstname || '');
 </script>
 
 <template>
   <main class="main">
-    <div>
-    <div v-if="loggedIn">
-      <h1>Welcome {{ user?.firstname }}!</h1>
+    <div v-if="pending">
+      <p>Loading...</p>
     </div>
     <div v-else>
-      <h1>Not logged in</h1>
-      <NuxtLink to="login">Login with password</NuxtLink>
+      <div v-if="loggedIn">
+        <h1>Welcome {{ userFirstname }}!</h1>
+      </div>
+      <div v-else>
+        <h1>Not logged in</h1>
+        <NuxtLink to="login">Login with password</NuxtLink>
+      </div>
     </div>
-  </div>
   </main>
 </template>
   

@@ -53,11 +53,40 @@ const items = ref([
       {
         label: 'Se déconnecter',
         icon: 'pi pi-sign-out',
-        command: () => router.push({ path: '/login' }),
+        command: () => logout(),
       },
     ],
   },
 ]);
+
+const runtimeConfig = useRuntimeConfig();
+
+const logout = async () => {
+  try {
+    const response = await fetch(`${runtimeConfig.public.apiUrl}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Erreur lors de la déconnexion:', errorData.message);
+      alert('Une erreur s\'est produite lors de la déconnexion : ' + errorData.message);
+      return;
+    };
+
+    const data = await response.json();
+    alert(data.message || 'Logout successful!');
+    router.push('/login');
+  } catch (error) {
+    console.error('Logout error:', error);
+    alert('Une erreur s\'est produite lors de la déconnexion.');
+  }
+};
 </script>
 
 <template>
