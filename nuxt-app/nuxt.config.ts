@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import Aura from '@primevue/themes/aura';
 import MyPreset from './assets/primevue-theme';
+import Aura from '@primevue/themes/aura';
 import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
@@ -29,6 +29,21 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     "@nuxt/eslint"
   ],
+  primevue: {
+    usePrimeVue: true,
+    options: {
+        ripple: true,
+        inputVariant: 'filled',
+        theme: {
+          preset: Aura,
+          options: {
+            prefix: 'p',
+            darkModeSelector: 'system',
+            cssLayer: false
+          }
+        }
+    },
+  },
 
   runtimeConfig: {
     public: {
@@ -57,22 +72,6 @@ export default defineNuxtConfig({
         }
       }
     }
-  },
-
-  primevue: {
-    usePrimeVue: true,
-    options: {
-        ripple: true,
-        inputVariant: 'filled',
-        theme: {
-          preset: MyPreset,
-          options: {
-            prefix: 'p',
-            darkModeSelector: 'system',
-            cssLayer: false
-          }
-        }
-    },
   },
 
   css: [

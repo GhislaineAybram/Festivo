@@ -29,9 +29,9 @@ if (error.value) {
         <div id="photo-title-event">
           <h1 class="text-3xl font-bold sm:text-4xl">{{ celebration?.name }}</h1>
           <img src="~/public/img/photo-party.png" alt="photo de ballons" class="photo-event">
+          <p id="event-author-name" class="mt-4 text-gray-500">proposé par {{ celebration?.author }}</p>
         </div>
-        <p class="text-2xl mt-4 text-gray-900">{{ celebration?.description }}</p>
-        <p class="mt-4 text-gray-500">proposé par {{ celebration?.author }}</p>
+        <h3 class="text-2xl mt-4 text-gray-900">{{ celebration?.description }}</h3>
         <div id="event-details">
         <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
           <div class="border-t border-gray-200 pt-4">
@@ -86,10 +86,26 @@ h1 {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
+#event-author-name {
+  color: $grey;
+  text-align: right;
+  position: absolute;
+  bottom: 20px; 
+  right: 20px;
+  z-index: 1;
+}
 .photo-event {
   filter: opacity(35%);
 }
-
+h3 {
+  color: $indigo;
+  background-color: $seashell;
+  width: 100%;
+  height: 100px;
+  align-content: center;
+  text-align: left;
+  padding-left: 50px;
+}
 @media (min-width: 1024px) {
   #event-details {
     margin-top: 59px;

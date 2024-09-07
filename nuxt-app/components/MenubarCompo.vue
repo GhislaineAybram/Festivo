@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-// import Menubar from 'primevue/menubar';
+import Menubar from 'primevue/menubar';
 const router = useRouter();
 
 const items = ref([
@@ -112,19 +112,9 @@ const logout = async () => {
 </template>
 
 <style  lang="scss" scoped>
-:root {
-  --p-menubar-background: $indigo; /* Couleur de fond de la barre de navigation */
-  --p-menubar-item-color: $tangerine; /* Couleur du texte des éléments du menu */
-  --p-menubar-item-hover-background: $tangerine; /* Couleur de fond au survol des éléments du menu */
-  --p-menubar-item-hover-color: $indigo; /* Couleur du texte au survol des éléments du menu */
-  --p-menubar-item-border: $indigo; /* Couleur des bordures des éléments du menu */
-  --p-menubar-icon-color: $tangerine;
-}
 #menuBar {
   position: absolute;
   top: 0;
   width: 100%;
-  background-color: $indigo;
-  color: $tangerine;
 }
 </style>

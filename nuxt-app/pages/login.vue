@@ -83,6 +83,7 @@ const submitRegisterForm = async () => {
     justify-content: center;
     gap: 2rem;
 }
+
 .register-container {
   display: flex; /* Utilisez Flexbox pour aligner les éléments */
   justify-content: center; /* Espacement entre les éléments */
