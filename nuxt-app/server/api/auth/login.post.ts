@@ -1,11 +1,12 @@
 // routes.ts
 import { getUserByEmail } from "~~/db-queries";
+import bcrypt from "bcrypt";
 
 async function handleUserValidation(email: string, password: string) {
     // verify the user, email password etc
     const user = await getUserByEmail(email);
 
-    if (!user || user.password !== password) {
+    if (!user || !(await bcrypt.compare(password, user.password))) {
         return null; // Utilisateur non trouvé ou mot de passe invalide
     }
 

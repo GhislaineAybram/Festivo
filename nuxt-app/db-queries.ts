@@ -1,4 +1,7 @@
 import client from "./db";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
 export interface User {
   id: number;
   firstname: string;
@@ -53,12 +56,15 @@ export const createUser = async (
   email: string, 
   password: string
 ): Promise<User> => {
+  // hashing password
+  const hashedPassword: string = await bcrypt.hash(password, saltRounds);
+
   const result = await client.query(`
     INSERT INTO public.user (firstname, lastname, email, password)
     VALUES ($1, $2, $3, $4)
     RETURNING *;
     `,
-    [firstname, lastname, email, password]
+    [firstname, lastname, email, hashedPassword]
   );
   return result.rows[0]; // Retourne l'utilisateur nouvellement créé
 };

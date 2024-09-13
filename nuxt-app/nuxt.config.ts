@@ -46,6 +46,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    bcryptSaltRound: 10,
     public: {
       apiUrl: process.env.API_URL
     },
@@ -76,7 +77,9 @@ export default defineNuxtConfig({
 
   css: [
     'primeicons/primeicons.css',
-    '~/assets/css/main.css'
+    '~/assets/primevue-custom-theme.scss',
+    '~/assets/css/main.css',
+    '~/assets/main.scss',
   ],
 
   compatibilityDate: '2024-07-12',

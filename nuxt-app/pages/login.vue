@@ -37,7 +37,6 @@ const submitRegisterForm = async () => {
     alert('Une erreur s\'est produite lors de la connexion.');
   }
 };
-
 </script>
 
 <template>
@@ -59,7 +58,7 @@ const submitRegisterForm = async () => {
                 <InputText id="password" v-model="password" type="password" placeholder="Password" fluid />
             </IconField>
 
-            <Button type="submit" id="sign-in" label="Sign in" class="mt-2" @click="submitRegisterForm" />
+            <Button type="submit" id="sign-in" label="Sign in" class="mt-2 button-validatation" @click="submitRegisterForm" />
         </div>
     </div>
     <div class="register-container">

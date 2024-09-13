@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
         statusMessage: "All fields are required.",
       });
     };
-    
+
     // create a new user
     const newUser = await createUser(
       firstname, 
