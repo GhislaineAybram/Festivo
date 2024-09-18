@@ -12,9 +12,10 @@ interface Celebration {
   location: string;
 }
 
-const route = useRoute();
+const { id } = useRoute().params;
+
 const runtimeConfig = useRuntimeConfig();
-const { data: celebration, error } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/${route.params.id}`);
+const { data: celebration, error } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/${id}`);
 
 if (error.value) {
   console.error('Failed to fetch celebration data', error.value);

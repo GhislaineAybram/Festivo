@@ -1,26 +1,12 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import Menubar from 'primevue/menubar';
-import type { MenuItem } from 'primevue/menuitem';
 
 const router = useRouter();
-const runtimeConfig = useRuntimeConfig();
 
-const session = ref(null);
-const loggedIn = ref(false);
-const userId = ref(null);
+const { loggedIn, user, session, fetch, clear } = useUserSession();
 
-const { data: userData, error, refresh } = await useFetch(() => `/api/user/${userId.value}`, {
-  immediate: false, // Ne pas lancer la requête tant que l'ID n'est pas défini
-});
-
-watch(userId, (newId) => {
-  if (newId) {
-    refresh(); // Rafraîchir les données lorsque l'ID change
-  }
-});
-
-const loading = computed(() => userData.value === null && !error.value);
+const userId = computed(() => user.value?.id || null);
 
 const items = ref([
   {
@@ -77,38 +63,12 @@ const items = ref([
       {
         label: 'Se déconnecter',
         icon: 'pi pi-sign-out',
-        command: () => logout(),
+        command: () => clear(),
       },
     ],
   },
 ]);
 
-const logout = async () => {
-  try {
-    const response = await fetch(`${runtimeConfig.public.apiUrl}/auth/logout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Erreur lors de la déconnexion:', errorData.message);
-      alert('Une erreur s\'est produite lors de la déconnexion : ' + errorData.message);
-      return;
-    };
-
-    const data = await response.json();
-    alert(data.message || 'Logout successful!');
-    router.push('/login');
-  } catch (error) {
-    console.error('Logout error:', error);
-    alert('Une erreur s\'est produite lors de la déconnexion.');
-  }
-};
 </script>
 
 <template>

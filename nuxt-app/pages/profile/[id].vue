@@ -1,46 +1,11 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { useRuntimeConfig } from '#app';
 
-interface User {
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  added_datetime: string;
-}
+const { loggedIn, user, session, fetch, clear } = useUserSession();
 
-const route = useRoute();
-const router = useRouter();
-const runtimeConfig = useRuntimeConfig();
-
-const session = ref<{ user: User | null } | null>(null);
-const firstname = ref('');
-const lastname = ref('');
-const email = ref('');
-
-const loggedIn = ref(false);
-
-const fetchSession = async () => {
-  try {
-    const { data } = await useFetch(`${runtimeConfig.public.apiUrl}/auth/session`);
-    if (data.value?.user) {
-      session.value = data.value;
-      loggedIn.value = true;
-      firstname.value = session.value.user.firstname;
-      lastname.value = session.value.user.lastname;
-      email.value = session.value.user.email;
-    } else {
-      loggedIn.value = false;
-      router.push('/login'); // Rediriger vers la page de connexion si non connecté
-    }
-  } catch (err) {
-    console.error('Erreur lors de la récupération de la session', err);
-    router.push('/login'); // Rediriger vers la page de connexion en cas d'erreur
-  }
-};
-
-fetchSession();
+const pseudo = computed(() => user.value?.pseudo || '');
+const firstname = computed(() => user.value?.firstname || '');
+const lastname = computed(() => user.value?.lastname || '');
+const email = computed(() => user.value?.email || '');
 
 </script>
 
@@ -59,7 +24,7 @@ fetchSession();
         <div class="sm:col-span-4">
           <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Pseudo</label>
           <div class="mt-2">
-            <input v-model="username" id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input v-model="pseudo" id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
