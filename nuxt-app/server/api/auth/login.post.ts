@@ -13,14 +13,15 @@ async function handleUserValidation(email: string, password: string) {
     return {
       email: user.email,
       firstname: user.firstname,
+      lastname: user.lastname,
     }
 }
   
 export default defineEventHandler(async (event) => {
     try {
       const { email, password } = await readBody(event);
+
       const user = await handleUserValidation(email, password);
-      const session = await getUserSession(event);
        
       if (!user) {
         throw createError({
@@ -29,16 +30,18 @@ export default defineEventHandler(async (event) => {
         });
       }
 
+      const session = await getUserSession(event);
+
       await setUserSession(event, { user });
 
       return { 
         success: true, 
         message: "Login successful",
-        user: user 
+        user: user,
     };
 
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       // Vérifier si l'erreur est un objet avec une propriété `statusCode`
       if (error instanceof Error && 'statusCode' in error) {

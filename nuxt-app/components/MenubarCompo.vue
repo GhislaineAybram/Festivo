@@ -1,7 +1,26 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import Menubar from 'primevue/menubar';
+import type { MenuItem } from 'primevue/menuitem';
+
 const router = useRouter();
+const runtimeConfig = useRuntimeConfig();
+
+const session = ref(null);
+const loggedIn = ref(false);
+const userId = ref(null);
+
+const { data: userData, error, refresh } = await useFetch(() => `/api/user/${userId.value}`, {
+  immediate: false, // Ne pas lancer la requête tant que l'ID n'est pas défini
+});
+
+watch(userId, (newId) => {
+  if (newId) {
+    refresh(); // Rafraîchir les données lorsque l'ID change
+  }
+});
+
+const loading = computed(() => userData.value === null && !error.value);
 
 const items = ref([
   {
@@ -46,6 +65,11 @@ const items = ref([
     icon: 'pi pi-user',
     items: [
       {
+        label: 'Mon profil',
+        icon: 'pi pi-user',
+        command: () => router.push({ path: `/profile/${userId.value}` }),
+      },
+      {
         label: 'Se connecter',
         icon: 'pi pi-sign-in',
         command: () => router.push({ path: '/login' }),
@@ -58,8 +82,6 @@ const items = ref([
     ],
   },
 ]);
-
-const runtimeConfig = useRuntimeConfig();
 
 const logout = async () => {
   try {

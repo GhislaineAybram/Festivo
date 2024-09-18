@@ -11,19 +11,45 @@ interface User {
 }
 
 const route = useRoute();
+const router = useRouter();
 const runtimeConfig = useRuntimeConfig();
-const { data: user, error } = await useFetch<User>(() => `${runtimeConfig.public.apiUrl}/user/${route.params.id}`);
 
-if (error.value) {
-  console.error('Failed to fetch user profile', error.value);
-}
+const session = ref<{ user: User | null } | null>(null);
+const firstname = ref('');
+const lastname = ref('');
+const email = ref('');
+
+const loggedIn = ref(false);
+
+const fetchSession = async () => {
+  try {
+    const { data } = await useFetch(`${runtimeConfig.public.apiUrl}/auth/session`);
+    if (data.value?.user) {
+      session.value = data.value;
+      loggedIn.value = true;
+      firstname.value = session.value.user.firstname;
+      lastname.value = session.value.user.lastname;
+      email.value = session.value.user.email;
+    } else {
+      loggedIn.value = false;
+      router.push('/login'); // Rediriger vers la page de connexion si non connecté
+    }
+  } catch (err) {
+    console.error('Erreur lors de la récupération de la session', err);
+    router.push('/login'); // Rediriger vers la page de connexion en cas d'erreur
+  }
+};
+
+fetchSession();
+
 </script>
 
 <template>
   <main class="main">
-    <div id="photo-title-profile">
+      <div v-if="loggedIn">
+        <div id="photo-title-profile">
       <img id="profile-picture" class="inline-block h-40 w-40 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="avatar" />
-      <h1>Bienvenue {{ user?.firstname }} {{ user?.lastname }} !</h1>
+      <h1>Bienvenue {{ firstname }} !</h1>
     </div>
   <form id="profile-details">
   <div class="space-y-12">
@@ -33,7 +59,7 @@ if (error.value) {
         <div class="sm:col-span-4">
           <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Pseudo</label>
           <div class="mt-2">
-            <input id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input v-model="username" id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
@@ -51,21 +77,21 @@ if (error.value) {
         <div class="sm:col-span-3">
           <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
           <div class="mt-2">
-            <input id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input v-model="firstname" id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
         <div class="sm:col-span-3">
           <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
           <div class="mt-2">
-            <input id="last-name" type="text" name="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input v-model="lastname" id="last-name" type="text" name="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
         <div class="sm:col-span-4">
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
-            <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input v-model="email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
@@ -243,7 +269,11 @@ if (error.value) {
     <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
   </div>
 </form>
-
+      </div>
+      <div v-else>
+        <h1>Not logged in</h1>
+        <NuxtLink to="login">Login with password</NuxtLink>
+      </div>
   </main>
 </template>
 
