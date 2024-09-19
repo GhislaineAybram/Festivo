@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import MyPreset from './assets/primevue-theme';
 import Aura from '@primevue/themes/aura';
 import { defineNuxtConfig } from 'nuxt/config';
 
@@ -27,6 +26,7 @@ export default defineNuxtConfig({
     '@primevue/nuxt-module',
     'nuxt-icons',
     'nuxt-auth-utils',
+    '@prisma/nuxt',
     "@nuxt/eslint"
   ],
   primevue: {

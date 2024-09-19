@@ -13,22 +13,25 @@ const email = computed(() => user.value?.email || '');
   <main class="main">
       <div v-if="loggedIn">
         <div id="photo-title-profile">
-      <img id="profile-picture" class="inline-block h-40 w-40 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="avatar" />
-      <h1>Bienvenue {{ firstname }} !</h1>
-    </div>
+          <div id="photo-profile">
+            <img id="profile-picture" class="inline-block h-40 w-40 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="avatar" />
+            <button class="edit-button">
+              <svg class="edit-svgIcon" viewBox="0 0 512 512">
+                <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+              </svg>
+            </button>
+          </div>
+          <h1>Bienvenue {{ firstname }} !</h1>
+        </div>
   <form id="profile-details">
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
       <h2 class="text-base font-semibold leading-7 text-gray-900">Informations de profil</h2>
+      
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-4">
-          <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Pseudo</label>
-          <div class="mt-2">
-            <input v-model="pseudo" id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-          </div>
-        </div>
 
-        <div class="col-span-full">
+
+        <!-- <div class="col-span-full">
           <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo de profil</label>
           <div class="mt-2 flex items-center gap-x-3">
             <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -36,27 +39,35 @@ const email = computed(() => user.value?.email || '');
             </svg>
             <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Modifier</button>
           </div>
-        </div>
+        </div> -->
 
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-3">
+        
+          <div class="sm:col-span-3">
+            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Pseudo</label>
+            <div class="mt-2">
+              <input id="first-name" v-model="pseudo" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+          </div>
+
+          <div class="sm:col-span-3">
           <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
           <div class="mt-2">
-            <input v-model="firstname" id="first-name" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input id="first-name" v-model="firstname" type="text" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
         <div class="sm:col-span-3">
           <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
           <div class="mt-2">
-            <input v-model="lastname" id="last-name" type="text" name="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input id="last-name" v-model="lastname" type="text" name="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
-        <div class="sm:col-span-4">
+        <div class="sm:col-span-3">
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
-            <input v-model="email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input id="email" v-model="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
 
@@ -66,23 +77,28 @@ const email = computed(() => user.value?.email || '');
     </div>
 
     <div class="border-b border-gray-900/10 pb-12">
-      <h2 class="text-base font-semibold leading-7 text-gray-900">Régimes</h2>
+      <h2 class="text-base font-semibold leading-7 text-gray-900">Régimes alimentaires</h2>
       <p class="mt-1 text-sm leading-6 text-gray-600">Afin que vos convives puissent prendre soin de vous.</p>
     </div>
 
     <div class="border-b border-gray-900/10 pb-12">
       <div class="mt-10 space-y-10">
         <fieldset>
-          <div class="text-sm leading-6 grid grid-cols-4 gap-2">
+          <div class="text-sm leading-6 grid grid-cols-4 gap-2 items-center">
             <legend class="text-sm font-semibold leading-6 text-gray-900 col-span-2">Allergies / intolérances</legend>
 
-          <div class="flex items-center gap-x-3">
+              <div class="flex items-center gap-x-3 col-span-1">
                 <input id="push-email" name="push-notifications" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                 <label for="push-email" class="block text-sm font-medium leading-6 text-gray-900">Oui</label>
               </div>
-              <div class="flex items-center gap-x-3">
+              <div class="flex items-center gap-x-3 col-span-1">
                 <input id="push-nothing" name="push-notifications" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                 <label for="push-nothing" class="block text-sm font-medium leading-6 text-gray-900">Non</label>
+              </div>
+              <div class="col-span-1 flex justify-end">
+                <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                </svg>
               </div>
           </div>
 
@@ -252,6 +268,10 @@ const email = computed(() => user.value?.email || '');
 #photo-title-profile {
   position: relative;
 }
+#photo-profile {
+  position: relative;
+  display: inline-block;
+}
 #profile-picture {
   z-index: 2;
   position: relative;
@@ -269,6 +289,32 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+}
+.edit-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 3;
+  text-decoration: none !important;
+}
+.edit-svgIcon {
+  width: 14px;
+}
+.edit-svgIcon path {
+  fill: white;
 }
 @media (min-width: 1024px) {
   #profile-details {

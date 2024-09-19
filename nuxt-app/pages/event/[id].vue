@@ -12,6 +12,11 @@ interface Celebration {
   location: string;
 }
 
+interface User {
+  firstname: string;
+  lastname: string;
+}
+
 const { id } = useRoute().params;
 
 const runtimeConfig = useRuntimeConfig();
@@ -20,6 +25,7 @@ const { data: celebration, error } = await useFetch<Celebration>(() => `${runtim
 if (error.value) {
   console.error('Failed to fetch celebration data', error.value);
 }
+
 </script>
 
 <template>

@@ -50,6 +50,11 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
   return result.rows[0] as User;
 };
 
+const formatName = (name: string) => {
+  if (!name) return '';
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
+
 export const createUser = async (
   firstname: string, 
   lastname: string, 
@@ -59,12 +64,18 @@ export const createUser = async (
   // hashing password
   const hashedPassword: string = await bcrypt.hash(password, saltRounds);
 
+  // firtsname formatting
+  const formattedFirstname = firstname.toUpperCase();
+
+  // lastname formatting
+  const formattedLastname = formatName(lastname);
+
   const result = await client.query(`
     INSERT INTO public.user (firstname, lastname, email, password)
     VALUES ($1, $2, $3, $4)
     RETURNING *;
     `,
-    [firstname, lastname, email, hashedPassword]
+    [formattedFirstname, formattedLastname, email, hashedPassword]
   );
   return result.rows[0]; // Retourne l'utilisateur nouvellement créé
 };

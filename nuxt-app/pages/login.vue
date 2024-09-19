@@ -9,7 +9,7 @@ const password = ref();
 const router = useRouter();
 const runtimeConfig = useRuntimeConfig();
 
-const submitRegisterForm = async () => {
+async function submitRegisterForm() {
   try {
     const response = await fetch(`${runtimeConfig.public.apiUrl}/auth/login`, {
       method: 'POST',
@@ -58,7 +58,7 @@ const submitRegisterForm = async () => {
                 <InputText id="password" v-model="password" type="password" placeholder="Password" fluid />
             </IconField>
 
-            <Button type="submit" id="sign-in" label="Sign in" class="mt-2 button-validation" @click="submitRegisterForm" />
+            <Button id="sign-in" type="submit" label="Sign in" class="mt-2 button-validation" @click="submitRegisterForm" />
         </div>
     </div>
     <div class="register-container">

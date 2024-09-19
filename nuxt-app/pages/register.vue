@@ -12,7 +12,7 @@ const accept = ref(false);
 const router = useRouter();
 const runtimeConfig = useRuntimeConfig();
 
-const registerNewUser = async () => {
+async function registerNewUser() {
   if (!accept.value) {
     alert('Vous devez accepter les termes et conditions.');
     return;
@@ -94,7 +94,7 @@ const registerNewUser = async () => {
                 <label for="accept">I agree to the terms and conditions.</label>
             </div>
 
-        <Button type="submit" id="sign-up-button" label="Sign Up" icon="pi pi-user-plus" class="mt-2" />
+        <Button id="sign-up-button" type="submit" label="Sign Up" icon="pi pi-user-plus" class="mt-2" />
 
         </form>
     </div>
