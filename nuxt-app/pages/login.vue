@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useRuntimeConfig } from '#app';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useRuntimeConfig } from '#app'
 
-const email = ref();
-const password = ref();
+const email = ref()
+const password = ref()
 
-const router = useRouter();
-const runtimeConfig = useRuntimeConfig();
+const router = useRouter()
+const runtimeConfig = useRuntimeConfig()
 
 async function submitRegisterForm() {
   try {
@@ -20,51 +20,81 @@ async function submitRegisterForm() {
         email: email.value,
         password: password.value,
       }),
-    });
+    })
 
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Erreur lors de la connexion:', errorData.message);
-      alert('Une erreur s\'est produite lors de la connexion : ' + errorData.message);
-      return;
+      const errorData = await response.json()
+      console.error('Erreur lors de la connexion:', errorData.message)
+      alert('Une erreur s\'est produite lors de la connexion : ' + errorData.message)
+      return
     };
 
-    const data = await response.json();
-    alert(data.message || 'Login successful!');
-    router.push('/');
-  } catch (error) {
-    console.error('Login error:', error);
-    alert('Une erreur s\'est produite lors de la connexion.');
+    const data = await response.json()
+    alert(data.message || 'Login successful!')
+    router.push('/')
+  }
+  catch (error) {
+    console.error('Login error:', error)
+    alert('Une erreur s\'est produite lors de la connexion.')
   }
 };
 </script>
 
 <template>
   <main class="main flex flex-col items-center">
-    <h1 class="text-3xl font-bold sm:text-4xl">Page login</h1>
-    <div id="login" class="card w-full sm:w-80 p-6 mb-6">
-        <div v-focustrap class="w-full sm:w-80 flex flex-col gap-6">
-            <IconField>
-                <InputIcon>
-                    <i class="pi pi-user" />
-                </InputIcon>
-                <InputText id="username" v-model="email" type="text" placeholder="Email address" autofocus fluid />
-            </IconField>
+    <h1 class="text-3xl font-bold sm:text-4xl">
+      Page login
+    </h1>
+    <div
+      id="login"
+      class="card w-full sm:w-80 p-6 mb-6"
+    >
+      <div
+        v-focustrap
+        class="w-full sm:w-80 flex flex-col gap-6"
+      >
+        <IconField>
+          <InputIcon>
+            <i class="pi pi-user" />
+          </InputIcon>
+          <InputText
+            id="username"
+            v-model="email"
+            type="text"
+            placeholder="Email address"
+            autofocus
+            fluid
+          />
+        </IconField>
 
-            <IconField>
-                <InputIcon>
-                    <i class="pi pi-key" />
-                </InputIcon>
-                <InputText id="password" v-model="password" type="password" placeholder="Password" fluid />
-            </IconField>
+        <IconField>
+          <InputIcon>
+            <i class="pi pi-key" />
+          </InputIcon>
+          <InputText
+            id="password"
+            v-model="password"
+            type="password"
+            placeholder="Password"
+            fluid
+          />
+        </IconField>
 
-            <Button id="sign-in" type="submit" label="Sign in" class="mt-2 button-validation" @click="submitRegisterForm" />
-        </div>
+        <Button
+          id="sign-in"
+          type="submit"
+          label="Sign in"
+          class="mt-2 button-validation"
+          @click="submitRegisterForm"
+        />
+      </div>
     </div>
     <div class="register-container">
       <p>Don't have an account yes ?</p>
       <NuxtLink to="/register">
-        <p id="sign-up-link">Sign up</p>
+        <p id="sign-up-link">
+          Sign up
+        </p>
       </NuxtLink>
     </div>
   </main>
@@ -115,7 +145,7 @@ h1 {
   font-weight: bold;
   color: $indigo;
 }
-  
+
 @media (min-width: 1024px) {
   #login {
     margin-top: 59px;

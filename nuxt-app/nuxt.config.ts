@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import Aura from '@primevue/themes/aura';
-import { defineNuxtConfig } from 'nuxt/config';
+import Aura from '@primevue/themes/aura'
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -11,12 +11,12 @@ export default defineNuxtConfig({
 
   nitro: {
     experimental: {
-      database: true
+      database: true,
     },
     database: {
       default: {
         connector: 'sqlite',
-        options: { name: 'db' }
+        options: { name: 'db' },
       },
     },
   },
@@ -27,28 +27,35 @@ export default defineNuxtConfig({
     'nuxt-icons',
     'nuxt-auth-utils',
     '@prisma/nuxt',
-    "@nuxt/eslint"
+    '@nuxt/eslint',
   ],
+
+  eslint: {
+    config: {
+      stylistic: true,
+    },
+  },
+
   primevue: {
     usePrimeVue: true,
     options: {
-        ripple: true,
-        inputVariant: 'filled',
-        theme: {
-          preset: Aura,
-          options: {
-            prefix: 'p',
-            darkModeSelector: 'system',
-            cssLayer: false
-          }
-        }
+      ripple: true,
+      inputVariant: 'filled',
+      theme: {
+        preset: Aura,
+        options: {
+          prefix: 'p',
+          darkModeSelector: 'system',
+          cssLayer: false,
+        },
+      },
     },
   },
 
   runtimeConfig: {
     bcryptSaltRound: 10,
     public: {
-      apiUrl: process.env.API_URL
+      apiUrl: process.env.API_URL,
     },
     database: {
       user: process.env.DB_USER,
@@ -61,18 +68,18 @@ export default defineNuxtConfig({
       name: 'nuxt-session',
       password: process.env.NUXT_SESSION_PASSWORD || '',
       cookie: {
-        sameSite: 'lax'
-      }
-    }
+        sameSite: 'lax',
+      },
+    },
   },
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/_colors.scss" as *;'
-        }
-      }
-    }
+          additionalData: '@use "~/assets/_colors.scss" as *;',
+        },
+      },
+    },
   },
 
   css: [
@@ -83,4 +90,4 @@ export default defineNuxtConfig({
   ],
 
   compatibilityDate: '2024-07-12',
-});
+})

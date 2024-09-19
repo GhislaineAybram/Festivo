@@ -1,11 +1,11 @@
 <template>
   <NuxtLayout>
-    <NuxtPage/>
-        <MenubarCompo />
-        <div class="main">
-          <slot />
-        </div>
-        <!-- <FooterPage /> -->
+    <NuxtPage />
+    <MenubarCompo />
+    <div class="main">
+      <slot />
+    </div>
+    <!-- <FooterPage /> -->
   </NuxtLayout>
 </template>
 
