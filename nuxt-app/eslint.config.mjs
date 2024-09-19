@@ -1,6 +1,12 @@
 // @ts-check
-import withNuxt from './.nuxt/eslint.config.mjs'
+import { createConfigForNuxt } from '@nuxt/eslint-config/flat';
 
-export default withNuxt(
-  // Your custom configs here
-)
+export default createConfigForNuxt({
+  // options here
+})
+  .override('nuxt/typescript/setup', {
+    rules: {
+      // ...Override rules, for example:
+      '@typescript-eslint/no-unused-vars': 'off'
+    }
+  })
