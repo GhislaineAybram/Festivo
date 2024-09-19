@@ -56,9 +56,6 @@ That's it! You can now use My Module in your Nuxt app ✨
   # Build the playground
   npm run dev:build
   
-  # Run ESLint
-  npm run lint
-  
   # Run Vitest
   npm run test
   npm run test:watch

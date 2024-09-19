@@ -27,14 +27,7 @@ export default defineNuxtConfig({
     'nuxt-icons',
     'nuxt-auth-utils',
     '@prisma/nuxt',
-    '@nuxt/eslint',
   ],
-
-  eslint: {
-    config: {
-      stylistic: true,
-    },
-  },
 
   primevue: {
     usePrimeVue: true,

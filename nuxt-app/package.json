@@ -7,9 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/devtools": "latest",
@@ -29,7 +27,6 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.7",
     "@primevue/nuxt-module": "^4.0.0",
     "@prisma/client": "^5.19.1",
     "@prisma/nuxt": "^0.0.35",
