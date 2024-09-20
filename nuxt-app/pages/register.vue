@@ -182,7 +182,7 @@ h1 {
     display: flex;
     flex-direction: column; /* Ajoutez cette ligne pour s'assurer que les éléments enfants soient en colonne */
     align-items: center; /* Centrer horizontalement les enfants */
-    max-width: 1024px; /* Limitez la largeur maximale à 1024px */
+    max-width: 424px; /* Limitez la largeur maximale à 1024px */
     margin-left: auto; /* Centre horizontalement le conteneur */
     margin-right: auto; /* Centre horizontalement le conteneur */
     padding: 1rem;

@@ -152,7 +152,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1024px;
+    max-width: 424px;
     margin-left: auto;
     margin-right: auto;
     padding: 1rem;
