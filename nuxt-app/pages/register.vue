@@ -128,10 +128,10 @@ async function registerNewUser() {
           <Checkbox
             id="accept"
             v-model="accept"
-            name="accept"
+            name="accept-registration"
             value="Accept"
           />
-          <label for="accept">I agree to the terms and conditions.</label>
+          <label for="accept-registration">I agree to the terms and conditions.</label>
         </div>
 
         <Button
