@@ -131,7 +131,7 @@ async function registerNewUser() {
             name="accept-registration"
             value="Accept"
           />
-          <label for="accept-registration">I agree to the terms and conditions.</label>
+          <label for="accept">I agree to the terms and conditions.</label>
         </div>
 
         <Button
