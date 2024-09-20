@@ -26,7 +26,6 @@ export default defineNuxtConfig({
     '@primevue/nuxt-module',
     'nuxt-icons',
     'nuxt-auth-utils',
-    '@prisma/nuxt',
     '@nuxtjs/supabase',
   ],
 
