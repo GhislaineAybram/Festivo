@@ -65,10 +65,10 @@ export const createUser = async (
   const hashedPassword: string = await bcrypt.hash(password, saltRounds)
 
   // firtsname formatting
-  const formattedFirstname = firstname.toUpperCase()
+  const formattedFirstname = formatName(lastname);
 
   // lastname formatting
-  const formattedLastname = formatName(lastname)
+  const formattedLastname = firstname.toUpperCase();
 
   const result = await client.query(`
     INSERT INTO public.user (firstname, lastname, email, password)
