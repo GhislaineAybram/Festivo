@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { loggedIn, user, session, fetch, clear } = useUserSession()
+const { auth } = useSupabaseClient();
+const user = useSupabaseUser();
 
 const pseudo = computed(() => user.value?.pseudo || '')
 const firstname = computed(() => user.value?.firstname || '')
@@ -9,7 +10,7 @@ const email = computed(() => user.value?.email || '')
 
 <template>
   <main class="main">
-    <div v-if="loggedIn">
+    <div v-if="user">
       <div id="photo-title-profile">
         <div id="photo-profile">
           <img
@@ -490,10 +491,7 @@ const email = computed(() => user.value?.email || '')
       </form>
     </div>
     <div v-else>
-      <h1>Not logged in</h1>
-      <NuxtLink to="login">
-        Login with password
-      </NuxtLink>
+      <AlertNotLoggedIn />
     </div>
   </main>
 </template>

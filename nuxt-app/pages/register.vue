@@ -1,53 +1,70 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useRuntimeConfig } from '#app'
+const user = useSupabaseUser();
+const firstname = ref('');
+const lastname = ref('');
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const errorMsg = ref('');
+const accept = ref(false);
 
-const firstname = ref()
-const lastname = ref()
-const email = ref()
-const password = ref()
-const accept = ref(false)
+const { auth } = useSupabaseClient();
 
-const router = useRouter()
-const runtimeConfig = useRuntimeConfig()
-
-async function registerNewUser() {
+const submitRegisterForm = async () => {
+  console.log('Submit button clicked');
   if (!accept.value) {
     alert('Vous devez accepter les termes et conditions.')
     return
   }
 
-  try {
-    const response = await fetch(`${runtimeConfig.public.apiUrl}/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        firstname: firstname.value,
-        lastname: lastname.value,
-        email: email.value,
-        password: password.value,
-      }),
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      console.error('Erreur lors de l\'inscription:', data.message)
-      alert('Une erreur s\'est produite lors de l\'inscription : ' + data.message)
-      return
-    }
-
-    alert('Inscription réussie !')
-    router.push('/login') // Redirige vers la page de connexion
+  if (password.value !== confirmPassword.value) {
+    errorMsg.value = 'Passwords do not match!';
+    password.value = '';
+    confirmPassword.value = '';
+    setTimeout(() => {
+      errorMsg.value = '';
+    }, 3000);
+    return;
   }
-  catch (error) {
-    console.error('Erreur lors de l\'inscription:', error)
-    alert('Une erreur s\'est produite lors de l\'inscription.')
+
+  try {
+    console.log('Attempting sign up');
+    const { error } = await auth.signUp({
+      email: email.value,
+      password: password.value,
+      options: {
+        data: {
+          firstname: firstname.value,
+          lastname: lastname.value,
+        }
+      }
+    });
+
+    if (error) throw error;
+
+    // Clear form
+    email.value = '';
+    password.value = '';
+    confirmPassword.value = '';
+    firstname.value = '';
+    lastname.value = '';
+
+    console.log('User signed up successfully');
+  } catch (error: any) {
+    console.error('Sign up error:', error);
+    errorMsg.value = error.message;
+    setTimeout(() => {
+      errorMsg.value = '';
+    }, 3000);
   }
 };
+
+watchEffect(() => {
+  if (user.value) {
+    console.log('User logged in, redirecting to home');
+    return navigateTo('/');
+  }
+});
 </script>
 
 <template>
@@ -61,7 +78,7 @@ async function registerNewUser() {
     >
       <form
         class="w-full sm:w-80 flex flex-col gap-6"
-        @submit.prevent="registerNewUser"
+        @submit.prevent="submitRegisterForm"
       >
         <IconField>
           <InputIcon>
@@ -117,12 +134,18 @@ async function registerNewUser() {
           />
         </IconField>
 
-        <!-- <IconField>
-                <InputIcon>
-                    <i class="pi pi-key" />
-                </InputIcon>
-                <InputText id="password2" v-model="email" type="email" placeholder="Rewrite your password" fluid />
-            </IconField> -->
+        <IconField>
+          <InputIcon>
+            <i class="pi pi-key" />
+            </InputIcon>
+          <InputText 
+          id="password2" 
+          v-model="confirmPassword" 
+          type="password" 
+          placeholder="Confirm your password" 
+          fluid
+          />
+        </IconField>
 
         <div class="flex items-center gap-2">
           <Checkbox
@@ -142,6 +165,9 @@ async function registerNewUser() {
           class="mt-2"
         />
       </form>
+    </div>
+    <div v-if="errorMsg" class="error-message">
+      {{ errorMsg }}
     </div>
   </main>
 </template>

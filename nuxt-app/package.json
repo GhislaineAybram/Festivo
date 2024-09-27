@@ -21,7 +21,6 @@
     "@types/pg": "^8.11.6",
     "@vue-hero-icons/outline": "^1.7.2",
     "autoprefixer": "^10.4.19",
-    "bcrypt": "^5.1.1",
     "nuxt": "^3.13.2",
     "nuxt-auth-utils": "^0.3.5",
     "nuxt-icons": "^3.2.1",

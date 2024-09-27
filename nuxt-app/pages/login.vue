@@ -1,43 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useRuntimeConfig } from '#app'
+const user = useSupabaseUser();
+const email = ref('');
+const password = ref('');
+const errorMsg = ref('');
 
-const email = ref()
-const password = ref()
+const { auth } = useSupabaseClient();
 
-const router = useRouter()
-const runtimeConfig = useRuntimeConfig()
-
-async function submitRegisterForm() {
+const submitLoginForm = async () => {
   try {
-    const response = await fetch(`${runtimeConfig.public.apiUrl}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email.value,
-        password: password.value,
-      }),
-    })
+    const { error } = await auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    });
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      console.error('Erreur lors de la connexion:', errorData.message)
-      alert('Une erreur s\'est produite lors de la connexion : ' + errorData.message)
-      return
-    };
+    email.value = '';
+    password.value = '';
 
-    const data = await response.json()
-    alert(data.message || 'Login successful!')
-    router.push('/')
-  }
-  catch (error) {
-    console.error('Login error:', error)
-    alert('Une erreur s\'est produite lors de la connexion.')
+    if (error) throw error;
+  } catch (error: any) {
+    errorMsg.value = error.message;
+    setTimeout(() => {
+      errorMsg.value = '';
+    }, 3000);
   }
 };
+
+watchEffect(() => {
+  if (user.value) {
+    return navigateTo('/');
+  }
+});
 </script>
 
 <template>
@@ -85,12 +77,12 @@ async function submitRegisterForm() {
           type="submit"
           label="Sign in"
           class="mt-2 button-validation"
-          @click="submitRegisterForm"
+          @click="submitLoginForm"
         />
       </div>
     </div>
     <div class="register-container">
-      <p>Don't have an account yes ?</p>
+      <p>Don't have an account yet ?</p>
       <NuxtLink to="/register">
         <p id="sign-up-link">
           Sign up

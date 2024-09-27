@@ -1,4 +1,4 @@
-import { getCelebrationById } from '~~/db-queries'
+import { getCelebrationById } from '~~/supabase'
 
 export default defineEventHandler(async (event) => {
   try {

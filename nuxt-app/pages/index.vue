@@ -1,13 +1,27 @@
 <script setup lang="ts">
-const { loggedIn, user, session, fetch, clear } = useUserSession()
+const { auth } = useSupabaseClient();
+const user = useSupabaseUser();
 
-const userFirstname = computed(() => user.value?.firstname || '')
+const userLogout = async () => {
+  await auth.signOut();
+};
+
+watchEffect(() => {
+  // if (!user.value) {
+  //   return navigateTo('/login');
+  // }
+});
+
+definePageMeta({
+  middleware: 'auth',
+});
 </script>
 
 <template>
   <main class="main">
-    <div v-if="loggedIn">
+    <div v-if="user">
       <h1>Welcome {{ userFirstname }}!</h1>
+      <AlertRegistration />
     </div>
     <div v-else>
       <h1>Not logged in</h1>

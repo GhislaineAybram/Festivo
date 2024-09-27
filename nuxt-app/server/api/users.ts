@@ -1,5 +1,5 @@
 // routes.ts
-import { getUsers } from '~~/db-queries'
+import { getUsers } from '~~/supabase'
 
 export default defineEventHandler(async (event) => {
   try {

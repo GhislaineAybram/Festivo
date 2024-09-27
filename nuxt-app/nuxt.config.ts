@@ -29,6 +29,12 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
   ],
 
+  supabase: {
+    url: process.env.SUPABASE_URL,
+    key: process.env.SUPABASE_KEY,
+    redirect: false,
+  },
+
   primevue: {
     usePrimeVue: true,
     options: {
@@ -50,13 +56,13 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.API_URL,
     },
-    database: {
-      user: process.env.DB_USER,
-      host: process.env.DB_HOST,
-      name: process.env.DB_NAME,
-      password: process.env.DB_PASSWORD,
-      port: process.env.DB_PORT,
-    },
+    // database: {
+    //   user: process.env.DB_USER,
+    //   host: process.env.DB_HOST,
+    //   name: process.env.DB_NAME,
+    //   password: process.env.DB_PASSWORD,
+    //   port: process.env.DB_PORT,
+    // },
     session: {
       name: 'nuxt-session',
       password: process.env.NUXT_SESSION_PASSWORD || '',

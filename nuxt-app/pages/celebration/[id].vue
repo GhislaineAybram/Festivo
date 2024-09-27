@@ -32,17 +32,17 @@ if (error.value) {
     <div class="bg-white">
       <!-- <div class="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8"> -->
       <div>
-        <div id="photo-title-event">
+        <div id="photo-title-celebration">
           <h1 class="text-3xl font-bold sm:text-4xl">
             {{ celebration?.name }}
           </h1>
           <img
             src="~/public/img/photo-party.png"
             alt="photo de ballons"
-            class="photo-event"
+            class="photo-celebration"
           >
           <p
-            id="event-author-name"
+            id="celebration-author-name"
             class="mt-4 text-gray-500"
           >
             proposé par {{ celebration?.author }}
@@ -51,7 +51,7 @@ if (error.value) {
         <h3 class="text-2xl mt-4 text-gray-900">
           {{ celebration?.description }}
         </h3>
-        <div id="event-details">
+        <div id="celebration-details">
           <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
             <div class="border-t border-gray-200 pt-4">
               <dt class="font-medium text-gray-900">
@@ -84,7 +84,7 @@ if (error.value) {
               <dt class="font-medium text-gray-900">
                 Ma réponse
               </dt>
-              <div id="event-answer">
+              <div id="celebration-answer">
                 <Button
                   icon="pi pi-check"
                   severity="success"
@@ -114,10 +114,10 @@ if (error.value) {
 </template>
 
 <style  lang="scss" scoped>
-#photo-title-event {
+#photo-title-celebration {
   position: relative;
 }
-.photo-event {
+.photo-celebration {
   width: 100%;
   height: auto;
 }
@@ -133,7 +133,7 @@ h1 {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
-#event-author-name {
+#celebration-author-name {
   color: $grey;
   text-align: right;
   position: absolute;
@@ -141,7 +141,7 @@ h1 {
   right: 20px;
   z-index: 1;
 }
-.photo-event {
+.photo-celebration {
   filter: opacity(35%);
 }
 h3 {
@@ -154,7 +154,7 @@ h3 {
   padding-left: 50px;
 }
 @media (min-width: 1024px) {
-  #event-details {
+  #celebration-details {
     margin-top: 59px;
     display: flex;
     flex-direction: column;
@@ -167,7 +167,7 @@ h3 {
   }
 }
 @media (max-width: 600px) {
-  #event-details {
+  #celebration-details {
     width: 80%;
     margin-left: auto;
     margin-right: auto;

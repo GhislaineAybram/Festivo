@@ -1,15 +1,15 @@
 // routes.ts
-import { getCelebrations } from '~~/db-queries'
+import { getCelebrations } from '~~/supabase'
 
 export default defineEventHandler(async (event) => {
   try {
-    const events = await getCelebrations()
-    return events
+    const celebrations = await getCelebrations()
+    return celebrations
   }
   catch (error) {
     return {
       statusCode: 500,
-      body: { error: 'Failed to fetch events' },
+      body: { error: 'Failed to fetch celebrations' },
     }
   }
 })

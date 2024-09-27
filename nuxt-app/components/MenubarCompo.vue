@@ -2,14 +2,17 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 
-const { loggedIn, user, session, fetch, clear } = useUserSession()
+const { auth } = useSupabaseClient();
+const user = useSupabaseUser();
 
-const userId = computed(() => user.value?.id || null)
+const userLogout = async () => {
+  await auth.signOut();
+};
 
 const navigation = [
   { name: 'Accueil', href: '/', current: false },
-  { name: 'Mes invitations', href: 'event/1', current: false },
-  { name: 'Mes événements', href: 'eventadmin/1', current: false },
+  { name: 'Mes invitations', href: '/celebration/1', current: false },
+  { name: 'Mes événements', href: '/celebrationadmin/1', current: false },
   { name: 'Login', href: '/login', current: false },
 ]
 </script>
