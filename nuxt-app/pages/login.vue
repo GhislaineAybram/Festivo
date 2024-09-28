@@ -30,13 +30,25 @@ watchEffect(() => {
     return navigateTo('/');
   }
 });
+
+import { ref } from "vue";
+
+const home = ref({
+    icon: 'pi pi-home'
+});
+const items = ref([
+    { label: 'Sign in' },
+]);
 </script>
 
 <template>
   <main class="main flex flex-col items-center">
-    <h1 class="text-3xl font-bold sm:text-4xl">
+    <div class="card flex justify-center">
+        <Breadcrumb :home="home" :model="items" />
+    </div>
+    <!-- <h1 class="text-3xl font-bold sm:text-4xl">
       Page login
-    </h1>
+    </h1> -->
     <div
       id="login"
       class="card w-full sm:w-80 p-6 mb-6"
@@ -45,6 +57,10 @@ watchEffect(() => {
         v-focustrap
         class="w-full sm:w-80 flex flex-col gap-6"
       >
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-10 w-auto" src="../public/img/disco-ball-tangerine.png" alt="Logo Festify" />
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+      </div>
         <IconField>
           <InputIcon>
             <i class="pi pi-user" />
@@ -71,6 +87,9 @@ watchEffect(() => {
             fluid
           />
         </IconField>
+        <div class="text-sm">
+          <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+        </div>
 
         <Button
           id="sign-in"

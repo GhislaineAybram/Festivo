@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import Tag from 'primevue/tag';
 
 const { auth } = useSupabaseClient();
 const user = useSupabaseUser();
@@ -53,7 +54,8 @@ const navigation = [
               <MenuButton class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                <Avatar icon="pi pi-user" class="h-8 w-8" size="medium" style="background-color: #ece9fc; color: #2a1261" shape="circle" />
+                <!-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> -->
               </MenuButton>
             </div>
             <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -74,6 +76,23 @@ const navigation = [
     <DisclosurePanel class="sm:hidden">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
+
+        <hr class="border-gray-700" style="margin: 30px 0;">
+
+        <DisclosureButton as="div" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+            <div class="flex items-center gap-3 px-1">     
+                <img alt="Français" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" class="flag flag-fr" style="width: 18px" />
+                <span class="text-gray-300 hover:text-white">FR</span>
+            </div> 
+        </DisclosureButton>
+
+        <DisclosureButton as="div" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+            <div class="flex items-center gap-3 px-1">     
+                <img alt="English" src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" class="flag flag-en" style="width: 18px" />
+                <span class="text-gray-300 hover:text-white">EN</span>
+            </div> 
+        </DisclosureButton>
+
       </div>
     </DisclosurePanel>
   </Disclosure>
