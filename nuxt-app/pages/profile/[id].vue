@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 const { auth } = useSupabaseClient();
 const { data: { user },} = await auth.getUser();
 let metadata = user?.user_metadata;
@@ -7,6 +8,69 @@ const pseudo = computed(() => metadata?.nickname || '');
 const firstname = computed(() => metadata?.firstname || '');
 const lastname = computed(() => metadata?.lastname || '');
 const email = computed(() => user?.email || '');
+
+const allergy = [
+        {
+          name: 'Gluten',
+          description: 'Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales',
+          selected: false,
+        },
+        {
+          name: 'Crustacés',
+          description: 'Et produits à base de crustacés',
+          selected: false,
+        },
+        {
+          name: 'Oeufs',
+          description: 'Et produits à base d’œufs',
+          selected: false,
+        },
+        {
+          name: 'Arachides',
+          description: 'Et produits à base d\'arachides',
+          selected: false,
+        },
+        {
+          name: 'Poissons',
+          description: 'Et produits à base de poissons',
+          selected: false,
+        },
+        {
+          name: 'Soja',
+          description: 'Et produits à base de soja',
+          selected: false,
+        },
+        {
+          name: 'Lait',
+          description: 'Et produits à base de lait (y compris de lactose)',
+          selected: false,
+        },
+        {
+          name: 'Fruits à coques',
+          description: 'Amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches et produits à base de ces fruits',
+          selected: false,
+        },
+        {
+          name: 'Céleri',
+          description: 'Et produits à base de céleri',
+          selected: false,
+        },
+        {
+          name: 'Moutarde',
+          description: 'Et produits à base de moutarde',
+          selected: false,
+        },
+        {
+          name: 'Graines de sésame',
+          description: 'Et produits à base de graines de sésame',
+          selected: false,
+        },
+        {
+          name: 'Anhydride sulfureux et sulfites',
+          description: 'En concentration de plus de 10 mg/kg ou 10 mg/L',
+          selected: false,
+        },
+      ];
 </script>
 
 <template>
@@ -29,7 +93,7 @@ const email = computed(() => user?.email || '');
             </svg>
           </button>
         </div>
-        <h1>Bienvenue {{ firstname }} !</h1>
+        <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Bienvenue {{ firstname }} !</h1>
       </div>
       <form id="profile-details">
         <div class="space-y-12">
@@ -39,14 +103,14 @@ const email = computed(() => user?.email || '');
             </h2>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <!-- <div class="col-span-full">
-          <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo de profil</label>
+              <!-- <div class="col-span-full"> -->
+          <!-- <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo de profil</label>
           <div class="mt-2 flex items-center gap-x-3">
             <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
-            </svg>
-            <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Modifier</button>
-          </div>
+            </svg> -->
+            <!-- <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Modifier</button> -->
+          <!-- </div>
         </div> -->
 
               <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -62,7 +126,7 @@ const email = computed(() => user?.email || '');
                       type="text"
                       name="first-name"
                       autocomplete="given-name"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                   </div>
                 </div>
@@ -79,7 +143,7 @@ const email = computed(() => user?.email || '');
                       type="text"
                       name="first-name"
                       autocomplete="given-name"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                   </div>
                 </div>
@@ -96,7 +160,7 @@ const email = computed(() => user?.email || '');
                       type="text"
                       name="last-name"
                       autocomplete="family-name"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                   </div>
                 </div>
@@ -113,7 +177,7 @@ const email = computed(() => user?.email || '');
                       name="email"
                       type="email"
                       autocomplete="email"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                   </div>
                 </div>
@@ -133,6 +197,7 @@ const email = computed(() => user?.email || '');
           <div class="border-b border-gray-900/10 pb-12">
             <div class="mt-10 space-y-10">
               <fieldset>
+                <Disclosure>
                 <div class="text-sm leading-6 grid grid-cols-4 gap-2 items-center">
                   <legend class="text-sm font-semibold leading-6 text-gray-900 col-span-2">
                     Allergies / intolérances
@@ -163,23 +228,18 @@ const email = computed(() => user?.email || '');
                     >Non</label>
                   </div>
                   <div class="col-span-1 flex justify-end">
-                    <svg
-                      class="-mr-1 h-5 w-5 text-gray-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
+                    
+                    <DisclosureButton className="group flex w-full items-center justify-between">
+                      <!-- <ChevronDownIcon className="size-5 fill-white/60 group-data-[hover]:fill-white/50 group-data-[open]:rotate-180" /> -->
+                    </DisclosureButton>
                   </div>
                 </div>
 
-                <div class="mt-6 space-y-6">
-                  <div class="relative flex gap-x-3">
+                <DisclosurePanel class="mt-2 text-gray-600">
+                
+                  <div class="mt-6 space-y-6">
+
+                  <div v-for="item in allergy" :key="item.name" class="relative flex gap-x-3">
                     <div class="flex h-6 items-center">
                       <input
                         id="comments"
@@ -192,267 +252,20 @@ const email = computed(() => user?.email || '');
                       <label
                         for="comments"
                         class="font-medium text-gray-900"
-                      >Gluten</label>
+                      >{{ item.name }}</label>
                       <p class="text-gray-500">
-                        Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Crustacés</label>
-                      <p class="text-gray-500">
-                        et produits à base de crustacés
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Oeufs</label>
-                      <p class="text-gray-500">
-                        et produits à base d’œufs
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Arachides</label>
-                      <p class="text-gray-500">
-                        et produits à base d'arachides
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Poissons</label>
-                      <p class="text-gray-500">
-                        et produits à base de poissons
+                        {{ item.description }}
                       </p>
                     </div>
                   </div>
 
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Soja</label>
-                      <p class="text-gray-500">
-                        et produits à base de soja
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="candidates"
-                        name="candidates"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="candidates"
-                        class="font-medium text-gray-900"
-                      >Lait</label>
-                      <p class="text-gray-500">
-                        et produits à base de lait (y compris de lactose)
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Fruits à coques</label>
-                      <p class="text-gray-500">
-                        (amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches) et produits à base de ces fruits
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Céleri</label>
-                      <p class="text-gray-500">
-                        et produits à base de céleri
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Moutarde</label>
-                      <p class="text-gray-500">
-                        et produits à base de moutarde
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Graines de sésame</label>
-                      <p class="text-gray-500">
-                        et produits à base de graines de sésame
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Anhydride sulfureux et sulfites</label>
-                      <p class="text-gray-500">
-                        en concentration de plus de 10 mg/kg ou 10 mg/l
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Lupin</label>
-                      <p class="text-gray-500">
-                        et produits à base de lupin
-                      </p>
-                    </div>
-                  </div>
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >Mollusques</label>
-                      <p class="text-gray-500">
-                        et produits à base de mollusques
-                      </p>
-                    </div>
-                  </div>
                   <div class="relative flex gap-x-3">
                     <div class="flex h-6 items-center">
                       <input
                         id="offers"
                         name="offers"
                         type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        class="h-4 w-4 px-2 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       >
                     </div>
                     <div class="text-sm leading-6 grid grid-cols-2 gap-4">
@@ -468,8 +281,12 @@ const email = computed(() => user?.email || '');
                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       >
                     </div>
-                  </div>
+                  </div> 
+
                 </div>
+
+              </DisclosurePanel>   
+            </Disclosure>          
               </fieldset>
             </div>
           </div>
@@ -525,7 +342,7 @@ h1 {
   text-align: center;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 60%;
   transform: translate(-50%, -50%);
   z-index: -2;
 }
@@ -533,7 +350,7 @@ h1 {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: rgb(20, 20, 20);
+  background-color: $indigo;
   border: none;
   font-weight: 600;
   display: flex;

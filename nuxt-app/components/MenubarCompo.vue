@@ -68,7 +68,7 @@ const navigation = [
                   <a :href="getProfilePage()" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">My profile</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
-                  <a @click="userLogout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
+                  <a @click="userLogout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']">Sign out</a>
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -84,14 +84,14 @@ const navigation = [
         <hr class="border-gray-700" style="margin: 30px 0;">
 
         <DisclosureButton as="div" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
-            <div class="flex items-center gap-3 px-1">     
+            <div class="flex items-center gap-3 px-1 cursor-pointer">     
                 <img alt="Français" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" class="flag flag-fr" style="width: 18px" />
                 <span class="text-gray-300 hover:text-white">FR</span>
             </div> 
         </DisclosureButton>
 
         <DisclosureButton as="div" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
-            <div class="flex items-center gap-3 px-1">     
+            <div class="flex items-center gap-3 px-1 cursor-pointer">     
                 <img alt="English" src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" class="flag flag-en" style="width: 18px" />
                 <span class="text-gray-300 hover:text-white">EN</span>
             </div> 
@@ -107,5 +107,8 @@ const navigation = [
   position: absolute;
   top: 0;
   width: 100%;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 </style>

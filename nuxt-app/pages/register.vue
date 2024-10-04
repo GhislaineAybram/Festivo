@@ -69,7 +69,6 @@ const submitRegisterForm = async () => {
 watchEffect(() => {
   if (user.value) {
     console.log('User logged in, redirecting to home');
-    return navigateTo('/');
   }
 });
 </script>
@@ -186,7 +185,7 @@ watchEffect(() => {
   </main>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 #register {
     border-radius: 1rem;
     border-color: $tangerine;

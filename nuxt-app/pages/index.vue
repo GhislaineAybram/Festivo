@@ -20,6 +20,10 @@ definePageMeta({
   <main class="main">
     <div v-if="user">
       <h1>Welcome {{ firstname }}!</h1>
+      <div class="grid grid-cols-2 sm:grid-cols-1">
+        <CelebrationCard />
+        <CelebrationCard />
+      </div>
     </div>
     <div v-else>
       <h1>Not logged in</h1>
