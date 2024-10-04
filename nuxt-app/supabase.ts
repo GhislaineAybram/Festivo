@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-import bcrypt from 'bcrypt';
 
 const supabaseUrl = process.env.SUPABASE_URL!
 const supabaseKey = process.env.SUPABASE_KEY!
@@ -29,8 +28,6 @@ export interface Celebration {
   created_at: string
 }
 
-const saltRounds = 10
-
 export const getUsers = async () => {
   const { data } = await supabase
     .from('user')
@@ -52,11 +49,6 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
     .select('*')
     .eq('email', email) 
   return data && data.length > 0 ? data[0] : null
-}
-
-const formatName = (name: string) => {
-  if (!name) return ''
-  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
 }
 
 export const getCelebrations = async () => {

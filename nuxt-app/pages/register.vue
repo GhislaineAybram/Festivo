@@ -7,8 +7,14 @@ const password = ref('');
 const confirmPassword = ref('');
 const errorMsg = ref('');
 const accept = ref(false);
+const registrationSuccess = ref(false);
 
 const { auth } = useSupabaseClient();
+
+const formatName = (name: string) => {
+  if (!name) return '';
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
 
 const submitRegisterForm = async () => {
   console.log('Submit button clicked');
@@ -30,12 +36,12 @@ const submitRegisterForm = async () => {
   try {
     console.log('Attempting sign up');
     const { error } = await auth.signUp({
-      email: email.value,
+      email: email.value.toLowerCase(),
       password: password.value,
       options: {
         data: {
-          firstname: firstname.value,
-          lastname: lastname.value,
+          firstname: formatName(firstname.value),
+          lastname: (lastname.value).toUpperCase(),
         }
       }
     });
@@ -49,6 +55,7 @@ const submitRegisterForm = async () => {
     firstname.value = '';
     lastname.value = '';
 
+    registrationSuccess.value = true;
     console.log('User signed up successfully');
   } catch (error: any) {
     console.error('Sign up error:', error);
@@ -65,21 +72,11 @@ watchEffect(() => {
     return navigateTo('/');
   }
 });
-
-import { ref } from "vue";
-
-const home = ref({
-    icon: 'pi pi-home'
-});
-const items = ref([
-    { label: 'Sign up' },
-]);
 </script>
 
 <template>
   <main class="main flex flex-col items-center">
     <div class="card flex justify-center">
-        <Breadcrumb :home="home" :model="items" />
     </div>
     <!-- <h1 class="text-3xl font-bold sm:text-4xl">
       Page registration
@@ -182,6 +179,7 @@ const items = ref([
         />
       </form>
     </div>
+    <AlertRegistration v-if="registrationSuccess" />
     <div v-if="errorMsg" class="error-message">
       {{ errorMsg }}
     </div>

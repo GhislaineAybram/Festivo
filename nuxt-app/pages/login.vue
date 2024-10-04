@@ -30,21 +30,11 @@ watchEffect(() => {
     return navigateTo('/');
   }
 });
-
-import { ref } from "vue";
-
-const home = ref({
-    icon: 'pi pi-home'
-});
-const items = ref([
-    { label: 'Sign in' },
-]);
 </script>
 
 <template>
   <main class="main flex flex-col items-center">
     <div class="card flex justify-center">
-        <Breadcrumb :home="home" :model="items" />
     </div>
     <!-- <h1 class="text-3xl font-bold sm:text-4xl">
       Page login

@@ -1,15 +1,14 @@
 <script setup lang="ts">
 const { auth } = useSupabaseClient();
-const user = useSupabaseUser();
+const { data: { user },} = await auth.getUser();
+let metadata = user?.user_metadata;
 
-const userLogout = async () => {
-  await auth.signOut();
-};
+const firstname = computed(() => metadata?.firstname || '');
 
 watchEffect(() => {
-  // if (!user.value) {
-  //   return navigateTo('/login');
-  // }
+  if (!user) {
+    return navigateTo('/login');
+  }
 });
 
 definePageMeta({
@@ -20,8 +19,7 @@ definePageMeta({
 <template>
   <main class="main">
     <div v-if="user">
-      <h1>Welcome {{ userFirstname }}!</h1>
-      <AlertRegistration />
+      <h1>Welcome {{ firstname }}!</h1>
     </div>
     <div v-else>
       <h1>Not logged in</h1>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 const { auth } = useSupabaseClient();
-const user = useSupabaseUser();
+const { data: { user },} = await auth.getUser();
+let metadata = user?.user_metadata;
 
-const pseudo = computed(() => user.value?.pseudo || '')
-const firstname = computed(() => user.value?.firstname || '')
-const lastname = computed(() => user.value?.lastname || '')
-const email = computed(() => user.value?.email || '')
+const pseudo = computed(() => metadata?.nickname || '');
+const firstname = computed(() => metadata?.firstname || '');
+const lastname = computed(() => metadata?.lastname || '');
+const email = computed(() => user?.email || '');
 </script>
 
 <template>

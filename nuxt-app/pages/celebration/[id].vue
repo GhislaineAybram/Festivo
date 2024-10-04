@@ -12,11 +12,6 @@ interface Celebration {
   location: string
 }
 
-interface User {
-  firstname: string
-  lastname: string
-}
-
 const { id } = useRoute().params
 
 const runtimeConfig = useRuntimeConfig()
