@@ -6,18 +6,18 @@ const supabaseKey = process.env.SUPABASE_KEY!
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export interface User {
-  id: number
+  id: string
   firstname: string
   lastname: string
   nickname: string
   email: string
   password: string
   created_at: string
-  avatar: number
+  avatar: string
 }
 
 export interface Celebration {
-  id: number
+  id: string
   name: string
   description: string
   address: string
@@ -35,7 +35,7 @@ export const getUsers = async () => {
   return data
 }
 
-export const getUserById = async (id: number): Promise<User> => {
+export const getUserById = async (id: string): Promise<User> => {
   const { data } = await supabase
     .from('user')
     .select('*')
@@ -58,7 +58,7 @@ export const getCelebrations = async () => {
     return data
 }
 
-export const getCelebrationById = async (id: number): Promise<Celebration> => {
+export const getCelebrationById = async (id: string): Promise<Celebration> => {
   const { data } = await supabase
     .from('celebration')
     .select('*')

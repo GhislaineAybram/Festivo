@@ -126,7 +126,6 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
 }
 #celebration-author-name {
   color: $grey;
@@ -134,10 +133,10 @@ h1 {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  z-index: 1;
 }
 .photo-celebration {
   filter: opacity(35%);
+  z-index: -1;
 }
 h3 {
   color: $indigo;

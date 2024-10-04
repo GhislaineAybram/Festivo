@@ -12,15 +12,7 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    // Convertir l'ID en nombre
-    const celebrationId = parseInt(String(id), 10)
-
-    if (isNaN(celebrationId)) {
-      return {
-        statusCode: 400,
-        body: { error: 'Invalid Celebration ID' },
-      }
-    }
+    const celebrationId = id
 
     const celebration = await getCelebrationById(celebrationId)
 

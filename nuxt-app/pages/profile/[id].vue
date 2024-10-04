@@ -512,7 +512,7 @@ const email = computed(() => user?.email || '');
   display: inline-block;
 }
 #profile-picture {
-  z-index: 2;
+  z-index: -1;
   position: relative;
   transform: scale(0.85);
 }
@@ -527,7 +527,7 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: -2;
 }
 .edit-button {
   width: 30px;
@@ -546,7 +546,6 @@ h1 {
   position: absolute;
   bottom: 15px;
   right: 15px;
-  z-index: 3;
   text-decoration: none !important;
 }
 .edit-svgIcon {
