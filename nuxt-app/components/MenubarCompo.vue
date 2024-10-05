@@ -16,7 +16,7 @@ const getProfilePage = () => {
 
 const navigation = [
   { name: 'Accueil', href: '/', current: false },
-  { name: 'Mes invitations', href: '/celebration/1', current: false },
+  { name: 'Mes invitations', href: '/celebration/6597f938-9e05-4015-b62b-4468d042869e', current: false },
   { name: 'Mes événements', href: '/celebrationadmin/1', current: false },
   { name: 'Login', href: '/login', current: false },
 ]

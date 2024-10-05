@@ -65,3 +65,11 @@ export const getCelebrationById = async (id: string): Promise<Celebration> => {
     .eq('celebration_id', id)
     return data ? data[0] : null
 }
+
+export const getCelebrationByAuthor = async (id: string): Promise<Celebration> => {
+  const { data } = await supabase
+    .from('celebration')
+    .select('*')
+    .eq('author_id', id)
+    return data ? data[0] : null
+}

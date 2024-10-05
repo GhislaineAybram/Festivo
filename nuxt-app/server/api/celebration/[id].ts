@@ -3,7 +3,7 @@ import { getCelebrationById } from '~~/supabase'
 export default defineEventHandler(async (event) => {
   try {
     // Extraire l'ID de l'URL
-    const id = event.context.params?.id
+    const id = getRouterParam(event, 'id')
 
     if (!id) {
       return {
