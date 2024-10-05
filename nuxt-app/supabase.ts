@@ -73,3 +73,12 @@ export const getCelebrationByAuthor = async (id: string): Promise<Celebration> =
     .eq('author_id', id)
     return data ? data[0] : null
 }
+
+export const getCelebrationAuthorName = async (id: string): Promise<User> => {
+  const { data } = await supabase
+    .from('celebration')
+    .select('*, author:user(*)')
+    .eq('author_id', id)
+    .single();
+    return data ? data.author?.firstname : null;
+}
