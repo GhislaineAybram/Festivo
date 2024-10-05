@@ -16,6 +16,7 @@ definePageMeta({
 });
 
 interface Celebration {
+  celebration_id: string
   name: string
   description: string
   author: string
@@ -26,6 +27,7 @@ interface Celebration {
 
 const runtimeConfig = useRuntimeConfig()
 const { data: celebration, error } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/6597f938-9e05-4015-b62b-4468d042869e`)
+const { data: celebration2 } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/bc5abc08-c022-4117-88bd-f5abdcf1300d`)
 
 if (error.value) {
   console.error('Failed to fetch celebration data', error.value)
@@ -43,6 +45,9 @@ const getDay = (dateString: string) => {
 
 const dateMonth = computed(() => celebration.value ? getMonth(celebration.value.date) : '');
 const dateDay = computed(() => celebration.value ? getDay(celebration.value.date) : '');
+
+const dateMonth2 = computed(() => celebration2.value ? getMonth(celebration2.value.date) : '');
+const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.date) : '');
 </script>
 
 <template>
@@ -50,9 +55,9 @@ const dateDay = computed(() => celebration.value ? getDay(celebration.value.date
     <div v-if="user">
       <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Bienvenue {{ firstname }} !</h1>
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Voici vos événements</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-1">
+      <div class="grid grid-cols-1 sm:grid-cols-1">
         <div class="parent">
-    <div class="card">
+        <div class="card">
         <div class="card-image"></div>
         <div class="category"> {{ celebration?.name }} </div>
         <div class="date-box">
@@ -60,12 +65,29 @@ const dateDay = computed(() => celebration.value ? getDay(celebration.value.date
             <span class="month">{{ dateMonth }}</span>
         </div>
         <div class="heading"> {{ celebration?.description }}</div>
-        <a class="action" href="#">
+        <a class="action" v-bind:href="`/celebration/${celebration?.celebration_id}`">
             Go to the event page
           <span aria-hidden="true">→</span>
         </a>
     </div>
     </div>
+
+    <div class="parent">
+        <div class="card">
+        <div class="card-image"></div>
+        <div class="category"> {{ celebration2?.name }} </div>
+        <div class="date-box">
+            <span class="date">{{ dateDay2 }}</span>
+            <span class="month">{{ dateMonth2 }}</span>
+        </div>
+        <div class="heading"> {{ celebration2?.description }}</div>
+        <a class="action" v-bind:href="`/celebration/${celebration2?.celebration_id}`">
+            Go to the event page
+          <span aria-hidden="true">→</span>
+        </a>
+    </div>
+    </div>
+
       </div>
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Voici vos invitations</h2>
     </div>
