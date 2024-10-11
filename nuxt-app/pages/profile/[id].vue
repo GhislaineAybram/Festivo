@@ -95,14 +95,14 @@ const allergy = [
           </button>
         </div>
         <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-          Bienvenue {{ firstname }} !
+          {{ $t('welcome.title') }} {{ firstname }} !
         </h1>
       </div>
       <form id="profile-details">
         <div class="space-y-12">
           <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
-              Informations de profil
+              {{ $t('user.informations') }}
             </h2>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -121,7 +121,7 @@ const allergy = [
                   <label
                     for="username"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >Pseudo</label>
+                  >{{ $t('user.alias') }}</label>
                   <div class="mt-2">
                     <input
                       id="first-name"
@@ -138,7 +138,7 @@ const allergy = [
                   <label
                     for="first-name"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >First name</label>
+                  >{{ $t('user.firstname') }}</label>
                   <div class="mt-2">
                     <input
                       id="first-name"
@@ -155,7 +155,7 @@ const allergy = [
                   <label
                     for="last-name"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >Last name</label>
+                  >{{ $t('user.lastname') }}</label>
                   <div class="mt-2">
                     <input
                       id="last-name"
@@ -172,7 +172,7 @@ const allergy = [
                   <label
                     for="email"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >Email address</label>
+                  >{{ $t('user.email') }}</label>
                   <div class="mt-2">
                     <input
                       id="email"
@@ -190,10 +190,10 @@ const allergy = [
 
           <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
-              Régimes alimentaires
+              {{ $t('user.alimentation') }}
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
-              Afin que vos convives puissent prendre soin de vous.
+              {{ $t('user.alimentation_explanation') }}
             </p>
           </div>
 
@@ -203,7 +203,7 @@ const allergy = [
                 <Disclosure>
                   <div class="text-sm leading-6 grid grid-cols-4 gap-2 items-center">
                     <legend class="text-sm font-semibold leading-6 text-gray-900 col-span-2">
-                      Allergies / intolérances
+                      {{ $t('user.allergies') }}
                     </legend>
 
                     <div class="flex items-center gap-x-3 col-span-1">
@@ -216,7 +216,7 @@ const allergy = [
                       <label
                         for="push-email"
                         class="block text-sm font-medium leading-6 text-gray-900"
-                      >Oui</label>
+                      >{{ $t('user.yes') }}</label>
                     </div>
                     <div class="flex items-center gap-x-3 col-span-1">
                       <input
@@ -228,7 +228,7 @@ const allergy = [
                       <label
                         for="push-nothing"
                         class="block text-sm font-medium leading-6 text-gray-900"
-                      >Non</label>
+                      >{{ $t('user.no') }}</label>
                     </div>
                     <div class="col-span-1 flex justify-end">
                       <DisclosureButton class-name="group flex w-full items-center justify-between">
@@ -276,7 +276,7 @@ const allergy = [
                           <label
                             for="offers"
                             class="font-medium text-gray-900"
-                          >Autres</label>
+                          >{{ $t('user.other') }}</label>
                           <input
                             id="first-name"
                             type="text"
@@ -299,13 +299,13 @@ const allergy = [
             type="button"
             class="text-sm font-semibold leading-6 text-gray-900"
           >
-            Cancel
+          {{ $t('user.cancel') }}
           </button>
           <button
             type="submit"
             class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Save
+          {{ $t('user.save') }}
           </button>
         </div>
       </form>

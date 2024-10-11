@@ -1,9 +1,39 @@
 {
-  "welcome": "Bienvenue",
-  "login": {
-    "title": "Connexion",
+  "welcome": {
+    "title": "Bienvenue",
+    "events": "Vos événements",
+    "invitations": "Vos invitations",
+    "event_link": "Vers la page de l'événement",
+    "not_logged": "Vous n'êtes pas connecté"
+  },
+  "user": {
+    "informations": "Informations de profil",
+    "alias": "Pseudo",
+    "firstname": "Prénom",
+    "lastname": "Nom",
     "email": "E-mail",
     "password": "Mot de passe",
+    "password_confirmed": "Confirmez votre mot de passe",
+    "alimentation": "Régimes alimentaires",
+    "alimentation_explanation": "Afin que vos convives puissent prendre soin de vous.",
+    "allergies": "Allergies / intolérances alimentaires",
+    "yes": "Oui",
+    "no": "Non",
+    "other": "Autres",
+    "cancel": "Annuler",
+    "save": "Sauvegarder"
+  },
+  "celebration": {
+    "created": "créé par",
+    "date": "Date",
+    "the": "Le",
+    "hour": "Heure",
+    "at": "à",
+    "guests": "Invités",
+    "answer": "Ma réponse"
+  },
+  "login": {
+    "title": "Connexion",
     "password_forgot": "Mot de passe oublié ?",
     "no_account": "Pas encore de compte ?",
     "sign_up": "Créer un compte",
@@ -11,11 +41,6 @@
   },
   "register": {
     "title": "Inscription",
-    "firstname": "Prénom",
-    "lastname": "Nom",
-    "email": "E-mail",
-    "password": "Mot de passe",
-    "password_confirmed": "Confirmez votre mot de passe",
     "agree": "J'accepte les termes et conditions.",
     "button": "Créer votre compte"
   } 

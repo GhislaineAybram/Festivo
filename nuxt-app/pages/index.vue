@@ -46,10 +46,10 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
   <main class="main">
     <div v-if="user">
       <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        {{ $t('welcome') }} {{ firstname }} !
+        {{ $t('welcome.title') }} {{ firstname }} !
       </h1>
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Voici vos événements
+        {{ $t('welcome.events') }}
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-1">
         <div class="parent">
@@ -69,7 +69,7 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
               class="action"
               :href="`/celebration/${celebration?.id}`"
             >
-              Go to the event page
+            {{ $t('welcome.event_link') }}
               <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -92,19 +92,19 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
               class="action"
               :href="`/celebration/${celebration2?.id}`"
             >
-              Go to the event page
+            {{ $t('welcome.event_link') }}
               <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
       </div>
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Voici vos invitations
+        {{ $t('welcome.invitations') }}
       </h2>
     </div>
 
     <div v-else>
-      <h1>Not logged in</h1>
+      <h1>{{ $t('welcome.not_logged') }}</h1>
       <NuxtLink to="login">
         <Button
           label="Login with password"

@@ -55,6 +55,13 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     langDir: 'locales/',
     lazy: true, 
+    strategy: 'no_prefix',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      alwaysRedirect: false,
+      fallbackLocale: 'en'
+    }
   },
 
   supabase: {

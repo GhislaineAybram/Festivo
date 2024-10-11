@@ -1,9 +1,39 @@
 {
-  "welcome": "Welcome",
-  "login": {
-    "title": "Sign in to your account",
+  "welcome": {
+    "title": "Welcome",
+    "events": "Your events",
+    "invitations": "Your invitations",
+    "event_link": "Go to the event page",
+    "not_logged": "Not logged in"
+  },
+  "user": {
+    "informations": "Profile informations",
+    "alias": "Alias",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
     "email": "Email address",
     "password": "Password",
+    "password_confirmed": "Confirm your password",
+    "alimentation": "Dietary requirements",
+    "alimentation_explanation": "So that your guests can take care of you.",
+    "allergies": "Allergies / food intolerances",
+    "yes": "Yes",
+    "no": "No",
+    "other": "Others",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "celebration": {
+    "created": "created by",
+    "date": "Date",
+    "the": "The",
+    "hour": "Hour",
+    "at": "at",
+    "guests": "Guests",
+    "answer": "My answer"
+  },
+  "login": {
+    "title": "Sign in to your account",
     "password_forgot": "Forgot password ?",
     "no_account": "Don't have an account yet ?",
     "sign_up": "Sign up",
@@ -11,11 +41,6 @@
   },
   "register": {
     "title": "Sign up",
-    "firstname": "Firstname",
-    "lastname": "Lastname",
-    "email": "Email address",
-    "password": "Password",
-    "password_confirmed": "Confirm your password",
     "agree": "I agree to the terms and conditions.",
     "button": "Sign up"
   } 

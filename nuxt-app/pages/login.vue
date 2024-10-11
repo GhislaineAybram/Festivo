@@ -65,7 +65,7 @@ watchEffect(() => {
             id="username"
             v-model="email"
             type="text"
-            :placeholder="$t('login.email')"
+            :placeholder="$t('user.email')"
             autofocus
             fluid
           />
@@ -79,7 +79,7 @@ watchEffect(() => {
             id="password"
             v-model="password"
             type="password"
-            :placeholder="$t('login.password')"
+            :placeholder="$t('user.password')"
             fluid
           />
         </IconField>

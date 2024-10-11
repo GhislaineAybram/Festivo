@@ -106,7 +106,7 @@ watchEffect(() => {
             id="firstname"
             v-model="firstname"
             type="text"
-            :placeholder="$t('register.firstname')"
+            :placeholder="$t('user.firstname')"
             autofocus
             fluid
           />
@@ -120,7 +120,7 @@ watchEffect(() => {
             id="lastname"
             v-model="lastname"
             type="text"
-            :placeholder="$t('register.lastname')"
+            :placeholder="$t('user.lastname')"
             autofocus
             fluid
           />
@@ -134,7 +134,7 @@ watchEffect(() => {
             id="email"
             v-model="email"
             type="email"
-            :placeholder="$t('register.email')"
+            :placeholder="$t('user.email')"
             fluid
           />
         </IconField>
@@ -147,7 +147,7 @@ watchEffect(() => {
             id="password1"
             v-model="password"
             type="password"
-            :placeholder="$t('register.password')"
+            :placeholder="$t('user.password')"
             fluid
           />
         </IconField>
@@ -160,7 +160,7 @@ watchEffect(() => {
             id="password2"
             v-model="confirmPassword"
             type="password"
-            :placeholder="$t('register.password_confirmed')"
+            :placeholder="$t('user.password_confirmed')"
             fluid
           />
         </IconField>
