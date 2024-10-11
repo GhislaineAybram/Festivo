@@ -1,0 +1,22 @@
+{
+  "welcome": "Bienvenue",
+  "login": {
+    "title": "Connexion",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "password_forgot": "Mot de passe oublié ?",
+    "no_account": "Pas encore de compte ?",
+    "sign_up": "Créer un compte",
+    "button": "Se connecter"
+  },
+  "register": {
+    "title": "Inscription",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "password_confirmed": "Confirmez votre mot de passe",
+    "agree": "J'accepte les termes et conditions.",
+    "button": "Créer votre compte"
+  } 
+}

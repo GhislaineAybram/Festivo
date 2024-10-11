@@ -46,7 +46,7 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
   <main class="main">
     <div v-if="user">
       <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        Bienvenue {{ firstname }} !
+        {{ $t('welcome') }} {{ firstname }} !
       </h1>
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         Voici vos événements

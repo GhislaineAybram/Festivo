@@ -1,0 +1,22 @@
+{
+  "welcome": "Welcome",
+  "login": {
+    "title": "Sign in to your account",
+    "email": "Email address",
+    "password": "Password",
+    "password_forgot": "Forgot password ?",
+    "no_account": "Don't have an account yet ?",
+    "sign_up": "Sign up",
+    "button": "Sign in"
+  },
+  "register": {
+    "title": "Sign up",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "email": "Email address",
+    "password": "Password",
+    "password_confirmed": "Confirm your password",
+    "agree": "I agree to the terms and conditions.",
+    "button": "Sign up"
+  } 
+}

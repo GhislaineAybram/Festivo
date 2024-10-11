@@ -95,7 +95,7 @@ watchEffect(() => {
             alt="Logo Festify"
           >
           <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign up
+            {{ $t('register.title') }}
           </h2>
         </div>
         <IconField>
@@ -106,7 +106,7 @@ watchEffect(() => {
             id="firstname"
             v-model="firstname"
             type="text"
-            placeholder="Firstname"
+            :placeholder="$t('register.firstname')"
             autofocus
             fluid
           />
@@ -120,7 +120,7 @@ watchEffect(() => {
             id="lastname"
             v-model="lastname"
             type="text"
-            placeholder="Lastname"
+            :placeholder="$t('register.lastname')"
             autofocus
             fluid
           />
@@ -134,7 +134,7 @@ watchEffect(() => {
             id="email"
             v-model="email"
             type="email"
-            placeholder="Email"
+            :placeholder="$t('register.email')"
             fluid
           />
         </IconField>
@@ -147,7 +147,7 @@ watchEffect(() => {
             id="password1"
             v-model="password"
             type="password"
-            placeholder="Password"
+            :placeholder="$t('register.password')"
             fluid
           />
         </IconField>
@@ -160,7 +160,7 @@ watchEffect(() => {
             id="password2"
             v-model="confirmPassword"
             type="password"
-            placeholder="Confirm your password"
+            :placeholder="$t('register.password_confirmed')"
             fluid
           />
         </IconField>
@@ -172,13 +172,13 @@ watchEffect(() => {
             name="accept-registration"
             value="Accept"
           />
-          <label for="accept">I agree to the terms and conditions.</label>
+          <label for="accept">{{ $t('register.agree') }}</label>
         </div>
 
         <Button
           id="sign-up-button"
           type="submit"
-          label="Sign Up"
+          :label="$t('register.button')"
           icon="pi pi-user-plus"
           class="mt-2"
         />

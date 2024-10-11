@@ -54,7 +54,7 @@ watchEffect(() => {
             alt="Logo Festify"
           >
           <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            {{ $t('login.title') }}
           </h2>
         </div>
         <IconField>
@@ -65,7 +65,7 @@ watchEffect(() => {
             id="username"
             v-model="email"
             type="text"
-            placeholder="Email address"
+            :placeholder="$t('login.email')"
             autofocus
             fluid
           />
@@ -79,7 +79,7 @@ watchEffect(() => {
             id="password"
             v-model="password"
             type="password"
-            placeholder="Password"
+            :placeholder="$t('login.password')"
             fluid
           />
         </IconField>
@@ -87,23 +87,23 @@ watchEffect(() => {
           <a
             href="#"
             class="font-semibold text-indigo-600 hover:text-indigo-500"
-          >Forgot password?</a>
+          >{{ $t('login.password_forgot') }}</a>
         </div>
 
         <Button
           id="sign-in"
           type="submit"
-          label="Sign in"
+          :label="$t('login.button')"
           class="mt-2 button-validation"
           @click="submitLoginForm"
         />
       </div>
     </div>
     <div class="register-container">
-      <p>Don't have an account yet ?</p>
+      <p>{{ $t('login.no_account') }}</p>
       <NuxtLink to="/register">
         <p id="sign-up-link">
-          Sign up
+          {{ $t('login.sign_up') }}
         </p>
       </NuxtLink>
     </div>

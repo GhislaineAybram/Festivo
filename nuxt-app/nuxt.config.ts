@@ -38,12 +38,23 @@ export default defineNuxtConfig({
     'nuxt-icons',
     '@nuxtjs/supabase',
     '@nuxt/eslint',
+    '@nuxtjs/i18n',
   ],
 
   eslint: {
     config: {
       stylistic: true,
     },
+  },
+
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', file: 'en.json' },
+      { code: 'fr', iso: 'fr-FR', file: 'fr.json' }
+    ],
+    defaultLocale: 'en',
+    langDir: 'locales/',
+    lazy: true, 
   },
 
   supabase: {
