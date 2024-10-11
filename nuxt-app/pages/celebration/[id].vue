@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import { useRuntimeConfig } from '#app'
-import type { Celebration } from '~/types';
+import type { Celebration } from '~/types'
 
 const { id } = useRoute().params
 

@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
     return celebration
   }
   catch (error) {
+    console.error(error)
     return {
       statusCode: 500,
       body: { error: 'Failed to fetch celebration' },

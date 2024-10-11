@@ -1,76 +1,77 @@
 <script setup lang="ts">
-import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-const { auth } = useSupabaseClient();
-const { data: { user },} = await auth.getUser();
-let metadata = user?.user_metadata;
+// import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
-const pseudo = computed(() => metadata?.nickname || '');
-const firstname = computed(() => metadata?.firstname || '');
-const lastname = computed(() => metadata?.lastname || '');
-const email = computed(() => user?.email || '');
+const { auth } = useSupabaseClient()
+const { data: { user } } = await auth.getUser()
+const metadata = user?.user_metadata
+
+const pseudo = computed(() => metadata?.nickname || '')
+const firstname = computed(() => metadata?.firstname || '')
+const lastname = computed(() => metadata?.lastname || '')
+const email = computed(() => user?.email || '')
 
 const allergy = [
-        {
-          name: 'Gluten',
-          description: 'Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales',
-          selected: false,
-        },
-        {
-          name: 'Crustacés',
-          description: 'Et produits à base de crustacés',
-          selected: false,
-        },
-        {
-          name: 'Oeufs',
-          description: 'Et produits à base d’œufs',
-          selected: false,
-        },
-        {
-          name: 'Arachides',
-          description: 'Et produits à base d\'arachides',
-          selected: false,
-        },
-        {
-          name: 'Poissons',
-          description: 'Et produits à base de poissons',
-          selected: false,
-        },
-        {
-          name: 'Soja',
-          description: 'Et produits à base de soja',
-          selected: false,
-        },
-        {
-          name: 'Lait',
-          description: 'Et produits à base de lait (y compris de lactose)',
-          selected: false,
-        },
-        {
-          name: 'Fruits à coques',
-          description: 'Amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches et produits à base de ces fruits',
-          selected: false,
-        },
-        {
-          name: 'Céleri',
-          description: 'Et produits à base de céleri',
-          selected: false,
-        },
-        {
-          name: 'Moutarde',
-          description: 'Et produits à base de moutarde',
-          selected: false,
-        },
-        {
-          name: 'Graines de sésame',
-          description: 'Et produits à base de graines de sésame',
-          selected: false,
-        },
-        {
-          name: 'Anhydride sulfureux et sulfites',
-          description: 'En concentration de plus de 10 mg/kg ou 10 mg/L',
-          selected: false,
-        },
-      ];
+  {
+    name: 'Gluten',
+    description: 'Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales',
+    selected: false,
+  },
+  {
+    name: 'Crustacés',
+    description: 'Et produits à base de crustacés',
+    selected: false,
+  },
+  {
+    name: 'Oeufs',
+    description: 'Et produits à base d’œufs',
+    selected: false,
+  },
+  {
+    name: 'Arachides',
+    description: 'Et produits à base d\'arachides',
+    selected: false,
+  },
+  {
+    name: 'Poissons',
+    description: 'Et produits à base de poissons',
+    selected: false,
+  },
+  {
+    name: 'Soja',
+    description: 'Et produits à base de soja',
+    selected: false,
+  },
+  {
+    name: 'Lait',
+    description: 'Et produits à base de lait (y compris de lactose)',
+    selected: false,
+  },
+  {
+    name: 'Fruits à coques',
+    description: 'Amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches et produits à base de ces fruits',
+    selected: false,
+  },
+  {
+    name: 'Céleri',
+    description: 'Et produits à base de céleri',
+    selected: false,
+  },
+  {
+    name: 'Moutarde',
+    description: 'Et produits à base de moutarde',
+    selected: false,
+  },
+  {
+    name: 'Graines de sésame',
+    description: 'Et produits à base de graines de sésame',
+    selected: false,
+  },
+  {
+    name: 'Anhydride sulfureux et sulfites',
+    description: 'En concentration de plus de 10 mg/kg ou 10 mg/L',
+    selected: false,
+  },
+]
 </script>
 
 <template>
@@ -93,7 +94,9 @@ const allergy = [
             </svg>
           </button>
         </div>
-        <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Bienvenue {{ firstname }} !</h1>
+        <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+          Bienvenue {{ firstname }} !
+        </h1>
       </div>
       <form id="profile-details">
         <div class="space-y-12">
@@ -104,13 +107,13 @@ const allergy = [
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <!-- <div class="col-span-full"> -->
-          <!-- <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo de profil</label>
+              <!-- <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo de profil</label>
           <div class="mt-2 flex items-center gap-x-3">
             <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
             </svg> -->
-            <!-- <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Modifier</button> -->
-          <!-- </div>
+              <!-- <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Modifier</button> -->
+              <!-- </div>
         </div> -->
 
               <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -198,95 +201,94 @@ const allergy = [
             <div class="mt-10 space-y-10">
               <fieldset>
                 <Disclosure>
-                <div class="text-sm leading-6 grid grid-cols-4 gap-2 items-center">
-                  <legend class="text-sm font-semibold leading-6 text-gray-900 col-span-2">
-                    Allergies / intolérances
-                  </legend>
+                  <div class="text-sm leading-6 grid grid-cols-4 gap-2 items-center">
+                    <legend class="text-sm font-semibold leading-6 text-gray-900 col-span-2">
+                      Allergies / intolérances
+                    </legend>
 
-                  <div class="flex items-center gap-x-3 col-span-1">
-                    <input
-                      id="push-email"
-                      name="push-notifications"
-                      type="radio"
-                      class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    >
-                    <label
-                      for="push-email"
-                      class="block text-sm font-medium leading-6 text-gray-900"
-                    >Oui</label>
-                  </div>
-                  <div class="flex items-center gap-x-3 col-span-1">
-                    <input
-                      id="push-nothing"
-                      name="push-notifications"
-                      type="radio"
-                      class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    >
-                    <label
-                      for="push-nothing"
-                      class="block text-sm font-medium leading-6 text-gray-900"
-                    >Non</label>
-                  </div>
-                  <div class="col-span-1 flex justify-end">
-                    
-                    <DisclosureButton className="group flex w-full items-center justify-between">
+                    <div class="flex items-center gap-x-3 col-span-1">
+                      <input
+                        id="push-email"
+                        name="push-notifications"
+                        type="radio"
+                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                      >
+                      <label
+                        for="push-email"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                      >Oui</label>
+                    </div>
+                    <div class="flex items-center gap-x-3 col-span-1">
+                      <input
+                        id="push-nothing"
+                        name="push-notifications"
+                        type="radio"
+                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                      >
+                      <label
+                        for="push-nothing"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                      >Non</label>
+                    </div>
+                    <div class="col-span-1 flex justify-end">
+                      <DisclosureButton class-name="group flex w-full items-center justify-between">
                       <!-- <ChevronDownIcon className="size-5 fill-white/60 group-data-[hover]:fill-white/50 group-data-[open]:rotate-180" /> -->
-                    </DisclosureButton>
-                  </div>
-                </div>
-
-                <DisclosurePanel class="mt-2 text-gray-600">
-                
-                  <div class="mt-6 space-y-6">
-
-                  <div v-for="item in allergy" :key="item.name" class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6">
-                      <label
-                        for="comments"
-                        class="font-medium text-gray-900"
-                      >{{ item.name }}</label>
-                      <p class="text-gray-500">
-                        {{ item.description }}
-                      </p>
+                      </DisclosureButton>
                     </div>
                   </div>
 
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="offers"
-                        name="offers"
-                        type="checkbox"
-                        class="h-4 w-4 px-2 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  <DisclosurePanel class="mt-2 text-gray-600">
+                    <div class="mt-6 space-y-6">
+                      <div
+                        v-for="item in allergy"
+                        :key="item.name"
+                        class="relative flex gap-x-3"
                       >
-                    </div>
-                    <div class="text-sm leading-6 grid grid-cols-2 gap-4">
-                      <label
-                        for="offers"
-                        class="font-medium text-gray-900"
-                      >Autres</label>
-                      <input
-                        id="first-name"
-                        type="text"
-                        name="first-name"
-                        autocomplete="given-name"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      >
-                    </div>
-                  </div> 
+                        <div class="flex h-6 items-center">
+                          <input
+                            id="comments"
+                            name="comments"
+                            type="checkbox"
+                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          >
+                        </div>
+                        <div class="text-sm leading-6">
+                          <label
+                            for="comments"
+                            class="font-medium text-gray-900"
+                          >{{ item.name }}</label>
+                          <p class="text-gray-500">
+                            {{ item.description }}
+                          </p>
+                        </div>
+                      </div>
 
-                </div>
-
-              </DisclosurePanel>   
-            </Disclosure>          
+                      <div class="relative flex gap-x-3">
+                        <div class="flex h-6 items-center">
+                          <input
+                            id="offers"
+                            name="offers"
+                            type="checkbox"
+                            class="h-4 w-4 px-2 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          >
+                        </div>
+                        <div class="text-sm leading-6 grid grid-cols-2 gap-4">
+                          <label
+                            for="offers"
+                            class="font-medium text-gray-900"
+                          >Autres</label>
+                          <input
+                            id="first-name"
+                            type="text"
+                            name="first-name"
+                            autocomplete="given-name"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </DisclosurePanel>
+                </Disclosure>
               </fieldset>
             </div>
           </div>

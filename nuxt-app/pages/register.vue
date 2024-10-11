@@ -1,40 +1,40 @@
 <script setup lang="ts">
-const user = useSupabaseUser();
-const firstname = ref('');
-const lastname = ref('');
-const email = ref('');
-const password = ref('');
-const confirmPassword = ref('');
-const errorMsg = ref('');
-const accept = ref(false);
-const registrationSuccess = ref(false);
+const user = useSupabaseUser()
+const firstname = ref('')
+const lastname = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const errorMsg = ref('')
+const accept = ref(false)
+const registrationSuccess = ref(false)
 
-const { auth } = useSupabaseClient();
+const { auth } = useSupabaseClient()
 
 const formatName = (name: string) => {
-  if (!name) return '';
-  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  if (!name) return ''
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
 }
 
 const submitRegisterForm = async () => {
-  console.log('Submit button clicked');
+  console.log('Submit button clicked')
   if (!accept.value) {
     alert('Vous devez accepter les termes et conditions.')
     return
   }
 
   if (password.value !== confirmPassword.value) {
-    errorMsg.value = 'Passwords do not match!';
-    password.value = '';
-    confirmPassword.value = '';
+    errorMsg.value = 'Passwords do not match!'
+    password.value = ''
+    confirmPassword.value = ''
     setTimeout(() => {
-      errorMsg.value = '';
-    }, 3000);
-    return;
+      errorMsg.value = ''
+    }, 3000)
+    return
   }
 
   try {
-    console.log('Attempting sign up');
+    console.log('Attempting sign up')
     const { error } = await auth.signUp({
       email: email.value.toLowerCase(),
       password: password.value,
@@ -42,41 +42,41 @@ const submitRegisterForm = async () => {
         data: {
           firstname: formatName(firstname.value),
           lastname: (lastname.value).toUpperCase(),
-        }
-      }
-    });
+        },
+      },
+    })
 
-    if (error) throw error;
+    if (error) throw error
 
     // Clear form
-    email.value = '';
-    password.value = '';
-    confirmPassword.value = '';
-    firstname.value = '';
-    lastname.value = '';
+    email.value = ''
+    password.value = ''
+    confirmPassword.value = ''
+    firstname.value = ''
+    lastname.value = ''
 
-    registrationSuccess.value = true;
-    console.log('User signed up successfully');
-  } catch (error: any) {
-    console.error('Sign up error:', error);
-    errorMsg.value = error.message;
-    setTimeout(() => {
-      errorMsg.value = '';
-    }, 3000);
+    registrationSuccess.value = true
+    console.log('User signed up successfully')
   }
-};
+  catch (error) {
+    console.error('Sign up error:', error)
+    errorMsg.value = error.message
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
+  }
+}
 
 watchEffect(() => {
   if (user.value) {
-    console.log('User logged in, redirecting to home');
+    console.log('User logged in, redirecting to home')
   }
-});
+})
 </script>
 
 <template>
   <main class="main flex flex-col items-center">
-    <div class="card flex justify-center">
-    </div>
+    <div class="card flex justify-center" />
     <!-- <h1 class="text-3xl font-bold sm:text-4xl">
       Page registration
     </h1> -->
@@ -88,10 +88,16 @@ watchEffect(() => {
         class="w-full sm:w-80 flex flex-col gap-6"
         @submit.prevent="submitRegisterForm"
       >
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img class="mx-auto h-10 w-auto" src="../public/img/disco-ball-tangerine.png" alt="Logo Festify" />
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up</h2>
-      </div>
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            class="mx-auto h-10 w-auto"
+            src="../public/img/disco-ball-tangerine.png"
+            alt="Logo Festify"
+          >
+          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign up
+          </h2>
+        </div>
         <IconField>
           <InputIcon>
             <i class="pi pi-user" />
@@ -149,13 +155,13 @@ watchEffect(() => {
         <IconField>
           <InputIcon>
             <i class="pi pi-key" />
-            </InputIcon>
-          <InputText 
-          id="password2" 
-          v-model="confirmPassword" 
-          type="password" 
-          placeholder="Confirm your password" 
-          fluid
+          </InputIcon>
+          <InputText
+            id="password2"
+            v-model="confirmPassword"
+            type="password"
+            placeholder="Confirm your password"
+            fluid
           />
         </IconField>
 
@@ -179,7 +185,10 @@ watchEffect(() => {
       </form>
     </div>
     <AlertRegistration v-if="registrationSuccess" />
-    <div v-if="errorMsg" class="error-message">
+    <div
+      v-if="errorMsg"
+      class="error-message"
+    >
       {{ errorMsg }}
     </div>
   </main>

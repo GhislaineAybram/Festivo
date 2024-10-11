@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import Aura from '@primevue/themes/aura'
-import { defineNuxtConfig } from 'nuxt/config';
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -15,9 +15,9 @@ export default defineNuxtConfig({
     tsConfig: {
       exclude: [
         '.nuxt',
-        'dist'
-      ]
-    }
+        'dist',
+      ],
+    },
   },
 
   nitro: {
@@ -37,7 +37,14 @@ export default defineNuxtConfig({
     '@primevue/nuxt-module',
     'nuxt-icons',
     '@nuxtjs/supabase',
+    '@nuxt/eslint',
   ],
+
+  eslint: {
+    config: {
+      stylistic: true,
+    },
+  },
 
   supabase: {
     url: process.env.SUPABASE_URL,

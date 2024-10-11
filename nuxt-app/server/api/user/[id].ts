@@ -3,7 +3,7 @@ import { getUserById } from '~~/supabase'
 export default defineEventHandler(async (event) => {
   try {
     // Extraire l'ID de l'URL
-    const id = getRouterParam(event, 'id');
+    const id = getRouterParam(event, 'id')
 
     if (!id) {
       return {
@@ -26,6 +26,7 @@ export default defineEventHandler(async (event) => {
     return user
   }
   catch (error) {
+    console.error(error)
     return {
       statusCode: 500,
       body: { error: 'Failed to fetch user' },

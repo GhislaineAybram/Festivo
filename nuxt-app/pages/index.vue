@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { Celebration } from '~/types';
+import type { Celebration } from '~/types'
 
-const { auth } = useSupabaseClient();
-const { data: { user },} = await auth.getUser();
-let metadata = user?.user_metadata;
+const { auth } = useSupabaseClient()
+const { data: { user } } = await auth.getUser()
+const metadata = user?.user_metadata
 
-const firstname = computed(() => metadata?.firstname || '');
+const firstname = computed(() => metadata?.firstname || '')
 
 watchEffect(() => {
   if (!user) {
-    return navigateTo('/login');
+    return navigateTo('/login')
   }
-});
+})
 
 definePageMeta({
   middleware: 'auth',
-});
+})
 
 const runtimeConfig = useRuntimeConfig()
 const { data: celebration, error } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/6597f938-9e05-4015-b62b-4468d042869e`)
@@ -26,62 +26,81 @@ if (error.value) {
 }
 
 const getMonth = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.toLocaleString('default', { month: 'long' });
-};
+  const date = new Date(dateString)
+  return date.toLocaleString('default', { month: 'long' })
+}
 
 const getDay = (dateString: string) => {
-  const date = new Date(dateString);
-  return date.getDate();
-};
+  const date = new Date(dateString)
+  return date.getDate()
+}
 
-const dateMonth = computed(() => celebration.value ? getMonth(celebration.value.date) : '');
-const dateDay = computed(() => celebration.value ? getDay(celebration.value.date) : '');
+const dateMonth = computed(() => celebration.value ? getMonth(celebration.value.date) : '')
+const dateDay = computed(() => celebration.value ? getDay(celebration.value.date) : '')
 
-const dateMonth2 = computed(() => celebration2.value ? getMonth(celebration2.value.date) : '');
-const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.date) : '');
+const dateMonth2 = computed(() => celebration2.value ? getMonth(celebration2.value.date) : '')
+const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.date) : '')
 </script>
 
 <template>
   <main class="main">
     <div v-if="user">
-      <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Bienvenue {{ firstname }} !</h1>
-      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Voici vos événements</h2>
+      <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+        Bienvenue {{ firstname }} !
+      </h1>
+      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+        Voici vos événements
+      </h2>
       <div class="grid grid-cols-1 sm:grid-cols-1">
         <div class="parent">
-        <div class="card">
-        <div class="card-image"></div>
-        <div class="category"> {{ celebration?.name }} </div>
-        <div class="date-box">
-            <span class="date">{{ dateDay }}</span>
-            <span class="month">{{ dateMonth }}</span>
+          <div class="card">
+            <div class="card-image" />
+            <div class="category">
+              {{ celebration?.name }}
+            </div>
+            <div class="date-box">
+              <span class="date">{{ dateDay }}</span>
+              <span class="month">{{ dateMonth }}</span>
+            </div>
+            <div class="heading">
+              {{ celebration?.description }}
+            </div>
+            <a
+              class="action"
+              :href="`/celebration/${celebration?.id}`"
+            >
+              Go to the event page
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
-        <div class="heading"> {{ celebration?.description }}</div>
-        <a class="action" v-bind:href="`/celebration/${celebration?.id}`">
-            Go to the event page
-          <span aria-hidden="true">→</span>
-        </a>
-    </div>
-    </div>
 
-    <div class="parent">
-        <div class="card">
-        <div class="card-image"></div>
-        <div class="category"> {{ celebration2?.name }} </div>
-        <div class="date-box">
-            <span class="date">{{ dateDay2 }}</span>
-            <span class="month">{{ dateMonth2 }}</span>
+        <div class="parent">
+          <div class="card">
+            <div class="card-image" />
+            <div class="category">
+              {{ celebration2?.name }}
+            </div>
+            <div class="date-box">
+              <span class="date">{{ dateDay2 }}</span>
+              <span class="month">{{ dateMonth2 }}</span>
+            </div>
+            <div class="heading">
+              {{ celebration2?.description }}
+            </div>
+            <a
+              class="action"
+              :href="`/celebration/${celebration2?.id}`"
+            >
+              Go to the event page
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
-        <div class="heading"> {{ celebration2?.description }}</div>
-        <a class="action" v-bind:href="`/celebration/${celebration2?.id}`">
-            Go to the event page
-          <span aria-hidden="true">→</span>
-        </a>
-    </div>
-    </div>
-
       </div>
-      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Voici vos invitations</h2>
+      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+        Voici vos invitations
+      </h2>
     </div>
 
     <div v-else>

@@ -1,41 +1,41 @@
 <script setup lang="ts">
-const user = useSupabaseUser();
-const email = ref('');
-const password = ref('');
-const errorMsg = ref('');
+const user = useSupabaseUser()
+const email = ref('')
+const password = ref('')
+const errorMsg = ref('')
 
-const { auth } = useSupabaseClient();
+const { auth } = useSupabaseClient()
 
 const submitLoginForm = async () => {
   try {
     const { error } = await auth.signInWithPassword({
       email: email.value,
       password: password.value,
-    });
+    })
 
-    email.value = '';
-    password.value = '';
+    email.value = ''
+    password.value = ''
 
-    if (error) throw error;
-  } catch (error: any) {
-    errorMsg.value = error.message;
-    setTimeout(() => {
-      errorMsg.value = '';
-    }, 3000);
+    if (error) throw error
   }
-};
+  catch (error) {
+    errorMsg.value = error.message
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
+  }
+}
 
 watchEffect(() => {
   if (user.value) {
-    return navigateTo('/');
+    return navigateTo('/')
   }
-});
+})
 </script>
 
 <template>
   <main class="main flex flex-col items-center">
-    <div class="card flex justify-center">
-    </div>
+    <div class="card flex justify-center" />
     <!-- <h1 class="text-3xl font-bold sm:text-4xl">
       Page login
     </h1> -->
@@ -47,10 +47,16 @@ watchEffect(() => {
         v-focustrap
         class="w-full sm:w-80 flex flex-col gap-6"
       >
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img class="mx-auto h-10 w-auto" src="../public/img/disco-ball-tangerine.png" alt="Logo Festify" />
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-      </div>
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            class="mx-auto h-10 w-auto"
+            src="../public/img/disco-ball-tangerine.png"
+            alt="Logo Festify"
+          >
+          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
         <IconField>
           <InputIcon>
             <i class="pi pi-user" />
@@ -78,7 +84,10 @@ watchEffect(() => {
           />
         </IconField>
         <div class="text-sm">
-          <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+          <a
+            href="#"
+            class="font-semibold text-indigo-600 hover:text-indigo-500"
+          >Forgot password?</a>
         </div>
 
         <Button
