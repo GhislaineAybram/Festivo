@@ -1,12 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import Aura from '@primevue/themes/aura'
-import { defineNuxtConfig } from 'nuxt/config'
+import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
   devServer: {
     port: Number(process.env.PORT_FRONT),
+  },
+
+  typescript: {
+    typeCheck: true,
+    strict: false,
+    tsConfig: {
+      exclude: [
+        '.nuxt',
+        'dist'
+      ]
+    }
   },
 
   nitro: {
@@ -25,7 +36,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module',
     'nuxt-icons',
-    'nuxt-auth-utils',
     '@nuxtjs/supabase',
   ],
 
@@ -56,13 +66,6 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.API_URL,
     },
-    // database: {
-    //   user: process.env.DB_USER,
-    //   host: process.env.DB_HOST,
-    //   name: process.env.DB_NAME,
-    //   password: process.env.DB_PASSWORD,
-    //   port: process.env.DB_PORT,
-    // },
     session: {
       name: 'nuxt-session',
       password: process.env.NUXT_SESSION_PASSWORD || '',

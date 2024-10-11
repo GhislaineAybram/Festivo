@@ -2,15 +2,7 @@
 import { useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import { useRuntimeConfig } from '#app'
-
-interface Celebration {
-  name: string
-  description: string
-  author: string
-  date: string
-  hour: string
-  location: string
-}
+import type { Celebration } from '~/types';
 
 const { id } = useRoute().params
 

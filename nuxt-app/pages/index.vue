@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Celebration } from '~/types';
+
 const { auth } = useSupabaseClient();
 const { data: { user },} = await auth.getUser();
 let metadata = user?.user_metadata;
@@ -14,16 +16,6 @@ watchEffect(() => {
 definePageMeta({
   middleware: 'auth',
 });
-
-interface Celebration {
-  celebration_id: string
-  name: string
-  description: string
-  author: string
-  date: string
-  hour: string
-  location: string
-}
 
 const runtimeConfig = useRuntimeConfig()
 const { data: celebration, error } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/6597f938-9e05-4015-b62b-4468d042869e`)
@@ -65,7 +57,7 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
             <span class="month">{{ dateMonth }}</span>
         </div>
         <div class="heading"> {{ celebration?.description }}</div>
-        <a class="action" v-bind:href="`/celebration/${celebration?.celebration_id}`">
+        <a class="action" v-bind:href="`/celebration/${celebration?.id}`">
             Go to the event page
           <span aria-hidden="true">→</span>
         </a>
@@ -81,7 +73,7 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
             <span class="month">{{ dateMonth2 }}</span>
         </div>
         <div class="heading"> {{ celebration2?.description }}</div>
-        <a class="action" v-bind:href="`/celebration/${celebration2?.celebration_id}`">
+        <a class="action" v-bind:href="`/celebration/${celebration2?.id}`">
             Go to the event page
           <span aria-hidden="true">→</span>
         </a>
