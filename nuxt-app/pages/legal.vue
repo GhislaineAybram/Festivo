@@ -3,15 +3,15 @@
 
 <template>
   <main class="main">
-    <div class="about">
-      <h1>This is an about page</h1>
+    <div class="legal">
+      <h1>This is the legal page</h1>
     </div>
   </main>
 </template>
 
 <style lang="scss" scoped>
 @media (min-width: 1024px) {
-  .about {
+  .legal {
     min-height: 100vh;
     display: flex;
     align-items: center;

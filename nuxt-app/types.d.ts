@@ -1,5 +1,5 @@
 export interface User {
-  id: string
+  user_id: string
   firstname: string
   lastname: string
   nickname: string
@@ -10,7 +10,7 @@ export interface User {
 }
 
 export interface Celebration {
-  id: string
+  celebration_id: string
   name: string
   description: string
   address: string

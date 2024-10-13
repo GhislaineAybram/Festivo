@@ -83,7 +83,7 @@ const dateDay2 = computed(() =>
             </div>
             <a
               class="action"
-              :href="`/celebration/${celebration?.id}`"
+              :href="`/celebration/${celebration?.celebration_id}`"
             >
               {{ $t("welcome.event_link") }}
               <span aria-hidden="true">→</span>
@@ -106,7 +106,7 @@ const dateDay2 = computed(() =>
             </div>
             <a
               class="action"
-              :href="`/celebration/${celebration2?.id}`"
+              :href="`/celebration/${celebration2?.celebration_id}`"
             >
               {{ $t("welcome.event_link") }}
               <span aria-hidden="true">→</span>
