@@ -2,24 +2,28 @@
 import type { Celebration } from '~/types'
 
 const { auth } = useSupabaseClient()
-const { data: { user } } = await auth.getUser()
+const {
+  data: { user },
+} = await auth.getUser()
 const metadata = user?.user_metadata
 
 const firstname = computed(() => metadata?.firstname || '')
 
-watchEffect(() => {
-  if (!user) {
-    return navigateTo('/login')
-  }
-})
-
-definePageMeta({
-  middleware: 'auth',
-})
+// watchEffect(() => {
+//   if (!user) {
+//     return navigateTo('/login')
+//   }
+// })
 
 const runtimeConfig = useRuntimeConfig()
-const { data: celebration, error } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/6597f938-9e05-4015-b62b-4468d042869e`)
-const { data: celebration2 } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/bc5abc08-c022-4117-88bd-f5abdcf1300d`)
+const { data: celebration, error } = await useFetch<Celebration>(
+  () =>
+    `${runtimeConfig.public.apiUrl}/celebration/6597f938-9e05-4015-b62b-4468d042869e`,
+)
+const { data: celebration2 } = await useFetch<Celebration>(
+  () =>
+    `${runtimeConfig.public.apiUrl}/celebration/bc5abc08-c022-4117-88bd-f5abdcf1300d`,
+)
 
 if (error.value) {
   console.error('Failed to fetch celebration data', error.value)
@@ -35,21 +39,33 @@ const getDay = (dateString: string) => {
   return date.getDate()
 }
 
-const dateMonth = computed(() => celebration.value ? getMonth(celebration.value.date) : '')
-const dateDay = computed(() => celebration.value ? getDay(celebration.value.date) : '')
+const dateMonth = computed(() =>
+  celebration.value ? getMonth(celebration.value.date) : '',
+)
+const dateDay = computed(() =>
+  celebration.value ? getDay(celebration.value.date) : '',
+)
 
-const dateMonth2 = computed(() => celebration2.value ? getMonth(celebration2.value.date) : '')
-const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.date) : '')
+const dateMonth2 = computed(() =>
+  celebration2.value ? getMonth(celebration2.value.date) : '',
+)
+const dateDay2 = computed(() =>
+  celebration2.value ? getDay(celebration2.value.date) : '',
+)
 </script>
 
 <template>
   <main class="main">
     <div v-if="user">
-      <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        {{ $t('welcome.title') }} {{ firstname }} !
+      <h1
+        class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:tracking-tight"
+      >
+        {{ $t("welcome.title") }} {{ firstname }} !
       </h1>
-      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        {{ $t('welcome.events') }}
+      <h2
+        class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:tracking-tight"
+      >
+        {{ $t("welcome.events") }}
       </h2>
       <div class="grid grid-cols-1 sm:grid-cols-1">
         <div class="parent">
@@ -69,7 +85,7 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
               class="action"
               :href="`/celebration/${celebration?.id}`"
             >
-            {{ $t('welcome.event_link') }}
+              {{ $t("welcome.event_link") }}
               <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -92,19 +108,21 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
               class="action"
               :href="`/celebration/${celebration2?.id}`"
             >
-            {{ $t('welcome.event_link') }}
+              {{ $t("welcome.event_link") }}
               <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
       </div>
-      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-        {{ $t('welcome.invitations') }}
+      <h2
+        class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
+      >
+        {{ $t("welcome.invitations") }}
       </h2>
     </div>
 
     <div v-else>
-      <h1>{{ $t('welcome.not_logged') }}</h1>
+      <h1>{{ $t("welcome.not_logged") }}</h1>
       <NuxtLink to="login">
         <Button
           label="Login with password"
@@ -115,7 +133,7 @@ const dateDay2 = computed(() => celebration2.value ? getDay(celebration2.value.d
   </main>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 h1 {
   background-color: $seashell;
   color: $indigo;
@@ -217,7 +235,7 @@ h2 {
 .action {
   display: inline-flex;
   margin-top: 1rem;
-  color: #180161;
+  color: $indigo;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
@@ -228,12 +246,12 @@ h2 {
   border-radius: 4px;
 }
 @media (min-width: 1024px) {
-    .about {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-    .main {
+  .about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .main {
     margin-top: 59px;
   }
 }

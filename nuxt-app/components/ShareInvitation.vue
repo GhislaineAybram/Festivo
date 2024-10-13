@@ -4,9 +4,24 @@ import { ref } from 'vue'
 
 const op = ref()
 const members = ref([
-  { name: 'Amy Elsner', image: 'amyelsner.png', email: 'amy@email.com', role: 'Owner' },
-  { name: 'Bernardo Dominic', image: 'bernardodominic.png', email: 'bernardo@email.com', role: 'Editor' },
-  { name: 'Ioni Bowcher', image: 'ionibowcher.png', email: 'ioni@email.com', role: 'Viewer' },
+  {
+    name: 'Amy Elsner',
+    image: 'amyelsner.png',
+    email: 'amy@email.com',
+    role: 'Owner',
+  },
+  {
+    name: 'Bernardo Dominic',
+    image: 'bernardodominic.png',
+    email: 'bernardo@email.com',
+    role: 'Editor',
+  },
+  {
+    name: 'Ioni Bowcher',
+    image: 'ionibowcher.png',
+    email: 'ioni@email.com',
+    role: 'Viewer',
+  },
 ])
 
 const toggle = (event: MouseEvent) => {
@@ -66,7 +81,9 @@ const toggle = (event: MouseEvent) => {
                   {{ member.email }}
                 </div>
               </div>
-              <div class="flex items-center gap-2 text-surface-500 dark:text-surface-400 ml-auto text-sm">
+              <div
+                class="flex items-center gap-2 text-surface-500 dark:text-surface-400 ml-auto text-sm"
+              >
                 <span>{{ member.role }}</span>
                 <i class="pi pi-angle-down" />
               </div>
@@ -78,5 +95,4 @@ const toggle = (event: MouseEvent) => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

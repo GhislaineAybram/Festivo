@@ -50,18 +50,18 @@ export default defineNuxtConfig({
   i18n: {
     locales: [
       { code: 'en', iso: 'en-US', file: 'en.json' },
-      { code: 'fr', iso: 'fr-FR', file: 'fr.json' }
+      { code: 'fr', iso: 'fr-FR', file: 'fr.json' },
     ],
     defaultLocale: 'en',
     langDir: 'locales/',
-    lazy: true, 
+    lazy: true,
     strategy: 'no_prefix',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
       alwaysRedirect: false,
-      fallbackLocale: 'en'
-    }
+      fallbackLocale: 'en',
+    },
   },
 
   supabase: {

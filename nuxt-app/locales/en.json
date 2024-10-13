@@ -53,5 +53,16 @@
     "login": "Log in",
     "profile": "My profile page",
     "sign_out": "Log out"
-  } 
+  },
+  "error": {
+    "page": "Page not found",
+    "information": "Sorry, we couldn’t find the page you’re looking for.",
+    "back": "Go back home",
+    "contact": "Contact support"
+  },
+  "footer": {
+    "legal": "Legal information",
+    "privacy": "Privacy",
+    "about": "About"
+  }
 }

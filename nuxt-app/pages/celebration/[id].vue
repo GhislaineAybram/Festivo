@@ -7,7 +7,9 @@ import type { Celebration } from '~/types'
 const { id } = useRoute().params
 
 const runtimeConfig = useRuntimeConfig()
-const { data: celebration, error } = await useFetch<Celebration>(() => `${runtimeConfig.public.apiUrl}/celebration/${id}`)
+const { data: celebration, error } = await useFetch<Celebration>(
+  () => `${runtimeConfig.public.apiUrl}/celebration/${id}`,
+)
 
 if (error.value) {
   console.error('Failed to fetch celebration data', error.value)
@@ -32,33 +34,35 @@ if (error.value) {
             id="celebration-author-name"
             class="mt-4 text-gray-500"
           >
-          {{ $t('celebration.created') }} {{ celebration?.author }}
+            {{ $t("celebration.created") }} {{ celebration?.author }}
           </p>
         </div>
         <h3 class="text-2xl mt-4 text-gray-900">
           {{ celebration?.description }}
         </h3>
         <div id="celebration-details">
-          <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+          <dl
+            class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8"
+          >
             <div class="border-t border-gray-200 pt-4">
               <dt class="font-medium text-gray-900">
-                {{ $t('celebration.date') }}
+                {{ $t("celebration.date") }}
               </dt>
               <dd class="mt-2 text-sm text-gray-500">
-                {{ $t('celebration.the') }} {{ celebration?.date }}
+                {{ $t("celebration.the") }} {{ celebration?.date }}
               </dd>
             </div>
             <div class="border-t border-gray-200 pt-4">
               <dt class="font-medium text-gray-900">
-                {{ $t('celebration.hour') }}
+                {{ $t("celebration.hour") }}
               </dt>
               <dd class="mt-2 text-sm text-gray-500">
-                {{ $t('celebration.at') }} {{ celebration?.hour }}
+                {{ $t("celebration.at") }} {{ celebration?.hour }}
               </dd>
             </div>
             <div class="border-t border-gray-200 pt-4">
               <dt class="font-medium text-gray-900">
-                {{ $t('celebration.guests') }}
+                {{ $t("celebration.guests") }}
               </dt>
               <dd class="mt-2 text-sm text-gray-500">
                 30
@@ -66,10 +70,12 @@ if (error.value) {
             </div>
           </dl>
 
-          <dl class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+          <dl
+            class="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8"
+          >
             <div class="border-t border-gray-200 pt-4">
               <dt class="font-medium text-gray-900">
-                {{ $t('celebration.answer') }}
+                {{ $t("celebration.answer") }}
               </dt>
               <div id="celebration-answer">
                 <Button
@@ -94,13 +100,13 @@ if (error.value) {
             </div>
           </dl>
         </div>
-      <!-- </div> -->
+        <!-- </div> -->
       </div>
     </div>
   </main>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 #photo-title-celebration {
   position: relative;
 }

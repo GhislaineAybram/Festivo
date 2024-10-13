@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main class="main">
@@ -9,7 +8,7 @@
   </main>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;

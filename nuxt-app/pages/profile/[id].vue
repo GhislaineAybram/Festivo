@@ -1,8 +1,14 @@
 <script setup lang="ts">
 // import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
+definePageMeta({
+  middleware: 'auth',
+})
+
 const { auth } = useSupabaseClient()
-const { data: { user } } = await auth.getUser()
+const {
+  data: { user },
+} = await auth.getUser()
 const metadata = user?.user_metadata
 
 const pseudo = computed(() => metadata?.nickname || '')
@@ -13,7 +19,8 @@ const email = computed(() => user?.email || '')
 const allergy = [
   {
     name: 'Gluten',
-    description: 'Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales',
+    description:
+      'Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales',
     selected: false,
   },
   {
@@ -48,7 +55,8 @@ const allergy = [
   },
   {
     name: 'Fruits à coques',
-    description: 'Amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches et produits à base de ces fruits',
+    description:
+      'Amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches et produits à base de ces fruits',
     selected: false,
   },
   {
@@ -90,19 +98,23 @@ const allergy = [
               class="edit-svgIcon"
               viewBox="0 0 512 512"
             >
-              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z" />
+              <path
+                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
+              />
             </svg>
           </button>
         </div>
-        <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-          {{ $t('welcome.title') }} {{ firstname }} !
+        <h1
+          class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
+        >
+          {{ $t("welcome.title") }} {{ firstname }} !
         </h1>
       </div>
       <form id="profile-details">
         <div class="space-y-12">
           <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
-              {{ $t('user.informations') }}
+              {{ $t("user.informations") }}
             </h2>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -116,18 +128,20 @@ const allergy = [
               <!-- </div>
         </div> -->
 
-              <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div
+                class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+              >
                 <div class="sm:col-span-3">
                   <label
                     for="username"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >{{ $t('user.alias') }}</label>
+                  >{{ $t("user.alias") }}</label>
                   <div class="mt-2">
                     <input
-                      id="first-name"
+                      id="firstname"
                       v-model="pseudo"
                       type="text"
-                      name="first-name"
+                      name="firstname"
                       autocomplete="given-name"
                       class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
@@ -136,15 +150,15 @@ const allergy = [
 
                 <div class="sm:col-span-3">
                   <label
-                    for="first-name"
+                    for="firstname"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >{{ $t('user.firstname') }}</label>
+                  >{{ $t("user.firstname") }}</label>
                   <div class="mt-2">
                     <input
-                      id="first-name"
+                      id="firstname"
                       v-model="firstname"
                       type="text"
-                      name="first-name"
+                      name="firstname"
                       autocomplete="given-name"
                       class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
@@ -153,15 +167,15 @@ const allergy = [
 
                 <div class="sm:col-span-3">
                   <label
-                    for="last-name"
+                    for="lastname"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >{{ $t('user.lastname') }}</label>
+                  >{{ $t("user.lastname") }}</label>
                   <div class="mt-2">
                     <input
-                      id="last-name"
+                      id="lastname"
                       v-model="lastname"
                       type="text"
-                      name="last-name"
+                      name="lastname"
                       autocomplete="family-name"
                       class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
@@ -172,7 +186,7 @@ const allergy = [
                   <label
                     for="email"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                  >{{ $t('user.email') }}</label>
+                  >{{ $t("user.email") }}</label>
                   <div class="mt-2">
                     <input
                       id="email"
@@ -190,10 +204,10 @@ const allergy = [
 
           <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
-              {{ $t('user.alimentation') }}
+              {{ $t("user.alimentation") }}
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
-              {{ $t('user.alimentation_explanation') }}
+              {{ $t("user.alimentation_explanation") }}
             </p>
           </div>
 
@@ -201,9 +215,13 @@ const allergy = [
             <div class="mt-10 space-y-10">
               <fieldset>
                 <Disclosure>
-                  <div class="text-sm leading-6 grid grid-cols-4 gap-2 items-center">
-                    <legend class="text-sm font-semibold leading-6 text-gray-900 col-span-2">
-                      {{ $t('user.allergies') }}
+                  <div
+                    class="text-sm leading-6 grid grid-cols-4 gap-2 items-center"
+                  >
+                    <legend
+                      class="text-sm font-semibold leading-6 text-gray-900 col-span-2"
+                    >
+                      {{ $t("user.allergies") }}
                     </legend>
 
                     <div class="flex items-center gap-x-3 col-span-1">
@@ -216,7 +234,7 @@ const allergy = [
                       <label
                         for="push-email"
                         class="block text-sm font-medium leading-6 text-gray-900"
-                      >{{ $t('user.yes') }}</label>
+                      >{{ $t("user.yes") }}</label>
                     </div>
                     <div class="flex items-center gap-x-3 col-span-1">
                       <input
@@ -228,11 +246,13 @@ const allergy = [
                       <label
                         for="push-nothing"
                         class="block text-sm font-medium leading-6 text-gray-900"
-                      >{{ $t('user.no') }}</label>
+                      >{{ $t("user.no") }}</label>
                     </div>
                     <div class="col-span-1 flex justify-end">
-                      <DisclosureButton class-name="group flex w-full items-center justify-between">
-                      <!-- <ChevronDownIcon className="size-5 fill-white/60 group-data-[hover]:fill-white/50 group-data-[open]:rotate-180" /> -->
+                      <DisclosureButton
+                        class-name="group flex w-full items-center justify-between"
+                      >
+                        <!-- <ChevronDownIcon className="size-5 fill-white/60 group-data-[hover]:fill-white/50 group-data-[open]:rotate-180" /> -->
                       </DisclosureButton>
                     </div>
                   </div>
@@ -276,11 +296,11 @@ const allergy = [
                           <label
                             for="offers"
                             class="font-medium text-gray-900"
-                          >{{ $t('user.other') }}</label>
+                          >{{ $t("user.other") }}</label>
                           <input
-                            id="first-name"
+                            id="firstname"
                             type="text"
-                            name="first-name"
+                            name="firstname"
                             autocomplete="given-name"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           >
@@ -299,13 +319,13 @@ const allergy = [
             type="button"
             class="text-sm font-semibold leading-6 text-gray-900"
           >
-          {{ $t('user.cancel') }}
+            {{ $t("user.cancel") }}
           </button>
           <button
             type="submit"
             class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-          {{ $t('user.save') }}
+            {{ $t("user.save") }}
           </button>
         </div>
       </form>
@@ -316,7 +336,7 @@ const allergy = [
   </main>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .main {
   margin-top: 59px;
   display: flex;

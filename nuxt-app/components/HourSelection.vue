@@ -4,7 +4,9 @@
       <label
         for="datepicker-timeonly"
         class="font-bold block mb-2"
-      > Time </label>
+      >
+        Time
+      </label>
       <DatePicker
         id="datepicker-timeonly"
         v-model="time"

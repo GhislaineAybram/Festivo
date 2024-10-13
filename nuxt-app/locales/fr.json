@@ -53,5 +53,16 @@
     "login": "Se connecter",
     "profile": "Ma page profil",
     "sign_out": "Se déconnecter"
-  } 
+  },
+  "error": {
+    "page": "Page introuvable",
+    "information": "La page que vous essayez d'atteindre est introuvable.",
+    "back": "Retour à l'accueil",
+    "contact": "Contactez les supports"
+  },
+  "footer": {
+    "legal": "Mentions légales",
+    "privacy": "Confidentialité",
+    "about": "A propos"
+  }
 }

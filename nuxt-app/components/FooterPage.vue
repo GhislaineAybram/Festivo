@@ -8,25 +8,27 @@ import IconGitHub from './icons/IconGitHub.vue'
     class="w-full z-10 font-body bottom-0 bg-gray-700 text-gray-200 flex flex-col"
   >
     <div class="bg-gray-800 bottom-0 right-0 left-0">
-      <div class="flex mx-auto items-center justify-between flex-wrap p-4 md:px-6 max-w-7xl">
+      <div
+        class="flex mx-auto items-center justify-between flex-wrap p-4 md:px-6 max-w-7xl"
+      >
         <span>
           <NuxtLink
             to="/legal"
             class="text-gray-400 hover:text-white mx-2"
           >
-            Mentions légales
+            {{ $t("footer.legal") }}
           </NuxtLink>
           <NuxtLink
             to="/privacy"
             class="text-gray-400 hover:text-white mx-2"
           >
-            Vie privée
+            {{ $t("footer.privacy") }}
           </NuxtLink>
           <NuxtLink
             to="/about"
             class="text-gray-400 hover:text-white mx-2"
           >
-            A propos
+            {{ $t("footer.about") }}
           </NuxtLink>
         </span>
         <a
@@ -45,7 +47,7 @@ import IconGitHub from './icons/IconGitHub.vue'
 <style scoped>
 #footer {
   display: flex;
-  position: absolute;
+  position: relative;
   bottom: 0;
 }
 </style>

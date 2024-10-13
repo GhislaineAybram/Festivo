@@ -38,24 +38,24 @@ import SupportIcon from './icons/IconSupport.vue'
       href="https://vitejs.dev/guide/features.html"
       target="_blank"
       rel="noopener"
-    >Vite</a>. The
-    recommended IDE setup is
+    >Vite</a>. The recommended IDE setup is
     <a
       href="https://code.visualstudio.com/"
       target="_blank"
       rel="noopener"
-    >VSCode</a> +
+    >VSCode</a>
+    +
     <a
       href="https://github.com/johnsoncodehk/volar"
       target="_blank"
       rel="noopener"
-    >Volar</a>. If
-    you need to test your components and web pages, check out
+    >Volar</a>. If you need to test your components and web pages, check out
     <a
       href="https://www.cypress.io/"
       target="_blank"
       rel="noopener"
-    >Cypress</a> and
+    >Cypress</a>
+    and
     <a
       href="https://on.cypress.io/component"
       target="_blank"
@@ -95,8 +95,7 @@ import SupportIcon from './icons/IconSupport.vue'
       href="https://github.com/vuejs/devtools"
       target="_blank"
       rel="noopener"
-    >Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
+    >Vue Dev Tools</a>. If you need more resources, we suggest paying
     <a
       href="https://github.com/vuejs/awesome-vue"
       target="_blank"
@@ -118,8 +117,7 @@ import SupportIcon from './icons/IconSupport.vue'
       href="https://chat.vuejs.org"
       target="_blank"
       rel="noopener"
-    >Vue Land</a>, our official
-    Discord server, or
+    >Vue Land</a>, our official Discord server, or
     <a
       href="https://stackoverflow.com/questions/tagged/vue.js"
       target="_blank"
@@ -129,8 +127,8 @@ import SupportIcon from './icons/IconSupport.vue'
       href="https://news.vuejs.org"
       target="_blank"
       rel="noopener"
-    >our mailing list</a> and follow
-    the official
+    >our mailing list</a>
+    and follow the official
     <a
       href="https://twitter.com/vuejs"
       target="_blank"
@@ -147,8 +145,8 @@ import SupportIcon from './icons/IconSupport.vue'
       Support Vue
     </template>
 
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
+    As an independent project, Vue relies on community backing for its
+    sustainability. You can help us by
     <a
       href="https://vuejs.org/sponsor/"
       target="_blank"

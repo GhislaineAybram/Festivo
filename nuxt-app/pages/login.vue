@@ -53,8 +53,10 @@ watchEffect(() => {
             src="../public/img/disco-ball-tangerine.png"
             alt="Logo Festify"
           >
-          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {{ $t('login.title') }}
+          <h2
+            class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+          >
+            {{ $t("login.title") }}
           </h2>
         </div>
         <IconField>
@@ -87,7 +89,7 @@ watchEffect(() => {
           <a
             href="#"
             class="font-semibold text-indigo-600 hover:text-indigo-500"
-          >{{ $t('login.password_forgot') }}</a>
+          >{{ $t("login.password_forgot") }}</a>
         </div>
 
         <Button
@@ -100,27 +102,27 @@ watchEffect(() => {
       </div>
     </div>
     <div class="register-container">
-      <p>{{ $t('login.no_account') }}</p>
+      <p>{{ $t("login.no_account") }}</p>
       <NuxtLink to="/register">
         <p id="sign-up-link">
-          {{ $t('login.sign_up') }}
+          {{ $t("login.sign_up") }}
         </p>
       </NuxtLink>
     </div>
   </main>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 #login {
-    border-radius: 1rem;
-    border-color: $tangerine;
-    padding: 2rem;
-    margin-top: 59px;
-    border-width: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+  border-radius: 1rem;
+  border-color: $tangerine;
+  padding: 2rem;
+  margin-top: 59px;
+  border-width: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .register-container {

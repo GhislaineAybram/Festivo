@@ -28,5 +28,4 @@ import DatePicker from 'primevue/datepicker'
 const buttondisplay = ref()
 </script>
 
-<style>
-</style>
+<style></style>

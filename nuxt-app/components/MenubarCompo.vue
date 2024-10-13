@@ -1,8 +1,17 @@
 <script setup lang="ts">
-const { locale, setLocale } = useI18n()
-const { t } = useI18n();
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+
+const { setLocale } = useI18n()
+const { t } = useI18n()
 
 const { auth } = useSupabaseClient()
 const user = useSupabaseUser()
@@ -18,10 +27,14 @@ const getProfilePage = () => {
 
 const navigation = computed(() => [
   { name: t('menubar.homepage'), href: '/', current: false },
-  { name: t('menubar.invitations'), href: '/celebration/6597f938-9e05-4015-b62b-4468d042869e', current: false },
+  {
+    name: t('menubar.invitations'),
+    href: '/celebration/6597f938-9e05-4015-b62b-4468d042869e',
+    current: false,
+  },
   { name: t('menubar.events'), href: '/celebrationadmin/1', current: false },
   { name: t('menubar.login'), href: '/login', current: false },
-]);
+])
 </script>
 
 <template>
@@ -35,7 +48,9 @@ const navigation = computed(() => [
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button -->
-          <DisclosureButton class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <DisclosureButton
+            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          >
             <span class="absolute -inset-0.5" />
             <span class="sr-only">Open main menu</span>
             <Bars3Icon
@@ -50,7 +65,9 @@ const navigation = computed(() => [
             />
           </DisclosureButton>
         </div>
-        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+        <div
+          class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
+        >
           <div class="flex flex-shrink-0 items-center">
             <img
               class="h-8 w-auto"
@@ -64,13 +81,20 @@ const navigation = computed(() => [
                 v-for="item in navigation"
                 :key="item.name"
                 :href="item.href"
-                :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']"
+                :class="[
+                  item.current
+                    ? 'bg-gray-900 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  'rounded-md px-3 py-2 text-sm font-medium',
+                ]"
                 :aria-current="item.current ? 'page' : undefined"
               >{{ item.name }}</a>
             </div>
           </div>
         </div>
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div
+          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+        >
           <!-- <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <span class="absolute -inset-1.5" />
             <span class="sr-only">View notifications</span>
@@ -83,14 +107,16 @@ const navigation = computed(() => [
             class="relative ml-3"
           >
             <div>
-              <MenuButton class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <MenuButton
+                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              >
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">Open user menu</span>
                 <Avatar
                   icon="pi pi-user"
                   class="h-8 w-8"
                   size="normal"
-                  style="background-color: #FFF6F0; color: #180161"
+                  style="background-color: #fff6f0; color: #180161"
                   shape="circle"
                 />
                 <!-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> -->
@@ -104,18 +130,26 @@ const navigation = computed(() => [
               leave-from-class="transform opacity-100 scale-100"
               leave-to-class="transform opacity-0 scale-95"
             >
-              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <MenuItems
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              >
                 <MenuItem v-slot="{ active }">
                   <a
                     :href="getProfilePage()"
-                    :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                  >{{ $t('menubar.profile') }}</a>
+                    :class="[
+                      active ? 'bg-gray-100' : '',
+                      'block px-4 py-2 text-sm text-gray-700',
+                    ]"
+                  >{{ $t("menubar.profile") }}</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <a
-                    :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']"
+                    :class="[
+                      active ? 'bg-gray-100' : '',
+                      'block px-4 py-2 text-sm text-gray-700 cursor-pointer',
+                    ]"
                     @click="userLogout"
-                  >{{ $t('menubar.sign_out') }}</a>
+                  >{{ $t("menubar.sign_out") }}</a>
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -131,7 +165,12 @@ const navigation = computed(() => [
           :key="item.name"
           as="a"
           :href="item.href"
-          :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md px-3 py-2 text-base font-medium']"
+          :class="[
+            item.current
+              ? 'bg-gray-900 text-white'
+              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+            'block rounded-md px-3 py-2 text-base font-medium',
+          ]"
           :aria-current="item.current ? 'page' : undefined"
         >
           {{ item.name }}
@@ -139,13 +178,13 @@ const navigation = computed(() => [
 
         <hr
           class="border-gray-700"
-          style="margin: 30px 0;"
+          style="margin: 30px 0"
         >
 
         <DisclosureButton
           as="div"
-          @click="setLocale('fr')"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+          @click="setLocale('fr')"
         >
           <div class="flex items-center gap-3 px-1 cursor-pointer">
             <img
@@ -160,8 +199,8 @@ const navigation = computed(() => [
 
         <DisclosureButton
           as="div"
-          @click="setLocale('en')"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+          @click="setLocale('en')"
         >
           <div class="flex items-center gap-3 px-1 cursor-pointer">
             <img
@@ -178,7 +217,7 @@ const navigation = computed(() => [
   </Disclosure>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 #menuBar {
   position: absolute;
   top: 0;

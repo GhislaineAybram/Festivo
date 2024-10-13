@@ -41,7 +41,7 @@ const submitRegisterForm = async () => {
       options: {
         data: {
           firstname: formatName(firstname.value),
-          lastname: (lastname.value).toUpperCase(),
+          lastname: lastname.value.toUpperCase(),
         },
       },
     })
@@ -94,8 +94,10 @@ watchEffect(() => {
             src="../public/img/disco-ball-tangerine.png"
             alt="Logo Festify"
           >
-          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {{ $t('register.title') }}
+          <h2
+            class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+          >
+            {{ $t("register.title") }}
           </h2>
         </div>
         <IconField>
@@ -172,7 +174,7 @@ watchEffect(() => {
             name="accept-registration"
             value="Accept"
           />
-          <label for="accept">{{ $t('register.agree') }}</label>
+          <label for="accept">{{ $t("register.agree") }}</label>
         </div>
 
         <Button
@@ -196,15 +198,15 @@ watchEffect(() => {
 
 <style lang="scss" scoped>
 #register {
-    border-radius: 1rem;
-    border-color: $tangerine;
-    padding: 2rem;
-    margin-top: 59px;
-    border-width: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+  border-radius: 1rem;
+  border-color: $tangerine;
+  padding: 2rem;
+  margin-top: 59px;
+  border-width: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 #sign-up-button {
   background-color: $indigo;
