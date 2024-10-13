@@ -3,6 +3,17 @@ import Aura from '@primevue/themes/aura'
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      title: 'Festify, where every event comes to life',
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
+    }
+  },
+
   devtools: { enabled: true },
 
   devServer: {
