@@ -42,6 +42,16 @@
   "register": {
     "title": "Inscription",
     "agree": "J'accepte les termes et conditions.",
-    "button": "Créer votre compte"
+    "button": "Créer votre compte",
+    "successfull": "Inscription réussie",
+    "success_message": "Vous pouvez maintenant vous identifier avec votre adresse email et votre mot de passe !"
+  },
+  "menubar": {
+    "homepage": "Accueil",
+    "invitations": "Mes invitations",
+    "events": "Mes événements",
+    "login": "Se connecter",
+    "profile": "Ma page profil",
+    "sign_out": "Se déconnecter"
   } 
 }

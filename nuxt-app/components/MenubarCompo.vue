@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { locale, setLocale } = useI18n()
+const { t } = useI18n();
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
@@ -15,12 +16,12 @@ const getProfilePage = () => {
   return user.value ? `/profile/${user.value.id}` : '/' // Redirige vers le profil si l'utilisateur est connecté
 }
 
-const navigation = [
-  { name: 'Accueil', href: '/', current: false },
-  { name: 'Mes invitations', href: '/celebration/6597f938-9e05-4015-b62b-4468d042869e', current: false },
-  { name: 'Mes événements', href: '/celebrationadmin/1', current: false },
-  { name: 'Login', href: '/login', current: false },
-]
+const navigation = computed(() => [
+  { name: t('menubar.homepage'), href: '/', current: false },
+  { name: t('menubar.invitations'), href: '/celebration/6597f938-9e05-4015-b62b-4468d042869e', current: false },
+  { name: t('menubar.events'), href: '/celebrationadmin/1', current: false },
+  { name: t('menubar.login'), href: '/login', current: false },
+]);
 </script>
 
 <template>
@@ -108,13 +109,13 @@ const navigation = [
                   <a
                     :href="getProfilePage()"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                  >My profile</a>
+                  >{{ $t('menubar.profile') }}</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <a
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']"
                     @click="userLogout"
-                  >Sign out</a>
+                  >{{ $t('menubar.sign_out') }}</a>
                 </MenuItem>
               </MenuItems>
             </transition>

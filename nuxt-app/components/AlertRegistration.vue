@@ -52,11 +52,11 @@ const open = ref(true)
                       as="h3"
                       class="text-base font-semibold leading-6 text-gray-900"
                     >
-                      Registration successful
+                    {{ $t('register.successfull') }}
                     </DialogTitle>
                     <div class="mt-2">
                       <p class="text-sm text-gray-500">
-                        You need to confirm your account registration by clicking in the link you have just received by email.
+                        {{ $t('register.success_message') }}
                       </p>
                     </div>
                   </div>

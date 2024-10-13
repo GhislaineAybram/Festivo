@@ -42,6 +42,16 @@
   "register": {
     "title": "Sign up",
     "agree": "I agree to the terms and conditions.",
-    "button": "Sign up"
+    "button": "Sign up",
+    "successfull": "Registration successful",
+    "success_message": "You can now log in with your email address and password !"
+  },
+  "menubar": {
+    "homepage": "Homepage",
+    "invitations": "My invitations",
+    "events": "My events",
+    "login": "Log in",
+    "profile": "My profile page",
+    "sign_out": "Log out"
   } 
 }
