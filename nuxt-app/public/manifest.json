@@ -1,21 +1,20 @@
 {
-    "name": "Festify, where every event comes to life",
-    "short_name": "Festify",
-    "icons": [
-      {
-        "src": "/icons/Disco_globe_icon_256.png",
-        "sizes": "256x256",
-        "type": "image/png"
-      },
-      {
-        "src": "/icons/Disco_globe_icon_512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ],
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#FFA96A"
+  "name": "Festify, where every event comes to life",
+  "short_name": "Festify",
+  "icons": [
+    {
+      "src": "/icons/Disco_globe_icon_256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/Disco_globe_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
 }
-  

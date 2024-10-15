@@ -134,8 +134,11 @@ const dateDay2 = computed(() =>
 </template>
 
 <style lang="scss" scoped>
-h1 {
+* {
   background-color: $seashell;
+}
+h1 {
+  background-color: $whisper;
   color: $indigo;
   width: 100%;
   height: 75px;
@@ -152,16 +155,16 @@ h2 {
 }
 .parent {
   display: flex;
-  flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si l'écran est trop petit */
-  gap: 1rem; /* Espace entre les cartes */
-  justify-content: center; /* Centrer les cartes */
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
   padding: 35px;
 }
 
 .card {
-  position: relative; /* Nécessaire pour positionner la date-box */
-  flex: 1 1 calc(100% - 2rem); /* Prend toute la largeur avec marge pour petits écrans */
-  max-width: 260px; /* Largeur max pour écrans plus larges */
+  position: relative;
+  flex: 1 1 calc(100% - 2rem);
+  max-width: 260px;
   background: white;
   padding: 0.5em;
   border-radius: 6px;
@@ -186,6 +189,7 @@ h2 {
   font-weight: 600;
   color: $indigo;
   padding: 10px 7px 0;
+  background-color: white;
 }
 
 .category:hover {
@@ -196,6 +200,7 @@ h2 {
   font-weight: 600;
   color: $grey;
   padding: 7px;
+  background-color: white;
 }
 
 .heading:hover {
@@ -204,8 +209,8 @@ h2 {
 
 .date-box {
   position: absolute;
-  top: -20px; /* Fait dépasser la boîte de la carte */
-  right: -20px; /* Décale la boîte vers l'extérieur de la carte */
+  top: -20px;
+  right: -20px;
   height: 60px;
   width: 60px;
   background: white;
@@ -218,6 +223,7 @@ h2 {
 .date-box span {
   display: block;
   text-align: center;
+  background-color: white
 }
 
 .date-box .month {
@@ -244,6 +250,9 @@ h2 {
   background-color: $tangerine;
   padding: 4px 8px;
   border-radius: 4px;
+}
+.action span {
+  background-color: $tangerine;
 }
 @media (min-width: 1024px) {
   .about {
