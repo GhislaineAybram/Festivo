@@ -45,6 +45,7 @@ watchEffect(() => {
     >
       <div
         v-focustrap
+        id="login-container"
         class="w-full sm:w-80 flex flex-col gap-6"
       >
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -85,7 +86,7 @@ watchEffect(() => {
             fluid
           />
         </IconField>
-        <div class="text-sm">
+        <div id="password-forgot" class="text-sm">
           <a
             href="#"
             class="font-semibold text-indigo-600 hover:text-indigo-500"
@@ -113,6 +114,9 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
+* {
+  background-color: $seashell;
+}
 #login {
   border-radius: 1rem;
   border-color: $tangerine;
@@ -123,8 +127,11 @@ watchEffect(() => {
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  background-color: white;
 }
-
+#login * {
+  background-color: white;
+}
 .register-container {
   display: flex; /* Utilisez Flexbox pour aligner les éléments */
   justify-content: center; /* Espacement entre les éléments */
@@ -143,12 +150,12 @@ h1 {
   align-content: center;
   text-align: center;
 }
-#sign-in {
+#sign-in, #sign-in * {
   background-color: $indigo;
   color: $seashell;
   border-color: $indigo;
 }
-#sign-in:hover {
+#sign-in:hover, #sign-in:hover * {
   background-color: $tangerine;
   color: $indigo;
   border-color: $indigo;

@@ -197,6 +197,9 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
+* {
+  background-color: $seashell;
+}
 #register {
   border-radius: 1rem;
   border-color: $tangerine;
@@ -207,13 +210,17 @@ watchEffect(() => {
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  background-color: white;
 }
-#sign-up-button {
+#register * {
+  background-color: white;
+}
+#sign-up-button, #sign-up-button * {
   background-color: $indigo;
   color: $seashell;
   border-color: $indigo;
 }
-#sign-up-button:hover {
+#sign-up-button:hover, #sign-up-button:hover * {
   background-color: $tangerine;
   color: $indigo;
   border-color: $indigo;
