@@ -141,6 +141,7 @@ watchEffect(() => {
   margin-left: 1rem; /* Centre le conteneur horizontalement */
   margin-right: 1rem; /* Centre le conteneur horizontalement */
   gap: 0.5rem;
+  color: $indigo;
 }
 h1 {
   background-color: $tangerine;

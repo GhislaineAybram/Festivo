@@ -167,7 +167,7 @@ watchEffect(() => {
           />
         </IconField>
 
-        <div class="flex items-center gap-2">
+        <div id="accept-conditions" class="flex items-center gap-2">
           <Checkbox
             id="accept"
             v-model="accept"
@@ -224,6 +224,9 @@ watchEffect(() => {
   background-color: $tangerine;
   color: $indigo;
   border-color: $indigo;
+}
+#accept-conditions {
+  color: $indigo;
 }
 h1 {
   background-color: $tangerine;
