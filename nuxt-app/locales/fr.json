@@ -30,7 +30,16 @@
     "hour": "Heure",
     "at": "à",
     "guests": "Invités",
-    "answer": "Ma réponse"
+    "answer": "Ma réponse",
+    "creation-title": "Créez votre événement",
+    "creation-subtitle": "sous-titre à trouver",
+    "title": "Titre de l'événement",
+    "type": "Type de l'événement",
+    "description": "Description",
+    "address": "Adresse",
+    "accept-privacy": "En acceptant, vous acceptez notre",
+    "privacy-policy": "politique de confidentialités",
+    "creation-button": "Créez mon événement"
   },
   "login": {
     "title": "Connexion",
@@ -62,7 +71,7 @@
   },
   "footer": {
     "legal": "Mentions légales",
-    "privacy": "Confidentialité",
+    "privacy": "Confidentialités",
     "about": "A propos"
   }
 }

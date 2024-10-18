@@ -30,7 +30,16 @@
     "hour": "Hour",
     "at": "at",
     "guests": "Guests",
-    "answer": "My answer"
+    "answer": "My answer",
+    "creation-title": "Create your event",
+    "creation-subtitle": "subtitle to find",
+    "title": "Event title",
+    "type": "Event type",
+    "description": "Description",
+    "address": "Address",
+    "accept-privacy": "By selecting this, you agree to our",
+    "privacy-policy": "privacy policy",
+    "creation-button": "Create my event"
   },
   "login": {
     "title": "Sign in to your account",

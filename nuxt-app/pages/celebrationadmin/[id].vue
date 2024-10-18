@@ -13,10 +13,10 @@ const agreed = ref(false);
     <div id="celebration-details">
       <div class="mx-auto mt-6 max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Créez votre événement
+          {{ $t("celebration.creation-title") }}
         </h2>
         <p class="mt-2 text-lg leading-8 text-gray-600">
-          Aute magna irure deserunt veniam aliqua magna enim voluptate.
+          {{ $t("celebration.creation-subtitle") }}
         </p>
       </div>
       <form action="#" method="POST" class="mx-auto mt-10 max-w-xl sm:mt-20">
@@ -25,7 +25,7 @@ const agreed = ref(false);
             <label
               for="celebration-title"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >Titre de l'événement</label
+              >{{ $t("celebration.title") }}</label
             >
             <div class="mt-2.5">
               <input
@@ -41,7 +41,7 @@ const agreed = ref(false);
             <label
               for="celebration-type"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >Type de l'événement</label
+              >{{ $t("celebration.title") }}</label
             >
             <div class="mt-2.5">
               <select id="celebration-type" name="celebration-type" autocomplete="celebration-type" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -55,7 +55,7 @@ const agreed = ref(false);
             <label
               for="celebration-description"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >Description</label
+              >{{ $t("celebration.description") }}</label
             >
             <div class="mt-2.5">
               <textarea
@@ -71,11 +71,12 @@ const agreed = ref(false);
             <label
               for="celebration-date"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >Date</label
+              >{{ $t("celebration.date") }}</label
             >
             <div class="mt-2.5">
               <DatePicker
                 v-model="buttondisplay"
+                id="datepicker-month"
                 class="flex-auto"
                 date-format="dd/mm/yy"
                 variant="filled"
@@ -88,9 +89,9 @@ const agreed = ref(false);
           </div>
           <div>
             <label
-              for="celebration-hour"
+              for="celebration-hour" 
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >Heure</label
+              >{{ $t("celebration.hour") }}</label
             >
             <div class="mt-2.5">
               <DatePicker
@@ -106,7 +107,7 @@ const agreed = ref(false);
             <label
               for="celebration-address"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >Adresse</label
+              >{{ $t("celebration.address") }}</label
             >
             <div class="mt-2.5">
               <input
@@ -139,11 +140,9 @@ const agreed = ref(false);
               </Switch>
             </div>
             <SwitchLabel class="text-sm leading-6 text-gray-600">
-              By selecting this, you agree to our
-              {{ " " }}
-              <a href="#" class="font-semibold text-indigo-600"
-                >privacy&nbsp;policy</a
-              >.
+              {{ $t("celebration.accept-privacy") }}
+              <a href="/privacy" class="font-semibold text-indigo-600">
+                {{ $t("celebration.privacy-policy") }}</a>.
             </SwitchLabel>
           </SwitchGroup>
         </div>
@@ -153,7 +152,7 @@ const agreed = ref(false);
             id="celebration-creation"
             class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Créer mon événement
+          {{ $t("celebration.creation-button") }}
           </button>
         </div>
       </form>
@@ -178,7 +177,7 @@ const agreed = ref(false);
   background-color: $tangerine;
   color: $indigo;
 }
-input, select, option, textarea {
+input, select, option, textarea, #datepicker-timeonly, #datepicker-month {
   background-color: white;
 }
 @media (min-width: 1024px) {
