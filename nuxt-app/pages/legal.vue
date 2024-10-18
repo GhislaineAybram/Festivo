@@ -10,6 +10,9 @@
 </template>
 
 <style lang="scss" scoped>
+* {
+  background-color: $seashell;
+}
 @media (min-width: 1024px) {
   .legal {
     min-height: 100vh;

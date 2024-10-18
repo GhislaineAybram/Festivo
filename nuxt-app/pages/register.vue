@@ -43,7 +43,7 @@ const submitRegisterForm = async () => {
         data: {
           firstname: formatName(firstname.value),
           lastname: lastname.value.toUpperCase(),
-          alias: alias.value
+          alias: alias.value,
         },
       },
     })
@@ -109,8 +109,8 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="firstname"
-            class="text"
             v-model="firstname"
+            class="text"
             type="text"
             :placeholder="$t('user.firstname')"
             autofocus
@@ -124,8 +124,8 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="lastname"
-            class="text"
             v-model="lastname"
+            class="text"
             type="text"
             :placeholder="$t('user.lastname')"
             autofocus
@@ -139,8 +139,8 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="alias"
-            class="text"
             v-model="alias"
+            class="text"
             type="text"
             :placeholder="$t('user.alias')"
             autofocus
@@ -154,8 +154,8 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="email"
-            class="text"
             v-model="email"
+            class="text"
             type="email"
             :placeholder="$t('user.email')"
             fluid
@@ -168,8 +168,8 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="password1"
-            class="text"
             v-model="password"
+            class="text"
             type="password"
             :placeholder="$t('user.password')"
             fluid
@@ -182,15 +182,18 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="password2"
-            class="text"
             v-model="confirmPassword"
+            class="text"
             type="password"
             :placeholder="$t('user.password_confirmed')"
             fluid
           />
         </IconField>
 
-        <div id="accept-conditions" class="flex items-center gap-2 text-sm">
+        <div
+          id="accept-conditions"
+          class="flex items-center gap-2 text-sm"
+        >
           <Checkbox
             id="accept"
             v-model="accept"
@@ -269,11 +272,11 @@ h1 {
   #register {
     margin-top: 59px;
     display: flex;
-    flex-direction: column; /* Ajoutez cette ligne pour s'assurer que les éléments enfants soient en colonne */
-    align-items: center; /* Centrer horizontalement les enfants */
-    max-width: 424px; /* Limitez la largeur maximale à 1024px */
-    margin-left: auto; /* Centre horizontalement le conteneur */
-    margin-right: auto; /* Centre horizontalement le conteneur */
+    flex-direction: column;
+    align-items: center;
+    max-width: 424px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 1rem;
     width: 100%;
   }

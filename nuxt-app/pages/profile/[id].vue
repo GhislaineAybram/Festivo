@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 
-definePageMeta({
-  middleware: 'auth',
-})
+// definePageMeta({
+//   middleware: 'auth',
+// })
 
 const { auth } = useSupabaseClient()
 const {

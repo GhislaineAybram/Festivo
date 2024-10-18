@@ -44,8 +44,8 @@ watchEffect(() => {
       class="card w-full sm:w-80 p-6 mb-6"
     >
       <div
-        v-focustrap
         id="login-container"
+        v-focustrap
         class="w-full sm:w-80 flex flex-col gap-6"
       >
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -66,8 +66,8 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="email"
-            class="text"
             v-model="email"
+            class="text"
             type="text"
             :placeholder="$t('user.email')"
             autofocus
@@ -76,26 +76,29 @@ watchEffect(() => {
         </IconField>
 
         <div class="password-container">
-        <IconField>
-          <InputIcon>
-            <i class="pi pi-key" />
-          </InputIcon>
-          <InputText
-            id="password"
-            class="text"
-            v-model="password"
-            type="password"
-            :placeholder="$t('user.password')"
-            fluid
-          />
-        </IconField>
-        <div id="password-forgot" class="text-sm">
-          <a
-            href="#"
-            class="font-semibold text-indigo-600 hover:text-indigo-500"
-          >{{ $t("login.password_forgot") }}</a>
+          <IconField>
+            <InputIcon>
+              <i class="pi pi-key" />
+            </InputIcon>
+            <InputText
+              id="password"
+              v-model="password"
+              class="text"
+              type="password"
+              :placeholder="$t('user.password')"
+              fluid
+            />
+          </IconField>
+          <div
+            id="password-forgot"
+            class="text-sm"
+          >
+            <a
+              href="#"
+              class="font-semibold text-indigo-600 hover:text-indigo-500"
+            >{{ $t("login.password_forgot") }}</a>
+          </div>
         </div>
-      </div>
         <Button
           id="sign-in"
           type="submit"
@@ -142,13 +145,13 @@ h2 {
   background-color: white;
 }
 .register-container {
-  display: flex; /* Utilisez Flexbox pour aligner les éléments */
-  justify-content: center; /* Espacement entre les éléments */
-  align-items: center; /* Aligner les éléments verticalement au centre */
-  width: 80%; /* Optionnel : ajuste la largeur du conteneur */
-  margin-top: 1rem; /* Optionnel : espace au-dessus */
-  margin-left: 1rem; /* Centre le conteneur horizontalement */
-  margin-right: 1rem; /* Centre le conteneur horizontalement */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   gap: 0.5rem;
   color: $indigo;
 }

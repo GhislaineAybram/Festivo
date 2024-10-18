@@ -138,7 +138,7 @@ const dateDay2 = computed(() =>
   background-color: $seashell;
 }
 h1 {
-  background-color: $whisper;
+  background-color: $seashell;
   color: $indigo;
   width: 100%;
   height: 75px;

@@ -113,6 +113,8 @@ if (error.value) {
 .photo-celebration {
   width: 100%;
   height: auto;
+  filter: opacity(35%);
+  z-index: -1;
 }
 h1 {
   color: $indigo;
@@ -131,10 +133,6 @@ h1 {
   position: absolute;
   bottom: 20px;
   right: 20px;
-}
-.photo-celebration {
-  filter: opacity(35%);
-  z-index: -1;
 }
 h3 {
   color: $indigo;

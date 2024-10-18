@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { ChevronDownIcon } from "@heroicons/vue/20/solid";
-import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import { ref } from 'vue'
+import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 
-const buttondisplay = ref();
-const time = ref();
-const agreed = ref(false);
+const buttondisplay = ref()
+const time = ref()
+const agreed = ref(false)
 </script>
 
 <template>
@@ -19,32 +18,39 @@ const agreed = ref(false);
           {{ $t("celebration.creation-subtitle") }}
         </p>
       </div>
-      <form action="#" method="POST" class="mx-auto mt-10 max-w-xl sm:mt-20">
+      <form
+        action="#"
+        method="POST"
+        class="mx-auto mt-10 max-w-xl sm:mt-20"
+      >
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
             <label
               for="celebration-title"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >{{ $t("celebration.title") }}</label
-            >
+            >{{ $t("celebration.title") }}</label>
             <div class="mt-2.5">
               <input
+                id="celebration-title"
                 type="text"
                 name="celebration-title"
-                id="celebration-title"
                 autocomplete="celebration-title"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+              >
             </div>
           </div>
           <div>
             <label
               for="celebration-type"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >{{ $t("celebration.title") }}</label
-            >
+            >{{ $t("celebration.title") }}</label>
             <div class="mt-2.5">
-              <select id="celebration-type" name="celebration-type" autocomplete="celebration-type" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <select
+                id="celebration-type"
+                name="celebration-type"
+                autocomplete="celebration-type"
+                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              >
                 <option>Anniversary</option>
                 <option>Baby shower</option>
                 <option>New Year</option>
@@ -55,12 +61,11 @@ const agreed = ref(false);
             <label
               for="celebration-description"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >{{ $t("celebration.description") }}</label
-            >
+            >{{ $t("celebration.description") }}</label>
             <div class="mt-2.5">
               <textarea
-                name="celebration-description"
                 id="celebration-description"
+                name="celebration-description"
                 rows="4"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -71,12 +76,11 @@ const agreed = ref(false);
             <label
               for="celebration-date"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >{{ $t("celebration.date") }}</label
-            >
+            >{{ $t("celebration.date") }}</label>
             <div class="mt-2.5">
               <DatePicker
-                v-model="buttondisplay"
                 id="datepicker-month"
+                v-model="buttondisplay"
                 class="flex-auto"
                 date-format="dd/mm/yy"
                 variant="filled"
@@ -89,10 +93,9 @@ const agreed = ref(false);
           </div>
           <div>
             <label
-              for="celebration-hour" 
+              for="celebration-hour"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >{{ $t("celebration.hour") }}</label
-            >
+            >{{ $t("celebration.hour") }}</label>
             <div class="mt-2.5">
               <DatePicker
                 id="datepicker-timeonly"
@@ -107,20 +110,22 @@ const agreed = ref(false);
             <label
               for="celebration-address"
               class="block text-sm font-semibold leading-6 text-gray-900"
-              >{{ $t("celebration.address") }}</label
-            >
+            >{{ $t("celebration.address") }}</label>
             <div class="mt-2.5">
               <input
+                id="celebration-address"
                 type="text"
                 name="celebration-address"
-                id="celebration-address"
                 autocomplete="celebration-address"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
+              >
             </div>
           </div>
 
-          <SwitchGroup as="div" class="flex gap-x-4 sm:col-span-2">
+          <SwitchGroup
+            as="div"
+            class="flex gap-x-4 sm:col-span-2"
+          >
             <div class="flex h-6 items-center">
               <Switch
                 v-model="agreed"
@@ -141,18 +146,20 @@ const agreed = ref(false);
             </div>
             <SwitchLabel class="text-sm leading-6 text-gray-600">
               {{ $t("celebration.accept-privacy") }}
-              <a href="/privacy" class="font-semibold text-indigo-600">
-                {{ $t("celebration.privacy-policy") }}</a>.
+              <NuxtLink to="/privacy">
+                <div class="font-semibold text-indigo-600">
+                  {{ $t("celebration.privacy-policy") }}</div>
+              </NuxtLink>
             </SwitchLabel>
           </SwitchGroup>
         </div>
         <div class="mt-10">
           <button
-            type="submit"
             id="celebration-creation"
+            type="submit"
             class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-          {{ $t("celebration.creation-button") }}
+            {{ $t("celebration.creation-button") }}
           </button>
         </div>
       </form>
@@ -177,8 +184,10 @@ const agreed = ref(false);
   background-color: $tangerine;
   color: $indigo;
 }
-input, select, option, textarea, #datepicker-timeonly, #datepicker-month {
-  background-color: white;
+input, select, option, textarea,
+#datepicker-timeonly *,
+#datepicker-month * {
+  background-color: white !important;
 }
 @media (min-width: 1024px) {
   #celebration-details {
