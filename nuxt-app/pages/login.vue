@@ -75,6 +75,7 @@ watchEffect(() => {
           />
         </IconField>
 
+        <div class="password-container">
         <IconField>
           <InputIcon>
             <i class="pi pi-key" />
@@ -94,7 +95,7 @@ watchEffect(() => {
             class="font-semibold text-indigo-600 hover:text-indigo-500"
           >{{ $t("login.password_forgot") }}</a>
         </div>
-
+      </div>
         <Button
           id="sign-in"
           type="submit"
@@ -119,13 +120,16 @@ watchEffect(() => {
 * {
   background-color: $seashell;
 }
+h2 {
+  color: $indigo;
+}
 .text {
   color: $indigo;
 }
 #login {
   border-radius: 1rem;
   border-color: $tangerine;
-  padding: 2rem;
+  padding: 1.5rem;
   margin-top: 59px;
   border-width: 2px;
   display: flex;
@@ -169,6 +173,10 @@ h1 {
 #sign-up-link {
   font-weight: bold;
   color: $indigo;
+}
+#password-forgot {
+  padding-top: 5px;
+  text-align: right;
 }
 
 @media (min-width: 1024px) {

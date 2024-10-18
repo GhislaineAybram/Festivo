@@ -88,7 +88,7 @@ watchEffect(() => {
       class="card w-full sm:w-80 p-6 mb-6"
     >
       <form
-        class="w-full sm:w-80 flex flex-col gap-6"
+        class="w-full sm:w-80 flex flex-col gap-4"
         @submit.prevent="submitRegisterForm"
       >
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -223,13 +223,16 @@ watchEffect(() => {
 * {
   background-color: $seashell;
 }
+h2 {
+  color: $indigo;
+}
 .text {
   color: $indigo;
 }
 #register {
   border-radius: 1rem;
   border-color: $tangerine;
-  padding: 2rem;
+  padding: 1.5rem;
   margin-top: 59px;
   border-width: 2px;
   display: flex;
