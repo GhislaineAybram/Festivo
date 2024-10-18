@@ -65,7 +65,8 @@ watchEffect(() => {
             <i class="pi pi-user" />
           </InputIcon>
           <InputText
-            id="username"
+            id="email"
+            class="text"
             v-model="email"
             type="text"
             :placeholder="$t('user.email')"
@@ -80,6 +81,7 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="password"
+            class="text"
             v-model="password"
             type="password"
             :placeholder="$t('user.password')"
@@ -102,7 +104,7 @@ watchEffect(() => {
         />
       </div>
     </div>
-    <div class="register-container">
+    <div class="register-container text-sm">
       <p>{{ $t("login.no_account") }}</p>
       <NuxtLink to="/register">
         <p id="sign-up-link">
@@ -116,6 +118,9 @@ watchEffect(() => {
 <style lang="scss" scoped>
 * {
   background-color: $seashell;
+}
+.text {
+  color: $indigo;
 }
 #login {
   border-radius: 1rem;

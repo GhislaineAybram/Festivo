@@ -2,6 +2,7 @@
 const user = useSupabaseUser()
 const firstname = ref('')
 const lastname = ref('')
+const alias = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
@@ -42,6 +43,7 @@ const submitRegisterForm = async () => {
         data: {
           firstname: formatName(firstname.value),
           lastname: lastname.value.toUpperCase(),
+          alias: alias.value
         },
       },
     })
@@ -54,6 +56,7 @@ const submitRegisterForm = async () => {
     confirmPassword.value = ''
     firstname.value = ''
     lastname.value = ''
+    alias.value = ''
 
     registrationSuccess.value = true
     console.log('User signed up successfully')
@@ -106,6 +109,7 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="firstname"
+            class="text"
             v-model="firstname"
             type="text"
             :placeholder="$t('user.firstname')"
@@ -120,9 +124,25 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="lastname"
+            class="text"
             v-model="lastname"
             type="text"
             :placeholder="$t('user.lastname')"
+            autofocus
+            fluid
+          />
+        </IconField>
+
+        <IconField>
+          <InputIcon>
+            <i class="pi pi-user" />
+          </InputIcon>
+          <InputText
+            id="alias"
+            class="text"
+            v-model="alias"
+            type="text"
+            :placeholder="$t('user.alias')"
             autofocus
             fluid
           />
@@ -134,6 +154,7 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="email"
+            class="text"
             v-model="email"
             type="email"
             :placeholder="$t('user.email')"
@@ -147,6 +168,7 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="password1"
+            class="text"
             v-model="password"
             type="password"
             :placeholder="$t('user.password')"
@@ -160,6 +182,7 @@ watchEffect(() => {
           </InputIcon>
           <InputText
             id="password2"
+            class="text"
             v-model="confirmPassword"
             type="password"
             :placeholder="$t('user.password_confirmed')"
@@ -167,7 +190,7 @@ watchEffect(() => {
           />
         </IconField>
 
-        <div id="accept-conditions" class="flex items-center gap-2">
+        <div id="accept-conditions" class="flex items-center gap-2 text-sm">
           <Checkbox
             id="accept"
             v-model="accept"
@@ -199,6 +222,9 @@ watchEffect(() => {
 <style lang="scss" scoped>
 * {
   background-color: $seashell;
+}
+.text {
+  color: $indigo;
 }
 #register {
   border-radius: 1rem;

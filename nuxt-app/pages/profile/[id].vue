@@ -11,7 +11,7 @@ const {
 } = await auth.getUser()
 const metadata = user?.user_metadata
 
-const pseudo = computed(() => metadata?.nickname || '')
+const pseudo = computed(() => metadata?.alias || '')
 const firstname = computed(() => metadata?.firstname || '')
 const lastname = computed(() => metadata?.lastname || '')
 const email = computed(() => user?.email || '')
