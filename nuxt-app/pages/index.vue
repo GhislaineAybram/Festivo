@@ -9,20 +9,15 @@ const metadata = user?.user_metadata
 
 const firstname = computed(() => metadata?.firstname || '')
 
-// watchEffect(() => {
-//   if (!user) {
-//     return navigateTo('/login')
-//   }
-// })
+watchEffect(() => {
+  if (!user) {
+    return navigateTo('/login')
+  }
+})
 
 const runtimeConfig = useRuntimeConfig()
-const { data: celebration, error } = await useFetch<Celebration>(
-  () =>
-    `${runtimeConfig.public.apiUrl}/celebration/6597f938-9e05-4015-b62b-4468d042869e`,
-)
-const { data: celebration2 } = await useFetch<Celebration>(
-  () =>
-    `${runtimeConfig.public.apiUrl}/celebration/bc5abc08-c022-4117-88bd-f5abdcf1300d`,
+const { data: celebrationCreated, error } = await useFetch<Celebration[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user.id}`,
 )
 
 if (error.value) {
@@ -39,18 +34,13 @@ const getDay = (dateString: string) => {
   return date.getDate()
 }
 
-const dateMonth = computed(() =>
-  celebration.value ? getMonth(celebration.value.date) : '',
-)
-const dateDay = computed(() =>
-  celebration.value ? getDay(celebration.value.date) : '',
-)
-
-const dateMonth2 = computed(() =>
-  celebration2.value ? getMonth(celebration2.value.date) : '',
-)
-const dateDay2 = computed(() =>
-  celebration2.value ? getDay(celebration2.value.date) : '',
+const celebrationsCreated = computed(
+  () =>
+    celebrationCreated.value?.map(celebration => ({
+      ...celebration,
+      dateMonth: getMonth(celebration.date),
+      dateDay: getDay(celebration.date),
+    })) || [],
 )
 </script>
 
@@ -67,52 +57,39 @@ const dateDay2 = computed(() =>
       >
         {{ $t("welcome.events") }}
       </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-1">
-        <div class="parent">
+      <div
+        v-if="celebrationsCreated && celebrationsCreated.length > 0"
+        class="grid grid-cols-1 sm:grid-cols-1"
+      >
+        <div
+          v-for="celebration in celebrationsCreated"
+          :key="celebration.celebration_id"
+          class="parent"
+        >
           <div class="card">
             <div class="card-image" />
             <div class="category">
-              {{ celebration?.name }}
+              {{ celebration.name }}
             </div>
             <div class="date-box">
-              <span class="date">{{ dateDay }}</span>
-              <span class="month">{{ dateMonth }}</span>
+              <span class="date">{{ celebration.dateDay }}</span>
+              <span class="month">{{ celebration.dateMonth }}</span>
             </div>
             <div class="heading">
-              {{ celebration?.description }}
+              {{ celebration.description }}
             </div>
             <a
               class="action"
-              :href="`/celebration/${celebration?.celebration_id}`"
+              :href="`/celebration/${celebration.celebration_id}`"
             >
               {{ $t("welcome.event_link") }}
               <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
-
-        <div class="parent">
-          <div class="card">
-            <div class="card-image" />
-            <div class="category">
-              {{ celebration2?.name }}
-            </div>
-            <div class="date-box">
-              <span class="date">{{ dateDay2 }}</span>
-              <span class="month">{{ dateMonth2 }}</span>
-            </div>
-            <div class="heading">
-              {{ celebration2?.description }}
-            </div>
-            <a
-              class="action"
-              :href="`/celebration/${celebration2?.celebration_id}`"
-            >
-              {{ $t("welcome.event_link") }}
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </div>
+      </div>
+      <div v-else>
+        <p>Pas d'événement créé</p>
       </div>
       <h2
         class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
@@ -223,7 +200,7 @@ h2 {
 .date-box span {
   display: block;
   text-align: center;
-  background-color: white
+  background-color: white;
 }
 
 .date-box .month {

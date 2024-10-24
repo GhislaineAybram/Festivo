@@ -62,6 +62,14 @@ if (error.value) {
             </div>
             <div class="border-t border-gray-200 pt-4">
               <dt class="font-medium text-gray-900">
+                {{ $t("celebration.address") }}
+              </dt>
+              <dd class="mt-2 text-sm text-gray-500">
+                {{ celebration?.address }}
+              </dd>
+            </div>
+            <div class="border-t border-gray-200 pt-4">
+              <dt class="font-medium text-gray-900">
                 {{ $t("celebration.guests") }}
               </dt>
               <dd class="mt-2 text-sm text-gray-500">

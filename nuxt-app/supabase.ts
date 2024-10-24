@@ -44,12 +44,12 @@ export const getCelebrationById = async (id: string): Promise<Celebration> => {
   return data ? data[0] : null
 }
 
-export const getCelebrationByAuthor = async (id: string): Promise<Celebration> => {
+export const getCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
   const { data } = await supabase
     .from('celebration')
     .select('*')
-    .eq('author_id', id)
-  return data ? data[0] : null
+    .eq('author', id)
+  return data ? data : null
 }
 
 export const getCelebrationAuthorName = async (id: string): Promise<User> => {

@@ -37,3 +37,15 @@ defineProps({
   </main>
   <FooterPage />
 </template>
+
+<style lang="scss" scoped>
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  margin-top: auto;
+}
+</style>
