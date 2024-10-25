@@ -17,9 +17,20 @@ export const getUserById = async (id: string): Promise<User> => {
 export const getCelebrationById = async (id: string): Promise<Celebration> => {
   const { data } = await supabase
     .from('celebration')
-    .select('*')
+    .select(`
+      *,
+      author:user(firstname)
+    `)
     .eq('celebration_id', id)
   return data ? data[0] : null
+}
+
+export const getNumberGuestsByCelebration = async (id: string): Promise<number> => {
+  const { count } = await supabase
+    .from('guest')
+    .select('*', { count: 'exact', head: true })
+    .eq('celebration_id', id)
+  return count || null
 }
 
 export const getCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {

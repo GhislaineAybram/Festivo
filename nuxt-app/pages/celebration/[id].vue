@@ -7,12 +7,18 @@ import type { Celebration } from '~/types'
 const { id } = useRoute().params
 
 const runtimeConfig = useRuntimeConfig()
-const { data: celebration, error } = await useFetch<Celebration>(
+const { data: celebration, error: celebrationError } = await useFetch<Celebration>(
   () => `${runtimeConfig.public.apiUrl}/celebration/${id}`,
 )
+if (celebrationError.value) {
+  console.error('Failed to fetch celebration data', celebrationError.value)
+}
 
-if (error.value) {
-  console.error('Failed to fetch celebration data', error.value)
+const { data: nbGuests, error: nbGuestsError } = await useFetch<Celebration>(
+  () => `${runtimeConfig.public.apiUrl}/guests/celebration/${id}`,
+)
+if (nbGuestsError.value) {
+  console.error('Failed to fetch nb of guest celebration', nbGuestsError.value)
 }
 </script>
 
@@ -34,7 +40,7 @@ if (error.value) {
             id="celebration-author-name"
             class="mt-4 text-gray-500"
           >
-            {{ $t("celebration.created") }} {{ celebration?.author }}
+            {{ $t("celebration.created") }} {{ celebration?.author.firstname }}
           </p>
         </div>
         <h3 class="text-2xl mt-4 text-gray-900">
@@ -73,7 +79,7 @@ if (error.value) {
                 {{ $t("celebration.guests") }}
               </dt>
               <dd class="mt-2 text-sm text-gray-500">
-                30
+                {{ nbGuests }}
               </dd>
             </div>
           </dl>

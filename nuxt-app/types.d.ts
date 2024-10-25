@@ -16,7 +16,7 @@ export interface Celebration {
   address: string
   date: string
   hour: string
-  author: string
+  author: User
   celebration_type: string
   created_at: string
 }
