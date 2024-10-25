@@ -39,7 +39,9 @@
     "address": "Adresse",
     "accept-privacy": "En acceptant, vous acceptez notre",
     "privacy-policy": "politique de confidentialités",
-    "creation-button": "Créer mon événement"
+    "creation-button": "Créer mon événement",
+    "no-celebration-created": "Pas d'événement créé",
+    "no-celebration-invited": "Pas d'invitation"
   },
   "login": {
     "title": "Connexion",
@@ -57,8 +59,7 @@
   },
   "menubar": {
     "homepage": "Accueil",
-    "invitations": "Mes invitations",
-    "events": "Mes événements",
+    "event_creation": "Créer mon événement",
     "login": "Se connecter",
     "profile": "Ma page profil",
     "sign_out": "Se déconnecter"

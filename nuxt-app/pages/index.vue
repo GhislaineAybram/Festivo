@@ -15,28 +15,41 @@ watchEffect(() => {
   }
 })
 
-const runtimeConfig = useRuntimeConfig()
-const { data: celebrationCreated, error } = await useFetch<Celebration[]>(
-  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user.id}`,
-)
-
-if (error.value) {
-  console.error('Failed to fetch celebration data', error.value)
-}
-
 const getMonth = (dateString: string) => {
   const date = new Date(dateString)
   return date.toLocaleString('default', { month: 'long' })
 }
-
 const getDay = (dateString: string) => {
   const date = new Date(dateString)
   return date.getDate()
 }
 
+const runtimeConfig = useRuntimeConfig()
+
+const { data: celebrationCreated, error: celebrationCreatedError } = await useFetch<Celebration[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user.id}`,
+)
+if (celebrationCreatedError.value) {
+  console.error('Failed to fetch celebration data', celebrationCreatedError.value)
+}
 const celebrationsCreated = computed(
   () =>
     celebrationCreated.value?.map(celebration => ({
+      ...celebration,
+      dateMonth: getMonth(celebration.date),
+      dateDay: getDay(celebration.date),
+    })) || [],
+)
+
+const { data: celebrationInvited, error: celebrationInvitedError } = await useFetch<Celebration[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user.id}`,
+)
+if (celebrationInvitedError.value) {
+  console.error('Failed to fetch celebration data', celebrationInvitedError.value)
+}
+const celebrationsInvited = computed(
+  () =>
+    celebrationInvited.value?.map(celebration => ({
       ...celebration,
       dateMonth: getMonth(celebration.date),
       dateDay: getDay(celebration.date),
@@ -89,13 +102,48 @@ const celebrationsCreated = computed(
         </div>
       </div>
       <div v-else>
-        <p>Pas d'événement créé</p>
+        <p>{{ $t("celebration.no-celebration-created") }}</p>
       </div>
+
       <h2
         class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
       >
         {{ $t("welcome.invitations") }}
       </h2>
+      <div
+        v-if="celebrationsInvited && celebrationsInvited.length > 0"
+        class="grid grid-cols-1 sm:grid-cols-1"
+      >
+        <div
+          v-for="celebration in celebrationsInvited"
+          :key="celebration.celebration_id"
+          class="parent"
+        >
+          <div class="card">
+            <div class="card-image" />
+            <div class="category">
+              {{ celebration.name }}
+            </div>
+            <div class="date-box">
+              <span class="date">{{ celebration.dateDay }}</span>
+              <span class="month">{{ celebration.dateMonth }}</span>
+            </div>
+            <div class="heading">
+              {{ celebration.description }}
+            </div>
+            <a
+              class="action"
+              :href="`/celebration/${celebration.celebration_id}`"
+            >
+              {{ $t("welcome.event_link") }}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <p>{{ $t("celebration.no-celebration-invited") }}</p>
+      </div>
     </div>
 
     <div v-else>
