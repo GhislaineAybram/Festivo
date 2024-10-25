@@ -18,7 +18,6 @@ const formatName = (name: string) => {
 }
 
 const submitRegisterForm = async () => {
-  console.log('Submit button clicked')
   if (!accept.value) {
     alert('Vous devez accepter les termes et conditions.')
     return
@@ -35,7 +34,6 @@ const submitRegisterForm = async () => {
   }
 
   try {
-    console.log('Attempting sign up')
     const { error } = await auth.signUp({
       email: email.value.toLowerCase(),
       password: password.value,
@@ -210,6 +208,10 @@ watchEffect(() => {
           icon="pi pi-user-plus"
           class="mt-2"
         />
+        <span
+          v-if="errorMsg"
+          class="bg-opacity-50 absolute right-8 top-8 rounded-lg bg-[#242424] p-8 px-4 py-2 text-red-500"
+        >{{ errorMsg }}</span>
       </form>
     </div>
     <AlertRegistration v-if="registrationSuccess" />

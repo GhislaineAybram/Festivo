@@ -51,3 +51,11 @@ export const getCelebrationsByGuest = async (id: string): Promise<Celebration[] 
     .eq('guest.user_id', id)
   return data ? data : null
 }
+
+export const newCelebration = async (newCelebrationData: Celebration): Promise<Celebration> => {
+  const { data } = await supabase
+    .from('celebration')
+    .insert([newCelebrationData])
+    .select('*')
+  return data ? data[0] : null
+}

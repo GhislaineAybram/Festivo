@@ -2,14 +2,75 @@
 import { ref } from 'vue'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 
-const buttondisplay = ref()
-const time = ref()
+definePageMeta({
+  middleware: 'auth',
+})
+
+const { auth } = useSupabaseClient()
+const {
+  data: { user },
+} = await auth.getUser()
+
+const celebrationTitle = ref('')
+const celebrationType = ref('')
+const celebrationDescription = ref('')
+const celebrationDate = ref()
+const celebrationTime = ref()
+const celebrationAddress = ref('')
 const agreed = ref(false)
+const creationSuccess = ref(false)
+
+const createNewCelebration = async () => {
+  if (!agreed.value) {
+    alert('Vous devez accepter les termes et conditions.')
+    return
+  }
+  if (!user?.id) {
+    alert('Utilisateur non identifié.')
+    return
+  }
+  try {
+    const { error } = await $fetch('/api/celebration', {
+      method: 'POST',
+      body: {
+        title: celebrationTitle.value,
+        type: celebrationType.value,
+        description: celebrationDescription.value,
+        date: celebrationDate.value,
+        time: celebrationTime.value,
+        address: celebrationAddress.value,
+        author: user.id,
+      },
+    })
+
+    if (error) {
+      console.error('Erreur lors de la création de l’événement :', error.value)
+      return
+    }
+
+    // Clear form
+    celebrationTitle.value = ''
+    celebrationType.value = ''
+    celebrationDescription.value = ''
+    celebrationDate.value = null
+    celebrationTime.value = null
+    celebrationAddress.value = ''
+
+    creationSuccess.value = true
+    alert('Événement créé avec succès!')
+  }
+  catch (error) {
+    console.error('Erreur lors de la création de l’événement :', error)
+  }
+}
 </script>
 
 <template>
   <main class="main flex flex-col items-center">
-    <div id="celebration-details">
+    <div
+      v-if="user"
+      id="celebration-details"
+    >
       <div class="mx-auto mt-6 max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           {{ $t("celebration.creation-title") }}
@@ -19,9 +80,9 @@ const agreed = ref(false)
         </p>
       </div>
       <form
-        action="#"
         method="POST"
         class="mx-auto mt-10 max-w-xl sm:mt-20"
+        @submit.prevent="createNewCelebration"
       >
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
@@ -32,6 +93,7 @@ const agreed = ref(false)
             <div class="mt-2.5">
               <input
                 id="celebration-title"
+                v-model="celebrationTitle"
                 type="text"
                 name="celebration-title"
                 autocomplete="celebration-title"
@@ -43,10 +105,11 @@ const agreed = ref(false)
             <label
               for="celebration-type"
               class="block text-sm font-semibold leading-6 text-gray-900"
-            >{{ $t("celebration.title") }}</label>
+            >{{ $t("celebration.type") }}</label>
             <div class="mt-2.5">
               <select
                 id="celebration-type"
+                v-model="celebrationType"
                 name="celebration-type"
                 autocomplete="celebration-type"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -65,6 +128,7 @@ const agreed = ref(false)
             <div class="mt-2.5">
               <textarea
                 id="celebration-description"
+                v-model="celebrationDescription"
                 name="celebration-description"
                 rows="4"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -80,7 +144,7 @@ const agreed = ref(false)
             <div class="mt-2.5">
               <DatePicker
                 id="datepicker-month"
-                v-model="buttondisplay"
+                v-model="celebrationDate"
                 class="flex-auto"
                 date-format="dd/mm/yy"
                 variant="filled"
@@ -99,7 +163,7 @@ const agreed = ref(false)
             <div class="mt-2.5">
               <DatePicker
                 id="datepicker-timeonly"
-                v-model="time"
+                v-model="celebrationTime"
                 time-only
                 fluid
               />
@@ -114,6 +178,7 @@ const agreed = ref(false)
             <div class="mt-2.5">
               <input
                 id="celebration-address"
+                v-model="celebrationAddress"
                 type="text"
                 name="celebration-address"
                 autocomplete="celebration-address"
@@ -163,6 +228,9 @@ const agreed = ref(false)
           </button>
         </div>
       </form>
+    </div>
+    <div v-else>
+      <AlertNotLoggedIn />
     </div>
   </main>
 </template>

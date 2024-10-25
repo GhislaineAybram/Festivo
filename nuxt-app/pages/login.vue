@@ -106,6 +106,10 @@ watchEffect(() => {
           class="mt-2 button-validation"
           @click="submitLoginForm"
         />
+        <span
+          v-if="errorMsg"
+          class="bg-opacity-50 absolute right-8 top-8 rounded-lg bg-[#242424] p-8 px-4 py-2 text-red-500"
+        >{{ errorMsg }}</span>
       </div>
     </div>
     <div class="register-container text-sm">
