@@ -86,6 +86,7 @@ watchEffect(() => {
       class="card w-full sm:w-80 p-6 mb-6"
     >
       <form
+        v-focustrap
         class="w-full sm:w-80 flex flex-col gap-4"
         @submit.prevent="submitRegisterForm"
       >
@@ -195,7 +196,7 @@ watchEffect(() => {
           <Checkbox
             id="accept"
             v-model="accept"
-            name="accept-registration"
+            name="accept"
             value="Accept"
           />
           <label for="accept">{{ $t("register.agree") }}</label>
@@ -214,7 +215,7 @@ watchEffect(() => {
         >{{ errorMsg }}</span>
       </form>
     </div>
-    <AlertRegistration v-if="registrationSuccess" />
+    <AlertRegistration v-if="registrationSuccess" class="alert-registration" />
     <div
       v-if="errorMsg"
       class="error-message"
@@ -269,6 +270,11 @@ h1 {
   height: 100px;
   align-content: center;
   text-align: center;
+}
+.alert-registration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 @media (min-width: 1024px) {
   #register {

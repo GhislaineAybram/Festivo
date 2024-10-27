@@ -230,7 +230,7 @@ const createNewCelebration = async () => {
       </form>
     </div>
     <div v-else>
-      <AlertNotLoggedIn />
+      <AlertNotLoggedIn class="alert-not-logged-in" />
     </div>
   </main>
 </template>
@@ -238,6 +238,11 @@ const createNewCelebration = async () => {
 <style lang="scss" scoped>
 * {
   background-color: $seashell;
+}
+.alert-not-logged-in {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 #celebration-details {
   padding: 1.5rem;
