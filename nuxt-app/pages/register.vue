@@ -215,7 +215,10 @@ watchEffect(() => {
         >{{ errorMsg }}</span>
       </form>
     </div>
-    <AlertRegistration v-if="registrationSuccess" class="alert-registration" />
+    <AlertRegistration
+      v-if="registrationSuccess"
+      class="alert-registration"
+    />
     <div
       v-if="errorMsg"
       class="error-message"

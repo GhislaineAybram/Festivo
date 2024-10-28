@@ -29,22 +29,26 @@ const createNewCelebration = async () => {
     alert('Utilisateur non identifié.')
     return
   }
+  const formattedTime = celebrationTime.value
+    ? celebrationTime.value.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    : null
   try {
-    const { error } = await $fetch('/api/celebration', {
+    const response = await $fetch('/api/celebration', {
       method: 'POST',
       body: {
-        title: celebrationTitle.value,
-        type: celebrationType.value,
+        name: celebrationTitle.value,
+        celebration_type: celebrationType.value,
         description: celebrationDescription.value,
         date: celebrationDate.value,
-        time: celebrationTime.value,
+        // hour: celebrationTime.value,
+        hour: formattedTime,
         address: celebrationAddress.value,
         author: user.id,
       },
-    })
+    }) as { error?: string }
 
-    if (error) {
-      console.error('Erreur lors de la création de l’événement :', error.value)
+    if (response.error) {
+      console.error('Erreur lors de la création de l’événement :', response.error)
       return
     }
 
@@ -114,9 +118,21 @@ const createNewCelebration = async () => {
                 autocomplete="celebration-type"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option>Anniversary</option>
-                <option>Baby shower</option>
-                <option>New Year</option>
+                <option
+                  value=""
+                  disabled
+                >
+                  Choisissez un type
+                </option>
+                <option value="d016615d-6ca8-42a9-9abb-54a35a3234df">
+                  Anniversary
+                </option>
+                <option value="3d41671f-6103-480f-b3ae-16191fb1bd11">
+                  Baby shower
+                </option>
+                <option value="1bbb698b-6276-4e1f-91a0-544e045fca71">
+                  New Year
+                </option>
               </select>
             </div>
           </div>

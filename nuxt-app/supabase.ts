@@ -52,7 +52,7 @@ export const getCelebrationsByGuest = async (id: string): Promise<Celebration[] 
   return data ? data : null
 }
 
-export const newCelebration = async (newCelebrationData: Celebration): Promise<Celebration> => {
+export const newCelebration = async (newCelebrationData: Partial<Celebration>): Promise<Celebration> => {
   const { data } = await supabase
     .from('celebration')
     .insert([newCelebrationData])
