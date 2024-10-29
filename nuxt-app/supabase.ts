@@ -33,15 +33,27 @@ export const getNumberGuestsByCelebration = async (id: string): Promise<number> 
   return count || null
 }
 
-export const getCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
+export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
   const { data } = await supabase
     .from('celebration')
     .select('*')
     .eq('author', id)
+    .gte('date', new Date().toISOString())
+    .order('date', { ascending: true })
   return data ? data : null
 }
 
-export const getCelebrationsByGuest = async (id: string): Promise<Celebration[] | null> => {
+export const getPastCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
+  const { data } = await supabase
+    .from('celebration')
+    .select('*')
+    .eq('author', id)
+    .lt('date', new Date().toISOString())
+    .order('date', { ascending: false })
+  return data ? data : null
+}
+
+export const getUpcomingCelebrationsByGuest = async (id: string): Promise<Celebration[] | null> => {
   const { data } = await supabase
     .from('celebration')
     .select(`
@@ -49,6 +61,21 @@ export const getCelebrationsByGuest = async (id: string): Promise<Celebration[] 
       guest!inner(user_id,user_id)
     `)
     .eq('guest.user_id', id)
+    .gte('date', new Date().toISOString())
+    .order('date', { ascending: true })
+  return data ? data : null
+}
+
+export const getPastCelebrationsByGuest = async (id: string): Promise<Celebration[] | null> => {
+  const { data } = await supabase
+    .from('celebration')
+    .select(`
+      *,
+      guest!inner(user_id,user_id)
+    `)
+    .eq('guest.user_id', id)
+    .lt('date', new Date().toISOString())
+    .order('date', { ascending: false })
   return data ? data : null
 }
 

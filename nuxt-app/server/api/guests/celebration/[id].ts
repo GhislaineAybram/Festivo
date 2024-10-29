@@ -1,3 +1,4 @@
+// guests/celebration/[id]
 import { getNumberGuestsByCelebration } from '~~/supabase'
 
 export default defineEventHandler(async (event) => {

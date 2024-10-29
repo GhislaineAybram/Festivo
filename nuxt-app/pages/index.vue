@@ -26,30 +26,60 @@ const getDay = (dateString: string) => {
 
 const runtimeConfig = useRuntimeConfig()
 
-const { data: celebrationCreated, error: celebrationCreatedError } = await useFetch<Celebration[]>(
-  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user.id}`,
+const { data: upcomingCelebrationCreated, error: upcomingCelebrationCreatedError } = await useFetch<Celebration[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/upcoming/author/${user.id}`,
 )
-if (celebrationCreatedError.value) {
-  console.error('Failed to fetch celebration data', celebrationCreatedError.value)
+if (upcomingCelebrationCreatedError.value) {
+  console.error('Failed to fetch celebration data', upcomingCelebrationCreatedError.value)
 }
-const celebrationsCreated = computed(
+const upcomingCelebrationsCreated = computed(
   () =>
-    celebrationCreated.value?.map(celebration => ({
+    upcomingCelebrationCreated.value?.map(celebration => ({
       ...celebration,
       dateMonth: getMonth(celebration.date),
       dateDay: getDay(celebration.date),
     })) || [],
 )
 
-const { data: celebrationInvited, error: celebrationInvitedError } = await useFetch<Celebration[]>(
-  () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user.id}`,
+const { data: upcomingCelebrationInvited, error: upcomingCelebrationInvitedError } = await useFetch<Celebration[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/upcoming/guest/${user.id}`,
 )
-if (celebrationInvitedError.value) {
-  console.error('Failed to fetch celebration data', celebrationInvitedError.value)
+if (upcomingCelebrationInvitedError.value) {
+  console.error('Failed to fetch celebration data', upcomingCelebrationInvitedError.value)
 }
-const celebrationsInvited = computed(
+const upcomingCelebrationsInvited = computed(
   () =>
-    celebrationInvited.value?.map(celebration => ({
+    upcomingCelebrationInvited.value?.map(celebration => ({
+      ...celebration,
+      dateMonth: getMonth(celebration.date),
+      dateDay: getDay(celebration.date),
+    })) || [],
+)
+
+const { data: pastCelebrationCreated, error: pastCelebrationCreatedError } = await useFetch<Celebration[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/past/author/${user.id}`,
+)
+if (pastCelebrationCreatedError.value) {
+  console.error('Failed to fetch celebration data', pastCelebrationCreatedError.value)
+}
+const pastCelebrationsCreated = computed(
+  () =>
+    pastCelebrationCreated.value?.map(celebration => ({
+      ...celebration,
+      dateMonth: getMonth(celebration.date),
+      dateDay: getDay(celebration.date),
+    })) || [],
+)
+
+const { data: pastCelebrationInvited, error: pastCelebrationInvitedError } = await useFetch<Celebration[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/past/guest/${user.id}`,
+)
+if (pastCelebrationInvitedError.value) {
+  console.error('Failed to fetch celebration data', pastCelebrationInvitedError.value)
+}
+const pastCelebrationsInvited = computed(
+  () =>
+    pastCelebrationInvited.value?.map(celebration => ({
       ...celebration,
       dateMonth: getMonth(celebration.date),
       dateDay: getDay(celebration.date),
@@ -70,12 +100,13 @@ const celebrationsInvited = computed(
       >
         {{ $t("welcome.events") }}
       </h2>
+      <!-- upcoming celebrations created -->
       <div
-        v-if="celebrationsCreated && celebrationsCreated.length > 0"
+        v-if="upcomingCelebrationsCreated && upcomingCelebrationsCreated.length > 0"
         class="grid grid-cols-1 sm:grid-cols-1"
       >
         <div
-          v-for="celebration in celebrationsCreated"
+          v-for="celebration in upcomingCelebrationsCreated"
           :key="celebration.celebration_id"
           class="parent"
         >
@@ -105,17 +136,51 @@ const celebrationsInvited = computed(
         <p>{{ $t("celebration.no-celebration-created") }}</p>
       </div>
 
+      <!-- past celebrations created -->
+      <div
+        v-if="pastCelebrationsCreated && pastCelebrationsCreated.length > 0"
+        class="grid grid-cols-1 sm:grid-cols-1"
+      >
+        <div
+          v-for="celebration in pastCelebrationsCreated"
+          :key="celebration.celebration_id"
+          class="parent"
+        >
+          <div class="card">
+            <div class="card-image" />
+            <div class="category">
+              {{ celebration.name }} - PAST !!!
+            </div>
+            <div class="date-box">
+              <span class="date">{{ celebration.dateDay }}</span>
+              <span class="month">{{ celebration.dateMonth }}</span>
+            </div>
+            <div class="heading">
+              {{ celebration.description }}
+            </div>
+            <a
+              class="action"
+              :href="`/celebration/${celebration.celebration_id}`"
+            >
+              {{ $t("welcome.event_link") }}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <h2
         class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
       >
         {{ $t("welcome.invitations") }}
       </h2>
+      <!-- upcoming invitations -->
       <div
-        v-if="celebrationsInvited && celebrationsInvited.length > 0"
+        v-if="upcomingCelebrationsInvited && upcomingCelebrationsInvited.length > 0"
         class="grid grid-cols-1 sm:grid-cols-1"
       >
         <div
-          v-for="celebration in celebrationsInvited"
+          v-for="celebration in upcomingCelebrationsInvited"
           :key="celebration.celebration_id"
           class="parent"
         >
@@ -143,6 +208,39 @@ const celebrationsInvited = computed(
       </div>
       <div v-else>
         <p>{{ $t("celebration.no-celebration-invited") }}</p>
+      </div>
+
+      <!-- past invitations -->
+      <div
+        v-if="pastCelebrationsInvited && pastCelebrationsInvited.length > 0"
+        class="grid grid-cols-1 sm:grid-cols-1"
+      >
+        <div
+          v-for="celebration in pastCelebrationsInvited"
+          :key="celebration.celebration_id"
+          class="parent"
+        >
+          <div class="card">
+            <div class="card-image" />
+            <div class="category">
+              {{ celebration.name }} - PAST !!!
+            </div>
+            <div class="date-box">
+              <span class="date">{{ celebration.dateDay }}</span>
+              <span class="month">{{ celebration.dateMonth }}</span>
+            </div>
+            <div class="heading">
+              {{ celebration.description }}
+            </div>
+            <a
+              class="action"
+              :href="`/celebration/${celebration.celebration_id}`"
+            >
+              {{ $t("welcome.event_link") }}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 

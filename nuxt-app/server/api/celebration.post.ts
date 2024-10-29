@@ -1,3 +1,4 @@
+// celebration.post
 import { newCelebration } from '~~/supabase'
 
 export default defineEventHandler(async (event) => {

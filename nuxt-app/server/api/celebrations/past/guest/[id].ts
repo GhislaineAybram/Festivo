@@ -1,5 +1,5 @@
-// routes.ts
-import { getCelebrationsByAuthor } from '~~/supabase'
+// celebrations/past/guest/[id]
+import { getPastCelebrationsByGuest } from '~~/supabase'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
         body: { error: 'Missing user ID' },
       }
     }
-    const celebrations = await getCelebrationsByAuthor(id)
+    const celebrations = await getPastCelebrationsByGuest(id)
     return celebrations
   }
   catch (error) {
