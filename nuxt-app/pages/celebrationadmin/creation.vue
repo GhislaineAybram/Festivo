@@ -20,7 +20,7 @@ const celebrationAddress = ref('')
 const agreed = ref(false)
 const creationSuccess = ref(false)
 
-const createNewCelebration = async () => {
+async function createNewCelebration() {
   if (!agreed.value) {
     alert('Vous devez accepter les termes et conditions.')
     return
@@ -32,40 +32,34 @@ const createNewCelebration = async () => {
   const formattedTime = celebrationTime.value
     ? celebrationTime.value.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     : null
-  try {
-    const response = await $fetch('/api/celebration', {
-      method: 'POST',
-      body: {
-        name: celebrationTitle.value,
-        celebration_type: celebrationType.value,
-        description: celebrationDescription.value,
-        date: celebrationDate.value,
-        // hour: celebrationTime.value,
-        hour: formattedTime,
-        address: celebrationAddress.value,
-        author: user.id,
-      },
-    }) as { error?: string }
+  const response = await $fetch('/api/celebration', {
+    method: 'POST',
+    body: {
+      name: celebrationTitle.value,
+      celebration_type: celebrationType.value,
+      description: celebrationDescription.value,
+      date: celebrationDate.value,
+      hour: formattedTime,
+      address: celebrationAddress.value,
+      author: user.id,
+    },
+  }) as { error?: string }
 
-    if (response.error) {
-      console.error('Erreur lors de la création de l’événement :', response.error)
-      return
-    }
-
-    // Clear form
-    celebrationTitle.value = ''
-    celebrationType.value = ''
-    celebrationDescription.value = ''
-    celebrationDate.value = null
-    celebrationTime.value = null
-    celebrationAddress.value = ''
-
-    creationSuccess.value = true
-    alert('Événement créé avec succès!')
+  if (response.error) {
+    console.error('Erreur lors de la création de l’événement :', response.error)
+    return
   }
-  catch (error) {
-    console.error('Erreur lors de la création de l’événement :', error)
-  }
+
+  // Clear form
+  celebrationTitle.value = ''
+  celebrationType.value = ''
+  celebrationDescription.value = ''
+  celebrationDate.value = null
+  celebrationTime.value = null
+  celebrationAddress.value = ''
+
+  creationSuccess.value = true
+  alert('Événement créé avec succès!')
 }
 </script>
 
@@ -244,6 +238,10 @@ const createNewCelebration = async () => {
           </button>
         </div>
       </form>
+      <AlertRegistration
+        v-if="creationSuccess"
+        class="alert-registration"
+      />
     </div>
     <div v-else>
       <AlertNotLoggedIn class="alert-not-logged-in" />
@@ -277,6 +275,11 @@ input, select, option, textarea,
 #datepicker-timeonly *,
 #datepicker-month * {
   background-color: white !important;
+}
+.alert-registration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 @media (min-width: 1024px) {
   #celebration-details {

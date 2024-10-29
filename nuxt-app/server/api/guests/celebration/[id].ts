@@ -14,13 +14,10 @@ export default defineEventHandler(async (event) => {
 
     const celebrationId = id
 
-    const nbGuests = await getNumberGuestsByCelebration(celebrationId)
+    let nbGuests = await getNumberGuestsByCelebration(celebrationId)
 
     if (!nbGuests) {
-      return {
-        statusCode: 404,
-        body: { error: 'Celebration not found' },
-      }
+      nbGuests = 0
     }
 
     return nbGuests

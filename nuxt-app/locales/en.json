@@ -41,7 +41,9 @@
     "privacy-policy": "privacy policy",
     "creation-button": "Create my event",
     "no-celebration-created": "No event created",
-    "no-celebration-invited": "No invitation"
+    "no-celebration-invited": "No invitation",
+    "successfull": "Celebration creation successful",
+    "success_message": "You can now invite your friends !"
   },
   "login": {
     "title": "Sign in to your account",
