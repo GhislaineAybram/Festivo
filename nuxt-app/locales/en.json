@@ -50,7 +50,9 @@
     "password_forgot": "Forgot password ?",
     "no_account": "Don't have an account yet ?",
     "sign_up": "Sign up",
-    "button": "Sign in"
+    "button": "Sign in",
+    "successfull": "Login successful",
+    "success_message": "You can now anwer your invitations or create your celebration !"
   },
   "register": {
     "title": "Sign up",

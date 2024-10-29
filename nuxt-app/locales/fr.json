@@ -50,7 +50,9 @@
     "password_forgot": "Mot de passe oublié ?",
     "no_account": "Pas encore de compte ?",
     "sign_up": "Créer un compte",
-    "button": "Se connecter"
+    "button": "Se connecter",
+    "successfull": "Authentification réussie",
+    "success_message": "Vous pouvez maintenant répondre à vos invitations ou créer votre événement !"
   },
   "register": {
     "title": "Inscription",

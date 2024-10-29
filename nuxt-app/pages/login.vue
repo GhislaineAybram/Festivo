@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const user = useSupabaseUser()
+import AlertLoggedIn from '~/components/AlertLoggedIn.vue'
+
 const email = ref('')
 const password = ref('')
 const errorMsg = ref('')
+const loginSuccess = ref(false)
 
 const { auth } = useSupabaseClient()
 
@@ -13,10 +15,12 @@ const submitLoginForm = async () => {
       password: password.value,
     })
 
+    if (error) throw error
+
     email.value = ''
     password.value = ''
 
-    if (error) throw error
+    loginSuccess.value = true
   }
   catch (error) {
     errorMsg.value = error.message
@@ -25,12 +29,6 @@ const submitLoginForm = async () => {
     }, 3000)
   }
 }
-
-watchEffect(() => {
-  if (user.value) {
-    return navigateTo('/')
-  }
-})
 </script>
 
 <template>
@@ -120,6 +118,10 @@ watchEffect(() => {
         </p>
       </NuxtLink>
     </div>
+    <AlertLoggedIn
+      v-if="loginSuccess"
+      class="alert-registration"
+    />
   </main>
 </template>
 
@@ -185,7 +187,11 @@ h1 {
   padding-top: 5px;
   text-align: right;
 }
-
+.alert-registration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
 @media (min-width: 1024px) {
   #login {
     margin-top: 59px;

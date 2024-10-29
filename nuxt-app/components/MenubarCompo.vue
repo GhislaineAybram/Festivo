@@ -18,7 +18,7 @@ const user = useSupabaseUser()
 
 const userLogout = async () => {
   await auth.signOut()
-  navigateTo('/')
+  navigateTo('/login')
 }
 
 const getProfilePage = () => {
