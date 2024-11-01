@@ -90,7 +90,10 @@ watchEffect(() => {
         class="w-full sm:w-80 flex flex-col gap-4"
         @submit.prevent="submitRegisterForm"
       >
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <div
+          id="form-inside"
+          class="sm:mx-auto sm:w-full sm:max-w-sm"
+        >
           <img
             class="mx-auto h-10 w-auto"
             src="../public/img/disco-ball-tangerine.png"
@@ -191,7 +194,7 @@ watchEffect(() => {
 
         <div
           id="accept-conditions"
-          class="flex items-center gap-2 text-sm"
+          class="flex items-center gap-2 text-xs"
         >
           <Checkbox
             id="accept"
@@ -199,7 +202,10 @@ watchEffect(() => {
             name="accept"
             value="Accept"
           />
-          <label for="accept">{{ $t("register.agree") }}</label>
+          <label
+            id="accept-label"
+            for="accept"
+          >{{ $t("register.agree") }}</label>
         </div>
 
         <Button
@@ -234,6 +240,7 @@ watchEffect(() => {
 }
 h2 {
   color: $indigo;
+  background-color: white;
 }
 .text {
   color: $indigo;
@@ -248,9 +255,9 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background-color: white;
+  // background-color: white;
 }
-#register * {
+#register, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img {
   background-color: white;
 }
 #sign-up-button, #sign-up-button * {

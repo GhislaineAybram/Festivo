@@ -70,7 +70,7 @@ const open = ref(true)
                     </DialogTitle>
                     <div class="mt-2">
                       <p class="text-sm text-gray-500">
-                        You need to log in before accessing your profile page
+                        You need to log in before accessing your profile page pr create an event
                       </p>
                     </div>
                   </div>
