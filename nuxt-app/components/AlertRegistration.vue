@@ -98,4 +98,5 @@ const open = ref(true)
   </TransitionRoot>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

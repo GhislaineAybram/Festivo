@@ -189,23 +189,4 @@ input, select, option, textarea,
 #datepicker-month * {
   background-color: white !important;
 }
-@media (min-width: 1024px) {
-  #celebration-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 424px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
-    width: 100%;
-  }
-}
-@media (max-width: 600px) {
-  #celebration-details {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
 </style>

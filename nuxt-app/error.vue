@@ -9,14 +9,14 @@ defineProps({
 <template>
   <MenubarCompo />
   <main
-    class="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8"
+    class="flex flex-col justify-center min-h-screen bg-white px-6 py-24 sm:py-32 lg:px-8"
   >
     <div class="text-center">
-      <p class="text-base font-semibold text-indigo-600">
+      <p class="text-base font-semibold text-indigo-600 sm:text-3xl">
         {{ error?.statusCode }}
       </p>
       <h1
-        class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+        class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl"
       >
         {{ $t("error.page") }}
       </h1>
@@ -35,17 +35,16 @@ defineProps({
       </div>
     </div>
   </main>
-  <FooterPage />
+  <FooterPage id="footer" />
 </template>
 
 <style lang="scss" scoped>
 .main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  margin-top: 59px;
+  padding: auto;
 }
-
-.footer {
-  margin-top: auto;
+#footer {
+  position: absolute;
+  bottom: 0;
 }
 </style>

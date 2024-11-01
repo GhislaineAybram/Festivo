@@ -13,14 +13,4 @@
 * {
   background-color: $seashell;
 }
-@media (min-width: 1024px) {
-  .legal {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-  .main {
-    margin-top: 59px;
-  }
-}
 </style>

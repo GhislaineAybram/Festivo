@@ -45,7 +45,7 @@ import IconGitHub from './icons/IconGitHub.vue'
   </footer>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 #footer {
   display: flex;
   position: relative;

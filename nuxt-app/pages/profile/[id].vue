@@ -337,12 +337,6 @@ const allergy = [
 </template>
 
 <style lang="scss" scoped>
-.main {
-  margin-top: 59px;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
 #photo-title-profile {
   position: relative;
 }
@@ -364,8 +358,7 @@ h1 {
   text-align: center;
   position: absolute;
   top: 50%;
-  left: 60%;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -50%);
   z-index: -2;
 }
 .edit-button {
@@ -393,24 +386,15 @@ h1 {
 .edit-svgIcon path {
   fill: white;
 }
-@media (min-width: 1024px) {
-  #profile-details {
-    margin-top: 59px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
-    width: 100%;
-  }
-}
-@media (max-width: 600px) {
-  #profile-details {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+
+#profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  width: 100%;
 }
 </style>

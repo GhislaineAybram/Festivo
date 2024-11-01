@@ -19,10 +19,6 @@ const celebrationAddress = ref('')
 const creationSuccess = ref(false)
 
 async function createNewCelebration() {
-  if (!user?.id) {
-    alert('Utilisateur non identifié.')
-    return
-  }
   const formattedTime = celebrationTime.value
     ? celebrationTime.value.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     : null
@@ -53,7 +49,6 @@ async function createNewCelebration() {
   celebrationAddress.value = ''
 
   creationSuccess.value = true
-  alert('Événement créé avec succès!')
 }
 </script>
 
@@ -201,7 +196,7 @@ async function createNewCelebration() {
           </button>
         </div>
       </form>
-      <AlertRegistration
+      <AlertCelebrationCreation
         v-if="creationSuccess"
         class="alert-registration"
       />
@@ -244,23 +239,7 @@ input, select, option, textarea,
   top: 50%;
   left: 50%;
 }
-@media (min-width: 1024px) {
-  #celebration-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 424px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1rem;
-    width: 100%;
-  }
-}
-@media (max-width: 600px) {
-  #celebration-details {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+#celebration-type {
+  height: 40px;
 }
 </style>
