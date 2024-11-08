@@ -207,7 +207,10 @@ watchEffect(() => {
             for="accept"
           >{{ $t("register.agree") }}</label>
         </div>
-
+        <span
+          v-if="errorMsg"
+          class="text-sm text-red-500"
+        >{{ errorMsg }}</span>
         <Button
           id="sign-up-button"
           type="submit"
@@ -215,10 +218,6 @@ watchEffect(() => {
           icon="pi pi-user-plus"
           class="mt-2"
         />
-        <span
-          v-if="errorMsg"
-          class="bg-opacity-50 absolute right-8 top-8 rounded-lg bg-[#242424] p-8 px-4 py-2 text-red-500"
-        >{{ errorMsg }}</span>
       </form>
     </div>
     <AlertRegistration
@@ -257,7 +256,7 @@ h2 {
   gap: 2rem;
   // background-color: white;
 }
-#register, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img {
+#register, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span {
   background-color: white;
 }
 #sign-up-button, #sign-up-button * {

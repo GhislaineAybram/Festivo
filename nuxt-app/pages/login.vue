@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { AuthApiError } from '@supabase/supabase-js'
 import AlertLoggedIn from '~/components/AlertLoggedIn.vue'
 
 const email = ref('')
@@ -10,12 +11,14 @@ const { auth } = useSupabaseClient()
 
 const submitLoginForm = async () => {
   try {
-    const { error } = await auth.signInWithPassword({
+    const { data: _data, error } = await auth.signInWithPassword({
       email: email.value,
       password: password.value,
     })
 
-    if (error) throw error
+    if (error) {
+      throw error
+    }
 
     email.value = ''
     password.value = ''
@@ -23,10 +26,37 @@ const submitLoginForm = async () => {
     loginSuccess.value = true
   }
   catch (error) {
-    errorMsg.value = error.message
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
+    // Vérifie le code et le nom de l'erreur pour gérer différents cas
+    if (error instanceof AuthApiError) {
+      switch (error.code) {
+        case '400':
+          errorMsg.value
+            = 'Erreur de requête. Veuillez vérifier vos informations.'
+          break
+        case '401':
+          errorMsg.value = 'Non autorisé. Vérifiez vos identifiants.'
+          break
+        default:
+          errorMsg.value = 'Erreur d\'authentification inconnue.'
+          break
+      }
+    }
+    else if (error.name === 'CustomAuthError') {
+      switch (error.name) {
+        case 'InvalidCredentialsError':
+          errorMsg.value = 'Identifiants incorrects.'
+          break
+        case 'NetworkError':
+          errorMsg.value = 'Erreur réseau. Veuillez réessayer.'
+          break
+        default:
+          errorMsg.value = 'Erreur d\'authentification du client.'
+          break
+      }
+      setTimeout(() => {
+        errorMsg.value = ''
+      }, 3000)
+    }
   }
 }
 </script>
@@ -96,6 +126,12 @@ const submitLoginForm = async () => {
               class="font-semibold text-indigo-600 hover:text-indigo-500"
             >{{ $t("login.password_forgot") }}</a>
           </div>
+          <span
+            v-if="errorMsg"
+            class="text-sm text-red-500"
+          >{{
+            errorMsg
+          }}</span>
         </div>
         <Button
           id="sign-in"
@@ -104,10 +140,6 @@ const submitLoginForm = async () => {
           class="mt-2 button-validation"
           @click="submitLoginForm"
         />
-        <span
-          v-if="errorMsg"
-          class="bg-opacity-50 absolute right-8 top-8 rounded-lg bg-[#242424] p-8 px-4 py-2 text-red-500"
-        >{{ errorMsg }}</span>
       </div>
     </div>
     <div class="register-container text-sm">
@@ -169,12 +201,14 @@ h1 {
   align-content: center;
   text-align: center;
 }
-#sign-in, #sign-in * {
+#sign-in,
+#sign-in * {
   background-color: $indigo;
   color: $seashell;
   border-color: $indigo;
 }
-#sign-in:hover, #sign-in:hover * {
+#sign-in:hover,
+#sign-in:hover * {
   background-color: $tangerine;
   color: $indigo;
   border-color: $indigo;
