@@ -43,7 +43,10 @@ export default defineComponent({
       <div class="finished">
         FINISHED
       </div>
-      <div class="card-image" />
+      <div
+        class="card-image"
+        :style="{ backgroundImage: `url(${celebration.celebration_type.picture})` }"
+      />
       <div class="category">
         {{ celebration.name }}
       </div>
@@ -88,9 +91,13 @@ export default defineComponent({
 
 .card-image {
   background-color: rgb(236, 236, 236);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid $haze;
   width: 100%;
   height: 130px;
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 6px 6px;
 }
 
 .card-image:hover {
@@ -125,10 +132,10 @@ export default defineComponent({
   position: absolute;
   top: -20px;
   right: -20px;
-  height: 60px;
-  width: 60px;
+  height: 65px;
+  width: 65px;
   background: white;
-  border: 1px solid $tangerine;
+  border: 2px solid $tangerine;
   border-radius: 10px;
   padding: 5px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 17px 10px -10px;

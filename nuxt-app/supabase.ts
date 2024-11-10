@@ -19,6 +19,7 @@ export const getCelebrationById = async (id: string): Promise<Celebration> => {
     .from('celebration')
     .select(`
       *,
+      celebration_type:celebration_type(picture),
       author:user(firstname)
     `)
     .eq('celebration_id', id)
@@ -36,7 +37,10 @@ export const getNumberGuestsByCelebration = async (id: string): Promise<number> 
 export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
   const { data } = await supabase
     .from('celebration')
-    .select('*')
+    .select(`
+      *,
+      celebration_type:celebration_type(picture)
+    `)
     .eq('author', id)
     .gte('date', new Date().toISOString())
     .order('date', { ascending: true })
@@ -46,7 +50,10 @@ export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<Celeb
 export const getPastCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
   const { data } = await supabase
     .from('celebration')
-    .select('*')
+    .select(`
+      *,
+      celebration_type:celebration_type(picture)
+    `)
     .eq('author', id)
     .lt('date', new Date().toISOString())
     .order('date', { ascending: false })
@@ -58,6 +65,7 @@ export const getUpcomingCelebrationsByGuest = async (id: string): Promise<Celebr
     .from('celebration')
     .select(`
       *,
+      celebration_type:celebration_type(picture),
       guest!inner(user_id,user_id)
     `)
     .eq('guest.user_id', id)
@@ -71,6 +79,7 @@ export const getPastCelebrationsByGuest = async (id: string): Promise<Celebratio
     .from('celebration')
     .select(`
       *,
+      celebration_type:celebration_type(picture),
       guest!inner(user_id,user_id)
     `)
     .eq('guest.user_id', id)

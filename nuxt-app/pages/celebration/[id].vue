@@ -32,7 +32,7 @@ if (nbGuestsError.value) {
             {{ celebration?.name }}
           </h1>
           <img
-            src="~/public/img/photo-party.png"
+            :src="celebration?.celebration_type.picture"
             alt="photo de ballons"
             class="photo-celebration"
           >
@@ -125,8 +125,8 @@ if (nbGuestsError.value) {
   position: relative;
 }
 .photo-celebration {
-  width: 100%;
-  height: auto;
+  max-height: 600px;
+  width: auto;
   filter: opacity(35%);
   z-index: -1;
 }

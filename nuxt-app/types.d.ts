@@ -17,6 +17,13 @@ export interface Celebration {
   date: string
   hour: string
   author: User
-  celebration_type: string
+  celebration_type: CelebrationType
+  created_at: string
+}
+
+export interface CelebrationType {
+  celebration_type_id: string
+  category: string
+  picture: string
   created_at: string
 }
