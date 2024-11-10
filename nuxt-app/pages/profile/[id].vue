@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import AccordionPanel from 'primevue/accordionpanel'
+import { useRoute } from 'vue-router'
+import { useRuntimeConfig } from '#app'
+import type { User } from '~/types'
 
 definePageMeta({
   middleware: 'auth',
@@ -15,6 +18,20 @@ const pseudo = computed(() => metadata?.alias || '')
 const firstname = computed(() => metadata?.firstname || '')
 const lastname = computed(() => metadata?.lastname || '')
 const email = computed(() => user?.email || '')
+
+// avatar
+const { id } = useRoute().params
+const runtimeConfig = useRuntimeConfig()
+
+const { data: userAvatar, error: userAvatarError } = await useFetch<User>(
+  () => `${runtimeConfig.public.apiUrl}/user/${id}`,
+)
+if (userAvatarError.value) {
+  console.error('Failed to fetch user data', userAvatarError.value)
+}
+
+const defaultAvatarUrl = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
 
 const active = ref('0')
 
@@ -89,12 +106,12 @@ const allergy = [
     <div v-if="user">
       <div id="photo-title-profile">
         <div id="photo-profile">
-          <img
+          <div
             id="profile-picture"
+            alt="profile avatar"
+            :style="{ backgroundImage: `url(${avatar})` }"
             class="inline-block h-40 w-40 rounded-full ring-2 ring-white"
-            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt="avatar"
-          >
+          />
           <button class="edit-button">
             <svg
               class="edit-svgIcon"
@@ -343,6 +360,14 @@ const allergy = [
   display: inline-block;
 }
 #profile-picture {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: $whisper;
+  background-size: 75%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid $tangerine;
   z-index: -1;
   position: relative;
   transform: scale(0.85);

@@ -9,7 +9,10 @@ export const supabase = createClient(supabaseUrl, supabaseKey)
 export const getUserById = async (id: string): Promise<User> => {
   const { data } = await supabase
     .from('user')
-    .select('*')
+    .select(`
+      *,
+      avatar:avatar(picture)
+      `)
     .eq('user_id', id)
   return data ? data[0] : null
 }
