@@ -3,6 +3,7 @@ import AccordionPanel from 'primevue/accordionpanel'
 import { useRoute } from 'vue-router'
 import { useRuntimeConfig } from '#app'
 import type { User } from '~/types'
+import ModifyAvatar from '~/components/ModifyAvatar.vue'
 
 definePageMeta({
   middleware: 'auth',
@@ -34,6 +35,15 @@ const defaultAvatarUrl = 'https://images.unsplash.com/photo-1491528323818-fdd1fa
 const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
 
 const active = ref('0')
+
+const isModifyAvatarOpened = ref(false)
+
+const openModifyAvatar = () => {
+  isModifyAvatarOpened.value = true
+}
+const closeModifyAvatar = () => {
+  isModifyAvatarOpened.value = false
+}
 
 const allergy = [
   {
@@ -104,6 +114,14 @@ const allergy = [
 <template>
   <main class="main">
     <div v-if="user">
+      <div v-if="isModifyAvatarOpened">
+        <ModifyAvatar
+          :is-opened="isModifyAvatarOpened"
+          :close-modify-avatar="closeModifyAvatar"
+          :initial-avatar="userAvatar.avatar.avatar_id"
+          @close="closeModifyAvatar"
+        />
+      </div>
       <div id="photo-title-profile">
         <div id="photo-profile">
           <div
@@ -112,7 +130,10 @@ const allergy = [
             :style="{ backgroundImage: `url(${avatar})` }"
             class="inline-block h-40 w-40 rounded-full ring-2 ring-white"
           />
-          <button class="edit-button">
+          <button
+            class="edit-button"
+            @click="openModifyAvatar"
+          >
             <svg
               class="edit-svgIcon"
               viewBox="0 0 512 512"

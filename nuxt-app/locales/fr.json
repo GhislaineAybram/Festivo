@@ -23,6 +23,9 @@
     "cancel": "Annuler",
     "save": "Sauvegarder"
   },
+  "avatar": {
+    "modification_title": "Merci de sélectionner l'avatar de votre choix"
+  },
   "celebration": {
     "created": "créé par",
     "date": "Date",

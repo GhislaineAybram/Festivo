@@ -23,6 +23,9 @@
     "cancel": "Cancel",
     "save": "Save"
   },
+  "avatar": {
+    "modification_title": "Please select the avatar you want to use"
+  },
   "celebration": {
     "created": "created by",
     "date": "Date",
