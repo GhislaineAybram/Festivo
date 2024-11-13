@@ -28,6 +28,15 @@ export const getUserById = async (id: string): Promise<User> => {
   return data ? data[0] : null
 }
 
+export const updateAvatarByUser = async (id: string, newAvatar: string): Promise<User> => {
+  const { data } = await supabase
+    .from('user')
+    .update({ avatar: newAvatar })
+    .eq('user_id', id)
+    .select()
+  return data ? data[0] : null
+}
+
 export const getCelebrationById = async (id: string): Promise<Celebration> => {
   const { data } = await supabase
     .from('celebration')

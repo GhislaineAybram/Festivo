@@ -9,8 +9,6 @@ import {
 } from '@headlessui/vue'
 import type { UserAvatar } from '~/types'
 
-// const open = ref(true);
-
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 
@@ -25,7 +23,9 @@ if (error.value) {
 const props = defineProps<{
   initialAvatar: string
   isOpened: boolean
+  userId: string
   closeModifyAvatar: () => void
+  updateAvatar: (newAvatar: string) => void
 }>()
 
 const open = ref(props.isOpened)
@@ -34,7 +34,7 @@ watch(() => props.isOpened, (newVal) => {
   open.value = newVal
 })
 
-const selectedAvatarId = ref<string>(props.initialAvatar)
+const selectedAvatarId = ref(props.initialAvatar)
 
 function selectAvatar(id: string) {
   selectedAvatarId.value = id
@@ -43,6 +43,24 @@ function selectAvatar(id: string) {
 const closeModifyAvatar = () => {
   open.value = false
   props.closeModifyAvatar()
+}
+
+async function updateAvatarInDatabase() {
+  const response = await $fetch(`/api/avatar/user/${props.userId}`, {
+    method: 'POST',
+    body: {
+      id: props.userId,
+      newAvatar: selectedAvatarId.value,
+    },
+  }) as { error?: string }
+
+  if (response.error) {
+    console.error(`Erreur lors de la mise à jour de l'avatar :`, response.error)
+    return
+  }
+  props.updateAvatar(selectedAvatarId.value)
+  props.closeModifyAvatar()
+  window.location.reload()
 }
 </script>
 
@@ -124,7 +142,7 @@ const closeModifyAvatar = () => {
                 <button
                   type="button"
                   class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                  @click="closeModifyAvatar"
+                  @click="updateAvatarInDatabase"
                 >
                   Save
                 </button>
@@ -159,7 +177,7 @@ const closeModifyAvatar = () => {
   height: 100px;
   border-radius: 50%;
   border: 4px solid $tangerine;
-  background-color: $whisper;
+  background-color: $seashell;
   background-size: 75%;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import AccordionPanel from 'primevue/accordionpanel'
-import { useRoute } from 'vue-router'
 import { useRuntimeConfig } from '#app'
 import type { User } from '~/types'
 import ModifyAvatar from '~/components/ModifyAvatar.vue'
@@ -20,12 +19,11 @@ const firstname = computed(() => metadata?.firstname || '')
 const lastname = computed(() => metadata?.lastname || '')
 const email = computed(() => user?.email || '')
 
-// avatar
-const { id } = useRoute().params
+const user_id = user.id
 const runtimeConfig = useRuntimeConfig()
 
 const { data: userAvatar, error: userAvatarError } = await useFetch<User>(
-  () => `${runtimeConfig.public.apiUrl}/user/${id}`,
+  () => `${runtimeConfig.public.apiUrl}/user/${user_id}`,
 )
 if (userAvatarError.value) {
   console.error('Failed to fetch user data', userAvatarError.value)
@@ -44,6 +42,13 @@ const openModifyAvatar = () => {
 const closeModifyAvatar = () => {
   isModifyAvatarOpened.value = false
 }
+
+const updateAvatarInProfilePage = (newAvatar: string) => {
+  avatar.value = newAvatar
+}
+watch(avatar, (newAvatar) => {
+  console.log('Avatar mis à jour :', newAvatar)
+})
 
 const allergy = [
   {
@@ -119,6 +124,8 @@ const allergy = [
           :is-opened="isModifyAvatarOpened"
           :close-modify-avatar="closeModifyAvatar"
           :initial-avatar="userAvatar.avatar.avatar_id"
+          :user-id="user_id"
+          :update-avatar="updateAvatarInProfilePage"
           @close="closeModifyAvatar"
         />
       </div>
@@ -384,17 +391,17 @@ const allergy = [
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background-color: $whisper;
+  background-color: $seashell;
   background-size: 75%;
   background-position: center;
   background-repeat: no-repeat;
-  border: 2px solid $tangerine;
+  border: 5px solid $tangerine;
   z-index: -1;
   position: relative;
   transform: scale(0.85);
 }
 h1 {
-  background-color: $seashell;
+  background-color: $haze;
   color: $indigo;
   width: 100%;
   height: 100px;
