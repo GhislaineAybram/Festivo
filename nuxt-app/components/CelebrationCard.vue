@@ -84,8 +84,11 @@ export default defineComponent({
 
 .card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   flex: 1 1 calc(100% - 2rem);
-  max-width: 260px;
+  width: 242px;
+  height: 272px;
   background: white;
   padding: 0.5em;
   border-radius: 6px;
@@ -165,7 +168,7 @@ export default defineComponent({
 
 .action {
   display: inline-flex;
-  margin-top: 1rem;
+  margin-top: auto;
   color: $indigo;
   font-size: 0.875rem;
   line-height: 1.25rem;

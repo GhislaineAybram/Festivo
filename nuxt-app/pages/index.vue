@@ -69,21 +69,26 @@ const pastCelebrationsInvited = await fetchCelebrations(
         {{ $t("welcome.events") }}
       </h2>
       <!-- upcoming celebrations created -->
-      <CelebrationCard :celebrations="upcomingCelebrationsCreated" />
-
+      <div class="celebrations-gallery">
+        <CelebrationCard :celebrations="upcomingCelebrationsCreated" />
+      </div>
       <!-- past celebrations created -->
-      <CelebrationCardPast :celebrations="pastCelebrationsCreated" />
-
+      <div class="celebrations-gallery">
+        <CelebrationCardPast :celebrations="pastCelebrationsCreated" />
+      </div>
       <h2
         class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
       >
         {{ $t("welcome.invitations") }}
       </h2>
       <!-- upcoming invitations -->
-      <CelebrationCard :celebrations="upcomingCelebrationsInvited" />
-
+      <div class="celebrations-gallery">
+        <CelebrationCard :celebrations="upcomingCelebrationsInvited" />
+      </div>
       <!-- past invitations -->
-      <CelebrationCardPast :celebrations="pastCelebrationsInvited" />
+      <div class="celebrations-gallery">
+        <CelebrationCardPast :celebrations="pastCelebrationsInvited" />
+      </div>
     </div>
 
     <div v-else>
@@ -117,5 +122,12 @@ h2 {
   height: 50px;
   align-content: center;
   text-align: center;
+}
+.celebrations-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
 }
 </style>
