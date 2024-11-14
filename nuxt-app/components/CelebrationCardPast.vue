@@ -41,7 +41,7 @@ export default defineComponent({
   >
     <div class="card">
       <div class="finished">
-        FINISHED
+        {{ $t("celebration.finished") }}
       </div>
       <div
         class="card-image"

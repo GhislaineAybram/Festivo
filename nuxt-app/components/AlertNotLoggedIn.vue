@@ -66,11 +66,11 @@ const open = ref(true)
                       as="h3"
                       class="text-base font-semibold leading-6 text-gray-900"
                     >
-                      Not logged in
+                      {{ $t("alert.not_logged.title") }}
                     </DialogTitle>
                     <div class="mt-2">
                       <p class="text-sm text-gray-500">
-                        You need to log in before accessing your profile page pr create an event
+                        {{ $t("alert.not_logged.subtitle") }}
                       </p>
                     </div>
                   </div>
@@ -85,7 +85,7 @@ const open = ref(true)
                     class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
                     @click="open = false"
                   >
-                    Login with password
+                    {{ $t("button.login") }}
                   </button>
                 </NuxtLink>
                 <button
@@ -94,7 +94,7 @@ const open = ref(true)
                   class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                   @click="open = false"
                 >
-                  Cancel
+                  {{ $t("button.cancel") }}
                 </button>
               </div>
             </DialogPanel>

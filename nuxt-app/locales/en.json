@@ -46,7 +46,8 @@
     "no-celebration-created": "No event created",
     "no-celebration-invited": "No invitation",
     "successfull": "Celebration creation successful",
-    "success_message": "You can now invite your friends !"
+    "success_message": "You can now invite your friends !",
+    "finished": "Over"
   },
   "login": {
     "title": "Sign in to your account",
@@ -71,6 +72,12 @@
     "profile": "My profile page",
     "sign_out": "Log out"
   },
+  "button": {
+    "ok": "OK",
+    "save": "Save",
+    "cancel": "Cancel",
+    "login": "Login with password"
+  },
   "error": {
     "page": "Page not found",
     "information": "Sorry, we couldn’t find the page you’re looking for.",
@@ -81,5 +88,11 @@
     "legal": "Legal information",
     "privacy": "Privacy",
     "about": "About"
+  },
+  "alert": {
+    "not_logged": {
+      "title": "Not logged in",
+      "subtitle": "You need to log in before accessing your profile page or create an event"
+    }
   }
 }

@@ -4,7 +4,7 @@
 <template>
   <main class="main">
     <div class="legal">
-      <h1>This is the legal page</h1>
+      <h1>{{ $t("footer.legal") }}</h1>
     </div>
   </main>
 </template>

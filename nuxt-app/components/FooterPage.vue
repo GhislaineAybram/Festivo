@@ -37,7 +37,7 @@ import IconGitHub from './icons/IconGitHub.vue'
           </span>
           <span class="flex items-center">
             <IconGitHub class="h-6 w-6 text-gray-100 mr-2" />
-            <span class="mr-1"> v1</span>
+            <span class="mr-1"> v1.0.0</span>
           </span>
         </div>
       </div>

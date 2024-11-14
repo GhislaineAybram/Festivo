@@ -4,7 +4,7 @@
 <template>
   <main class="main">
     <div class="privacy">
-      <h1>This is the privacy page</h1>
+      <h1>{{ $t("footer.privacy") }}</h1>
     </div>
   </main>
 </template>

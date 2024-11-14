@@ -46,7 +46,8 @@
     "no-celebration-created": "Pas d'événement créé",
     "no-celebration-invited": "Pas d'invitation",
     "successfull": "Evenement créé avec succès",
-    "success_message": "Vous pouvez maintenant inviter vos amis !"
+    "success_message": "Vous pouvez maintenant inviter vos amis !",
+    "finished": "Terminé"
   },
   "login": {
     "title": "Connexion",
@@ -71,6 +72,12 @@
     "profile": "Ma page profil",
     "sign_out": "Se déconnecter"
   },
+  "button": {
+    "ok": "OK",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "login": "Se connecter avec mot de passe"
+  },
   "error": {
     "page": "Page introuvable",
     "information": "La page que vous essayez d'atteindre est introuvable.",
@@ -79,7 +86,13 @@
   },
   "footer": {
     "legal": "Mentions légales",
-    "privacy": "Confidentialités",
+    "privacy": "Confidentialité",
     "about": "A propos"
+  },
+  "alert": {
+    "not_logged": {
+      "title": "Pas connecté",
+      "subtitle": "Connection nécessaire avant d'accéder à votre page profil ou de créer un événement"
+    }
   }
 }
