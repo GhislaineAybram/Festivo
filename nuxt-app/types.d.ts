@@ -21,6 +21,20 @@ export interface Celebration {
   created_at: string
 }
 
+// TODO: change the type later
+export interface Guest {
+  guest_id: string
+  user_id: any
+  celebration_id: Celebration
+  is_coming: boolean | null
+  created_at: string
+}
+
+export interface GuestsList {
+  nb_guests: number
+  guests_list: Array<Guest>
+}
+
 export interface CelebrationType {
   celebration_type_id: string
   category: string
@@ -28,7 +42,7 @@ export interface CelebrationType {
   created_at: string
 }
 
-export interface UserAvatar {
+export interface Avatar {
   avatar_id: string
   picture_description: string
   picture: string

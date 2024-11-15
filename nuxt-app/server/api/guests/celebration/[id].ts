@@ -1,5 +1,5 @@
 // guests/celebration/[id]
-import { getNumberGuestsByCelebration } from '~~/supabase'
+import { getGuestsByCelebration, getNumberGuestsByCelebration } from '~~/supabase'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -15,13 +15,18 @@ export default defineEventHandler(async (event) => {
 
     const celebrationId = id
 
-    let nbGuests = await getNumberGuestsByCelebration(celebrationId)
+    let nb_guests = await getNumberGuestsByCelebration(celebrationId)
 
-    if (!nbGuests) {
-      nbGuests = 0
+    if (!nb_guests) {
+      nb_guests = 0
     }
 
-    return nbGuests
+    const guests_list = await getGuestsByCelebration(celebrationId)
+
+    return {
+      nb_guests,
+      guests_list,
+    }
   }
   catch (error) {
     console.error(error)

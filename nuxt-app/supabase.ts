@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Celebration, User, UserAvatar } from './types'
+import type { Celebration, Guest, User, Avatar } from './types'
 
 const supabaseUrl = process.env.SUPABASE_URL!
 const supabaseKey = process.env.SUPABASE_KEY!
@@ -57,6 +57,27 @@ export const getNumberGuestsByCelebration = async (id: string): Promise<number> 
   return count || null
 }
 
+export const getGuestsByCelebration = async (id: string): Promise<Guest[]> => {
+  const { data } = await supabase
+    .from('guest')
+    .select(`
+      guest_id,
+      celebration_id,
+      is_coming,
+      created_at,
+      user_id:user(
+        user_id,
+        firstname,
+        lastname,
+        email,
+        alias,
+        avatar:avatar(*)
+      )
+    `)
+    .eq('celebration_id', id)
+  return data ? data : null
+}
+
 export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
   const { data } = await supabase
     .from('celebration')
@@ -111,7 +132,7 @@ export const getPastCelebrationsByGuest = async (id: string): Promise<Celebratio
   return data ? data : null
 }
 
-export const getAvatars = async (): Promise<UserAvatar[]> => {
+export const getAvatars = async (): Promise<Avatar[]> => {
   const { data } = await supabase
     .from('avatar')
     .select('*')

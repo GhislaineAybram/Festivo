@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import { useRuntimeConfig } from '#app'
-import type { Celebration } from '~/types'
+import type { Celebration, GuestsList } from '~/types'
 
 const { id } = useRoute().params
 
@@ -14,12 +14,17 @@ if (celebrationError.value) {
   console.error('Failed to fetch celebration data', celebrationError.value)
 }
 
-const { data: nbGuests, error: nbGuestsError } = await useFetch<Celebration>(
+const { data: guestsList, error: guestsListError } = await useFetch<GuestsList>(
   () => `${runtimeConfig.public.apiUrl}/guests/celebration/${id}`,
 )
-if (nbGuestsError.value) {
-  console.error('Failed to fetch nb of guest celebration', nbGuestsError.value)
+if (guestsListError.value) {
+  console.error('Failed to fetch nb of guest celebration', guestsListError.value)
 }
+const nbGuests = computed(() => guestsList.value.nb_guests || 0)
+const guestInfoList = computed(() => guestsList.value.guests_list || [])
+
+const defaultAvatarUrl
+  = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 </script>
 
 <template>
@@ -81,6 +86,21 @@ if (nbGuestsError.value) {
               <dd class="mt-2 text-sm text-gray-500">
                 {{ nbGuests }}
               </dd>
+              <div class="flex -space-x-2 overflow-hidden">
+                <div
+                  v-for="(guest, index) in guestInfoList"
+                  :key="index"
+                >
+                  <img
+                    :src="guest.user_id.avatar.picture || defaultAvatarUrl"
+                    :alt="guest.user_id.avatar.picture_description || 'User avatar'"
+                    class="inline-block size-12 rounded-full ring-2 ring-white"
+                  >
+                  <p class="mt-2 text-xs text-gray-500">
+                    {{ guest.user_id.alias }}
+                  </p>
+                </div>
+              </div>
             </div>
           </dl>
 
