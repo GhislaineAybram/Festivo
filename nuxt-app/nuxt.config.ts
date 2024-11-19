@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      title: 'Festify, where every event comes to life',
+      title: 'Festivo, where every event comes to life',
       link: [
         { rel: 'manifest', href: '/manifest.json' },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

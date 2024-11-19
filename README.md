@@ -1,4 +1,4 @@
-# Festify - RNCP project
+# Festivo - RNCP project
 
 Ce projet est créé dans le cadre du RNCP Concepteur / développeur d'applications.
 
@@ -11,7 +11,7 @@ Ce projet est créé dans le cadre du RNCP Concepteur / développeur d'applicati
 - **Langages:** Typescript, CSS
 - **Framework / Library:** Nuxt, Primevue, Tailwind
 - **Serveur:** Nitro
-- **Database:** To be determined
+- **Database:** Supabase
 
 ## Fonctionnalités ajoutées
 
@@ -19,12 +19,6 @@ Ce projet est créé dans le cadre du RNCP Concepteur / développeur d'applicati
 - [X] to be continued
 
 ## Lancement du projet
-
-Lancement serveur backend :
-
-```bash
-to be determined
-```
 
 Lancement serveur local et exécution Nuxt :
 

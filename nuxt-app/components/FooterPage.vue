@@ -33,7 +33,7 @@ import IconGitHub from './icons/IconGitHub.vue'
         </span>
         <div class="flex justify-between w-full md:w-auto mt-2 md:space-x-4">
           <span class="text-gray-100">
-            &#169; festify.com
+            &#169; festivo-tawny.vercel.app
           </span>
           <span class="flex items-center">
             <IconGitHub class="h-6 w-6 text-gray-100 mr-2" />

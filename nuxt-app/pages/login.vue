@@ -80,7 +80,7 @@ const submitLoginForm = async () => {
           <img
             class="mx-auto h-10 w-auto"
             src="../public/img/disco-ball-tangerine.png"
-            alt="Logo Festify"
+            alt="Logo Festivo"
           >
           <h2
             class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"

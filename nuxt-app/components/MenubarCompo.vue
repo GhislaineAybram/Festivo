@@ -67,7 +67,7 @@ const navigation = computed(() => [
             <img
               class="h-8 w-auto"
               src="../public/img/disco-ball-saumon.png"
-              alt="Logo site Festify"
+              alt="Logo site Festivo"
             >
           </div>
           <div class="hidden sm:ml-6 sm:block">
