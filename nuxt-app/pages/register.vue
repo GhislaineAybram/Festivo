@@ -19,7 +19,7 @@ const formatName = (name: string) => {
 
 const submitRegisterForm = async () => {
   if (!accept.value) {
-    alert('Vous devez accepter les termes et conditions.')
+    errorMsg.value = 'Vous devez accepter les termes et conditions.'
     return
   }
 
@@ -61,7 +61,7 @@ const submitRegisterForm = async () => {
   }
   catch (error) {
     console.error('Sign up error:', error)
-    errorMsg.value = error.message
+    errorMsg.value = error.message;
     setTimeout(() => {
       errorMsg.value = ''
     }, 3000)
