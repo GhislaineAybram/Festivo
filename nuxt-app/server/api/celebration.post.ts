@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event)
 
     // Vérifie si les données essentielles sont présentes
-    if (!body.name || !body.description || !body.date) {
+    if (!body.name || !body.description || !body.address || !body.date || !body.hour || !body.author || !body.celebration_type) {
       return {
         statusCode: 400,
         body: { error: 'Missing required celebration data' },

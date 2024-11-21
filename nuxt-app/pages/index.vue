@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getDay, getMonth } from '~/components/CelebrationCard.vue'
-import type { Celebration } from '~/types'
+import type { CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor } from '~/types'
 
 const { auth } = useSupabaseClient()
 const {
@@ -18,8 +18,8 @@ watchEffect(() => {
 
 const runtimeConfig = useRuntimeConfig()
 
-async function fetchCelebrations(url: string, errorMessage: string) {
-  const { data, error } = await useFetch<Celebration[]>(() => url)
+async function fetchCelebrationsByAuthor(url: string, errorMessage: string) {
+  const { data, error } = await useFetch<CelebrationWithPictureAndAuthor[]>(() => url)
 
   if (error.value) {
     console.error(errorMessage, error.value)
@@ -34,22 +34,38 @@ async function fetchCelebrations(url: string, errorMessage: string) {
   )
 }
 
-const upcomingCelebrationsCreated = await fetchCelebrations(
+async function fetchCelebrationsByUser(url: string, errorMessage: string) {
+  const { data, error } = await useFetch<CelebrationWithGuestsAndType[]>(() => url)
+
+  if (error.value) {
+    console.error(errorMessage, error.value)
+  }
+
+  return computed(() =>
+    data.value?.map(celebration => ({
+      ...celebration,
+      dateMonth: getMonth(celebration.date),
+      dateDay: getDay(celebration.date),
+    })) || [],
+  )
+}
+
+const upcomingCelebrationsCreated = await fetchCelebrationsByAuthor(
   `${runtimeConfig.public.apiUrl}/celebrations/upcoming/author/${user.id}`,
   'Failed to fetch upcoming created celebrations data',
 )
 
-const upcomingCelebrationsInvited = await fetchCelebrations(
+const upcomingCelebrationsInvited = await fetchCelebrationsByUser(
   `${runtimeConfig.public.apiUrl}/celebrations/upcoming/guest/${user.id}`,
   'Failed to fetch upcoming celebrations invitations data',
 )
 
-const pastCelebrationsCreated = await fetchCelebrations(
+const pastCelebrationsCreated = await fetchCelebrationsByAuthor(
   `${runtimeConfig.public.apiUrl}/celebrations/past/author/${user.id}`,
   'Failed to fetch past created celebrations data',
 )
 
-const pastCelebrationsInvited = await fetchCelebrations(
+const pastCelebrationsInvited = await fetchCelebrationsByUser(
   `${runtimeConfig.public.apiUrl}/celebrations/past/guest/${user.id}`,
   'Failed to fetch past celebrations invitations data',
 )

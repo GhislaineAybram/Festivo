@@ -2,19 +2,19 @@
 import { useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import { useRuntimeConfig } from '#app'
-import type { Celebration, GuestsList } from '~/types'
+import type { CelebrationWithPictureAndAuthor, GuestWithUserInfo } from '~/types'
 
 const { id } = useRoute().params
 
 const runtimeConfig = useRuntimeConfig()
-const { data: celebration, error: celebrationError } = await useFetch<Celebration>(
+const { data: celebration, error: celebrationError } = await useFetch<CelebrationWithPictureAndAuthor>(
   () => `${runtimeConfig.public.apiUrl}/celebration/${id}`,
 )
 if (celebrationError.value) {
   console.error('Failed to fetch celebration data', celebrationError.value)
 }
 
-const { data: guestsList, error: guestsListError } = await useFetch<GuestsList>(
+const { data: guestsList, error: guestsListError } = await useFetch<GuestWithUserInfo>(
   () => `${runtimeConfig.public.apiUrl}/guests/celebration/${id}`,
 )
 if (guestsListError.value) {

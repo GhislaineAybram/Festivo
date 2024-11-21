@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AccordionPanel from 'primevue/accordionpanel'
 import { useRuntimeConfig } from '#app'
-import type { User } from '~/types'
 import ModifyAvatar from '~/components/ModifyAvatar.vue'
+import type { UserWithAvatar } from '~/types'
 
 definePageMeta({
   middleware: 'auth',
@@ -22,7 +22,7 @@ const email = computed(() => user?.email || '')
 const user_id = user.id
 const runtimeConfig = useRuntimeConfig()
 
-const { data: userAvatar, error: userAvatarError } = await useFetch<User>(
+const { data: userAvatar, error: userAvatarError } = await useFetch<UserWithAvatar>(
   () => `${runtimeConfig.public.apiUrl}/user/${user_id}`,
 )
 if (userAvatarError.value) {

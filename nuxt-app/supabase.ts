@@ -1,44 +1,59 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Celebration, Guest, User, Avatar } from './types'
+import type { Database } from './database.types'
+import type { Avatar, Celebration, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, GuestWithUserInfo, NewCelebrationData, User, UserWithAvatar } from './types'
 
 const supabaseUrl = process.env.SUPABASE_URL!
 const supabaseKey = process.env.SUPABASE_KEY!
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
-export const getUsers = async (): Promise<User[]> => {
-  const { data } = await supabase
+export const getUsers = async (): Promise<UserWithAvatar[] | null> => {
+  const { data, error } = await supabase
     .from('user')
     .select(`
       *,
       avatar:avatar(picture),
       avatar:avatar(picture_description)
       `)
-  return data ? data : null
+
+  if (error) {
+    console.error('Error fetching users with avatars:', error)
+    return null
+  }
+  return data as UserWithAvatar[]
 }
 
-export const getUserById = async (id: string): Promise<User> => {
-  const { data } = await supabase
+export const getUserById = async (id: string): Promise<UserWithAvatar | null> => {
+  const { data, error } = await supabase
     .from('user')
     .select(`
       *,
       avatar:avatar(avatar_id, picture)
       `)
     .eq('user_id', id)
-  return data ? data[0] : null
+    .single()
+  if (error) {
+    console.error('Error fetching user with avatar:', error)
+    return null
+  }
+  return data as UserWithAvatar
 }
 
-export const updateAvatarByUser = async (id: string, newAvatar: string): Promise<User> => {
-  const { data } = await supabase
+export const updateAvatarByUser = async (id: string, newAvatar: string): Promise<User | null> => {
+  const { data, error } = await supabase
     .from('user')
     .update({ avatar: newAvatar })
     .eq('user_id', id)
     .select()
+  if (error) {
+    console.error('Error updating user informations:', error)
+    return null
+  }
   return data ? data[0] : null
 }
 
-export const getCelebrationById = async (id: string): Promise<Celebration> => {
-  const { data } = await supabase
+export const getCelebrationById = async (id: string): Promise<CelebrationWithPictureAndAuthor | null> => {
+  const { data, error } = await supabase
     .from('celebration')
     .select(`
       *,
@@ -46,19 +61,28 @@ export const getCelebrationById = async (id: string): Promise<Celebration> => {
       author:user(firstname)
     `)
     .eq('celebration_id', id)
-  return data ? data[0] : null
+    .single()
+  if (error) {
+    console.error('Error fetching celebration:', error)
+    return null
+  }
+  return data as CelebrationWithPictureAndAuthor
 }
 
-export const getNumberGuestsByCelebration = async (id: string): Promise<number> => {
-  const { count } = await supabase
+export const getNumberGuestsByCelebration = async (id: string): Promise<number | null> => {
+  const { count, error } = await supabase
     .from('guest')
     .select('*', { count: 'exact', head: true })
     .eq('celebration_id', id)
+  if (error) {
+    console.error('Error fetching guests number of the celebration:', error)
+    return null
+  }
   return count || null
 }
 
-export const getGuestsByCelebration = async (id: string): Promise<Guest[]> => {
-  const { data } = await supabase
+export const getGuestsByCelebration = async (id: string): Promise<GuestWithUserInfo[] | null> => {
+  const { data, error } = await supabase
     .from('guest')
     .select(`
       guest_id,
@@ -75,11 +99,15 @@ export const getGuestsByCelebration = async (id: string): Promise<Guest[]> => {
       )
     `)
     .eq('celebration_id', id)
-  return data ? data : null
+  if (error) {
+    console.error('Error fetching guests list:', error)
+    return []
+  }
+  return data as GuestWithUserInfo[]
 }
 
-export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
-  const { data } = await supabase
+export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<CelebrationWithPictureAndAuthor[] | null> => {
+  const { data, error } = await supabase
     .from('celebration')
     .select(`
       *,
@@ -88,11 +116,15 @@ export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<Celeb
     .eq('author', id)
     .gte('date', new Date().toISOString())
     .order('date', { ascending: true })
-  return data ? data : null
+  if (error) {
+    console.error('Error fetching celebrations list:', error)
+    return []
+  }
+  return data as CelebrationWithPictureAndAuthor[]
 }
 
-export const getPastCelebrationsByAuthor = async (id: string): Promise<Celebration[] | null> => {
-  const { data } = await supabase
+export const getPastCelebrationsByAuthor = async (id: string): Promise<CelebrationWithPictureAndAuthor[] | null> => {
+  const { data, error } = await supabase
     .from('celebration')
     .select(`
       *,
@@ -101,11 +133,15 @@ export const getPastCelebrationsByAuthor = async (id: string): Promise<Celebrati
     .eq('author', id)
     .lt('date', new Date().toISOString())
     .order('date', { ascending: false })
-  return data ? data : null
+  if (error) {
+    console.error('Error fetching celebrations list:', error)
+    return []
+  }
+  return data as CelebrationWithPictureAndAuthor[]
 }
 
-export const getUpcomingCelebrationsByGuest = async (id: string): Promise<Celebration[] | null> => {
-  const { data } = await supabase
+export const getUpcomingCelebrationsByGuest = async (id: string): Promise<CelebrationWithGuestsAndType[] | null> => {
+  const { data, error } = await supabase
     .from('celebration')
     .select(`
       *,
@@ -115,11 +151,15 @@ export const getUpcomingCelebrationsByGuest = async (id: string): Promise<Celebr
     .eq('guest.user_id', id)
     .gte('date', new Date().toISOString())
     .order('date', { ascending: true })
-  return data ? data : null
+  if (error) {
+    console.error('Error fetching celebrations list:', error)
+    return []
+  }
+  return data as CelebrationWithGuestsAndType[]
 }
 
-export const getPastCelebrationsByGuest = async (id: string): Promise<Celebration[] | null> => {
-  const { data } = await supabase
+export const getPastCelebrationsByGuest = async (id: string): Promise<CelebrationWithGuestsAndType[] | null> => {
+  const { data, error } = await supabase
     .from('celebration')
     .select(`
       *,
@@ -129,20 +169,32 @@ export const getPastCelebrationsByGuest = async (id: string): Promise<Celebratio
     .eq('guest.user_id', id)
     .lt('date', new Date().toISOString())
     .order('date', { ascending: false })
-  return data ? data : null
+  if (error) {
+    console.error('Error fetching celebrations list:', error)
+    return []
+  }
+  return data as CelebrationWithGuestsAndType[]
 }
 
 export const getAvatars = async (): Promise<Avatar[]> => {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('avatar')
     .select('*')
-  return data ? data : null
+  if (error) {
+    console.error('Error fetching avatars list:', error)
+    return []
+  }
+  return data as Avatar[]
 }
 
-export const newCelebration = async (newCelebrationData: Partial<Celebration>): Promise<Celebration> => {
-  const { data } = await supabase
+export const newCelebration = async (newCelebrationData: NewCelebrationData): Promise<Celebration | null> => {
+  const { data, error } = await supabase
     .from('celebration')
     .insert([newCelebrationData])
     .select('*')
+  if (error) {
+    console.error('Error creating a new celebration:', error)
+    return null
+  };
   return data ? data[0] : null
 }

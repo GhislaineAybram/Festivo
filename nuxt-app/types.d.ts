@@ -1,50 +1,37 @@
-export interface User {
-  user_id: string
-  firstname: string
-  lastname: string
-  alias: string
-  email: string
-  password: string
-  created_at: string
-  avatar: UserAvatar
+type User = Tables<'user'>
+type Avatar = Tables<'avatar'>
+type UserWithAvatar = Tables<'user'> & {
+  avatar?: Tables<'avatar'>
 }
-
-export interface Celebration {
+export type Celebration = {
   celebration_id: string
-  name: string
-  description: string
-  address: string
-  date: string
-  hour: string
-  author: User
-  celebration_type: CelebrationType
   created_at: string
+  address: string | null
+  author: string
+  celebration_type: string | null
+  date: string | null
+  description: string | null
+  hour: string | null
+  name: string | null
 }
-
-// TODO: change the type later
-export interface Guest {
-  guest_id: string
-  user_id: any
-  celebration_id: Celebration
-  is_coming: boolean | null
-  created_at: string
+type CelebrationType = Tables<'celebration_type'>
+type CelebrationWithPictureAndAuthor = Tables<'celebration'> & {
+  celebration_type?: Pick<CelebrationType, 'picture'>
+  author?: Pick<Tables<'user'>, 'firstname'>
 }
-
-export interface GuestsList {
-  nb_guests: number
-  guests_list: Array<Guest>
+type CelebrationWithGuestsAndType = Tables<'celebration'> & {
+  celebration_type?: Pick<CelebrationType, 'picture'>
+  guest?: {
+    user_id: string
+  }[]
 }
-
-export interface CelebrationType {
-  celebration_type_id: string
-  category: string
-  picture: string
-  created_at: string
+type Guest = Tables<'guest'>
+type GuestWithUserInfo = Guest & {
+  user_id: Pick<User, 'user_id' | 'firstname' | 'lastname' | 'email' | 'alias'> & {
+    avatar?: Avatar
+  }
 }
-
-export interface Avatar {
-  avatar_id: string
-  picture_description: string
-  picture: string
-  created_at: string
-}
+type NewCelebrationData = Omit<
+  Celebration,
+  'celebration_id' | 'created_at'
+>

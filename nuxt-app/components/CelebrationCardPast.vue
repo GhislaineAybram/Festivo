@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { Celebration } from '~/types'
+import type { CelebrationWithGuestsAndType } from '~/types'
 
 export function getMonth(dateString: string) {
   const date = new Date(dateString)
@@ -15,7 +15,7 @@ export default defineComponent({
   name: 'CelebrationsList',
   props: {
     celebrations: {
-      type: Array as PropType<Celebration[]>,
+      type: Array as PropType<CelebrationWithGuestsAndType[]>,
       required: true,
     },
   },
