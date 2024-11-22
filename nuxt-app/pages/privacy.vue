@@ -3,12 +3,12 @@
 <template>
   <main class="main">
     <div class="privacy">
-      <h1 class="text-3xl font-bold mb-4">
+      <h1 class="text-3xl font-bold mb-8">
         {{ $t("footer.privacy") }}
       </h1>
       <p
         id="updated"
-        class="mb-4 text-gray-500"
+        class="mb-8 text-gray-500"
       >
         Last updated: November 19, 2024
       </p>
