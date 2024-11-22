@@ -1,6 +1,7 @@
+import type { UserWithAvatar } from '~/types'
 import { getUserById } from '~~/supabase'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<UserWithAvatar | { statusCode: number, body: { error: string } }> => {
   try {
     // Extraire l'ID de l'URL
     const id = getRouterParam(event, 'id')
@@ -10,7 +11,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
         body: { error: 'User ID is required' },
       }
-    }
+    };
 
     const userId = id
 
@@ -21,7 +22,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 404,
         body: { error: 'User not found' },
       }
-    }
+    };
 
     return user
   }

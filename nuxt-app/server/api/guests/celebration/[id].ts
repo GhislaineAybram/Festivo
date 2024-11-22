@@ -1,7 +1,8 @@
 // guests/celebration/[id]
+import type { CelebrationGuestsResponse } from '~/types'
 import { getGuestsByCelebration, getNumberGuestsByCelebration } from '~~/supabase'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<CelebrationGuestsResponse> => {
   try {
     // Extraire l'ID de l'URL
     const id = getRouterParam(event, 'id')
@@ -15,13 +16,13 @@ export default defineEventHandler(async (event) => {
 
     const celebrationId = id
 
-    let nb_guests = await getNumberGuestsByCelebration(celebrationId)
+    const nb_guests = (await getNumberGuestsByCelebration(celebrationId)) || 0
 
-    if (!nb_guests) {
-      nb_guests = 0
-    }
+    // if (!nb_guests) {
+    //   nb_guests = 0
+    // }
 
-    const guests_list = await getGuestsByCelebration(celebrationId)
+    const guests_list = (await getGuestsByCelebration(celebrationId)) || []
 
     return {
       nb_guests,
@@ -32,7 +33,7 @@ export default defineEventHandler(async (event) => {
     console.error(error)
     return {
       statusCode: 500,
-      body: { error: 'Failed to fetch celebration' },
+      body: { error: 'Failed to fetch celebration guests' },
     }
   }
 })

@@ -1,6 +1,7 @@
+import type { User } from '~/types'
 import { updateAvatarByUser } from '~~/supabase'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<User | null> => {
   try {
     const { id, newAvatar } = await readBody(event)
 
@@ -9,7 +10,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
         body: { error: 'User ID and newAvatar is required' },
       }
-    }
+    };
 
     const updatedUser = await updateAvatarByUser(id, newAvatar)
 
@@ -18,7 +19,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 404,
         body: { error: 'Failed to update avatar user' },
       }
-    }
+    };
 
     return updatedUser
   }

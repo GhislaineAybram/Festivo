@@ -35,3 +35,29 @@ type NewCelebrationData = Omit<
   Celebration,
   'celebration_id' | 'created_at'
 >
+
+interface ErrorResponse {
+  statusCode: number
+  body: { error: string }
+}
+
+interface CelebrationGuestsInfo {
+  nb_guests: number
+  guests_list: GuestWithUserInfo[]
+}
+
+type CelebrationGuestsResponse = CelebrationGuestsInfo | ErrorResponse
+
+interface CelebrationsByAuthor {
+  past: CelebrationWithPictureAndAuthor[]
+  upcoming: CelebrationWithPictureAndAuthor[]
+}
+
+type CelebrationsByAuthorResponse = CelebrationsByAuthor | ErrorResponse
+
+interface CelebrationsByGuest {
+  past: CelebrationWithGuestsAndType[]
+  upcoming: CelebrationWithGuestsAndType[]
+}
+
+type CelebrationsByGuestResponse = CelebrationsByGuest | ErrorResponse

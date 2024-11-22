@@ -1,7 +1,8 @@
 // celebration.post
+import type { Celebration, NewCelebrationData } from '~/types'
 import { newCelebration } from '~~/supabase'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<{ statusCode: number, body: Celebration | { error: string } }> => {
   try {
     // Récupérer le corps de la requête
     const body = await readBody(event)
@@ -15,7 +16,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Prépare les données pour la création de l'événement
-    const celebrationData = {
+    const celebrationData: NewCelebrationData = {
       name: body.name,
       description: body.description,
       address: body.address,
@@ -40,7 +41,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   catch (error) {
-    console.error(error)
+    console.error('Error creating celebration:', error)
     return {
       statusCode: 500,
       body: { error: 'Server error while creating celebration' },

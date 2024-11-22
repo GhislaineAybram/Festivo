@@ -1,7 +1,8 @@
 // celebration/[id]
+import type { CelebrationWithPictureAndAuthor } from '~/types'
 import { getCelebrationById } from '~~/supabase'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<CelebrationWithPictureAndAuthor | { statusCode: number, body: { error: string } }> => {
   try {
     // Extraire l'ID de l'URL
     const id = getRouterParam(event, 'id')
@@ -11,7 +12,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 400,
         body: { error: 'Celebration ID is required' },
       }
-    }
+    };
 
     const celebrationId = id
 
@@ -22,7 +23,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 404,
         body: { error: 'Celebration not found' },
       }
-    }
+    };
 
     return celebration
   }

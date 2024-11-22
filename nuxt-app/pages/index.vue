@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { getDay, getMonth } from '~/components/CelebrationCard.vue'
-import type { CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor } from '~/types'
+import type { CelebrationsByAuthorResponse, CelebrationsByGuestResponse } from '~/types'
 
 const { auth } = useSupabaseClient()
 const {
@@ -18,57 +17,46 @@ watchEffect(() => {
 
 const runtimeConfig = useRuntimeConfig()
 
-async function fetchCelebrationsByAuthor(url: string, errorMessage: string) {
-  const { data, error } = await useFetch<CelebrationWithPictureAndAuthor[]>(() => url)
-
-  if (error.value) {
-    console.error(errorMessage, error.value)
-  }
-
-  return computed(() =>
-    data.value?.map(celebration => ({
-      ...celebration,
-      dateMonth: getMonth(celebration.date),
-      dateDay: getDay(celebration.date),
-    })) || [],
-  )
+// celebrations list by author
+const { data: celebrationsByAuthor, error: celebrationsByAuthorError } = await useFetch<CelebrationsByAuthorResponse>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user.id}`,
+)
+if (celebrationsByAuthorError.value) {
+  console.error('Failed to fetch celebrations by author', celebrationsByAuthorError.value)
 }
 
-async function fetchCelebrationsByUser(url: string, errorMessage: string) {
-  const { data, error } = await useFetch<CelebrationWithGuestsAndType[]>(() => url)
-
-  if (error.value) {
-    console.error(errorMessage, error.value)
-  }
-
-  return computed(() =>
-    data.value?.map(celebration => ({
-      ...celebration,
-      dateMonth: getMonth(celebration.date),
-      dateDay: getDay(celebration.date),
-    })) || [],
-  )
+// celebrations list by guest
+const { data: celebrationsByGuest, error: celebrationsByGuestError } = await useFetch<CelebrationsByGuestResponse>(
+  () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user.id}`,
+)
+if (celebrationsByGuestError.value) {
+  console.error('Failed to fetch celebrations by guest', celebrationsByGuestError.value)
 }
 
-const upcomingCelebrationsCreated = await fetchCelebrationsByAuthor(
-  `${runtimeConfig.public.apiUrl}/celebrations/upcoming/author/${user.id}`,
-  'Failed to fetch upcoming created celebrations data',
-)
+const celebrationsListByAuthor = computed(() => {
+  if (celebrationsByAuthor.value && 'upcoming' in celebrationsByAuthor.value) {
+    return {
+      upcoming: celebrationsByAuthor.value?.upcoming ?? [],
+      past: celebrationsByAuthor.value?.past ?? [],
+    }
+  }
+  return { upcoming: [], past: [] } // Valeurs par défaut en cas d'erreur
+})
 
-const upcomingCelebrationsInvited = await fetchCelebrationsByUser(
-  `${runtimeConfig.public.apiUrl}/celebrations/upcoming/guest/${user.id}`,
-  'Failed to fetch upcoming celebrations invitations data',
-)
+const celebrationsListByGuest = computed(() => {
+  if (celebrationsByGuest.value && 'upcoming' in celebrationsByGuest.value) {
+    return {
+      upcoming: celebrationsByGuest.value.upcoming ?? [],
+      past: celebrationsByGuest.value.past ?? [],
+    }
+  }
+  return { upcoming: [], past: [] } // Valeurs par défaut en cas d'erreur
+})
 
-const pastCelebrationsCreated = await fetchCelebrationsByAuthor(
-  `${runtimeConfig.public.apiUrl}/celebrations/past/author/${user.id}`,
-  'Failed to fetch past created celebrations data',
-)
-
-const pastCelebrationsInvited = await fetchCelebrationsByUser(
-  `${runtimeConfig.public.apiUrl}/celebrations/past/guest/${user.id}`,
-  'Failed to fetch past celebrations invitations data',
-)
+const upcomingCelebrationsCreated = computed(() => celebrationsListByAuthor.value.upcoming)
+const pastCelebrationsCreated = computed(() => celebrationsListByAuthor.value.past)
+const upcomingCelebrationsInvited = computed(() => celebrationsListByGuest.value.upcoming)
+const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.past)
 </script>
 
 <template>

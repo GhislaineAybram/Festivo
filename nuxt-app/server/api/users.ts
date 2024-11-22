@@ -1,9 +1,17 @@
 // users
+import type { UserWithAvatar } from '~/types'
 import { getUsers } from '~~/supabase'
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (): Promise <UserWithAvatar[] | { statusCode: number, body: { error: string } }> => {
   try {
     const users = await getUsers()
+
+    if (!users) {
+      return {
+        statusCode: 404,
+        body: { error: 'No users found' },
+      }
+    }
     return users
   }
   catch (error) {
