@@ -51,6 +51,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@nuxt/eslint',
     '@nuxtjs/i18n',
+    '@nuxtjs/google-fonts',
   ],
 
   eslint: {
@@ -127,6 +128,13 @@ export default defineNuxtConfig({
     '~/assets/css/main.css',
     '~/assets/main.scss',
   ],
+
+  googleFonts: {
+    families: {
+      Montserrat: true,
+      Nunito: true,
+    }
+  },
 
   compatibilityDate: '2024-07-12',
 })

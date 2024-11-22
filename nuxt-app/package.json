@@ -15,6 +15,7 @@
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.1.5",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/i18n": "npm:@nuxtjs/i18n-edge",
     "@nuxtjs/supabase": "^1.4.0",
     "@nuxtjs/tailwindcss": "^6.12.0",

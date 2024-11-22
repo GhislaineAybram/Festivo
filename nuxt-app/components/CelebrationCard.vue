@@ -87,7 +87,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   flex: 1 1 calc(100% - 2rem);
-  width: 242px;
+  width: 272px;
   height: 272px;
   background: white;
   padding: 0.5em;
@@ -139,8 +139,8 @@ export default defineComponent({
   position: absolute;
   top: -20px;
   right: -20px;
-  height: 65px;
-  width: 65px;
+  height: 70px;
+  width: 70px;
   background: white;
   border: 2px solid $tangerine;
   border-radius: 10px;
