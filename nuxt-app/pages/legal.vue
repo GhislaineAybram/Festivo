@@ -1,48 +1,102 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main class="main">
     <div class="legal">
       <h1 class="text-3xl font-bold mb-12">
-        {{ $t("footer.legal") }}
+        {{ $t("legal.title") }}
       </h1>
       <p class="mb-4">
-        Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour
-        la confiance en l'économie numérique, il est précisé aux utilisateurs du
-        site Festivo l'identité des différents intervenants dans le cadre de sa
-        réalisation et de son suivi.
+        <i18n-t keypath="legal.introduction.text">
+          <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164">
+            {{ $t('legal.introduction.link_text') }}
+          </a>
+        </i18n-t>
       </p>
-      <h2 class="text-2xl font-bold mb-2">Edition du site</h2>
+      <h2 class="text-2xl font-bold mb-2">
+        {{ $t("legal.edition.title") }}
+      </h2>
       <p class="mb-4">
-        Le présent site, accessible à l’URL https://festivo-tawny.vercel.app (le
-        « Site »), est édité par :
+        {{ $t("legal.edition.text_1") }}
       </p>
       <p class="mb-4">
-        Ghislaine AYBRAM, résidant 1 avenue Victor Hugo 92190 MEUDON, de
-        nationalité Française (France), né(e) le 01/07/1984,
+        {{ $t("legal.edition.text_2") }}
       </p>
-      <h2 class="text-2xl font-bold mb-2">Hébergement</h2>
       <p class="mb-4">
-        Le Site est hébergé par la société Vercel Inc., situé 440 N Barranca
-        Avenue #4133 Covina, CA 91723 United States, (contact téléphonique ou
-        email : +15592887060).
+        {{ $t("legal.edition.text_3") }}
       </p>
-      <h2 class="text-2xl font-bold mb-2">Directeur de publication</h2>
+      <h2 class="text-2xl font-bold mb-2">
+        {{ $t("legal.hosting.title") }}
+      </h2>
       <p class="mb-4">
-        Le Directeur de la publication du Site est Ghislaine AYBRAM.
+        {{ $t("legal.hosting.text") }}
       </p>
-      <h2 class="text-2xl font-bold mb-2">Nous contacter</h2>
-      <p class="mb-4">Par téléphone : +33680785238</p>
-      <p class="mb-4">Par email : g.aybram.festivo@gmail.com</p>
-      <p class="mb-4">Par courrier : 1 avenue Victor Hugo 92190 MEUDON</p>
-      <h2 class="text-2xl font-bold mb-2">Données personnelles</h2>
+      <ul class="list-inside mb-4">
+        <li class="mb-2">
+          Vercel Inc.
+        </li>
+        <li class="mb-2">
+          440 N Barranca Avenue #4133
+        </li>
+        <li class="mb-2">
+          Covina, CA 91723
+        </li>
+        <li class="mb-2">
+          United States
+        </li>
+        <li class="mb-2">
+          +1 559-288-7060
+        </li>
+      </ul>
+      <h2 class="text-2xl font-bold mb-2">
+        {{ $t("legal.properties.title") }}
+      </h2>
       <p class="mb-4">
-        Le traitement de vos données à caractère personnel est régi par notre
-        Charte du respect de la vie privée, disponible depuis la section "Charte
-        de Protection des Données Personnelles", conformément au Règlement
-        Général sur la Protection des Données 2016/679 du 27 avril 2016
-        («RGPD»).
+        {{ $t("legal.properties.text_1") }}
+      </p>
+      <p class="mb-4">
+        <i18n-t keypath="legal.properties.text_2.text">
+          <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032655082">
+            {{ $t('legal.properties.text_2.link_text') }}
+          </a>
+        </i18n-t>
+      </p>
+      <h2 class="text-2xl font-bold mb-2">
+        {{ $t("legal.contact.title") }}
+      </h2>
+      <ul class="list-inside mb-4">
+        <li class="mb-2">
+          {{ $t('legal.contact.text_1', { phone: '+336 80 78 52 38' }) }}
+        </li>
+        <li class="mb-2">
+          {{ $t('legal.contact.text_2', { email: 'g.aybram.festivo@gmail.com' }) }}
+        </li>
+        <li class="mb-2">
+          {{ $t('legal.contact.text_3', { address: '1 avenue Victor Hugo 92190 MEUDON' }) }}
+        </li>
+      </ul>
+      <h2 class="text-2xl font-bold mb-2">
+        {{ $t("legal.privacy.title") }}
+      </h2>
+      <p class="mb-4">
+        <i18n-t keypath="legal.privacy.text_1.text">
+          <a href="https://www.legifrance.gouv.fr/codes/section_lc/JORFTEXT000000886460/LEGISCTA000037804929/">
+            {{ $t('legal.privacy.text_1.link_text') }}
+          </a>
+        </i18n-t>
+      </p>
+      <p class="mb-4">
+        <i18n-t keypath="legal.privacy.text_2.text">
+          <a href="https://festivo-tawny.vercel.app/privacy">
+            {{ $t('legal.privacy.text_2.link_text') }}
+          </a>
+        </i18n-t>
+      </p>
+      <h2 class="text-2xl font-bold mb-2">
+        {{ $t("legal.jurisdiction.title") }}
+      </h2>
+      <p class="mb-4">
+        {{ $t("legal.jurisdiction.text") }}
       </p>
     </div>
   </main>

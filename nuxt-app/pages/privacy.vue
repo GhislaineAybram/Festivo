@@ -23,11 +23,7 @@
         the Service, You agree to the collection and use of information in
         accordance with this Privacy Policy. This Privacy Policy has been
         created with the help of the
-        <a
-          href="https://www.privacypolicies.com/privacy-policy-generator/"
-          class="text-blue-500 underline decoration-blue-500 decoration-3 underline-offset-2 hover:decoration-blue-300 hover:text-blue-700"
-          target="_blank"
-        >Privacy Policy Generator</a>.
+        <a href="https://www.privacypolicies.com/privacy-policy-generator/">Privacy Policy Generator</a>.
       </p>
       <h2 class="text-2xl font-bold mb-2">
         Interpretation and Definitions
@@ -99,12 +95,7 @@
         </li>
         <li class="mb-2">
           <strong>Website</strong> refers to Festivo, accessible from
-          <a
-            href="https://festivo-tawny.vercel.app"
-            class="text-blue-500 underline decoration-blue-500 decoration-3 underline-offset-2 hover:decoration-blue-300 hover:text-blue-700"
-            rel="external nofollow noopener"
-            target="_blank"
-          >https://festivo-tawny.vercel.app</a>
+          <a href="https://festivo-tawny.vercel.app">https://festivo-tawny.vercel.app</a>
         </li>
         <li class="mb-2">
           <strong>You</strong> means the individual accessing or using the
@@ -197,11 +188,7 @@
         Persistent Cookies remain on Your personal computer or mobile device
         when You go offline, while Session Cookies are deleted as soon as You
         close Your web browser. Learn more about cookies on the
-        <a
-          href="https://www.privacypolicies.com/blog/privacy-policy-template/#Use_Of_Cookies_Log_Files_And_Tracking"
-          class="text-blue-500 underline decoration-blue-500 decoration-3 underline-offset-2 hover:decoration-blue-300 hover:text-blue-700"
-          target="_blank"
-        >Privacy Policies website</a>
+        <a href="https://www.privacypolicies.com/blog/privacy-policy-template/#Use_Of_Cookies_Log_Files_And_Tracking">Privacy Policies website</a>
         article.
       </p>
       <p class="mb-4">
@@ -532,12 +519,7 @@
       <ul class="list-disc list-inside mb-4">
         <li class="mb-2">
           By visiting this page on our website:
-          <a
-            href="https://festivo-tawny.vercel.app/privacy"
-            class="text-blue-500 underline decoration-blue-500 decoration-3 underline-offset-2 hover:decoration-blue-300 hover:text-blue-700"
-            rel="external nofollow noopener"
-            target="_blank"
-          >https://festivo-tawny.vercel.app/privacy</a>
+          <a href="https://festivo-tawny.vercel.app/privacy">https://festivo-tawny.vercel.app/privacy</a>
         </li>
       </ul>
     </div>
@@ -558,7 +540,7 @@ h2 {
   text-decoration: underline;
   text-decoration-color: $tangerine;
   text-decoration-thickness: 6px;
-  text-underline-offset: 8px;
+  text-underline-offset: 4px;
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
 }

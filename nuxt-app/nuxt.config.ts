@@ -131,9 +131,13 @@ export default defineNuxtConfig({
 
   googleFonts: {
     families: {
-      Montserrat: true,
-      Nunito: true,
-    }
+      'Montserrat': true,
+      'Playfair Display': true,
+      'Cinzel': true,
+      'Quattrocento': true,
+      'Oswald': true,
+      'Poppins': true,
+    },
   },
 
   compatibilityDate: '2024-07-12',

@@ -94,5 +94,51 @@
       "title": "Not logged in",
       "subtitle": "You need to log in before accessing your profile page or create an event"
     }
+  },
+  "legal": {
+    "title": "Legal Notices",
+    "introduction": {
+      "text": "In accordance with the provisions of the {0}, the identity of the various parties involved in the creation and monitoring of the Festivo website is specified to its users.",
+      "link_text": "loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique (Law No. 2004-575 of June 21, 2004, on Confidence in the Digital Economy)"
+    },
+    "edition": {
+      "title": "Site Publisher",
+      "text_1": "This website, accessible at the URL https://festivo-tawny.vercel.app (the \"Site\"), is published by:",
+      "text_2": "Ghislaine AYBRAM, residing at 1 avenue Victor Hugo 92190 MEUDON.",
+      "text_3": "The Site's Publishing Director is Ghislaine AYBRAM."
+    },
+    "hosting": {
+      "title": "Site Hosting",
+      "text": "The Site is hosted by the company:"
+    },
+    "properties": {
+      "title": "Intellectual Property and Infringements",
+      "text_1": "Ghislaine AYBRAM owns the intellectual property rights and holds the usage rights for all elements accessible on the website, including text, images, graphics, logos, and icons. Any reproduction, representation, modification, publication, or adaptation of all or part of the elements of the site, regardless of the method or process used, is prohibited without prior written permission from Ghislaine AYBRAM.",
+      "text_2": {
+        "text": "Any unauthorized use of the site or any of its contents will be considered as constituting infringement and will be prosecuted in accordance with the provisions of articles {0}",
+        "link_text": "L.335-2 et suivants du Code de Propriété Intellectuelle (Articles L.335-2 and following of the French Intellectual Property Code)."
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "text_1": "By phone: {phone}",
+      "text_2": "By email: {email}",
+      "text_3": "By mail: {address}"
+    },
+    "privacy": {
+      "title": "Personal Data",
+      "text_1": {
+        "text": "In accordance with the {0}, users of the site https://festivo-tawny.vercel.app have the right to access, modify, and delete collected information.",
+        "link_text": "Règlement Général sur la Protection des Données 2016/679 du 27 avril 2016 (« RGPD ») (General Data Protection Regulation 2016/679 of April 27, 2016 (\"GDPR\"))."
+      },
+      "text_2": {
+        "text": "For more information on how we process your data (type of data, purpose, recipients, etc.), read our {0}",
+        "link_text": "Privacy Policy."
+      }
+    },
+    "jurisdiction": {
+      "title": "Applicable Law and Jurisdiction",
+      "text": "Any dispute related to the use of the website https://festivo-tawny.vercel.app is subject to French law. Except where the law does not allow it, exclusive jurisdiction is granted to the competent courts of NANTERRE."
+    }
   }
 }

@@ -86,13 +86,59 @@
   },
   "footer": {
     "legal": "Mentions légales",
-    "privacy": "Confidentialité",
+    "privacy": "Politique de confidentialité",
     "about": "A propos"
   },
   "alert": {
     "not_logged": {
       "title": "Pas connecté",
       "subtitle": "Connection nécessaire avant d'accéder à votre page profil ou de créer un événement"
+    }
+  },
+  "legal": {
+    "title": "Mentions légales",
+    "introduction": {
+      "text": "Conformément aux dispositions de la {0}, il est précisé aux utilisateurs du site Festivo l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.",
+      "link_text": "loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique"
+    },
+    "edition": {
+      "title": "Edition du site",
+      "text_1": "Le présent site, accessible à l’URL https://festivo-tawny.vercel.app (le « Site »), est édité par :",
+      "text_2": "Ghislaine AYBRAM, résidant 1 avenue Victor Hugo 92190 MEUDON.",
+      "text_3": "La Directrice de la publication du Site est Ghislaine AYBRAM."
+    },
+    "hosting": {
+      "title": "Hébergement du site",
+      "text": "Le Site est hébergé par la société :"
+    },
+    "properties": {
+      "title": "Propriété intellectuelle et contrefaçons",
+      "text_1": "Ghislaine AYBRAM est propriétaire des droits de propriété intellectuelle et détient les droits d’usage sur tous les éléments accessibles sur le site internet, notamment les textes, images, graphismes, logos et icônes. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de Ghislaine AYBRAM.",
+      "text_2": {
+        "text": "Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles {0}",
+        "link_text": "L.335-2 et suivants du Code de Propriété Intellectuelle."
+      }
+    },
+    "contact": {
+      "title": "Nous contacter",
+      "text_1": "Par téléphone : {phone}",
+      "text_2": "Par email : {email}",
+      "text_3": "Par courrier : {address}"
+    },
+    "privacy": {
+      "title": "Données personnelles",
+      "text_1": {
+        "text": "Conformément au {0}, l’utilisateur du site https://festivo-tawny.vercel.app dispose d’un droit d’accès, de modification et de suppression des informations collectées.",
+        "link_text": "Règlement Général sur la Protection des Données 2016/679 du 27 avril 2016 («RGPD»)"
+      },
+      "text_2": {
+        "text": "Pour plus d'informations sur la façon dont nous traitons vos données (type de données, finalité, destinataire...), lisez notre {0}",
+        "link_text": "Politique de confidentialité."
+      }
+    },
+    "jurisdiction": {
+      "title": "Droit applicable et attribution de juridiction",
+      "text": "Tout litige en relation avec l’utilisation du site https://festivo-tawny.vercel.app est soumis au droit français. En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de NANTERRE."
     }
   }
 }
