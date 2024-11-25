@@ -540,7 +540,7 @@ h2 {
   text-decoration: underline;
   text-decoration-color: $tangerine;
   text-decoration-thickness: 6px;
-  text-underline-offset: 4px;
+  text-underline-offset: 7px;
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -551,6 +551,18 @@ h3 {
 }
 h4 {
   margin-top: 1.5rem;
+}
+a {
+  color: $indigo;
+  text-decoration: underline;
+  text-decoration-color: $indigo;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+a:hover {
+  color: $grey;
+  text-decoration-color: $grey;
 }
 #updated {
   text-align: right;

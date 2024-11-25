@@ -99,11 +99,11 @@ watchEffect(() => {
             src="../public/img/disco-ball-tangerine.png"
             alt="Logo Festivo"
           >
-          <h2
+          <h3
             class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
           >
             {{ $t("register.title") }}
-          </h2>
+          </h3>
         </div>
         <IconField>
           <InputIcon>
@@ -224,12 +224,6 @@ watchEffect(() => {
       v-if="registrationSuccess"
       class="alert-registration"
     />
-    <div
-      v-if="errorMsg"
-      class="error-message"
-    >
-      {{ errorMsg }}
-    </div>
   </main>
 </template>
 
@@ -237,9 +231,10 @@ watchEffect(() => {
 * {
   background-color: $seashell;
 }
-h2 {
+h3 {
   color: $indigo;
   background-color: white;
+  font-size: xx-large;
 }
 .text {
   color: $indigo;
@@ -254,9 +249,9 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  // background-color: white;
+  background-color: white;
 }
-#register, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span {
+#register * {
   background-color: white;
 }
 #sign-up-button, #sign-up-button * {

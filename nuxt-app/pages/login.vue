@@ -82,11 +82,11 @@ const submitLoginForm = async () => {
             src="../public/img/disco-ball-tangerine.png"
             alt="Logo Festivo"
           >
-          <h2
+          <h3
             class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
           >
             {{ $t("login.title") }}
-          </h2>
+          </h3>
         </div>
         <IconField>
           <InputIcon>
@@ -161,8 +161,9 @@ const submitLoginForm = async () => {
 * {
   background-color: $seashell;
 }
-h2 {
+h3 {
   color: $indigo;
+  font-size: xx-large;
 }
 .text {
   color: $indigo;

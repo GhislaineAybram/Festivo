@@ -17,11 +17,32 @@ const celebrationDate = ref()
 const celebrationTime = ref()
 const celebrationAddress = ref('')
 const creationSuccess = ref(false)
+const errorMsg = ref('')
 
 async function createNewCelebration() {
+  // all the fields must be filled
+  if (
+    !celebrationTitle.value.trim()
+    || !celebrationType.value
+    || !celebrationDescription.value.trim()
+    || !celebrationDate.value
+    || !celebrationTime.value
+    || !celebrationAddress.value.trim()
+  ) {
+    errorMsg.value = 'Tous les champs sont obligatoires.'
+    return
+  }
+
   const formattedTime = celebrationTime.value
-    ? celebrationTime.value.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    ? celebrationTime.value.toLocaleTimeString('fr-FR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    })
     : null
+
+  errorMsg.value = ''
+
   const response = await $fetch('/api/celebration', {
     method: 'POST',
     body: {
@@ -36,6 +57,7 @@ async function createNewCelebration() {
   }) as { error?: string }
 
   if (response.error) {
+    errorMsg.value = `Erreur lors de la création de l’événement : ${response.error}`
     console.error('Erreur lors de la création de l’événement :', response.error)
     return
   }
@@ -187,6 +209,10 @@ async function createNewCelebration() {
           </div>
         </div>
         <div class="mt-10">
+          <span
+            v-if="errorMsg"
+            class="text-sm text-red-500"
+          >{{ errorMsg }}</span>
           <button
             id="celebration-creation"
             type="submit"
@@ -223,7 +249,7 @@ async function createNewCelebration() {
   justify-content: center;
   gap: 0.5rem;
   flex-direction: column;
-  width: 80%;
+  width: 85%;
 }
 #celebration-creation {
   background-color: $tangerine;

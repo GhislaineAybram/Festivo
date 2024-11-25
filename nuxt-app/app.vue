@@ -23,29 +23,17 @@ h1 {
 h2 {
   font-family: 'Quattrocento', sans-serif;
   font-weight: 400 !important; /* Regular */
-  text-transform: uppercase;
+  font-size: xx-large !important;
 }
 h3 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500 !important; /* Medium */
-  // text-transform: uppercase;
-}
-h4 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300 !important; /* Light */
   text-transform: uppercase;
 }
-a {
-  color: $indigo;
-  text-decoration: underline;
-  text-decoration-color: $indigo;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
-}
-a:hover {
-  color: $grey;
-  text-decoration-color: $grey;
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600 !important; /* SemiBold */
+  font-size: larger !important;
 }
 
 .main {
