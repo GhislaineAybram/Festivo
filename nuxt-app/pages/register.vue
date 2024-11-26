@@ -251,7 +251,7 @@ h3 {
   gap: 2rem;
   background-color: white;
 }
-#register * {
+#register, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span *, span {
   background-color: white;
 }
 #sign-up-button, #sign-up-button * {
