@@ -142,7 +142,7 @@ const submitLoginForm = async () => {
         />
       </div>
     </div>
-    <div class="register-container text-sm">
+    <div class="register-container text-xs">
       <p>{{ $t("login.no_account") }}</p>
       <NuxtLink to="/register">
         <p id="sign-up-link">
@@ -152,7 +152,7 @@ const submitLoginForm = async () => {
     </div>
     <AlertLoggedIn
       v-if="loginSuccess"
-      class="alert-registration"
+      class="alert"
     />
   </main>
 </template>
@@ -180,7 +180,7 @@ h3 {
   gap: 2rem;
   background-color: white;
 }
-#login * {
+#login *, a, a:hover {
   background-color: white;
 }
 .register-container {
@@ -222,10 +222,18 @@ h1 {
   padding-top: 5px;
   text-align: right;
 }
-.alert-registration {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+
+a {
+  color: $indigo;
+  text-decoration: underline;
+  text-decoration-color: $indigo;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+a:hover {
+  color: $grey;
+  text-decoration-color: $grey;
 }
 @media (min-width: 1024px) {
   #login {

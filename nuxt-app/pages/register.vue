@@ -205,7 +205,13 @@ watchEffect(() => {
           <label
             id="accept-label"
             for="accept"
-          >{{ $t("register.agree") }}</label>
+          >
+          <i18n-t keypath="register.agree.text">
+          <a href="https://festivo-tawny.vercel.app/privacy">
+            {{ $t('register.agree.link_text') }}
+          </a>
+        </i18n-t>
+      </label>
         </div>
         <span
           v-if="errorMsg"
@@ -222,7 +228,7 @@ watchEffect(() => {
     </div>
     <AlertRegistration
       v-if="registrationSuccess"
-      class="alert-registration"
+      class="alert"
     />
   </main>
 </template>
@@ -251,7 +257,7 @@ h3 {
   gap: 2rem;
   background-color: white;
 }
-#register, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span *, span {
+#register, a, a:hover, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span *, span {
   background-color: white;
 }
 #sign-up-button, #sign-up-button * {
@@ -275,10 +281,17 @@ h1 {
   align-content: center;
   text-align: center;
 }
-.alert-registration {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+a {
+  color: $indigo;
+  text-decoration: underline;
+  text-decoration-color: $indigo;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+a:hover {
+  color: $grey;
+  text-decoration-color: $grey;
 }
 @media (min-width: 1024px) {
   #register {

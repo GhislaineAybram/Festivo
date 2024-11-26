@@ -60,7 +60,10 @@
   },
   "register": {
     "title": "Inscription",
-    "agree": "J'accepte les termes et conditions.",
+    "agree": {
+      "text": "J'accepte les {0}.",
+      "link_text": "termes et conditions"
+    },
     "button": "Créer votre compte",
     "successfull": "Inscription réussie",
     "success_message": "Vous pouvez maintenant vous identifier avec votre adresse email et votre mot de passe !"

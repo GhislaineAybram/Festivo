@@ -60,7 +60,10 @@
   },
   "register": {
     "title": "Sign up",
-    "agree": "I agree to the terms and conditions.",
+    "agree": {
+      "text": "I agree to the {0}.",
+      "link_text": "terms and conditions"
+    },
     "button": "Sign up",
     "successfull": "Registration successful",
     "success_message": "You can now log in with your email address and password !"

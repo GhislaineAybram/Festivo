@@ -224,11 +224,11 @@ async function createNewCelebration() {
       </form>
       <AlertCelebrationCreation
         v-if="creationSuccess"
-        class="alert-registration"
+        class="alert"
       />
     </div>
     <div v-else>
-      <AlertNotLoggedIn class="alert-not-logged-in" />
+      <AlertNotLoggedIn class="alert" />
     </div>
   </main>
 </template>
@@ -236,11 +236,6 @@ async function createNewCelebration() {
 <style lang="scss" scoped>
 * {
   background-color: $seashell;
-}
-.alert-not-logged-in {
-  position: absolute;
-  top: 50%;
-  left: 50%;
 }
 #celebration-details {
   padding: 1.5rem;
@@ -259,11 +254,6 @@ input, select, option, textarea,
 #datepicker-timeonly *,
 #datepicker-month * {
   background-color: white !important;
-}
-.alert-registration {
-  position: absolute;
-  top: 50%;
-  left: 50%;
 }
 #celebration-type {
   height: 40px;
