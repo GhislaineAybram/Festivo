@@ -49,4 +49,35 @@ h4 {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+// ne fonctionne pas
+:global(.button-validation-form) {
+  background-color: $tangerine !important;
+  color: $indigo !important;
+  border-color: $indigo !important;
+}
+:global(.button-validation-form:hover) {
+  background-color: $seashell !important;
+  color: $indigo !important;
+  border-color: $indigo !important;
+}
+:global(.button-info) {
+  background-color: $indigo;
+  color: $haze;
+  border-color: $haze;
+}
+:global(.button-info:hover) {
+  background-color: $haze;
+  color: $indigo;
+  border-color: $indigo;
+}
+:global(.button-cancel) {
+  background-color: $haze;
+  color: $indigo;
+  border-color: $indigo;
+}
+:global(.button-cancel:hover) {
+  background-color: $indigo;
+  color: $haze;
+  border-color: $haze;
+}
 </style>

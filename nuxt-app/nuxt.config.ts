@@ -126,7 +126,6 @@ export default defineNuxtConfig({
     'primeicons/primeicons.css',
     '~/assets/primevue-custom-theme.scss',
     '~/assets/css/main.css',
-    '~/assets/main.scss',
   ],
 
   googleFonts: {

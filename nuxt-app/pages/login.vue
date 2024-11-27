@@ -137,7 +137,7 @@ const submitLoginForm = async () => {
           id="sign-in"
           type="submit"
           :label="$t('login.button')"
-          class="mt-2 button-validation"
+          class="mt-2 button-validation-form"
           @click="submitLoginForm"
         />
       </div>
