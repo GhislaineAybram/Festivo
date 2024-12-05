@@ -65,8 +65,8 @@ const navigation = computed(() => [
         >
           <div class="flex flex-shrink-0 items-center">
             <img
-              class="h-8 w-auto"
-              src="../public/img/disco-ball-saumon.png"
+              class="h-10 w-auto"
+              src="../public/img/logo-Festivo-new-saumon.png"
               alt="Logo site Festivo"
             >
           </div>

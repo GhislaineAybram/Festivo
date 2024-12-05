@@ -54,7 +54,7 @@ create table
     celebration_id uuid not null,
     is_coming boolean null,
     created_at timestamp with time zone not null default now(),
-    constraint guest_pkey primary key (guest_id)
+    constraint guest_pkey primary key (guest_id),
     constraint guest_celebration_id_fkey foreign key (celebration_id) references celebration (celebration_id) on update cascade on delete cascade,
     constraint guest_user_id_fkey foreign key (user_id) references "user" (user_id) on update cascade on delete cascade
   ) tablespace pg_default;
