@@ -5,6 +5,12 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   app: {
     head: {
+      meta: [
+        {
+          name: 'Festivo',
+          content: 'Organisez vos événements et invitez vos amis facilement avec Festivo. Créez, gérez et partagez vos événements en un clic.',
+        },
+      ],
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       title: 'Festivo, where every event comes to life',
@@ -62,11 +68,11 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.json' },
-      { code: 'fr', iso: 'fr-FR', file: 'fr.json' },
+      { code: 'en', language: 'en-US', file: 'en.json' },
+      { code: 'fr', language: 'fr-FR', file: 'fr.json' },
     ],
     defaultLocale: 'en',
-    langDir: 'locales/',
+    langDir: './',
     lazy: true,
     strategy: 'no_prefix',
     detectBrowserLanguage: {
