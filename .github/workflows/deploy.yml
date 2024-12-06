@@ -19,6 +19,9 @@ jobs:
           cd nuxt-app
           npm install
       - name: Linter and build
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           cd nuxt-app
           npm run lint
