@@ -17,13 +17,13 @@
         {{ $t("legal.edition.title") }}
       </h2>
       <p class="mb-4">
-        {{ $t("legal.edition.text_1") }}
+        {{ $t("legal.edition.text_1", { url: 'https://festivo-tawny.vercel.app' }) }}
       </p>
       <p class="mb-4">
-        {{ $t("legal.edition.text_2") }}
+        {{ $t("legal.edition.text_2", { director: 'Ghislaine AYBRAM', address: '1 avenue Victor Hugo 92190 MEUDON' }) }}
       </p>
       <p class="mb-4">
-        {{ $t("legal.edition.text_3") }}
+        {{ $t("legal.edition.text_3", { director: 'Ghislaine AYBRAM' }) }}
       </p>
       <h2 class="text-2xl font-bold mb-2">
         {{ $t("legal.hosting.title") }}
@@ -52,7 +52,7 @@
         {{ $t("legal.properties.title") }}
       </h2>
       <p class="mb-4">
-        {{ $t("legal.properties.text_1") }}
+        {{ $t("legal.properties.text_1", { director: 'Ghislaine AYBRAM' }) }}
       </p>
       <p class="mb-4">
         <i18n-t keypath="legal.properties.text_2.text">
@@ -96,7 +96,7 @@
         {{ $t("legal.jurisdiction.title") }}
       </h2>
       <p class="mb-4">
-        {{ $t("legal.jurisdiction.text") }}
+        {{ $t("legal.jurisdiction.text", { url: 'https://festivo-tawny.vercel.app' }) }}
       </p>
     </div>
   </main>

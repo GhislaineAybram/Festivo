@@ -106,9 +106,9 @@
     },
     "edition": {
       "title": "Edition du site",
-      "text_1": "Le présent site, accessible à l’URL https://festivo-tawny.vercel.app (le « Site »), est édité par :",
-      "text_2": "Ghislaine AYBRAM, résidant 1 avenue Victor Hugo 92190 MEUDON.",
-      "text_3": "La Directrice de la publication du Site est Ghislaine AYBRAM."
+      "text_1": "Le présent site, accessible à l’URL {url} (le « Site »), est édité par :",
+      "text_2": "{director}, résidant {address}.",
+      "text_3": "La Directrice de la publication du Site est {director}."
     },
     "hosting": {
       "title": "Hébergement du site",
@@ -116,7 +116,7 @@
     },
     "properties": {
       "title": "Propriété intellectuelle et contrefaçons",
-      "text_1": "Ghislaine AYBRAM est propriétaire des droits de propriété intellectuelle et détient les droits d’usage sur tous les éléments accessibles sur le site internet, notamment les textes, images, graphismes, logos et icônes. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de Ghislaine AYBRAM.",
+      "text_1": "{director} est propriétaire des droits de propriété intellectuelle et détient les droits d’usage sur tous les éléments accessibles sur le site internet, notamment les textes, images, graphismes, logos et icônes. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de {director}.",
       "text_2": {
         "text": "Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles {0}",
         "link_text": "L.335-2 et suivants du Code de Propriété Intellectuelle."
@@ -141,7 +141,111 @@
     },
     "jurisdiction": {
       "title": "Droit applicable et attribution de juridiction",
-      "text": "Tout litige en relation avec l’utilisation du site https://festivo-tawny.vercel.app est soumis au droit français. En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de NANTERRE."
+      "text": "Tout litige en relation avec l’utilisation du site {url} est soumis au droit français. En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de NANTERRE."
+    }
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "version": "La présente politique, éditée le {edited}, a été mise à jour le {updated}",
+    "article_1": {
+      "title": "Article 1 : Préambule",
+      "text_1": "La présente politique de confidentialité s’applique au site {website} et a pour objet d’exposer aux utilisateurs du site :",
+      "text_2": "La manière dont sont collectées et traitées leurs données à caractère personnel. Doivent être considérées comme données personnelles toutes les données étant susceptibles d’identifier un utilisateur. Il s’agit notamment du prénom et du nom ou de l’adresse mail,",
+      "text_3": "Quels sont les droits des utilisateurs concernant ces données,",
+      "text_4": "Qui est responsable du traitement des données à caractère personnel collectées et traitées,",
+      "text_5": "A qui ces données sont transmises,",
+      "text_6": "Éventuellement, la politique du site en matière de fichiers « cookies ».",
+      "text_7": "Cette politique complète les mentions légales consultables par les utilisateurs à l’adresse suivante : {0}"
+    },
+    "article_2": {
+      "title": "Article 2 : Principes relatifs à la collecte et au traitement des données personnelles",
+      "text_1": "Conformément à l’article 5 du Règlement européen 2016/679, la collecte et le traitement des données des utilisateurs du site respectent les principes suivants :",
+      "text_2": "Licéité, loyauté et transparence : les données ne peuvent être collectées et traitées qu’avec le consentement de l’utilisateur propriétaire des données. A chaque fois que des données à caractère personnel seront collectées, il sera indiqué à l’utilisateur que ses données sont collectées, et pour quelles raisons ses données sont collectées,",
+      "text_3": "Finalités limitées : la collecte et le traitement des données sont exécutés pour répondre à un ou plusieurs objectifs déterminés dans les présentes conditions générales d’utilisation,",
+      "text_4": "Minimisation de la collecte et du traitement des données : seules les données nécessaires à la bonne exécution des objectifs poursuivis par le site sont collectées,",
+      "text_5": "Conservation des données réduites dans le temps : les données sont conservées pour une durée limitée, dont l’utilisateur est informé,",
+      "text_6": "Intégrité et confidentialité des données collectées et traitées : le responsable du traitement des données s’engage à garantir l’intégrité et la confidentialité des données collectées.",
+      "text_7": "Afin d’être licites, et ce conformément aux exigences de l’article 6 du règlement européen 2016/679, la collecte et le traitement des données à caractère personnel ne pourront intervenir que s’ils respectent au moins l’une des conditions ci-après énumérées :",
+      "text_8": "L’utilisateur a expressément consenti au traitement,",
+      "text_9": "Le traitement est nécessaire à la bonne exécution d’un contrat,",
+      "text_10": "Le traitement et la collecte des données à caractère personnel sont nécessaires aux fins des intérêts légitimes et privés poursuivis par le responsable du traitement ou par un tiers."
+    },
+    "article_3": {
+      "title": "Article 3 : Données à caractère personnel collectées et traitées dans le cadre de la navigation sur le site",
+      "subarticle_1": {
+        "title": "Article 3.1 : Données collectées", 
+        "text_1": "Les données personnelles collectées dans le cadre de notre activité sont les suivantes :",
+        "text_2": "le nom et prénom,",
+        "text_3": "l’email utilisé pour l’inscription.",
+        "text_4": "La collecte et le traitement de ces données répond aux finalités suivantes :",
+        "text_5": "Fournir la fonctionnalité de base de Festivo. Vous ne pourrez interagir avec le contenu d'autres personnes et publier votre propre contenu que si vous êtes connecté,",
+        "text_6": "L'adresse électronique que vous nous fournissez peut être utilisée pour vous envoyer des informations, des mises à jour et des notifications concernant d'autres personnes qui interagissent avec vos contenus ou vous envoient des messages et pour répondre à des demandes, et/ou à d'autres requêtes ou questions."
+      },
+      "subarticle_2": {
+        "title": "Article 3.2 : Mode de collecte des données", 
+        "text_1": "Ces données sont collectées lorsque l’utilisateur effectue l’une des opérations suivantes sur la plateforme :",
+        "text_2": "inscription sur le site",
+        "text_3": "Elles sont conservées par le responsable du traitement dans des conditions raisonnables de sécurité, pour une durée de : {nb} ans.",
+        "text_4": "La société est susceptible de conserver certaines données à caractère personnel au-delà des délais annoncés ci-dessus afin de remplir ses obligations légales ou réglementaires."
+      },
+      "subarticle_3": {
+        "title": "Article 3.3 : Hébergement des données", 
+        "text_1": "Les données personnelles des utilisateurs (telles que les informations de compte, les événements ou les inscriptions) sont hébergées par :"
+      }
+    },
+    "article_4": {
+      "title": "Article 4 : Responsable de la collecte et du traitement des données",
+      "subarticle_1": {
+        "title": "Article 4.1 : Le responsable du traitement des données", 
+        "text_1": "Les données à caractère personnelles sont collectées par {website}.",
+        "text_2": "Le responsable de la collecte et du traitement des données à caractère personnel peut être contacté de la manière suivante :",
+        "text_3": "Par email : {email}."
+      },
+      "subarticle_2": {
+        "title": "Article 4.2 : Obligations du responsable du traitement des données", 
+        "text_1": "Le responsable du traitement s’engage à protéger les données à caractère personnel collectées, à ne pas les transmettre à des tiers sans que l’utilisateur n’en ait été informé et à respecter les finalités pour lesquelles ces données ont été collectées.",
+        "text_2": "De plus, le responsable du traitement des données s’engage à notifier l’utilisateur en cas de rectification ou de suppression des données, à moins que cela n’entraîne pour lui des formalités, coûts et démarches disproportionnés.",
+        "text_3": "Dans le cas où l’intégrité, la confidentialité ou la sécurité des données à caractère personnel de l’utilisateur est compromise, le responsable du traitement s’engage à informer l’utilisateur par tout moyen.",
+        "text_4": "Si vous estimez, après nous avoir contactés, que vos droits “Informatique et Libertés”, ne sont pas respectés, vous pouvez adresser une information à la CNIL."
+      }
+    },
+    "article_5": {
+      "title": "Article 5 : Les droits de l'utilisateur en matière de collecte et de traitement des données",
+      "text_1": "Conformément à la réglementation concernant le traitement des données à caractère personnel, l’utilisateur possède les droits ci-après énumérés.",
+      "text_2": "Afin que le responsable du traitement des données puisse faire droit à sa demande, l’utilisateur est tenu de lui communiquer : ses prénom et nom ainsi que son adresse e-mail.",
+      "text_3": "Le responsable du traitement des données est tenu de répondre à l’utilisateur dans un délai de {nb} (trente) jours maximum.",
+      "subarticle_1": {
+        "title": "Article 5.1 : Droit d’accès, de rectification et droit à l’effacement des données", 
+        "text_1": "L’utilisateur peut prendre connaissance, mettre à jour, modifier ou demander la suppression des données le concernant, directement depuis son espace personnel.",
+        "text_2": "S’il en possède un, l’utilisateur a le droit de demander la suppression de son espace personnel, directement depuis son espace personnel en cliquant sur « Supprimer mon compte »."
+      },
+      "subarticle_2": {
+        "title": "Article 5.2 : Droit à la portabilité des données", 
+        "text_1": "L’utilisateur a le droit de demander la portabilité de ses données personnelles, détenues par le site, vers un autre site, en contactant le responsable du traitement des données."
+      },
+      "subarticle_3": {
+        "title": "Article 5.3 : Droit à la limitation et à l’opposition du traitement des données", 
+        "text_1": "L’utilisateur a le droit de demander la limitation ou de s’opposer au traitement de ses données par le site, sans que le site ne puisse refuser, sauf à démontrer l’existence de motifs légitimes et impérieux, pouvant prévaloir sur les intérêts et les droits et libertés de l’utilisateur.",
+        "text_2": "Afin de demander la limitation du traitement de ses données ou de formuler une opposition au traitement de ses données, l’utilisateur doit contacter le responsable du traitement des données."
+      },
+      "subarticle_4": {
+        "title": "Article 5.4 : Droit de ne pas faire l’objet d’une décision fondée exclusivement sur un procédé automatisé", 
+        "text_1": "Conformément aux dispositions du règlement 2016/679, l’utilisateur a le droit de ne pas faire l’objet d’une décision fondée exclusivement sur un procédé automatisé si la décision produit des effets juridiques le concernant, ou l’affecte de manière significative de façon similaire."
+      },
+      "subarticle_5": {
+        "title": "Article 5.5 : Droit de déterminer le sort des données après la mort", 
+        "text_1": "Il est rappelé à l’utilisateur qu’il peut organiser quel doit être le devenir de ses données collectées et traitées s’il décède, conformément à la loi n°2016-1321 du 7 octobre 2016."
+      },
+      "subarticle_6": {
+        "title": "Article 5.6 : Droit de saisir l’autorité de contrôle compétente", 
+        "text_1": "Dans le cas où le responsable du traitement des données décide de ne pas répondre à la demande de l’utilisateur, et que l’utilisateur souhaite contester cette décision, ou, s’il pense qu’il est porté atteinte à l’un des droits énumérés ci-dessus, il est en droit de saisir la CNIL (Commission Nationale de l’Informatique et des Libertés, {0}) ou tout juge compétent."
+      }
+    },
+    "article_6": {
+      "title": "Article 6 : Modification de la Politique de confidentialité",
+      "text_1": "Festivo se réserve le droit de modifier la présente Politique à tout moment afin de garantir sa conformité avec le droit en vigueur.",
+      "text_2": "Par conséquent, l’utilisateur est invité à venir consulter régulièrement cette politique de confidentialité afin de se tenir informé des derniers changements qui lui seront apportés.",
+      "text_3": "En naviguant sur le site, l’utilisateur atteste avoir lu et compris la présente politique de confidentialité et en accepte les conditions, en ce qui concerne plus particulièrement la collecte et le traitement de ses données à caractère personnel."
     }
   }
 }
