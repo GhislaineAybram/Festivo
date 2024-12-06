@@ -16,16 +16,16 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: |
-          # cd nuxt-app
-          # npm install
+          cd nuxt-app
+          npm install
       - name: Linter and build
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
-          # cd nuxt-app
-          # npm run lint
-          # npm run build
+          cd nuxt-app
+          npm run lint
+          npm run build
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: List files in the repository
