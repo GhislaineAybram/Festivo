@@ -206,12 +206,12 @@ watchEffect(() => {
             id="accept-label"
             for="accept"
           >
-          <i18n-t keypath="register.agree.text">
-          <a href="https://festivo-tawny.vercel.app/privacy">
-            {{ $t('register.agree.link_text') }}
-          </a>
-        </i18n-t>
-      </label>
+            <i18n-t keypath="register.agree.text">
+              <a href="https://festivo-tawny.vercel.app/privacy">
+                {{ $t('register.agree.link_text') }}
+              </a>
+            </i18n-t>
+          </label>
         </div>
         <span
           v-if="errorMsg"
