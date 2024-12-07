@@ -28,7 +28,6 @@ const getProfilePage = () => {
 const navigation = computed(() => [
   { name: t('menubar.homepage'), href: '/', current: false },
   { name: t('menubar.event_creation'), href: '/celebrationadmin/creation', current: false },
-  { name: t('menubar.login'), href: '/login', current: false },
 ])
 </script>
 

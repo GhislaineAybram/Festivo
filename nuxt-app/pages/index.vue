@@ -74,7 +74,10 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
       </h2>
       <!-- upcoming celebrations created -->
       <div class="celebrations-gallery">
-        <CelebrationCard :celebrations="upcomingCelebrationsCreated" />
+        <CelebrationCard
+          :celebrations="upcomingCelebrationsCreated"
+          :user-id="user.id"
+        />
       </div>
       <!-- past celebrations created -->
       <div class="celebrations-gallery">
