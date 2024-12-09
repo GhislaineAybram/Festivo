@@ -25,10 +25,23 @@ const getProfilePage = () => {
   return user.value ? `/profile/${user.value.id}` : '/' // Redirige vers le profil si l'utilisateur est connecté
 }
 
-const navigation = computed(() => [
-  { name: t('menubar.homepage'), href: '/', current: false },
-  { name: t('menubar.event_creation'), href: '/celebrationadmin/creation', current: false },
-])
+const navigation = computed(() => {
+  const baseLinks = [
+    { name: t('menubar.homepage'), href: '/', current: false },
+    { name: t('menubar.event_creation'), href: '/celebrationadmin/creation', current: false },
+  ]
+
+  // Ajouter le lien "Login" seulement si l'utilisateur n'est pas connecté
+  if (!user.value) {
+    baseLinks.push({
+      name: t('menubar.login'), // Traduction pour le login
+      href: '/login',
+      current: false,
+    })
+  }
+
+  return baseLinks
+})
 </script>
 
 <template>
@@ -64,8 +77,8 @@ const navigation = computed(() => [
         >
           <div class="flex flex-shrink-0 items-center">
             <img
-              class="h-10 w-auto"
-              src="../public/img/logo-Festivo-new-saumon.png"
+              class="h-6 w-auto"
+              src="../public/img/logo-horizontal-Festivo-seashell.png"
               alt="Logo site Festivo"
             >
           </div>
@@ -136,7 +149,10 @@ const navigation = computed(() => [
                     ]"
                   >{{ $t("menubar.profile") }}</a>
                 </MenuItem>
-                <MenuItem v-slot="{ active }">
+                <MenuItem
+                  v-if="user"
+                  v-slot="{ active }"
+                >
                   <a
                     :class="[
                       active ? 'bg-gray-100' : '',

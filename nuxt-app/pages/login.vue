@@ -78,12 +78,12 @@ const submitLoginForm = async () => {
       >
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-            class="mx-auto h-10 w-auto"
-            src="../public/img/disco-ball-tangerine.png"
+            class="mx-auto h-14 w-auto"
+            src="../public/img/boule-disco-indigo.png"
             alt="Logo Festivo"
           >
           <h3
-            class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+            class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
           >
             {{ $t("login.title") }}
           </h3>
@@ -188,7 +188,7 @@ h3 {
   justify-content: center;
   align-items: center;
   width: 80%;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
   gap: 0.5rem;
