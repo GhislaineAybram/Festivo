@@ -153,18 +153,18 @@ const allergy = [
             </svg>
           </button>
         </div>
-        <h1
+        <h2
           class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
         >
           {{ $t("welcome.title") }} {{ firstname }} !
-        </h1>
+        </h2>
       </div>
 
       <form id="profile-details">
         <div class="border-y border-gray-900/10 py-6 my-6">
-          <h2 class="text-base font-semibold leading-7 text-gray-900">
+          <h3 class="text-xl font-semibold leading-7 text-gray-900">
             {{ $t("user.informations") }}
-          </h2>
+          </h3>
         </div>
 
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -238,9 +238,9 @@ const allergy = [
         </div>
 
         <div class="border-y border-gray-900/10 py-6 my-6">
-          <h2 class="text-base font-semibold leading-7 text-gray-900">
+          <h3 class="text-xl font-semibold leading-7 text-gray-900">
             {{ $t("user.alimentation") }}
-          </h2>
+          </h3>
           <p class="mt-1 text-sm leading-6 text-gray-600">
             {{ $t("user.alimentation_explanation") }}
           </p>
@@ -249,7 +249,7 @@ const allergy = [
         <fieldset>
           <div class="card">
             <Accordion v-model:value="active">
-              <AccordionPanel value="0">
+              <AccordionPanel value="1">
                 <AccordionHeader
                   id="accordion-header"
                   class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3"
@@ -360,12 +360,12 @@ const allergy = [
         </div>
 
         <div
-          class="border-y border-gray-900/10 py-6 my-6 flex items-center justify-between"
+          class="bg-red-100 border-y border-gray-900/10 py-6 my-6 flex items-center justify-between"
         >
           <div>
-            <h2 class="text-base font-semibold leading-7 text-gray-900">
+            <h3 class="text-xl font-semibold leading-7 text-gray-900">
               Delete my profile
-            </h2>
+            </h3>
             <p class="mt-1 text-sm leading-6 text-gray-600">
               I am sure I want to delete my profile
             </p>
@@ -404,7 +404,7 @@ const allergy = [
   position: relative;
   transform: scale(0.85);
 }
-h1 {
+h2 {
   background-color: $haze;
   color: $indigo;
   width: 100%;

@@ -81,9 +81,9 @@ async function createNewCelebration() {
       id="celebration-details"
     >
       <div class="mx-auto mt-6 max-w-2xl text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           {{ $t("celebration.creation-title") }}
-        </h2>
+        </h1>
         <p class="mt-2 text-lg leading-8 text-gray-600">
           {{ $t("celebration.creation-subtitle") }}
         </p>
@@ -236,6 +236,9 @@ async function createNewCelebration() {
 <style lang="scss" scoped>
 * {
   background-color: $seashell;
+}
+h1 {
+  color: $indigo;
 }
 #celebration-details {
   padding: 1.5rem;

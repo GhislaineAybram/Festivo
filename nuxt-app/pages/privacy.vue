@@ -272,6 +272,7 @@ h2 {
   text-decoration-color: $tangerine;
   text-decoration-thickness: 6px;
   text-underline-offset: 7px;
+  text-decoration-skip-ink: none;
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -299,7 +300,7 @@ a:hover {
   text-align: right;
 }
 .privacy {
-  width: 80%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   padding: 1rem;

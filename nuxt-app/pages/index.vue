@@ -62,16 +62,16 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
 <template>
   <main class="main">
     <div v-if="user">
-      <h1
-        class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:tracking-tight"
-      >
-        {{ $t("welcome.title") }} {{ firstname }} !
-      </h1>
       <h2
         class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:tracking-tight"
       >
-        {{ $t("welcome.events") }}
+        {{ $t("welcome.title") }} {{ firstname }} !
       </h2>
+      <h3
+        class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:tracking-tight"
+      >
+        {{ $t("welcome.events") }}
+      </h3>
       <!-- upcoming celebrations created -->
       <div class="celebrations-gallery">
         <CelebrationCard
@@ -83,11 +83,11 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
       <div class="celebrations-gallery">
         <CelebrationCardPast :celebrations="pastCelebrationsCreated" />
       </div>
-      <h2
+      <h3
         class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
       >
         {{ $t("welcome.invitations") }}
-      </h2>
+      </h3>
       <!-- upcoming invitations -->
       <div class="celebrations-gallery">
         <CelebrationCard :celebrations="upcomingCelebrationsInvited" />
@@ -114,7 +114,7 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
 * {
   background-color: $seashell;
 }
-h1 {
+h2 {
   background-color: $seashell;
   color: $indigo;
   width: 100%;
@@ -122,7 +122,7 @@ h1 {
   align-content: center;
   text-align: center;
 }
-h2 {
+h3 {
   background-color: $tangerine;
   color: $indigo;
   width: 100%;
