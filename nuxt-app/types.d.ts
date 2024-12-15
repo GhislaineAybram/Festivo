@@ -41,6 +41,14 @@ interface ErrorResponse {
   body: { error: string }
 }
 
+interface ErrorResponseWithSuccess {
+  statusCode: number
+  body: {
+    success: boolean
+    message?: string
+    error?: string }
+}
+
 interface CelebrationGuestsInfo {
   nb_guests: number
   guests_list: GuestWithUserInfo[]

@@ -79,7 +79,8 @@
     "ok": "OK",
     "save": "Sauvegarder",
     "cancel": "Annuler",
-    "login": "Se connecter avec mot de passe"
+    "login": "Se connecter avec mot de passe",
+    "delete": "Oui, supprimer mon compte"
   },
   "error": {
     "page": "Page introuvable",
@@ -96,6 +97,18 @@
     "not_logged": {
       "title": "Pas connecté",
       "subtitle": "Connection nécessaire avant d'accéder à votre page profil ou de créer un événement"
+    },
+    "delete_account": {
+      "title": "Etes-vous sûr(e) de vouloir supprimer votre compte ?",
+      "subtitle": "Nous sommes tristes de vous voir partir !",
+      "text_1": "Cette action est irréversible et entraînera définitivement :",
+      "text_2": "la suppression de votre compte et de toutes vos données personnelles,",
+      "text_3": "la suppression de tous les événements que vous avez créés,",
+      "text_4": "la perte de vos invitations et participations à des événements."
+    },
+    "delete_success": {
+      "title": "Compte supprimé avec succès",
+      "subtitle": "N'hésitez pas à nous rejoindre de nouveau !"
     }
   },
   "legal": {

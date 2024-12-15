@@ -4,6 +4,21 @@ import { useRuntimeConfig } from '#app'
 import ModifyAvatar from '~/components/ModifyAvatar.vue'
 import type { UserWithAvatar } from '~/types'
 
+const isDeleteAlertVisible = ref(false)
+const deleteAccountSuccess = ref(false)
+const openDeleteAlert = () => {
+  isDeleteAlertVisible.value = true
+}
+const closeDeleteAlert = () => {
+  isDeleteAlertVisible.value = false
+}
+const confirmDeleteAccount = async () => {
+  const success = await deleteAccount(user_id)
+  if (success.body.success) {
+    deleteAccountSuccess.value = true
+    isDeleteAlertVisible.value = false
+  }
+}
 definePageMeta({
   middleware: 'auth',
 })
@@ -51,6 +66,35 @@ const updateAvatarInProfilePage = (newAvatar: string) => {
 watch(avatar, (newAvatar) => {
   console.log('Avatar mis à jour :', newAvatar)
 })
+
+const deleteAccount = async (user_id: string) => {
+  try {
+    const isUserDeleted = await $fetch(`/api/user/${user_id}`, {
+      method: 'DELETE',
+    })
+    if (!isUserDeleted.body.success) {
+      return {
+        statusCode: 404,
+        body: { success: false, error: 'User not found or deletion failed.' },
+      }
+    }
+    // TODO : mettre cette logique dans le component AlertDeleteSuccess
+    // Will force a logout after completing it
+    await auth.signOut()
+    navigateTo('/login')
+    return {
+      statusCode: 200,
+      body: { success: true, message: 'User deleted successfully.' },
+    }
+  }
+  catch (error) {
+    console.error('Error deleting user:', error)
+    return {
+      statusCode: 500,
+      body: { success: false, error: 'Internal server error.' },
+    }
+  }
+}
 
 const allergy = [
   {
@@ -373,9 +417,20 @@ const allergy = [
           <Button
             label="Delete my profile"
             severity="danger"
+            @click="openDeleteAlert"
           />
         </div>
       </form>
+      <AlertDeleteAccount
+        v-if="isDeleteAlertVisible"
+        class="alert"
+        @confirm="confirmDeleteAccount"
+        @cancel="closeDeleteAlert"
+      />
+      <AlertDeleteSuccess
+        v-if="deleteAccountSuccess"
+        class="alert"
+      />
     </div>
     <div v-else>
       <AlertNotLoggedIn class="alert" />

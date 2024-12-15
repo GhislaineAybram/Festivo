@@ -198,3 +198,15 @@ export const newCelebration = async (newCelebrationData: NewCelebrationData): Pr
   };
   return data ? data[0] : null
 }
+
+export const deleteUser = async (id: string): Promise<boolean> => {
+  const { error } = await supabase
+    .from('user')
+    .delete()
+    .eq('user_id', id)
+  if (error) {
+    console.error('Error deleting a user:', error)
+    return false
+  };
+  return true // Retourne `true` si la suppression a réussi
+}

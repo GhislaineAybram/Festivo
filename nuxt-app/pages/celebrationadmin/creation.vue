@@ -35,10 +35,10 @@ async function createNewCelebration() {
 
   const formattedTime = celebrationTime.value
     ? celebrationTime.value.toLocaleTimeString('fr-FR', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      })
     : null
 
   errorMsg.value = ''

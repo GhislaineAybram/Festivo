@@ -19,16 +19,19 @@ create table
 
 create table
   public.user (
-    user_id uuid not null,
     firstname character varying null,
     lastname character varying null,
     alias character varying null,
     email character varying null,
     created_at timestamp with time zone not null default now(),
-    avatar uuid null,
+    user_id uuid not null,
+    avatar uuid null default '1fc5e9e4-891e-4360-b912-ed11b7ba3c1a'::uuid,
     constraint user_pkey primary key (user_id),
-    constraint user_avatar_fkey foreign key (avatar) references avatar (avatar_id) on update cascade on delete cascade,
-    constraint user_user_id_fkey foreign key (user_id) references auth."users" (id) on update cascade on delete cascade
+    constraint user_alias_key unique (alias),
+    constraint user_email_key unique (email),
+    constraint user_user_id_key unique (user_id),
+    constraint user_avatar_fkey foreign key (avatar) references avatar (avatar_id) on update cascade on delete set default,
+    constraint user_user_id_fkey foreign key (user_id) references auth.users (id) on update cascade on delete cascade
   ) tablespace pg_default;
 
 create table
@@ -43,8 +46,8 @@ create table
     author uuid not null,
     created_at timestamp with time zone not null default now(),
     constraint celebration_pkey primary key (celebration_id),
-    constraint celebration_author_fkey foreign key (author) references "user" (user_id),
-    constraint celebration_celebration_type_fkey foreign key (celebration_type) references celebration_type (celebration_type_id) on update cascade on delete cascade
+    constraint celebration_author_fkey foreign key (author) references "user" (user_id) on update cascade on delete cascade,
+    constraint celebration_celebration_type_fkey foreign key (celebration_type) references celebration_type (celebration_type_id) on update cascade on delete set default
   ) tablespace pg_default;
 
 create table
@@ -85,6 +88,23 @@ create trigger on_auth_user_created
 after insert on auth.users
 for each row 
 execute procedure public.handle_new_user();
+
+/* Delete user trigger */
+create function public.handle_delete_auth_user()
+returns trigger
+language plpgsql
+security definer set search_path = ''
+as $$
+begin
+  delete from auth.users
+  where id = old.user_id;
+  return old;
+end;
+$$;
+create trigger on_public_user_deleted
+after delete on public.user
+for each row 
+execute procedure public.handle_delete_auth_user();
 
 /* Update user information trigger */
 /* 

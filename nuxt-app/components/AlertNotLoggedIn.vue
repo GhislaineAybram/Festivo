@@ -7,7 +7,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
+import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
 
 const open = ref(true)
 </script>
@@ -56,7 +56,7 @@ const open = ref(true)
                   <div
                     class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
                   >
-                    <ExclamationTriangleIcon
+                    <ExclamationCircleIcon
                       class="h-6 w-6 text-red-600"
                       aria-hidden="true"
                     />

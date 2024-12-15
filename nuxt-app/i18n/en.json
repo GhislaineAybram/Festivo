@@ -79,7 +79,8 @@
     "ok": "OK",
     "save": "Save",
     "cancel": "Cancel",
-    "login": "Login with password"
+    "login": "Login with password",
+    "delete": "Yes, delete my account"
   },
   "error": {
     "page": "Page not found",
@@ -96,6 +97,18 @@
     "not_logged": {
       "title": "Not logged in",
       "subtitle": "You need to log in before accessing your profile page or create an event"
+    },
+    "delete_account": {
+      "title": "Are you sure you want to delete your account ?",
+      "subtitle": "We are so sad to see you leave!",
+      "text_1": "This action is irreversible and will permanently result in:",
+      "text_2": "the deletion of your account and all your personal data,",
+      "text_3": "the deletion of all events you have created,",
+      "text_4": "the loss of your invitations and participation in events."
+    },
+    "delete_success": {
+      "title": "Account deleted successful",
+      "subtitle": "Don't hesitate to join us again !"
     }
   },
   "legal": {
