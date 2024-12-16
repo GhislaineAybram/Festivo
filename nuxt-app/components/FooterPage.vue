@@ -5,7 +5,7 @@ import IconGitHub from './icons/IconGitHub.vue'
 <template>
   <footer
     id="footer"
-    class="w-full z-10 font-body bg-gray-700 text-gray-200 flex flex-col"
+    class="w-full z-10 font-body text-gray-200 flex flex-col"
   >
     <div class="bg-gray-800">
       <div
@@ -14,30 +14,36 @@ import IconGitHub from './icons/IconGitHub.vue'
         <span class="flex flex-col items-center md:flex-row md:space-x-4">
           <NuxtLink
             to="/legal"
-            class="text-gray-400 hover:text-white my-1"
+            :class="[
+              'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
+            ]"
           >
             {{ $t("footer.legal") }}
           </NuxtLink>
           <NuxtLink
             to="/privacy"
-            class="text-gray-400 hover:text-white my-1"
+            :class="[
+              'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
+            ]"
           >
             {{ $t("footer.privacy") }}
           </NuxtLink>
           <NuxtLink
             to="/about"
-            class="text-gray-400 hover:text-white my-1"
+            :class="[
+              'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
+            ]"
           >
             {{ $t("footer.about") }}
           </NuxtLink>
         </span>
         <div class="flex justify-between w-full md:w-auto mt-2 md:space-x-4">
-          <span class="text-gray-100">
+          <span class="text-gray-300 text-sm font-medium">
             &#169; festivo-tawny.vercel.app
           </span>
-          <span class="flex items-center">
-            <IconGitHub class="h-6 w-6 text-gray-100 mr-2" />
-            <span class="mr-1"> v1.0.0</span>
+          <span class="flex items-center text-gray-300 text-sm font-medium">
+            <IconGitHub class="h-6 w-6 text-gray-300 mr-2" />
+            <span class="mr-1"> v 1.0.0</span>
           </span>
         </div>
       </div>
