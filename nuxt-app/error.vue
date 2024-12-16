@@ -16,7 +16,7 @@ defineProps({
         {{ error?.statusCode }}
       </p>
       <h1
-        class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl"
+        class="mt-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-5xl"
       >
         {{ $t("error.page") }}
       </h1>

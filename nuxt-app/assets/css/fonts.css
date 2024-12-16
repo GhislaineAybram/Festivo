@@ -1,6 +1,8 @@
 @font-face {
     font-family: 'Corn';
-    src: url('../fonts/CornDemo-Regular.ttf') format('truetype');
+    src: url('../fonts/corn-regular-webfont.woff2') format('woff2'),
+    url('../fonts/corn-regular-webfont.woff') format('woff'),
+    url('../fonts/Corn-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }

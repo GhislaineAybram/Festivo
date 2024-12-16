@@ -81,7 +81,7 @@ async function createNewCelebration() {
       id="celebration-details"
     >
       <div class="mx-auto mt-6 max-w-2xl text-center">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           {{ $t("celebration.creation-title") }}
         </h1>
         <p class="mt-2 text-lg leading-8 text-gray-600">

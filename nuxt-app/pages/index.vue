@@ -67,11 +67,11 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
       >
         {{ $t("welcome.title") }} {{ firstname }} !
       </h2>
-      <h3
-        class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:tracking-tight"
+      <h1
+        class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight"
       >
         {{ $t("welcome.events") }}
-      </h3>
+      </h1>
       <!-- upcoming celebrations created -->
       <div class="celebrations-gallery">
         <CelebrationCard
@@ -83,11 +83,11 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
       <div class="celebrations-gallery">
         <CelebrationCardPast :celebrations="pastCelebrationsCreated" />
       </div>
-      <h3
-        class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
+      <h1
+        class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight"
       >
         {{ $t("welcome.invitations") }}
-      </h3>
+      </h1>
       <!-- upcoming invitations -->
       <div class="celebrations-gallery">
         <CelebrationCard :celebrations="upcomingCelebrationsInvited" />
@@ -122,7 +122,7 @@ h2 {
   align-content: center;
   text-align: center;
 }
-h3 {
+h1 {
   background-color: $tangerine;
   color: $indigo;
   width: 100%;

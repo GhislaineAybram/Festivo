@@ -1,6 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { resolve } from 'path'
 import Aura from '@primevue/themes/aura'
 import { defineNuxtConfig } from 'nuxt/config'
+import { config } from 'dotenv'
+
+config({ path: resolve(__dirname, '../.env') })
 
 export default defineNuxtConfig({
   app: {
