@@ -3,7 +3,7 @@
 <template>
   <main class="main">
     <div class="privacy">
-      <h1 class="text-3xl font-bold mb-12">
+      <h1 class="text-2xl font-bold mb-12">
         {{ $t("privacy.title") }}
       </h1>
       <p
@@ -12,7 +12,7 @@
       >
         {{ $t("privacy.version", { edited: '03/12/2024', updated: '03/12/2024' }) }}
       </p>
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_1.title") }}
       </h2>
       <p class="mb-4">
@@ -41,7 +41,7 @@
         </i18n-t>
       </p>
 
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_2.title") }}
       </h2>
       <p class="mb-4">
@@ -79,7 +79,7 @@
         </li>
       </ul>
 
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_3.title") }}
       </h2>
 
@@ -151,7 +151,7 @@
         </li>
       </ul>
 
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_4.title") }}
       </h2>
 
@@ -184,7 +184,7 @@
         {{ $t("privacy.article_4.subarticle_2.text_4") }}
       </p>
 
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.title") }}
       </h2>
       <p class="mb-4">
@@ -241,7 +241,7 @@
         </i18n-t>
       </p>
 
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_6.title") }}
       </h2>
       <p class="mb-4">

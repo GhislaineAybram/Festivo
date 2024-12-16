@@ -13,7 +13,7 @@
           </a>
         </i18n-t>
       </p>
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("legal.edition.title") }}
       </h2>
       <p class="mb-4">
@@ -25,7 +25,7 @@
       <p class="mb-4">
         {{ $t("legal.edition.text_3", { director: 'Ghislaine AYBRAM' }) }}
       </p>
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("legal.hosting.title") }}
       </h2>
       <p class="mb-4">
@@ -48,7 +48,7 @@
           +1 559-288-7060
         </li>
       </ul>
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("legal.properties.title") }}
       </h2>
       <p class="mb-4">
@@ -61,7 +61,7 @@
           </a>
         </i18n-t>
       </p>
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("legal.contact.title") }}
       </h2>
       <ul class="list-inside mb-4">
@@ -75,7 +75,7 @@
           {{ $t('legal.contact.text_3', { address: '1 avenue Victor Hugo 92190 MEUDON' }) }}
         </li>
       </ul>
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("legal.privacy.title") }}
       </h2>
       <p class="mb-4">
@@ -92,7 +92,7 @@
           </a>
         </i18n-t>
       </p>
-      <h2 class="text-2xl font-bold mb-2">
+      <h2 class="text-xl font-bold mb-2">
         {{ $t("legal.jurisdiction.title") }}
       </h2>
       <p class="mb-4">
