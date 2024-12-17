@@ -32,7 +32,7 @@ const firstname = computed(() => metadata?.firstname || '')
 const lastname = computed(() => metadata?.lastname || '')
 const email = computed(() => user?.email || '')
 
-const user_id = user.id
+const user_id = user!.id
 const runtimeConfig = useRuntimeConfig()
 
 const { data: userAvatar, error: userAvatarError }

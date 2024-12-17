@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AuthApiError } from '@supabase/supabase-js'
+import { isAuthApiError, CustomAuthError } from '@supabase/supabase-js'
 import AlertLoggedIn from '~/components/AlertLoggedIn.vue'
 
 const email = ref('')
@@ -27,7 +27,7 @@ const submitLoginForm = async () => {
   }
   catch (error) {
     // Vérifie le code et le nom de l'erreur pour gérer différents cas
-    if (error instanceof AuthApiError) {
+    if (isAuthApiError(error)) {
       switch (error.code) {
         case '400':
           errorMsg.value
@@ -41,8 +41,8 @@ const submitLoginForm = async () => {
           break
       }
     }
-    else if (error.name === 'CustomAuthError') {
-      switch (error.name) {
+    else if (error) {
+      switch ((error as { name: string }).name) {
         case 'InvalidCredentialsError':
           errorMsg.value = 'Identifiants incorrects.'
           break

@@ -52,7 +52,7 @@ async function createNewCelebration() {
       date: celebrationDate.value,
       hour: formattedTime,
       address: celebrationAddress.value,
-      author: user.id,
+      author: user!.id,
     },
   }) as { error?: string }
 

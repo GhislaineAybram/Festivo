@@ -35,7 +35,6 @@ export default defineNuxtConfig({
 
   typescript: {
     typeCheck: true,
-    strict: false,
     tsConfig: {
       exclude: [
         '.nuxt',

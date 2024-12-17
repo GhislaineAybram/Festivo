@@ -77,7 +77,7 @@ watchEffect(async () => {
   if (user.value && user.value.id) {
     const { data: userAvatar, error: userAvatarError }
       = await useFetch<UserWithAvatar>(
-        () => `${runtimeConfig.public.apiUrl}/user/${user.value.id}`,
+        () => `${runtimeConfig.public.apiUrl}/user/${user.value!.id}`,
       )
     if (userAvatarError.value) {
       console.error('Failed to fetch user data', userAvatarError.value)

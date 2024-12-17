@@ -19,7 +19,7 @@ const runtimeConfig = useRuntimeConfig()
 
 // celebrations list by author
 const { data: celebrationsByAuthor, error: celebrationsByAuthorError } = await useFetch<CelebrationsByAuthorResponse>(
-  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user.id}`,
+  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user!.id}`,
 )
 if (celebrationsByAuthorError.value) {
   console.error('Failed to fetch celebrations by author', celebrationsByAuthorError.value)
@@ -27,7 +27,7 @@ if (celebrationsByAuthorError.value) {
 
 // celebrations list by guest
 const { data: celebrationsByGuest, error: celebrationsByGuestError } = await useFetch<CelebrationsByGuestResponse>(
-  () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user.id}`,
+  () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user!.id}`,
 )
 if (celebrationsByGuestError.value) {
   console.error('Failed to fetch celebrations by guest', celebrationsByGuestError.value)
