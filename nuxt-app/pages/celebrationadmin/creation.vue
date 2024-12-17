@@ -247,7 +247,7 @@ h1 {
   justify-content: center;
   gap: 0.5rem;
   flex-direction: column;
-  width: 85%;
+  width: 95%;
 }
 #celebration-creation {
   background-color: $tangerine;

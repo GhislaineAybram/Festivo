@@ -9,6 +9,7 @@ import {
   MenuItems,
 } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import type { UserWithAvatar } from '~/types'
 
 const { setLocale } = useI18n()
 const { t } = useI18n()
@@ -70,6 +71,20 @@ const changeLanguage = (code: 'en' | 'fr') => {
   currentFlag.value
     = languages.find(lang => lang.code === code)?.flag || currentFlag.value
 }
+const avatar = ref('pi pi-user')
+const runtimeConfig = useRuntimeConfig()
+watchEffect(async () => {
+  if (user.value && user.value.id) {
+    const { data: userAvatar, error: userAvatarError }
+      = await useFetch<UserWithAvatar>(
+        () => `${runtimeConfig.public.apiUrl}/user/${user.value.id}`,
+      )
+    if (userAvatarError.value) {
+      console.error('Failed to fetch user data', userAvatarError.value)
+    }
+    avatar.value = userAvatar.value?.avatar?.picture || 'pi pi-user'
+  }
+})
 </script>
 
 <template>
@@ -208,11 +223,16 @@ const changeLanguage = (code: 'en' | 'fr') => {
                   <span class="absolute -inset-1.5" />
                   <span class="sr-only">Open user menu</span>
                   <Avatar
+                    v-if="user"
+                    id="avatar-picture"
+                    class="h-8 w-8 rounded-full"
+                    :style="{ backgroundImage: `url(${avatar})` }"
+                  />
+                  <Avatar
+                    v-else
                     icon="pi pi-user"
-                    class="h-8 w-8"
-                    size="normal"
+                    class="h-8 w-8 rounded-full"
                     style="background-color: #fff6f0; color: #180161"
-                    shape="circle"
                   />
                   <!-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> -->
                 </MenuButton>
@@ -282,7 +302,7 @@ const changeLanguage = (code: 'en' | 'fr') => {
 
         <DisclosureButton
           as="div"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded px-3 py-2 text-base font-medium"
           @click="changeLanguage('fr')"
         >
           <div class="flex items-center gap-3 px-1 cursor-pointer">
@@ -325,5 +345,11 @@ const changeLanguage = (code: 'en' | 'fr') => {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+#avatar-picture {
+  background-color: $seashell;
+  background-size: 75%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>

@@ -24,9 +24,7 @@ definePageMeta({
 })
 
 const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
+const { data: { user } } = await auth.getUser()
 const metadata = user?.user_metadata
 
 const pseudo = computed(() => metadata?.alias || '')
