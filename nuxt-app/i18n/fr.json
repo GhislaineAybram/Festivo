@@ -111,6 +111,32 @@
       "subtitle": "N'hésitez pas à nous rejoindre de nouveau !"
     }
   },
+  "about": {
+    "title": "A propos",
+    "history": {
+      "title": "L’histoire derrière {website} : rendre chaque événement vraiment spécial",
+      "text_1": "Tout a commencé par une question simple mais frustrante : pourquoi est-il si difficile de rassembler ses proches pour célébrer les moments importants de la vie ? Que ce soit pour organiser une fête d’anniversaire, une réunion de famille ou une soirée à thème, jongler entre les confirmations de présence et les détails logistiques peut rapidement devenir un véritable casse-tête.",
+      "text_2": "Ainsi, paradoxalement, dans un monde où tout est connecté, la planification d’événements restait incroyablement désorganisée.",
+      "text_3": "{website} est parti d'une envie : celle de créer une plateforme qui ne se contente pas de gérer des événements, mais qui révolutionne les fêtes pour rendre chaque événement fluide, inclusif et inoubliable. Nous avons imaginé une plateforme où organiser devient aussi agréable que célébrer.",
+      "text_4": "Avec {website}, vous pouvez engager vos invités dès le départ. Grâce à une interface intuitive et des outils puissants, la planification devient un jeu d’enfant."
+    },
+    "quote": {
+      "text_1": "Parce que chaque célébration compte, et vous aussi.",
+      "text_2": "Avec {website}, transformez chaque événement en expériences inoubliables, en permettant à chacun de se concentrer sur ce qui compte vraiment : les liens humains."
+    },
+    "values": {
+      "title": "Nos valeurs : quand la technologie se met au service du collectif",
+      "text_1": "Simplification absolue : de l’invitation à la confirmation de présence, chaque étape est pensée pour vous faire gagner du temps,",
+      "text_2": "Personnalisation : créez des événements qui reflètent votre style et votre vision,",
+      "text_3": "Connexion humaine : {website} met l'accent sur les relations, en offrant une plateforme où tout le monde se sent impliqué."
+    },
+    "after": {
+      "title": "Et après ?",
+      "text_1": "{website} est en constante évolution. Nous introduisons de nouvelles fonctionnalités pour rendre la planification d’événements encore plus dynamique et captivante.",
+      "text_2": "Notre aventure ne fait que commencer...",
+      "text_3": "Rejoignez-nous et faites de chaque événement une fête inoubliable !"
+    }
+  },
   "legal": {
     "title": "Mentions légales",
     "introduction": {
@@ -191,7 +217,7 @@
         "text_2": "le nom et prénom,",
         "text_3": "l’email utilisé pour l’inscription.",
         "text_4": "La collecte et le traitement de ces données répond aux finalités suivantes :",
-        "text_5": "Fournir la fonctionnalité de base de Festivo. Vous ne pourrez interagir avec le contenu d'autres personnes et publier votre propre contenu que si vous êtes connecté,",
+        "text_5": "Fournir la fonctionnalité de base de {website}. Vous ne pourrez interagir avec le contenu d'autres personnes et publier votre propre contenu que si vous êtes connecté,",
         "text_6": "L'adresse électronique que vous nous fournissez peut être utilisée pour vous envoyer des informations, des mises à jour et des notifications concernant d'autres personnes qui interagissent avec vos contenus ou vous envoient des messages et pour répondre à des demandes, et/ou à d'autres requêtes ou questions."
       },
       "subarticle_2": {
@@ -256,7 +282,7 @@
     },
     "article_6": {
       "title": "Article 6 : Modification de la Politique de confidentialité",
-      "text_1": "Festivo se réserve le droit de modifier la présente Politique à tout moment afin de garantir sa conformité avec le droit en vigueur.",
+      "text_1": "{website} se réserve le droit de modifier la présente Politique à tout moment afin de garantir sa conformité avec le droit en vigueur.",
       "text_2": "Par conséquent, l’utilisateur est invité à venir consulter régulièrement cette politique de confidentialité afin de se tenir informé des derniers changements qui lui seront apportés.",
       "text_3": "En naviguant sur le site, l’utilisateur atteste avoir lu et compris la présente politique de confidentialité et en accepte les conditions, en ce qui concerne plus particulièrement la collecte et le traitement de ses données à caractère personnel."
     }

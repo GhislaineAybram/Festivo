@@ -12,9 +12,9 @@
       >
         {{ $t("privacy.version", { edited: '03/12/2024', updated: '03/12/2024' }) }}
       </p>
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_1.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         {{ $t("privacy.article_1.text_1", { website: 'Festivo' }) }}
       </p>
@@ -41,9 +41,9 @@
         </i18n-t>
       </p>
 
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_2.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         {{ $t("privacy.article_2.text_1") }}
       </p>
@@ -79,13 +79,13 @@
         </li>
       </ul>
 
-      <h2 class="text-xl font-bold mb-2">
-        {{ $t("privacy.article_3.title") }}
-      </h2>
-
       <h3 class="text-xl font-bold mb-2">
-        {{ $t("privacy.article_3.subarticle_1.title") }}
+        {{ $t("privacy.article_3.title") }}
       </h3>
+
+      <h4 class="text-xl font-bold mb-2">
+        {{ $t("privacy.article_3.subarticle_1.title") }}
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_3.subarticle_1.text_1") }}
       </p>
@@ -102,16 +102,16 @@
       </p>
       <ul class="list-disc list-inside mb-4">
         <li class="mb-2">
-          {{ $t("privacy.article_3.subarticle_1.text_5") }}
+          {{ $t("privacy.article_3.subarticle_1.text_5", { website: 'Festivo' }) }}
         </li>
         <li class="mb-2">
           {{ $t("privacy.article_3.subarticle_1.text_6") }}
         </li>
       </ul>
 
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_3.subarticle_2.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_3.subarticle_2.text_1") }}
       </p>
@@ -127,9 +127,9 @@
         {{ $t("privacy.article_3.subarticle_2.text_4") }}
       </p>
 
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_3.subarticle_3.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_3.subarticle_3.text_1") }}
       </p>
@@ -151,13 +151,13 @@
         </li>
       </ul>
 
-      <h2 class="text-xl font-bold mb-2">
-        {{ $t("privacy.article_4.title") }}
-      </h2>
-
       <h3 class="text-xl font-bold mb-2">
-        {{ $t("privacy.article_4.subarticle_1.title") }}
+        {{ $t("privacy.article_4.title") }}
       </h3>
+
+      <h4 class="text-xl font-bold mb-2">
+        {{ $t("privacy.article_4.subarticle_1.title") }}
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_4.subarticle_1.text_1", { website: 'Festivo' }) }}
       </p>
@@ -168,9 +168,9 @@
         {{ $t("privacy.article_4.subarticle_1.text_3", { email: 'g.aybram.festivo@gmail.com' }) }}
       </p>
 
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_4.subarticle_2.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_4.subarticle_2.text_1") }}
       </p>
@@ -184,9 +184,9 @@
         {{ $t("privacy.article_4.subarticle_2.text_4") }}
       </p>
 
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         {{ $t("privacy.article_5.text_1") }}
       </p>
@@ -196,56 +196,56 @@
       <p class="mb-4">
         {{ $t("privacy.article_5.text_3", { nb: '30' }) }}
       </p>
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.subarticle_1.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_5.subarticle_1.text_1") }}
       </p>
       <p class="mb-4">
         {{ $t("privacy.article_5.subarticle_1.text_2") }}
       </p>
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.subarticle_2.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_5.subarticle_2.text_1") }}
       </p>
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.subarticle_3.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_5.subarticle_3.text_1") }}
       </p>
       <p class="mb-4">
         {{ $t("privacy.article_5.subarticle_3.text_2") }}
       </p>
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.subarticle_4.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_5.subarticle_4.text_1") }}
       </p>
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.subarticle_5.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         {{ $t("privacy.article_5.subarticle_5.text_1") }}
       </p>
-      <h3 class="text-xl font-bold mb-2">
+      <h4 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_5.subarticle_6.title") }}
-      </h3>
+      </h4>
       <p class="mb-4">
         <i18n-t keypath="privacy.article_5.subarticle_6.text_1">
           <a href="https://www.cnil.fr/">https://www.cnil.fr</a>
         </i18n-t>
       </p>
 
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("privacy.article_6.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
-        {{ $t("privacy.article_6.text_1") }}
+        {{ $t("privacy.article_6.text_1", { website: 'Festivo' }) }}
       </p>
       <p class="mb-4">
         {{ $t("privacy.article_6.text_2") }}
@@ -266,22 +266,19 @@ h1 {
   align-content: center;
   text-align: center;
 }
-h2 {
+h3 {
   color: $indigo;
   text-decoration: underline;
   text-decoration-color: $tangerine;
   text-decoration-thickness: 6px;
-  text-underline-offset: 7px;
+  text-underline-offset: 6px;
   text-decoration-skip-ink: none;
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
-}
-h3 {
-  color: $indigo;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   margin-top: 1.5rem;
 }
 h4 {
+  color: $indigo;
+  margin-bottom: 0.5rem;
   margin-top: 1.5rem;
 }
 a {

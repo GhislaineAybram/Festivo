@@ -13,6 +13,14 @@ import IconGitHub from './icons/IconGitHub.vue'
       >
         <span class="flex flex-col items-center md:flex-row md:space-x-4">
           <NuxtLink
+            to="/about"
+            :class="[
+              'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
+            ]"
+          >
+            {{ $t("footer.about") }}
+          </NuxtLink>
+          <NuxtLink
             to="/legal"
             :class="[
               'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
@@ -27,14 +35,6 @@ import IconGitHub from './icons/IconGitHub.vue'
             ]"
           >
             {{ $t("footer.privacy") }}
-          </NuxtLink>
-          <NuxtLink
-            to="/about"
-            :class="[
-              'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
-            ]"
-          >
-            {{ $t("footer.about") }}
           </NuxtLink>
         </span>
         <div class="flex justify-between w-full md:w-auto mt-2 md:space-x-4">

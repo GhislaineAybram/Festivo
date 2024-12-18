@@ -13,9 +13,9 @@
           </a>
         </i18n-t>
       </p>
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("legal.edition.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         {{ $t("legal.edition.text_1", { url: 'https://festivo-tawny.vercel.app' }) }}
       </p>
@@ -25,9 +25,9 @@
       <p class="mb-4">
         {{ $t("legal.edition.text_3", { director: 'Ghislaine AYBRAM' }) }}
       </p>
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("legal.hosting.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         {{ $t("legal.hosting.text") }}
       </p>
@@ -48,9 +48,9 @@
           +1 559-288-7060
         </li>
       </ul>
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("legal.properties.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         {{ $t("legal.properties.text_1", { director: 'Ghislaine AYBRAM' }) }}
       </p>
@@ -61,9 +61,9 @@
           </a>
         </i18n-t>
       </p>
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("legal.contact.title") }}
-      </h2>
+      </h3>
       <ul class="list-inside mb-4">
         <li class="mb-2">
           {{ $t('legal.contact.text_1', { phone: '+336 80 78 52 38' }) }}
@@ -75,9 +75,9 @@
           {{ $t('legal.contact.text_3', { address: '1 avenue Victor Hugo 92190 MEUDON' }) }}
         </li>
       </ul>
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("legal.privacy.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         <i18n-t keypath="legal.privacy.text_1.text">
           <a href="https://www.legifrance.gouv.fr/codes/section_lc/JORFTEXT000000886460/LEGISCTA000037804929/">
@@ -92,9 +92,9 @@
           </a>
         </i18n-t>
       </p>
-      <h2 class="text-xl font-bold mb-2">
+      <h3 class="text-xl font-bold mb-2">
         {{ $t("legal.jurisdiction.title") }}
-      </h2>
+      </h3>
       <p class="mb-4">
         {{ $t("legal.jurisdiction.text", { url: 'https://festivo-tawny.vercel.app' }) }}
       </p>
@@ -111,14 +111,14 @@ h1 {
   align-content: center;
   text-align: center;
 }
-h2 {
+h3 {
   color: $indigo;
   text-decoration: underline;
   text-decoration-color: $tangerine;
   text-decoration-thickness: 6px;
-  text-underline-offset: 7px;
+  text-underline-offset: 6px;
   text-decoration-skip-ink: none;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   margin-top: 1.5rem;
 }
 a {

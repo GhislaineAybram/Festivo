@@ -111,6 +111,32 @@
       "subtitle": "Don't hesitate to join us again !"
     }
   },
+  "about": {
+    "title": "About",
+    "history": {
+      "title": "The story behind {website} : making every event truly special",
+      "text_1": "It all started with a simple yet frustrating question: why is it so hard to bring loved ones together to celebrate life's important moments ? Whether it's organizing a birthday party, a family reunion, or a themed soirée, juggling RSVPs and logistical details can quickly become a real headache.",
+      "text_2": "Ironically, in a world where everything is connected, event planning remained incredibly disorganized.",
+      "text_3": "{website} was born from a desire : to create a platform that doesn’t just manage events but revolutionizes celebrations to make every event seamless, inclusive, and unforgettable. We envisioned a platform where planning becomes as enjoyable as celebrating.",
+      "text_4": "With {website}, you can engage your guests right from the start. Thanks to an intuitive interface and powerful tools, planning becomes effortless."
+    },
+    "quote": {
+      "text_1": "Because every celebration matters, and so do you.",
+      "text_2": "With {website}, turn every event into unforgettable experiences, allowing everyone to focus on what truly matters: human connections."
+    },
+    "values": {
+      "title": "Our values : when technology serves the collective",
+      "text_1": "Absolute simplicity : from invitations to RSVPs, every step is designed to save you time.",
+      "text_2": "Personalization : create events that reflect your style and vision.",
+      "text_3": "Human connection : {website} emphasizes relationships by offering a platform where everyone feels involved."
+    },
+    "after": {
+      "title": "What’s next ?",
+      "text_1": "{website} is constantly evolving. We’re introducing new features to make event planning even more dynamic and engaging.",
+      "text_2": "Our journey has just begun...",
+      "text_3": "Join us and make every event an unforgettable celebration !"
+    }
+  },
   "legal": {
     "title": "Legal Notices",
     "introduction": {
@@ -191,7 +217,7 @@
         "text_2": "First and last names,",
         "text_3": "The email address used for registration.",
         "text_4": "The collection and processing of these data serve the following purposes:",
-        "text_5": "To provide the basic functionality of Festivo. You can only interact with other people's content and publish your own content if you are logged in.",
+        "text_5": "To provide the basic functionality of {website}. You can only interact with other people's content and publish your own content if you are logged in.",
         "text_6": "The email address you provide may be used to send you information, updates, and notifications regarding other people interacting with your content or sending you messages, and to respond to requests and/or other inquiries or questions."
       },
       "subarticle_2": {
@@ -256,7 +282,7 @@
     },
     "article_6": {
       "title": "Article 6: Modification of the Privacy Policy",
-      "text_1": "Festivo reserves the right to modify this Policy at any time to ensure its compliance with current laws.",
+      "text_1": "{website} reserves the right to modify this Policy at any time to ensure its compliance with current laws.",
       "text_2": "Therefore, users are encouraged to regularly review this privacy policy to stay informed of any changes made to it.",
       "text_3": "By navigating the site, the user acknowledges having read and understood this privacy policy and accepts its terms, particularly concerning the collection and processing of their personal data."
     }
