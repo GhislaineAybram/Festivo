@@ -35,10 +35,6 @@ h1 {
   font-family: 'Corn', sans-serif;
   font-weight: 400 !important; /* Regular */
 }
-// h1 {
-//   font-family: 'Cinzel', sans-serif;
-//   font-weight: 600 !important; /* SemiBold */
-// }
 h2 {
   font-family: 'Quattrocento', sans-serif;
   font-weight: 400 !important; /* Regular */

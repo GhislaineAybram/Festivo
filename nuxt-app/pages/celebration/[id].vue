@@ -25,6 +25,21 @@ const guestInfoList = computed(() => guestsList.value.guests_list || [])
 
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+
+// add the invited user if not already done
+const checkAndRegisterInvitedUser = async () => {
+  // const response = await useFetch(`/api/check-and-register?celebration_id=${celebration_id}`)
+
+  // if (response.data.message.includes('Inscription réussie')) {
+  //   // Si l'inscription est réussie, rediriger vers la page de confirmation
+  //   router.push(`/celebration/admin/${celebration_id}`)
+  // } else {
+  //   // Si l'utilisateur est déjà inscrit ou non connecté, afficher un message
+  //   alert(response.data.message)
+  // }
+}
+
+checkAndRegisterInvitedUser()
 </script>
 
 <template>

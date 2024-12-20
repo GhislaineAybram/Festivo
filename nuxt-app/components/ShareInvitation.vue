@@ -3,24 +3,34 @@ import Popover from 'primevue/popover'
 import { ref } from 'vue'
 
 const op = ref()
+
+const runtimeConfig = useRuntimeConfig()
+
+defineProps({
+  celebrationId: {
+    type: String,
+    required: true,
+  },
+})
+
 const members = ref([
   {
     name: 'Amy Elsner',
     image: 'amyelsner.png',
     email: 'amy@email.com',
-    role: 'Owner',
+    checked: false,
   },
   {
     name: 'Bernardo Dominic',
     image: 'bernardodominic.png',
     email: 'bernardo@email.com',
-    role: 'Editor',
+    checked: false,
   },
   {
     name: 'Ioni Bowcher',
     image: 'ionibowcher.png',
     email: 'ioni@email.com',
-    role: 'Viewer',
+    checked: false,
   },
 ])
 
@@ -44,7 +54,7 @@ const toggle = (event: MouseEvent) => {
           <span class="font-medium block mb-2">Share this document</span>
           <InputGroup>
             <InputText
-              value="https://primevue.org/12323ff26t2g243g423g234gg52hy25XADXAG3"
+              :value="`${runtimeConfig.public.url}/celebration/${celebrationId}`"
               readonly
               class="w-[25rem]"
             />
@@ -53,18 +63,14 @@ const toggle = (event: MouseEvent) => {
             </InputGroupAddon>
           </InputGroup>
         </div>
-        <div>
-          <span class="font-medium block mb-2">Invite Member</span>
-          <InputGroup>
-            <InputText disabled />
-            <Button
-              label="Invite"
-              icon="pi pi-users"
-            />
-          </InputGroup>
+        <div class="flex items-center justify-between">
+          <span class="font-medium block mb-2">Invite Friends</span>
+          <Button
+            label="Invite"
+            icon="pi pi-users"
+          />
         </div>
         <div>
-          <span class="font-medium block mb-2">Team Members</span>
           <ul class="list-none p-0 m-0 flex flex-col gap-4">
             <li
               v-for="member in members"
@@ -84,8 +90,10 @@ const toggle = (event: MouseEvent) => {
               <div
                 class="flex items-center gap-2 text-surface-500 dark:text-surface-400 ml-auto text-sm"
               >
-                <span>{{ member.role }}</span>
-                <i class="pi pi-angle-down" />
+                <Checkbox
+                  v-model="member.checked"
+                  binary
+                />
               </div>
             </li>
           </ul>
@@ -95,4 +103,5 @@ const toggle = (event: MouseEvent) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

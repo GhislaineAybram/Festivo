@@ -101,6 +101,7 @@ begin
   return old;
 end;
 $$;
+
 create trigger on_public_user_deleted
 after delete on public.user
 for each row 

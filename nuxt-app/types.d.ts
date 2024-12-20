@@ -16,7 +16,7 @@ export type Celebration = {
 }
 type CelebrationType = Tables<'celebration_type'>
 type CelebrationWithPictureAndAuthor = Tables<'celebration'> & {
-  celebration_type?: Pick<CelebrationType, 'picture'>
+  celebration_type?: Pick<CelebrationType, 'picture' | 'category'>
   author?: Pick<Tables<'user'>, 'firstname'>
 }
 type CelebrationWithGuestsAndType = Tables<'celebration'> & {
@@ -25,6 +25,7 @@ type CelebrationWithGuestsAndType = Tables<'celebration'> & {
     user_id: string
   }[]
 }
+
 type Guest = Tables<'guest'>
 type GuestWithUserInfo = Guest & {
   user_id: Pick<User, 'user_id' | 'firstname' | 'lastname' | 'email' | 'alias'> & {
@@ -35,6 +36,11 @@ type NewCelebrationData = Omit<
   Celebration,
   'celebration_id' | 'created_at'
 >
+
+type NewGuestData = {
+  user_id: string
+  celebration_id: string
+}
 
 interface ErrorResponse {
   statusCode: number

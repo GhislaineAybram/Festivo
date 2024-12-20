@@ -6,9 +6,7 @@ definePageMeta({
 })
 
 const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
+const { data: { user } } = await auth.getUser()
 
 const celebrationTitle = ref('')
 const celebrationType = ref('')
@@ -80,17 +78,14 @@ async function createNewCelebration() {
       v-if="user"
       id="celebration-details"
     >
-      <div class="mx-auto mt-6 max-w-2xl text-center">
+      <div class="mx-auto mt-4 max-w-2xl text-center">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           {{ $t("celebration.creation-title") }}
         </h1>
-        <p class="mt-2 text-lg leading-8 text-gray-600">
-          {{ $t("celebration.creation-subtitle") }}
-        </p>
       </div>
       <form
         method="POST"
-        class="mx-auto mt-10 max-w-xl sm:mt-20"
+        class="mx-auto mt-10 max-w-xl sm:mt-10"
         @submit.prevent="createNewCelebration"
       >
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
