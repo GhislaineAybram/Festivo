@@ -217,11 +217,11 @@ const allergy = [
             >{{ $t("user.alias") }}</label>
             <div class="mt-2">
               <input
-                id="firstname"
+                id="pseudo"
                 v-model="pseudo"
                 type="text"
-                name="firstname"
-                autocomplete="given-name"
+                name="pseudo"
+                autocomplete="pseudo"
                 class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
             </div>
@@ -238,7 +238,7 @@ const allergy = [
                 v-model="firstname"
                 type="text"
                 name="firstname"
-                autocomplete="given-name"
+                autocomplete="firstname"
                 class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
             </div>

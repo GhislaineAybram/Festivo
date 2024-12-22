@@ -5,6 +5,9 @@ import { useRuntimeConfig } from '#app'
 import type { CelebrationWithPictureAndAuthor, GuestWithUserInfo } from '~/types'
 
 const { id } = useRoute().params
+const { auth } = useSupabaseClient()
+const { data: { user } } = await auth.getUser()
+const userId = user?.id
 
 const runtimeConfig = useRuntimeConfig()
 const { data: celebration, error: celebrationError } = await useFetch<CelebrationWithPictureAndAuthor>(
@@ -25,6 +28,24 @@ const guestInfoList = computed(() => guestsList.value.guests_list || [])
 
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+
+// add the invited user if not already done
+const checkAndRegisterInvitedUser = async () => {
+  const response = await $fetch(`/api/guest`, {
+    method: 'POST',
+    body: {
+      user_id: userId,
+      celebration_id: id,
+    },
+  }) as { error?: string }
+
+  if (response.error) {
+    console.error(`Erreur lors de la création de l'invitation :`, response.error)
+    return
+  }
+}
+
+checkAndRegisterInvitedUser()
 </script>
 
 <template>

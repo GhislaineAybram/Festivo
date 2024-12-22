@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from './database.types'
-import type { Avatar, Celebration, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, GuestWithUserInfo, NewCelebrationData, User, UserWithAvatar } from './types'
+import type { Avatar, Celebration, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, User, UserWithAvatar } from './types'
 
 const supabaseUrl = process.env.SUPABASE_URL!
 const supabaseKey = process.env.SUPABASE_KEY!
@@ -57,7 +57,7 @@ export const getCelebrationById = async (id: string): Promise<CelebrationWithPic
     .from('celebration')
     .select(`
       *,
-      celebration_type:celebration_type(picture),
+      celebration_type:celebration_type(picture, category),
       author:user(firstname)
     `)
     .eq('celebration_id', id)
@@ -194,6 +194,32 @@ export const newCelebration = async (newCelebrationData: NewCelebrationData): Pr
     .select('*')
   if (error) {
     console.error('Error creating a new celebration:', error)
+    return null
+  };
+  return data ? data[0] : null
+}
+
+export const isExistingGuest = async (user_id: string, celebration_id: string): Promise<Guest | null> => {
+  const { data, error } = await supabase
+    .from('guest')
+    .select('*')
+    .eq('user_id', user_id)
+    .eq('celebration_id', celebration_id)
+    .single()
+  if (error) {
+    console.error('Error searching a guest:', error)
+    return null
+  };
+  return data || null
+}
+
+export const newGuest = async (newGuestData: NewGuestData): Promise<Guest | null> => {
+  const { data, error } = await supabase
+    .from('guest')
+    .insert([newGuestData])
+    .select('*')
+  if (error) {
+    console.error('Error creating a new guest:', error)
     return null
   };
   return data ? data[0] : null
