@@ -1,13 +1,11 @@
 // guest.post
-import { newGuest } from '~/supabase'
+import { isExistingGuest, newGuest } from '~/supabase'
 import type { Guest, NewGuestData } from '~/types'
 
 export default defineEventHandler(async (event): Promise<{ statusCode: number, body: Guest | { error: string } }> => {
   try {
-    // Récupérer le corps de la requête
     const body = await readBody(event)
 
-    // Vérifie si les données essentielles sont présentes
     if (!body.user_id || !body.celebration_id) {
       return {
         statusCode: 400,
@@ -15,10 +13,19 @@ export default defineEventHandler(async (event): Promise<{ statusCode: number, b
       }
     }
 
-    // Prépare les données pour la création de l'événement
+    const { user_id, celebration_id } = body
+    const checkExistingGuest = await isExistingGuest(user_id, celebration_id)
+
+    if (checkExistingGuest) {
+      return {
+        statusCode: 200,
+        body: checkExistingGuest,
+      }
+    }
+
     const guestData: NewGuestData = {
-      user_id: body.user_id,
-      celebration_id: body.celebration_id,
+      user_id,
+      celebration_id,
     }
 
     const guest = await newGuest(guestData)

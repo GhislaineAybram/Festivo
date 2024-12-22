@@ -5,6 +5,9 @@ import { useRuntimeConfig } from '#app'
 import type { CelebrationWithPictureAndAuthor, GuestWithUserInfo } from '~/types'
 
 const { id } = useRoute().params
+const { auth } = useSupabaseClient()
+const { data: { user } } = await auth.getUser()
+const userId = user?.id
 
 const runtimeConfig = useRuntimeConfig()
 const { data: celebration, error: celebrationError } = await useFetch<CelebrationWithPictureAndAuthor>(
@@ -28,15 +31,18 @@ const defaultAvatarUrl
 
 // add the invited user if not already done
 const checkAndRegisterInvitedUser = async () => {
-  // const response = await useFetch(`/api/check-and-register?celebration_id=${celebration_id}`)
+  const response = await $fetch(`/api/guest`, {
+    method: 'POST',
+    body: {
+      user_id: userId,
+      celebration_id: id,
+    },
+  }) as { error?: string }
 
-  // if (response.data.message.includes('Inscription réussie')) {
-  //   // Si l'inscription est réussie, rediriger vers la page de confirmation
-  //   router.push(`/celebration/admin/${celebration_id}`)
-  // } else {
-  //   // Si l'utilisateur est déjà inscrit ou non connecté, afficher un message
-  //   alert(response.data.message)
-  // }
+  if (response.error) {
+    console.error(`Erreur lors de la création de l'invitation :`, response.error)
+    return
+  }
 }
 
 checkAndRegisterInvitedUser()

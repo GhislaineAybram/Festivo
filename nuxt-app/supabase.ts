@@ -199,6 +199,20 @@ export const newCelebration = async (newCelebrationData: NewCelebrationData): Pr
   return data ? data[0] : null
 }
 
+export const isExistingGuest = async (user_id: string, celebration_id: string): Promise<Guest | null> => {
+  const { data, error } = await supabase
+    .from('guest')
+    .select('*')
+    .eq('user_id', user_id)
+    .eq('celebration_id', celebration_id)
+    .single()
+  if (error) {
+    console.error('Error searching a guest:', error)
+    return null
+  };
+  return data || null
+}
+
 export const newGuest = async (newGuestData: NewGuestData): Promise<Guest | null> => {
   const { data, error } = await supabase
     .from('guest')
