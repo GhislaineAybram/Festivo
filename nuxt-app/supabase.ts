@@ -52,6 +52,20 @@ export const updateAvatarByUser = async (id: string, newAvatar: string): Promise
   return data ? data[0] : null
 }
 
+export const updateIsComingGuest = async (userId: string, celebrationId: string, isComing: boolean): Promise<Guest | null> => {
+  const { data, error } = await supabase
+    .from('guest')
+    .update({ is_coming: isComing })
+    .eq('user_id', userId)
+    .eq('celebration_id', celebrationId)
+    .select()
+  if (error) {
+    console.error('Error updating guest isComing:', error)
+    return null
+  }
+  return data ? data[0] : null
+}
+
 export const getCelebrationById = async (id: string): Promise<CelebrationWithPictureAndAuthor | null> => {
   const { data, error } = await supabase
     .from('celebration')
@@ -67,6 +81,20 @@ export const getCelebrationById = async (id: string): Promise<CelebrationWithPic
     return null
   }
   return data as CelebrationWithPictureAndAuthor
+}
+
+export const getIsComingGuest = async (userId: string, celebrationId: string): Promise<boolean | null> => {
+  const { data, error } = await supabase
+    .from('guest')
+    .select('is_coming')
+    .eq('user_id', userId)
+    .eq('celebration_id', celebrationId)
+    .single()
+  if (error) {
+    console.error('Error fetching guest response:', error)
+    return null
+  }
+  return data?.is_coming ?? null
 }
 
 export const getNumberGuestsByCelebration = async (id: string): Promise<number | null> => {
