@@ -46,6 +46,31 @@ const checkAndRegisterInvitedUser = async () => {
 }
 
 checkAndRegisterInvitedUser()
+
+const { data: isComing, error: isComingError } = await useFetch<boolean | null>(
+  () => `${runtimeConfig.public.apiUrl}/guest/${userId}/${id}`,
+)
+if (isComingError.value) {
+  console.error('Failed to fetch guest response data', isComingError.value)
+}
+
+// add the response guest
+async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
+  const response = await $fetch(`/api/guest/${userId}/${id}`, {
+    method: 'POST',
+    body: {
+      userId: userId,
+      celebrationId: id,
+      isComing: guestResponse,
+    },
+  }) as { error?: string }
+
+  if (response.error) {
+    console.error(`Erreur lors de la mise à jour de la réponse :`, response.error)
+    return
+  }
+  isComing.value = guestResponse
+}
 </script>
 
 <template>
@@ -138,18 +163,24 @@ checkAndRegisterInvitedUser()
                   severity="success"
                   rounded
                   aria-label="Filter"
+                  :class="{ 'opacity-40': isComing !== true }"
+                  @click="updateIsComingGuestInDatabase(true)"
                 />
                 <Button
                   icon="pi pi-bell"
                   severity="warn"
                   rounded
                   aria-label="Notification"
+                  :class="{ 'opacity-40': isComing !== null }"
+                  @click="updateIsComingGuestInDatabase(null)"
                 />
                 <Button
                   icon="pi pi-times"
                   severity="danger"
                   rounded
                   aria-label="Cancel"
+                  :class="{ 'opacity-40': isComing !== false }"
+                  @click="updateIsComingGuestInDatabase(false)"
                 />
               </div>
             </div>

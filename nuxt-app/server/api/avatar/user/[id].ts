@@ -1,3 +1,4 @@
+// avatar/user/[id].ts
 import type { User } from '~/types'
 import { updateAvatarByUser } from '~~/supabase'
 
