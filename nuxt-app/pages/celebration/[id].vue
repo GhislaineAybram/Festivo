@@ -132,17 +132,22 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
               <dd class="mt-2 text-sm text-gray-500">
                 {{ nbGuests }}
               </dd>
-              <div class="flex -space-x-2 overflow-hidden">
+              <div class="flex space-x-1">
                 <div
                   v-for="(guest, index) in guestInfoList"
                   :key="index"
                 >
-                  <img
-                    :src="guest.user_id.avatar.picture || defaultAvatarUrl"
+                  <div
+                    :style="{ backgroundImage: `url(${guest.user_id.avatar.picture || defaultAvatarUrl})` }"
                     :alt="guest.user_id.avatar.picture_description || 'User avatar'"
-                    class="inline-block size-12 rounded-full ring-2 ring-white"
-                  >
-                  <p class="mt-2 text-xs text-gray-500">
+                    class="inline-block size-12 rounded-full ring-2 guest-avatar"
+                    :class="{
+                      'ring-green-500': guest.is_coming === true,
+                      'ring-red-500': guest.is_coming === false,
+                      'ring-gray-500': guest.is_coming === null,
+                    }"
+                  />
+                  <p class="mt-2 text-xs text-gray-900 text-center">
                     {{ guest.user_id.alias }}
                   </p>
                 </div>
@@ -228,6 +233,13 @@ h3 {
   align-content: center;
   text-align: left;
   padding-left: 50px;
+}
+.guest-avatar {
+  border-radius: 50%;
+  background-color: $seashell;
+  background-size: 75%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 @media (min-width: 1024px) {
   #celebration-details {
