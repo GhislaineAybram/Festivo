@@ -227,6 +227,7 @@ watchEffect(async () => {
                     id="avatar-picture"
                     class="h-8 w-8 rounded-full"
                     :style="{ backgroundImage: `url(${avatar})` }"
+                    shape="circle"
                   />
                   <Avatar
                     v-else

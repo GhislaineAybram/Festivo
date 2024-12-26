@@ -191,16 +191,16 @@ const allergy = [
             id="profile-picture"
             alt="profile avatar"
             :style="{ backgroundImage: `url(${avatar})` }"
-            class="object-cover object-center h-36 w-full rounded-full border-4 border-white overflow-hidden"
+            class="object-cover object-center h-36 w-full rounded-full overflow-hidden"
           />
         </div>
 
         <button
-          class="edit-button absolute bottom-0 right-0 bg-white p-1.5 rounded-full shadow-lg z-10"
+          class="edit-button"
           @click="openModifyAvatar"
         >
           <svg
-            class="edit-svgIcon h-6 w-6 text-gray-600"
+            class="edit-svgIcon"
             viewBox="0 0 512 512"
           >
             <path
@@ -468,6 +468,25 @@ h2 {
 }
 .edit-button {
   background-color: $indigo;
+  width: 29px;
+  height: 29px;
+  border-radius: 10px;
+  border: 1px solid $indigo;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  text-decoration: none !important;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.edit-svgIcon {
+  width: 17px;
 }
 .edit-svgIcon path {
   fill: white;

@@ -52,7 +52,7 @@ export default defineComponent({
           :style="{ backgroundImage: `url(${celebration.celebration_type.picture})` }"
         />
         <div class="title">
-          <div class="category">
+          <div class="category line-clamp-2">
             {{ celebration.name }}
           </div>
           <NuxtLink :to="`/celebrationadmin/${celebration.celebration_id}`">
@@ -75,7 +75,7 @@ export default defineComponent({
           <span class="date">{{ celebration.dateDay }}</span>
           <span class="month">{{ celebration.dateMonth }}</span>
         </div>
-        <div class="heading">
+        <div class="heading line-clamp-3">
           {{ celebration.description }}
         </div>
         <a
@@ -146,6 +146,7 @@ export default defineComponent({
 
 .heading {
   font-weight: 600;
+  font-size: 0.8em;
   color: $grey;
   padding: 7px;
   background-color: white;
@@ -205,10 +206,10 @@ export default defineComponent({
 }
 
 .edit-button {
+  background-color: $tangerine;
   width: 29px;
   height: 29px;
   border-radius: 10px;
-  background-color: $tangerine;
   border: 1px solid $indigo;
   font-weight: 600;
   display: flex;

@@ -47,14 +47,14 @@ export default defineComponent({
         class="card-image"
         :style="{ backgroundImage: `url(${celebration.celebration_type.picture})` }"
       />
-      <div class="category">
+      <div class="category line-clamp-2">
         {{ celebration.name }}
       </div>
       <div class="date-box">
         <span class="date">{{ celebration.dateDay }}</span>
         <span class="month">{{ celebration.dateMonth }}</span>
       </div>
-      <div class="heading">
+      <div class="heading line-clamp-3">
         {{ celebration.description }}
       </div>
       <a
@@ -122,6 +122,7 @@ export default defineComponent({
 
 .heading {
   font-weight: 600;
+  font-size: 0.8em;
   color: $grey;
   padding: 7px;
   background-color: white;
