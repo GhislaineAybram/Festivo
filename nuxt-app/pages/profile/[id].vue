@@ -24,7 +24,9 @@ definePageMeta({
 })
 
 const { auth } = useSupabaseClient()
-const { data: { user } } = await auth.getUser()
+const {
+  data: { user },
+} = await auth.getUser()
 const metadata = user?.user_metadata
 
 const pseudo = computed(() => metadata?.alias || '')
@@ -173,32 +175,44 @@ const allergy = [
           @close="closeModifyAvatar"
         />
       </div>
-      <div id="photo-title-profile">
+
+      <div class="rounded-t-lg h-32 overflow-hidden">
+        <img
+          class="object-cover object-top w-full"
+          src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Mountain"
+        >
+      </div>
+      <div
+        class="mx-auto w-36 h-36 relative -mt-20 border-4 border-white rounded-full overflow-hidden"
+      >
         <div id="photo-profile">
           <div
             id="profile-picture"
             alt="profile avatar"
             :style="{ backgroundImage: `url(${avatar})` }"
-            class="inline-block h-40 w-40 rounded-full ring-2 ring-white"
+            class="object-cover object-center h-36 w-full rounded-full border-4 border-white overflow-hidden"
           />
-          <button
-            class="edit-button"
-            @click="openModifyAvatar"
-          >
-            <svg
-              class="edit-svgIcon"
-              viewBox="0 0 512 512"
-            >
-              <path
-                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
-              />
-            </svg>
-          </button>
         </div>
-        <h2
-          class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight"
+
+        <button
+          class="edit-button absolute bottom-0 right-0 bg-white p-1.5 rounded-full shadow-lg z-10"
+          @click="openModifyAvatar"
         >
-          {{ $t("welcome.title") }} {{ firstname }} !
+          <svg
+            class="edit-svgIcon h-6 w-6 text-gray-600"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="text-center mt-2">
+        <h2 class="font-semibold">
+          {{ pseudo }}
         </h2>
       </div>
 
@@ -389,13 +403,13 @@ const allergy = [
         <div class="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
-            class="text-sm font-semibold leading-6 text-gray-900"
+            class="min-w-32 mt-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 hover:bg-gray-50"
           >
             {{ $t("user.cancel") }}
           </button>
           <button
             type="submit"
-            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="min-w-32 mt-3 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             {{ $t("user.save") }}
           </button>
@@ -412,11 +426,13 @@ const allergy = [
               I am sure I want to delete my profile
             </p>
           </div>
-          <Button
-            label="Delete my profile"
-            severity="danger"
+          <button
+            type="submit"
+            class="min-w-32 rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
             @click="openDeleteAlert"
-          />
+          >
+            Delete my profile
+          </button>
         </div>
       </form>
       <AlertDeleteAccount
@@ -437,64 +453,25 @@ const allergy = [
 </template>
 
 <style lang="scss" scoped>
-#photo-title-profile {
-  position: relative;
-}
-#photo-profile {
-  position: relative;
-  display: inline-block;
-}
 #profile-picture {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
   background-color: $seashell;
   background-size: 75%;
   background-position: center;
   background-repeat: no-repeat;
-  border: 5px solid $tangerine;
-  z-index: -1;
   position: relative;
-  transform: scale(0.85);
 }
 h2 {
-  background-color: $haze;
   color: $indigo;
-  width: 100%;
-  height: 100px;
-  align-content: center;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  z-index: -2;
+}
+.relative {
+  overflow: visible;
 }
 .edit-button {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
   background-color: $indigo;
-  border: none;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-  cursor: pointer;
-  transition-duration: 0.3s;
-  overflow: hidden;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  text-decoration: none !important;
-}
-.edit-svgIcon {
-  width: 14px;
 }
 .edit-svgIcon path {
   fill: white;
 }
-
 #profile-details {
   display: flex;
   flex-direction: column;
@@ -505,7 +482,6 @@ h2 {
   padding: 1rem;
   width: 100%;
 }
-
 #accordion-header {
   padding-left: 0;
   padding-right: 0;
