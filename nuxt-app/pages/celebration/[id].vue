@@ -103,7 +103,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
 <template>
   <main class="main">
     <div class="bg-white">
-      <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2">
         <!-- bloc d'en-tête de l'événement -->
         <div id="photo-title-celebration">
           <h1 class="text-3xl font-bold sm:text-4xl">
@@ -130,7 +130,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div class="flex items-center">
               <EnvelopeOpenIcon
-                class="rounded-lg bg-indigo-800 size-8 text-white p-1.5"
+                class="icon rounded-lg size-8 text-white p-1.5"
               />
               <div class="font-medium text-gray-900 flex px-2">
                 {{ $t("celebration.answer") }}
@@ -165,38 +165,38 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
           </div>
 
           <!-- bloc info importantes événement -->
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-gray-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <CalendarIcon
-                class="rounded-lg bg-indigo-800 size-8 text-white p-1.5"
+                class="icon rounded-lg size-8 text-white p-1.5"
               />
               <div class="font-medium text-gray-900 flex px-2">
                 {{ $t("celebration.date") }}
               </div>
             </div>
             <div class="text-sm text-gray-500 self-center">
-              {{ $t("celebration.the") }} {{ celebration?.date }}
+              {{ $d(celebration?.date, { year: "numeric", month: "long", day: "numeric" }) }}
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-gray-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <ClockIcon
-                class="rounded-lg bg-indigo-800 size-8 text-white p-1.5"
+                class="icon rounded-lg size-8 text-white p-1.5"
               />
               <div class="font-medium text-gray-900 flex px-2">
                 {{ $t("celebration.hour") }}
               </div>
             </div>
             <div class="text-sm text-gray-500 self-center">
-              {{ $t("celebration.at") }} {{ celebration?.hour }}
+              {{ $t("celebration.at") }} {{ $d(celebration?.hour, { hour: "2-digit", minute: "2-digit" }) }}
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-gray-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <MapPinIcon
-                class="rounded-lg bg-indigo-800 size-8 text-white p-1.5"
+                class="icon rounded-lg size-8 text-white p-1.5"
               />
               <div class="font-medium text-gray-900 flex px-2">
                 {{ $t("celebration.address") }}
@@ -207,10 +207,10 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-gray-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <InformationCircleIcon
-                class="rounded-lg bg-indigo-800 size-8 text-white p-1.5"
+                class="icon rounded-lg size-8 text-white p-1.5"
               />
               <div class="font-medium text-gray-900 flex px-2">
                 Info annexes
@@ -223,7 +223,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
         </div>
       </div>
 
-      <h3 class="text-2xl text-gray-900">
+      <h3 class="text-2xl text-gray-900 text-center">
         {{ celebration?.description }}
       </h3>
 
@@ -233,7 +233,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
       >
         <div class="flex items-center">
           <UsersIcon
-            class="rounded-lg bg-indigo-800 size-8 text-white p-1.5"
+            class="icon rounded-lg size-8 text-white p-1.5"
           />
           <div class="font-medium text-gray-900 flex px-2">
             {{ nbGuests }} {{ $t("celebration.guests") }}
@@ -267,7 +267,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
         </div>
 
         <div class="border-t border-gray-200 pt-4 flex">
-          <GiftIcon class="rounded-lg bg-indigo-800 size-8 text-white p-1.5" />
+          <GiftIcon class="icon rounded-lg size-8 text-white p-1.5" />
           <div class="flex items-center">
             <div class="font-medium text-gray-900 flex px-2">
               Lien cagnotte
@@ -277,7 +277,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
 
         <div class="border-t border-gray-200 pt-4 flex">
           <MusicalNoteIcon
-            class="rounded-lg bg-indigo-800 size-8 text-white p-1.5"
+            class="icon rounded-lg size-8 text-white p-1.5"
           />
           <div class="flex items-center">
             <div class="font-medium text-gray-900 flex px-2">
@@ -287,7 +287,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
         </div>
 
         <div class="border-t border-gray-200 pt-4 flex">
-          <TrophyIcon class="rounded-lg bg-indigo-800 size-8 text-white p-1.5" />
+          <TrophyIcon class="icon rounded-lg size-8 text-white p-1.5" />
           <div class="flex items-center">
             <div class="font-medium text-gray-900 flex px-2">
               Concours déguisement
@@ -338,7 +338,8 @@ h3 {
   color: $indigo;
   background-color: $haze;
   width: 100%;
-  height: 100px;
+  min-height: 75px;
+  height: 100%;
   align-content: center;
   text-align: left;
   padding-left: 50px;
@@ -352,6 +353,9 @@ h3 {
 }
 .main {
   padding-bottom: 1rem;
+}
+.icon {
+  background-color: $indigo;
 }
 @media (min-width: 1024px) {
   #celebration-details {
