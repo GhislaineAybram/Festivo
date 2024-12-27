@@ -15,7 +15,11 @@ const { setLocale } = useI18n()
 const { t } = useI18n()
 
 const { auth } = useSupabaseClient()
-const user = useSupabaseUser()
+const {
+  data: { user },
+} = await auth.getUser()
+const metadata = user?.user_metadata
+const alias = computed(() => metadata?.alias || '')
 
 const userLogout = async () => {
   await auth.signOut()
@@ -23,7 +27,7 @@ const userLogout = async () => {
 }
 
 const getProfilePage = () => {
-  return user.value ? `/profile/${user.value.id}` : '/' // Redirige vers le profil si l'utilisateur est connecté
+  return user ? `/profile/${user.id}` : '/' // Redirige vers le profil si l'utilisateur est connecté
 }
 
 const navigation = computed(() => {
@@ -37,7 +41,7 @@ const navigation = computed(() => {
   ]
 
   // Ajouter le lien "Login" seulement si l'utilisateur n'est pas connecté
-  if (!user.value) {
+  if (!user) {
     baseLinks.push({
       name: t('menubar.login'), // Traduction pour le login
       href: '/login',
@@ -74,10 +78,10 @@ const changeLanguage = (code: 'en' | 'fr') => {
 const avatar = ref('pi pi-user')
 const runtimeConfig = useRuntimeConfig()
 watchEffect(async () => {
-  if (user.value && user.value.id) {
+  if (user && user.id) {
     const { data: userAvatar, error: userAvatarError }
       = await useFetch<UserWithAvatar>(
-        () => `${runtimeConfig.public.apiUrl}/user/${user.value!.id}`,
+        () => `${runtimeConfig.public.apiUrl}/user/${user!.id}`,
       )
     if (userAvatarError.value) {
       console.error('Failed to fetch user data', userAvatarError.value)
@@ -149,7 +153,12 @@ watchEffect(async () => {
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-          <div class="flex items-center space-x-12">
+          <div class="flex items-center space-x-6">
+            <p
+              class="relative hidden sm:ml-6 sm:block text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-sm font-medium"
+            >
+              {{ $t("welcome.title") }} {{ alias }} !
+            </p>
             <!-- Dropdown pour sélection de langue -->
             <Menu
               as="div"
@@ -281,6 +290,22 @@ watchEffect(async () => {
 
     <DisclosurePanel class="sm:hidden">
       <div class="space-y-1 px-2 pb-3 pt-2">
+        <hr
+          class="border-gray-700"
+          style="margin: 0 0 30px 0"
+        >
+
+        <p
+          class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+        >
+          {{ $t("welcome.title") }} {{ alias }} !
+        </p>
+
+        <hr
+          class="border-gray-700"
+          style="margin: 30px 0"
+        >
+
         <DisclosureButton
           v-for="item in navigation"
           :key="item.name"

@@ -39,14 +39,14 @@ export default defineComponent({
 <template>
   <div
     v-if="celebrations && formattedCelebrations.length > 0"
-    class="grid grid-cols-1 sm:grid-cols-1"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 p-3"
   >
     <div
       v-for="celebration in formattedCelebrations"
       :key="celebration.celebration_id"
       class="parent"
     >
-      <div class="card">
+      <div class="card ">
         <div
           class="card-image"
           :style="{ backgroundImage: `url(${celebration.celebration_type.picture})` }"
@@ -79,7 +79,7 @@ export default defineComponent({
           {{ celebration.description }}
         </div>
         <a
-          class="action"
+          class="action place-content-between"
           :href="`/celebration/${celebration.celebration_id}`"
         >
           {{ $t("welcome.event_link") }}
@@ -95,11 +95,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .parent {
-  display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  padding: 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
 }
 
 .card {
@@ -107,8 +109,9 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   flex: 1 1 calc(100% - 2rem);
-  width: 272px;
-  height: 272px;
+  width: 280px;
+  max-width: 300px;
+  height: auto;
   background: white;
   padding: 0.5em;
   border-radius: 6px;
@@ -138,6 +141,7 @@ export default defineComponent({
   color: $indigo;
   padding: 10px 7px 0;
   background-color: white;
+  height: 46px;
 }
 
 .category:hover {
@@ -150,6 +154,7 @@ export default defineComponent({
   color: $grey;
   padding: 7px;
   background-color: white;
+  height: 70px;
 }
 
 .heading:hover {
@@ -191,7 +196,7 @@ export default defineComponent({
   display: inline-flex;
   margin-top: auto;
   color: $indigo;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   line-height: 1.25rem;
   font-weight: 500;
   align-items: center;
@@ -220,7 +225,7 @@ export default defineComponent({
   transition-duration: 0.3s;
   overflow: hidden;
   text-decoration: none !important;
-  margin-top: 3px;
+  margin-top: 9px;
 }
 .edit-svgIcon {
   width: 17px;

@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import type { CelebrationsByAuthorResponse, CelebrationsByGuestResponse } from '~/types'
+import type {
+  CelebrationsByAuthorResponse,
+  CelebrationsByGuestResponse,
+} from '~/types'
 
 const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
-const metadata = user?.user_metadata
-
-const firstname = computed(() => metadata?.firstname || '')
+const { data: { user } } = await auth.getUser()
 
 watchEffect(() => {
   if (!user) {
@@ -18,19 +16,27 @@ watchEffect(() => {
 const runtimeConfig = useRuntimeConfig()
 
 // celebrations list by author
-const { data: celebrationsByAuthor, error: celebrationsByAuthorError } = await useFetch<CelebrationsByAuthorResponse>(
-  () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user!.id}`,
-)
+const { data: celebrationsByAuthor, error: celebrationsByAuthorError }
+  = await useFetch<CelebrationsByAuthorResponse>(
+    () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user!.id}`,
+  )
 if (celebrationsByAuthorError.value) {
-  console.error('Failed to fetch celebrations by author', celebrationsByAuthorError.value)
+  console.error(
+    'Failed to fetch celebrations by author',
+    celebrationsByAuthorError.value,
+  )
 }
 
 // celebrations list by guest
-const { data: celebrationsByGuest, error: celebrationsByGuestError } = await useFetch<CelebrationsByGuestResponse>(
-  () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user!.id}`,
-)
+const { data: celebrationsByGuest, error: celebrationsByGuestError }
+  = await useFetch<CelebrationsByGuestResponse>(
+    () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user!.id}`,
+  )
 if (celebrationsByGuestError.value) {
-  console.error('Failed to fetch celebrations by guest', celebrationsByGuestError.value)
+  console.error(
+    'Failed to fetch celebrations by guest',
+    celebrationsByGuestError.value,
+  )
 }
 
 const celebrationsListByAuthor = computed(() => {
@@ -53,20 +59,23 @@ const celebrationsListByGuest = computed(() => {
   return { upcoming: [], past: [] } // Valeurs par défaut en cas d'erreur
 })
 
-const upcomingCelebrationsCreated = computed(() => celebrationsListByAuthor.value.upcoming)
-const pastCelebrationsCreated = computed(() => celebrationsListByAuthor.value.past)
-const upcomingCelebrationsInvited = computed(() => celebrationsListByGuest.value.upcoming)
-const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.past)
+const upcomingCelebrationsCreated = computed(
+  () => celebrationsListByAuthor.value.upcoming,
+)
+const pastCelebrationsCreated = computed(
+  () => celebrationsListByAuthor.value.past,
+)
+const upcomingCelebrationsInvited = computed(
+  () => celebrationsListByGuest.value.upcoming,
+)
+const pastCelebrationsInvited = computed(
+  () => celebrationsListByGuest.value.past,
+)
 </script>
 
 <template>
   <main class="main">
     <div v-if="user">
-      <h2
-        class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:tracking-tight"
-      >
-        {{ $t("welcome.title") }} {{ firstname }} !
-      </h2>
       <h1
         class="w-full text-2xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight"
       >
@@ -123,7 +132,7 @@ h2 {
   text-align: center;
 }
 h1 {
-  background-color: $tangerine;
+  background-color: $haze;
   color: $indigo;
   width: 100%;
   height: 50px;
