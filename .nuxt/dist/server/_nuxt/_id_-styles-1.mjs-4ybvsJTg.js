@@ -1,0 +1,5 @@
+const _id__vue_vue_type_style_index_0_scoped_faa33ad9_lang = "#profile-picture[data-v-faa33ad9]{background-color:#fff6f0;background-position:50%;background-repeat:no-repeat;background-size:75%;position:relative}h2[data-v-faa33ad9]{color:#180161}.relative[data-v-faa33ad9]{overflow:visible}.edit-button[data-v-faa33ad9]{align-items:center;background-color:#180161;border:1px solid #180161;border-radius:10px;bottom:0;box-shadow:0 0 20px rgba(0,0,0,.164);cursor:pointer;display:flex;font-weight:600;height:29px;justify-content:center;overflow:hidden;position:absolute;right:0;text-decoration:none!important;transition-duration:.3s;width:29px}.edit-svgIcon[data-v-faa33ad9]{width:17px}.edit-svgIcon path[data-v-faa33ad9]{fill:#fff}#profile-details[data-v-faa33ad9]{align-items:left;display:flex;flex-direction:column;margin-left:auto;margin-right:auto;max-width:1024px;padding:1rem;width:100%}#accordion-header[data-v-faa33ad9]{padding-left:0;padding-right:0}";
+export {
+  _id__vue_vue_type_style_index_0_scoped_faa33ad9_lang as default
+};
+//# sourceMappingURL=_id_-styles-1.mjs-4ybvsJTg.js.map
