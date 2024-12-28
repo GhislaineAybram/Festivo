@@ -49,7 +49,8 @@ const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
 
-const active = ref('0')
+const activeDiet = ref('0')
+const activeAllergy = ref('0')
 
 const isModifyAvatarOpened = ref(false)
 
@@ -95,6 +96,29 @@ const deleteAccount = async (user_id: string) => {
     }
   }
 }
+
+const diet = [
+  {
+    name: 'Végétarien',
+    description: 'xxx',
+    selected: false,
+  },
+  {
+    name: 'Végétalien',
+    description: 'xxx',
+    selected: false,
+  },
+  {
+    name: 'Vegan',
+    description: 'xxx',
+    selected: false,
+  },
+  {
+    name: 'Pescetarien',
+    description: 'xxx',
+    selected: false,
+  },
+]
 
 const allergy = [
   {
@@ -293,7 +317,7 @@ const allergy = [
           </div>
         </div>
 
-        <div class="border-y border-gray-900/10 py-6 my-6">
+        <div class="border-y border-gray-900/10 py-6">
           <h3 class="text-xl font-semibold leading-7 text-gray-900">
             {{ $t("user.alimentation") }}
           </h3>
@@ -304,42 +328,118 @@ const allergy = [
 
         <fieldset>
           <div class="card">
-            <Accordion v-model:value="active">
+            <Accordion v-model:value="activeDiet">
               <AccordionPanel value="1">
                 <AccordionHeader
                   id="accordion-header"
-                  class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3"
+                  class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
                 >
                   <div
-                    class="text-sm font-semibold leading-6 text-gray-900 col-span-1 sm:w-auto"
+                    class="text-sm font-semibold leading-6 text-gray-900 w-full sm:w-auto mb-3 sm:mb-0"
+                  >
+                    {{ $t("user.diet") }}
+                  </div>
+                  <div class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0">
+                    <div class="flex items-center gap-x-1">
+                      <input
+                        id="push-email"
+                        name="push-notifications"
+                        type="radio"
+                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        @click="activeDiet = '1'"
+                      >
+                      <label
+                        for="push-email"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                      >{{ $t("user.yes") }}</label>
+                    </div>
+                    <div class="flex items-center gap-x-1">
+                      <input
+                        id="push-nothing"
+                        name="push-notifications"
+                        type="radio"
+                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        @click="activeDiet = '0'"
+                      >
+                      <label
+                        for="push-nothing"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                      >{{ $t("user.no") }}</label>
+                    </div>
+                  </div>
+                </AccordionHeader>
+                <AccordionContent>
+                  <div
+                    v-for="item in diet"
+                    :key="item.name"
+                    class="relative flex gap-x-6"
+                  >
+                    <div class="flex h-6 items-center">
+                      <input
+                        id="comments"
+                        name="comments"
+                        type="checkbox"
+                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                      >
+                    </div>
+                    <div class="text-sm leading-6">
+                      <label
+                        for="comments"
+                        class="font-medium text-gray-900"
+                      >{{
+                        item.name
+                      }}</label>
+                      <p class="text-gray-500">
+                        {{ item.description }}
+                      </p>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionPanel>
+            </Accordion>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div class="card">
+            <Accordion v-model:value="activeAllergy">
+              <AccordionPanel value="1">
+                <AccordionHeader
+                  id="accordion-header"
+                  class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
+                >
+                  <div
+                    class="text-sm font-semibold leading-6 text-gray-900 w-full sm:w-auto mb-3 sm:mb-0"
                   >
                     {{ $t("user.allergies") }}
                   </div>
-                  <div class="flex items-center gap-x-1 col-span-1">
-                    <input
-                      id="push-email"
-                      name="push-notifications"
-                      type="radio"
-                      class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      @click="active = '1'"
-                    >
-                    <label
-                      for="push-email"
-                      class="block text-sm font-medium leading-6 text-gray-900"
-                    >{{ $t("user.yes") }}</label>
-                  </div>
-                  <div class="flex items-center gap-x-1 col-span-1">
-                    <input
-                      id="push-nothing"
-                      name="push-notifications"
-                      type="radio"
-                      class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      @click="active = '0'"
-                    >
-                    <label
-                      for="push-nothing"
-                      class="block text-sm font-medium leading-6 text-gray-900"
-                    >{{ $t("user.no") }}</label>
+                  <div class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0">
+                    <div class="flex items-center gap-x-1">
+                      <input
+                        id="push-email"
+                        name="push-notifications"
+                        type="radio"
+                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        @click="activeAllergy = '1'"
+                      >
+                      <label
+                        for="push-email"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                      >{{ $t("user.yes") }}</label>
+                    </div>
+                    <div class="flex items-center gap-x-1">
+                      <input
+                        id="push-nothing"
+                        name="push-notifications"
+                        type="radio"
+                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        @click="activeAllergy = '0'"
+                      >
+                      <label
+                        for="push-nothing"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                      >{{ $t("user.no") }}</label>
+                    </div>
                   </div>
                 </AccordionHeader>
                 <AccordionContent>

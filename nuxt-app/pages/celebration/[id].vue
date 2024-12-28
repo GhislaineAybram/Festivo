@@ -189,7 +189,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
               </div>
             </div>
             <div class="text-sm text-gray-500 self-center">
-              {{ $t("celebration.at") }} {{ $d(celebration?.hour, { hour: "2-digit", minute: "2-digit" }) }}
+              {{ $d(new Date(`${new Date().toISOString().split('T')[0]}T${celebration?.hour}`), { hour: "2-digit", minute: "2-digit" }) }}
             </div>
           </div>
 

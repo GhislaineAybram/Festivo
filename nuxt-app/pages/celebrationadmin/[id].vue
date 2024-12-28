@@ -23,7 +23,7 @@ const celebrationTitle = computed(() => celebration.value.name || '')
 const celebrationType = computed(() => celebration.value.celebration_type.category || '')
 const celebrationDescription = computed(() => celebration.value.description || '')
 const celebrationDate = computed(() => celebration.value.date || '')
-const celebrationTime = computed(() => celebration.value.hour || '')
+const celebrationTime = computed(() => celebration.value.hour.split(':').slice(0, 2).join(':') || '')
 const celebrationAddress = computed(() => celebration.value.address || '')
 
 const errorMsg = ref('')
