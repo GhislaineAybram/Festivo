@@ -18,16 +18,12 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: |
-          cd nuxt-app
-          npm install
+        run: npm install
 
       - run: echo "💡 The workflow is now ready to linter your code."
 
       - name: Run linter
-        run: |
-          cd nuxt-app
-          npm run lint
+        run: npm run lint
 
       - run: echo "🐧 The workflow is now ready to build your project."
 
@@ -35,9 +31,7 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: |
-          cd nuxt-app
-          npm run build --preset github_pages
+        run: npm run build --preset github_pages
 
   # test:
   #   runs-on: ubuntu-latest

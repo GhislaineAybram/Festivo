@@ -1,0 +1,1 @@
+export { default } from "file:///C:/Users/ghiso/Documents/RNCP/Festify/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
