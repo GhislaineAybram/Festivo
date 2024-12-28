@@ -1,13 +1,13 @@
 # Nuxt dev/build outputs
-nuxt-app/.output
-nuxt-app/.data
-nuxt-app/.nuxt
-nuxt-app/.nitro
-nuxt-app/.cache
-nuxt-app/dist
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+.vercel
 
 # Node dependencies
-nuxt-app/node_modules
 node_modules
 
 # Logs

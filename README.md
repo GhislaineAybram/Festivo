@@ -23,6 +23,5 @@ Ce projet est créé dans le cadre du RNCP Concepteur / développeur d'applicati
 Lancement serveur local et exécution Nuxt :
 
 ```bash
-cd nuxt-app/
 npm run dev
 ```
