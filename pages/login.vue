@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { isAuthApiError } from '@supabase/supabase-js'
-import AlertLoggedIn from '~/components/AlertLoggedIn.vue'
 
 const email = ref('')
 const password = ref('')

@@ -8,7 +8,7 @@
       </h1>
       <p
         id="updated"
-        class="mb-4"
+        class="mb-4 text-sm"
       >
         {{ $t("privacy.version", { edited: '03/12/2024', updated: '03/12/2024' }) }}
       </p>
@@ -297,7 +297,7 @@ a:hover {
   text-align: right;
 }
 .privacy {
-  width: 90%;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
   padding: 1rem;

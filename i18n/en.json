@@ -22,7 +22,12 @@
     "no": "No",
     "other": "Others",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "delete": {
+      "title": "Delete my profile",
+      "description": "Deleting your account will permanently and irrevocably remove your profile and details from our database. You will not be able to reinstate it in any way.",
+      "button": "Delete my profile"
+    }
   },
   "avatar": {
     "modification_title": "Please select the avatar you want to use"
@@ -48,7 +53,17 @@
     "no-celebration-invited": "No invitation",
     "successfull": "Celebration creation successful",
     "success_message": "You can now invite your friends !",
-    "finished": "Over"
+    "finished": "Over",
+    "modification": {
+      "title": "Modify your event",
+      "save": "Save changes",
+      "share": {
+        "button": "Share",
+        "title": "Share this link",
+        "copied": "copied",
+        "guests": "Guests"
+      }
+    }
   },
   "login": {
     "title": "Sign in to your account",

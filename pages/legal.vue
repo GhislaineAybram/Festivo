@@ -134,7 +134,7 @@ a:hover {
   text-decoration-color: $grey;
 }
 .legal {
-  width: 90%;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
   padding: 1rem;

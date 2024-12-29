@@ -49,7 +49,7 @@ const copyToClipboard = async () => {
     <Button
       type="button"
       icon="pi pi-share-alt"
-      label="Share"
+      :label="$t('celebration.modification.share.button')"
       @click="toggle"
     />
 
@@ -59,7 +59,7 @@ const copyToClipboard = async () => {
     >
       <div class="flex flex-col gap-4 w-[25rem]">
         <div>
-          <span class="font-medium block mb-2">Share this document</span>
+          <span class="font-medium block mb-2">{{ $t("celebration.modification.share.title") }}</span>
           <InputGroup>
             <InputText
               :value="`${runtimeConfig.public.url}/celebration/${celebrationId}`"
@@ -77,13 +77,13 @@ const copyToClipboard = async () => {
                 v-if="copySuccess"
                 class="text-green-500 transition-opacity duration-500 text-xs"
               >
-                copied
+                {{ $t("celebration.modification.share.copied") }}
               </span>
             </InputGroupAddon>
           </InputGroup>
         </div>
         <div class="flex items-center justify-between">
-          <span class="font-medium block mb-2">Invités</span>
+          <span class="font-medium block mb-2">{{ $t("celebration.modification.share.guests") }}</span>
           <!-- <Button
             label="Invite"
             icon="pi pi-users"

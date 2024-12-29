@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import AccordionPanel from 'primevue/accordionpanel'
-import { useRuntimeConfig } from '#app'
-import ModifyAvatar from '~/components/ModifyAvatar.vue'
 import type { UserWithAvatar } from '~/types'
 
 const isDeleteAlertVisible = ref(false)
@@ -520,10 +518,10 @@ const allergy = [
         >
           <div>
             <h3 class="text-xl font-semibold leading-7 text-gray-900">
-              Delete my profile
+              {{ $t("user.delete.title") }}
             </h3>
             <p class="mt-1 text-sm leading-6 text-gray-600">
-              I am sure I want to delete my profile
+              {{ $t("user.delete.description") }}
             </p>
           </div>
           <button
@@ -531,7 +529,7 @@ const allergy = [
             class="min-w-32 rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
             @click="openDeleteAlert"
           >
-            Delete my profile
+            {{ $t("user.delete.button") }}
           </button>
         </div>
       </form>
