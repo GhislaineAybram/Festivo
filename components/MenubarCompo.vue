@@ -85,6 +85,7 @@ const changeLanguage = async (code: 'en' | 'fr') => {
     console.log('Langue mise à jour dans la session:', code)
   }
 }
+
 // Récupération de la langue à partir des métadonnées au chargement
 if (metadata?.language) {
   setLocale(metadata.language)
@@ -93,6 +94,7 @@ if (metadata?.language) {
 }
 const avatar = ref('pi pi-user')
 const runtimeConfig = useRuntimeConfig()
+
 watchEffect(async () => {
   if (user && user.id) {
     const { data: userAvatar, error: userAvatarError }

@@ -12,11 +12,6 @@ const registrationSuccess = ref(false)
 
 const { auth } = useSupabaseClient()
 
-const formatName = (name: string) => {
-  if (!name) return ''
-  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-}
-
 const submitRegisterForm = async () => {
   if (!accept.value) {
     errorMsg.value = 'Vous devez accepter les termes et conditions.'
