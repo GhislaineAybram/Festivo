@@ -69,11 +69,27 @@ const currentFlag = ref(
   'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
 )
 
-const changeLanguage = (code: 'en' | 'fr') => {
+const changeLanguage = async (code: 'en' | 'fr') => {
   setLocale(code)
   currentLocale.value = code
   currentFlag.value
     = languages.find(lang => lang.code === code)?.flag || currentFlag.value
+  // Mise à jour de la session utilisateur avec la langue sélectionnée
+  const { error } = await auth.updateUser({
+    data: { language: code },
+  })
+  if (error) {
+    console.error('Erreur lors de la mise à jour de la langue dans la session:', error.message)
+  }
+  else {
+    console.log('Langue mise à jour dans la session:', code)
+  }
+}
+// Récupération de la langue à partir des métadonnées au chargement
+if (metadata?.language) {
+  setLocale(metadata.language)
+  currentLocale.value = metadata.language
+  currentFlag.value = languages.find(lang => lang.code === metadata.language)?.flag || currentFlag.value
 }
 const avatar = ref('pi pi-user')
 const runtimeConfig = useRuntimeConfig()
