@@ -81,7 +81,7 @@ if (isComingError.value) {
 // add the response guest
 async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
   const response = (await $fetch(`/api/guest/${userId}/${id}`, {
-    method: 'POST',
+    method: 'PUT',
     body: {
       userId: userId,
       celebrationId: id,
@@ -122,13 +122,17 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
           </p>
         </div>
 
+        <h3 class="text-2xl text-gray-900 text-center sm:hidden">
+          {{ celebration?.description }}
+        </h3>
+
         <!-- bloc de réponse de l'utilisateur -->
         <div
           id="important-info"
           class="content-center"
         >
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <div class="flex items-center">
+            <div class="flex items-center mt-4">
               <EnvelopeOpenIcon
                 class="icon rounded-lg size-8 text-white p-1.5"
               />
@@ -136,7 +140,10 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
                 {{ $t("celebration.answer") }}
               </div>
             </div>
-            <div id="celebration-answer">
+            <div
+              id="celebration-answer"
+              class="mt-4"
+            >
               <Button
                 icon="pi pi-check"
                 severity="success"
@@ -146,7 +153,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
                 @click="updateIsComingGuestInDatabase(true)"
               />
               <Button
-                icon="pi pi-bell"
+                icon="pi pi-question"
                 severity="warn"
                 rounded
                 aria-label="Notification"
@@ -217,80 +224,83 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
               </div>
             </div>
             <div class="text-sm text-gray-500 self-center">
-              blablabla
+              blablaa
             </div>
+            <div class="mt-0" />
           </div>
         </div>
       </div>
-
-      <h3 class="text-2xl text-gray-900 text-center">
-        {{ celebration?.description }}
-      </h3>
-
-      <div
-        id="option-info"
-        class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 mt-4"
-      >
-        <div class="flex items-center">
-          <UsersIcon
-            class="icon rounded-lg size-8 text-white p-1.5"
-          />
-          <div class="font-medium text-gray-900 flex px-2">
-            {{ nbGuests }} {{ $t("celebration.guests") }}
-          </div>
-        </div>
-        <div class="flex space-x-1">
-          <div
-            v-for="(guest, index) in guestInfoList"
-            :key="index"
-          >
-            <div
-              :style="{
-                backgroundImage: `url(${
-                  guest.user_id.avatar.picture || defaultAvatarUrl
-                })`,
-              }"
-              :alt="
-                guest.user_id.avatar.picture_description || 'User avatar'
-              "
-              class="inline-block size-12 rounded-full ring-2 guest-avatar"
-              :class="{
-                'ring-green-500': guest.is_coming === true,
-                'ring-red-500': guest.is_coming === false,
-                'ring-gray-500': guest.is_coming === null,
-              }"
+      <div class="border-t border-gray-200">
+        <h3 class="text-2xl text-gray-900 text-center hidden sm:block">
+          {{ celebration?.description }}
+        </h3>
+      </div>
+      <div class="border-t border-gray-200">
+        <div
+          id="option-info"
+          class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+        >
+          <div class="flex items-center">
+            <UsersIcon
+              class="icon rounded-lg size-8 text-white p-1.5"
             />
-            <p class="mt-2 text-xs text-gray-900 text-center">
-              {{ guest.user_id.alias }}
-            </p>
-          </div>
-        </div>
-
-        <div class="border-t border-gray-200 pt-4 flex">
-          <GiftIcon class="icon rounded-lg size-8 text-white p-1.5" />
-          <div class="flex items-center">
             <div class="font-medium text-gray-900 flex px-2">
-              Lien cagnotte
+              {{ nbGuests }} {{ $t("celebration.guests") }}
             </div>
           </div>
-        </div>
-
-        <div class="border-t border-gray-200 pt-4 flex">
-          <MusicalNoteIcon
-            class="icon rounded-lg size-8 text-white p-1.5"
-          />
-          <div class="flex items-center">
-            <div class="font-medium text-gray-900 flex px-2">
-              Playlist participative
+          <div class="flex space-x-1 mt-4">
+            <div
+              v-for="(guest, index) in guestInfoList"
+              :key="index"
+            >
+              <div
+                :style="{
+                  backgroundImage: `url(${
+                    guest.user_id.avatar.picture || defaultAvatarUrl
+                  })`,
+                }"
+                :alt="
+                  guest.user_id.avatar.picture_description || 'User avatar'
+                "
+                class="inline-block size-12 rounded-full ring-2 guest-avatar"
+                :class="{
+                  'ring-green-500': guest.is_coming === true,
+                  'ring-red-500': guest.is_coming === false,
+                  'ring-gray-500': guest.is_coming === null,
+                }"
+              />
+              <p class="mt-1 text-xs text-gray-900 text-center">
+                {{ guest.user_id.alias }}
+              </p>
             </div>
           </div>
-        </div>
 
-        <div class="border-t border-gray-200 pt-4 flex">
-          <TrophyIcon class="icon rounded-lg size-8 text-white p-1.5" />
-          <div class="flex items-center">
-            <div class="font-medium text-gray-900 flex px-2">
-              Concours déguisement
+          <div class="border-t border-gray-200 pt-4 flex">
+            <GiftIcon class="icon rounded-lg size-8 text-white p-1.5" />
+            <div class="flex items-center">
+              <div class="font-medium text-gray-900 flex px-2">
+                Lien cagnotte
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 pt-4 flex">
+            <MusicalNoteIcon
+              class="icon rounded-lg size-8 text-white p-1.5"
+            />
+            <div class="flex items-center">
+              <div class="font-medium text-gray-900 flex px-2">
+                Playlist participative
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 pt-4 mb-4 flex">
+            <TrophyIcon class="icon rounded-lg size-8 text-white p-1.5" />
+            <div class="flex items-center">
+              <div class="font-medium text-gray-900 flex px-2">
+                Concours déguisement
+              </div>
             </div>
           </div>
         </div>
@@ -333,7 +343,9 @@ h1 {
 }
 #option-info {
   padding-left: 1rem;
+  background-color: $whisper;
 }
+
 h3 {
   color: $indigo;
   background-color: $haze;
@@ -350,9 +362,6 @@ h3 {
   background-size: 75%;
   background-position: center;
   background-repeat: no-repeat;
-}
-.main {
-  padding-bottom: 1rem;
 }
 .icon {
   background-color: $indigo;

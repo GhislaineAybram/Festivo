@@ -1,4 +1,4 @@
-// guest/[user]/[celebration].post.ts
+// guest/[user]/[celebration].put.ts
 import type { Guest } from '~/types'
 import { updateIsComingGuest } from '~~/supabase'
 
