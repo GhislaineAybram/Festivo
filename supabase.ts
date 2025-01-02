@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from './database.types'
-import type { Avatar, Celebration, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, User, UserWithAvatar } from './types'
+import type { Avatar, Celebration, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, UpdateCelebrationData, User, UserWithAvatar } from './types'
 
 const supabaseUrl = process.env.SUPABASE_URL!
 const supabaseKey = process.env.SUPABASE_KEY!
@@ -71,7 +71,7 @@ export const getCelebrationById = async (id: string): Promise<CelebrationWithPic
     .from('celebration')
     .select(`
       *,
-      celebration_type:celebration_type(picture, category),
+      celebration_type:celebration_type(celebration_type_id, picture, category),
       author:user(firstname)
     `)
     .eq('celebration_id', id)
@@ -81,6 +81,20 @@ export const getCelebrationById = async (id: string): Promise<CelebrationWithPic
     return null
   }
   return data as CelebrationWithPictureAndAuthor
+}
+
+export const updateCelebrationById = async (id: string, newCelebrationData: UpdateCelebrationData): Promise<CelebrationWithPictureAndAuthor | null> => {
+  const { data, error } = await supabase
+    .from('celebration')
+    .update(newCelebrationData)
+    .eq('celebration_id', id)
+    .select()
+    .single()
+  if (error) {
+    console.error('Error updating celebration informations:', error)
+    return null
+  }
+  return data ? data : null
 }
 
 export const getIsComingGuest = async (userId: string, celebrationId: string): Promise<boolean | null> => {

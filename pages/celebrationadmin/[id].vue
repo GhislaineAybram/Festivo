@@ -7,26 +7,81 @@ definePageMeta({
 })
 
 const { auth } = useSupabaseClient()
-const { data: { user } } = await auth.getUser()
+const {
+  data: { user },
+} = await auth.getUser()
 
 const { id } = useRoute().params as { id: string }
 
 const runtimeConfig = useRuntimeConfig()
-const { data: celebration, error: celebrationError } = await useFetch<CelebrationWithPictureAndAuthor>(
-  () => `${runtimeConfig.public.apiUrl}/celebration/${id}`,
-)
-if (celebrationError.value) {
-  console.error('Failed to fetch celebration data', celebrationError.value)
+
+const celebrationTitle = ref<string>('')
+const celebrationType = ref('')
+const celebrationDescription = ref('')
+const celebrationDate = ref<Date | null>(null)
+const celebrationTime = ref()
+const celebrationAddress = ref('')
+const updateSuccess = ref(false)
+
+async function loadCelebrationData(id: string) {
+  try {
+    const { data: celebration, error: celebrationError }
+      = await useFetch<CelebrationWithPictureAndAuthor>(
+        () => `${runtimeConfig.public.apiUrl}/celebration/${id}`,
+      )
+    if (celebrationError.value) {
+      console.error('Failed to fetch celebration data', celebrationError.value)
+    }
+    celebrationTitle.value = celebration.value.name
+    celebrationType.value = celebration.value.celebration_type.celebration_type_id
+    celebrationDescription.value = celebration.value.description
+    celebrationDate.value = celebration.value.date
+    celebrationTime.value = new Date(`1970-01-01T${celebration.value.hour}`)
+    celebrationAddress.value = celebration.value.address
+  }
+  catch (err) {
+    console.error('Erreur lors du chargement de l’événement :', err)
+    errorMsg.value = 'Impossible de charger les informations de l’événement.'
+  }
 }
 
-const celebrationTitle = computed(() => celebration.value.name || '')
-const celebrationType = computed(() => celebration.value.celebration_type.category || '')
-const celebrationDescription = computed(() => celebration.value.description || '')
-const celebrationDate = computed(() => celebration.value.date || '')
-const celebrationTime = computed(() => celebration.value.hour.split(':').slice(0, 2).join(':') || '')
-const celebrationAddress = computed(() => celebration.value.address || '')
+onMounted(() => {
+  loadCelebrationData(id)
+})
 
 const errorMsg = ref('')
+
+async function updateCelebrationInformations(id: string) {
+  if (!celebrationDate.value || !celebrationTime.value) {
+    console.error('La date ou l\'heure n\'est pas définie.')
+    return
+  }
+  const formattedDate = celebrationDate.value ? formatDate(celebrationDate.value) : null
+  const formattedTime = celebrationTime.value ? formatTime(celebrationTime.value) : null
+
+  const response = (await $fetch(`/api/celebration/${id}`, {
+    method: 'PUT',
+    body: {
+      celebration_id: id,
+      name: celebrationTitle.value,
+      celebration_type: celebrationType.value,
+      description: celebrationDescription.value,
+      date: formattedDate,
+      hour: formattedTime,
+      address: celebrationAddress.value,
+    },
+  })) as { error?: string }
+
+  if (response.error) {
+    console.error(
+      `Erreur lors de la mise à jour de l'événement :`,
+      response.error,
+    )
+    return
+  }
+
+  updateSuccess.value = true
+}
 </script>
 
 <template>
@@ -40,10 +95,11 @@ const errorMsg = ref('')
           {{ $t("celebration.modification.title") }}
         </h1>
       </div>
-      <ShareInvitation
-        :celebration-id="id"
-      />
-      <form class="mx-auto mt-10 max-w-xl sm:mt-10">
+      <ShareInvitation :celebration-id="id" />
+      <form
+        class="mx-auto mt-10 max-w-xl sm:mt-10"
+        @submit.prevent="updateCelebrationInformations(id)"
+      >
         <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
             <label
@@ -67,14 +123,23 @@ const errorMsg = ref('')
               class="block text-sm font-semibold leading-6 text-gray-900"
             >{{ $t("celebration.type") }}</label>
             <div class="mt-2.5">
-              <input
+              <select
                 id="celebration-type"
                 v-model="celebrationType"
-                type="text"
                 name="celebration-type"
                 autocomplete="celebration-type"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
+                <option value="d016615d-6ca8-42a9-9abb-54a35a3234df">
+                  Anniversary
+                </option>
+                <option value="3d41671f-6103-480f-b3ae-16191fb1bd11">
+                  Baby shower
+                </option>
+                <option value="1bbb698b-6276-4e1f-91a0-544e045fca71">
+                  New Year
+                </option>
+              </select>
             </div>
           </div>
           <div class="sm:col-span-2">
@@ -107,6 +172,8 @@ const errorMsg = ref('')
                 variant="filled"
                 show-icon
                 fluid
+                :show-time="false"
+                :utc="false"
                 :show-on-focus="false"
                 input-id="buttondisplay"
               />
@@ -144,15 +211,22 @@ const errorMsg = ref('')
             </div>
           </div>
         </div>
+        <span
+          v-if="updateSuccess"
+          class="text-sm text-green-500"
+        >Evenement modifié avec succès</span>
         <div class="mt-10">
           <span
             v-if="errorMsg"
             class="text-sm text-red-500"
-          >{{ errorMsg }}</span>
+          >{{
+            errorMsg
+          }}</span>
           <button
             id="celebration-creation"
             type="submit"
             class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            @click="updateCelebrationInformations(id)"
           >
             {{ $t("celebration.modification.save") }}
           </button>
@@ -185,19 +259,15 @@ h1 {
   background-color: $tangerine;
   color: $indigo;
 }
-input, select, option, textarea,
+input,
+select,
+option,
+textarea,
 #datepicker-timeonly *,
 #datepicker-month * {
   background-color: white !important;
 }
 #celebration-type {
   height: 40px;
-}
-.popover-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
 }
 </style>

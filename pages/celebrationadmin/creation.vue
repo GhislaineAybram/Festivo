@@ -11,7 +11,7 @@ const { data: { user } } = await auth.getUser()
 const celebrationTitle = ref('')
 const celebrationType = ref('')
 const celebrationDescription = ref('')
-const celebrationDate = ref()
+const celebrationDate = ref<Date | null>(null)
 const celebrationTime = ref()
 const celebrationAddress = ref('')
 const creationSuccess = ref(false)
@@ -31,13 +31,8 @@ async function createNewCelebration() {
     return
   }
 
-  const formattedTime = celebrationTime.value
-    ? celebrationTime.value.toLocaleTimeString('fr-FR', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      })
-    : null
+  const formattedDate = celebrationDate.value ? formatDate(celebrationDate.value) : null
+  const formattedTime = celebrationTime.value ? formatTime(celebrationTime.value) : null
 
   errorMsg.value = ''
 
@@ -47,13 +42,13 @@ async function createNewCelebration() {
       name: celebrationTitle.value,
       celebration_type: celebrationType.value,
       description: celebrationDescription.value,
-      date: celebrationDate.value,
+      date: formattedDate,
       hour: formattedTime,
       address: celebrationAddress.value,
       author: user!.id,
     },
   }) as { error?: string }
-
+  alert(formattedDate)
   if (response.error) {
     errorMsg.value = `Erreur lors de la création de l’événement : ${response.error}`
     console.error('Erreur lors de la création de l’événement :', response.error)

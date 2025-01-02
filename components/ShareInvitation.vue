@@ -57,7 +57,7 @@ const copyToClipboard = async () => {
       ref="op"
       class="popover-container"
     >
-      <div class="flex flex-col gap-4 w-[25rem]">
+      <div class="flex flex-col gap-4 justify-center w-[20rem]">
         <div>
           <span class="font-medium block mb-2">{{ $t("celebration.modification.share.title") }}</span>
           <InputGroup>
@@ -99,7 +99,7 @@ const copyToClipboard = async () => {
               <img
                 :src="guest.user_id.avatar.picture || defaultAvatarUrl"
                 :alt="guest.user_id.avatar.picture_description || 'User avatar'"
-                style="width: 32px"
+                style="width: 32px; border: 1px solid #180161; border-radius: 50%;"
               >
               <div>
                 <span class="font-medium">{{ guest.user_id.alias }}</span>
@@ -112,6 +112,5 @@ const copyToClipboard = async () => {
   </div>
 </template>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>

@@ -16,7 +16,7 @@ export type Celebration = {
 }
 type CelebrationType = Tables<'celebration_type'>
 type CelebrationWithPictureAndAuthor = Tables<'celebration'> & {
-  celebration_type?: Pick<CelebrationType, 'picture' | 'category'>
+  celebration_type?: Pick<CelebrationType, 'celebration_type_id' | 'picture' | 'category'>
   author?: Pick<Tables<'user'>, 'firstname'>
 }
 type CelebrationWithGuestsAndType = Tables<'celebration'> & {
@@ -35,6 +35,10 @@ type GuestWithUserInfo = Guest & {
 type NewCelebrationData = Omit<
   Celebration,
   'celebration_id' | 'created_at'
+>
+type UpdateCelebrationData = Omit<
+  Celebration,
+  'created_at' | 'author'
 >
 
 type NewGuestData = {
