@@ -17,7 +17,7 @@ export type Celebration = {
 type CelebrationType = Tables<'celebration_type'>
 type CelebrationWithPictureAndAuthor = Tables<'celebration'> & {
   celebration_type?: Pick<CelebrationType, 'celebration_type_id' | 'picture' | 'category'>
-  author?: Pick<Tables<'user'>, 'firstname'>
+  author?: Pick<Tables<'user'>, 'alias'>
 }
 type CelebrationWithGuestsAndType = Tables<'celebration'> & {
   celebration_type?: Pick<CelebrationType, 'picture'>
@@ -28,7 +28,7 @@ type CelebrationWithGuestsAndType = Tables<'celebration'> & {
 
 type Guest = Tables<'guest'>
 type GuestWithUserInfo = Guest & {
-  user_id: Pick<User, 'user_id' | 'firstname' | 'lastname' | 'email' | 'alias'> & {
+  user_id: Pick<User, 'user_id' | 'email' | 'alias'> & {
     avatar?: Avatar
   }
 }

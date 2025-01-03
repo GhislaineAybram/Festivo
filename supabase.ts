@@ -72,7 +72,7 @@ export const getCelebrationById = async (id: string): Promise<CelebrationWithPic
     .select(`
       *,
       celebration_type:celebration_type(celebration_type_id, picture, category),
-      author:user(firstname)
+      author:user(alias)
     `)
     .eq('celebration_id', id)
     .single()
@@ -133,8 +133,6 @@ export const getGuestsByCelebration = async (id: string): Promise<GuestWithUserI
       created_at,
       user_id:user(
         user_id,
-        firstname,
-        lastname,
         email,
         alias,
         avatar:avatar(*)

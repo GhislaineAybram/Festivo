@@ -1,7 +1,5 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
-const firstname = ref('')
-const lastname = ref('')
 const alias = ref('')
 const email = ref('')
 const password = ref('')
@@ -34,8 +32,6 @@ const submitRegisterForm = async () => {
       password: password.value,
       options: {
         data: {
-          firstname: formatName(firstname.value),
-          lastname: lastname.value.toUpperCase(),
           alias: alias.value,
         },
       },
@@ -47,8 +43,6 @@ const submitRegisterForm = async () => {
     email.value = ''
     password.value = ''
     confirmPassword.value = ''
-    firstname.value = ''
-    lastname.value = ''
     alias.value = ''
 
     registrationSuccess.value = true
@@ -100,35 +94,6 @@ watchEffect(() => {
             {{ $t("register.title") }}
           </h3>
         </div>
-        <IconField>
-          <InputIcon>
-            <i class="pi pi-user" />
-          </InputIcon>
-          <InputText
-            id="firstname"
-            v-model="firstname"
-            class="text"
-            type="text"
-            :placeholder="$t('user.firstname')"
-            autofocus
-            fluid
-          />
-        </IconField>
-
-        <IconField>
-          <InputIcon>
-            <i class="pi pi-user" />
-          </InputIcon>
-          <InputText
-            id="lastname"
-            v-model="lastname"
-            class="text"
-            type="text"
-            :placeholder="$t('user.lastname')"
-            autofocus
-            fluid
-          />
-        </IconField>
 
         <IconField>
           <InputIcon>

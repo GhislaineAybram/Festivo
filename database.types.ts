@@ -147,8 +147,6 @@ export type Database = {
           avatar: string | null
           created_at: string
           email: string | null
-          firstname: string | null
-          lastname: string | null
           user_id: string
         }
         Insert: {
@@ -156,8 +154,6 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           email?: string | null
-          firstname?: string | null
-          lastname?: string | null
           user_id: string
         }
         Update: {
@@ -165,8 +161,6 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           email?: string | null
-          firstname?: string | null
-          lastname?: string | null
           user_id?: string
         }
         Relationships: [

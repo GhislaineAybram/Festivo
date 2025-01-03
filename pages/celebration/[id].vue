@@ -118,7 +118,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
             id="celebration-author-name"
             class="mt-4 text-gray-500"
           >
-            {{ $t("celebration.created") }} {{ celebration?.author.firstname }}
+            {{ $t("celebration.created") }} {{ celebration?.author.alias }}
           </p>
         </div>
 
@@ -235,12 +235,13 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
           {{ celebration?.description }}
         </h3>
       </div>
-      <div class="border-t border-gray-200">
-        <div
-          id="option-info"
-          class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
-        >
-          <div class="flex items-center">
+
+      <div
+        id="option-info"
+        class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+      >
+        <div class="border-t border-gray-200">
+          <div class="flex items-center pt-4">
             <UsersIcon
               class="icon rounded-lg size-8 text-white p-1.5"
             />
@@ -274,33 +275,33 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
               </p>
             </div>
           </div>
+        </div>
 
-          <div class="border-t border-gray-200 pt-4 flex">
-            <GiftIcon class="icon rounded-lg size-8 text-white p-1.5" />
-            <div class="flex items-center">
-              <div class="font-medium text-gray-900 flex px-2">
-                Lien cagnotte
-              </div>
+        <div class="border-t border-gray-200 pt-4 flex">
+          <GiftIcon class="icon rounded-lg size-8 text-white p-1.5" />
+          <div class="flex items-center">
+            <div class="font-medium text-gray-900 flex px-2">
+              Lien cagnotte
             </div>
           </div>
+        </div>
 
-          <div class="border-t border-gray-200 pt-4 flex">
-            <MusicalNoteIcon
-              class="icon rounded-lg size-8 text-white p-1.5"
-            />
-            <div class="flex items-center">
-              <div class="font-medium text-gray-900 flex px-2">
-                Playlist participative
-              </div>
+        <div class="border-t border-gray-200 pt-4 flex">
+          <MusicalNoteIcon
+            class="icon rounded-lg size-8 text-white p-1.5"
+          />
+          <div class="flex items-center">
+            <div class="font-medium text-gray-900 flex px-2">
+              Playlist participative
             </div>
           </div>
+        </div>
 
-          <div class="border-t border-gray-200 pt-4 mb-4 flex">
-            <TrophyIcon class="icon rounded-lg size-8 text-white p-1.5" />
-            <div class="flex items-center">
-              <div class="font-medium text-gray-900 flex px-2">
-                Concours déguisement
-              </div>
+        <div class="border-t border-gray-200 pt-4 mb-4 flex">
+          <TrophyIcon class="icon rounded-lg size-8 text-white p-1.5" />
+          <div class="flex items-center">
+            <div class="font-medium text-gray-900 flex px-2">
+              Concours déguisement
             </div>
           </div>
         </div>
@@ -354,7 +355,7 @@ h3 {
   height: 100%;
   align-content: center;
   text-align: left;
-  padding-left: 50px;
+  padding: 1rem;
 }
 .guest-avatar {
   border-radius: 50%;
