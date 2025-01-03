@@ -19,8 +19,6 @@ create table
 
 create table
   public.user (
-    firstname character varying null,
-    lastname character varying null,
     alias character varying null,
     email character varying null,
     created_at timestamp with time zone not null default now(),
@@ -78,8 +76,8 @@ language plpgsql
 security definer set search_path = ''
 as $$
 begin
-  insert into public.user (user_id, firstname, lastname, email, alias)
-  values (new.id, new.raw_user_meta_data->>'firstname', new.raw_user_meta_data->>'lastname', new.email, new.raw_user_meta_data->>'alias');
+  insert into public.user (user_id, email, alias)
+  values (new.id, new.email, new.raw_user_meta_data->>'alias');
   return new;
 end;
 $$;

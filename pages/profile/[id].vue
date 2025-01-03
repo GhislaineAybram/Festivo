@@ -28,8 +28,6 @@ const {
 const metadata = user?.user_metadata
 
 const pseudo = computed(() => metadata?.alias || '')
-const firstname = computed(() => metadata?.firstname || '')
-const lastname = computed(() => metadata?.lastname || '')
 const email = computed(() => user?.email || '')
 
 const user_id = user!.id
@@ -265,40 +263,6 @@ const allergy = [
 
           <div>
             <label
-              for="firstname"
-              class="block text-sm font-medium leading-6 text-gray-900"
-            >{{ $t("user.firstname") }}</label>
-            <div class="mt-2">
-              <input
-                id="firstname"
-                v-model="firstname"
-                type="text"
-                name="firstname"
-                autocomplete="firstname"
-                class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              >
-            </div>
-          </div>
-
-          <div>
-            <label
-              for="lastname"
-              class="block text-sm font-medium leading-6 text-gray-900"
-            >{{ $t("user.lastname") }}</label>
-            <div class="mt-2">
-              <input
-                id="lastname"
-                v-model="lastname"
-                type="text"
-                name="lastname"
-                autocomplete="family-name"
-                class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              >
-            </div>
-          </div>
-
-          <div>
-            <label
               for="email"
               class="block text-sm font-medium leading-6 text-gray-900"
             >{{ $t("user.email") }}</label>
@@ -315,7 +279,7 @@ const allergy = [
           </div>
         </div>
 
-        <div class="border-y border-gray-900/10 py-6">
+        <div class="border-y border-gray-900/10 mt-4 py-6">
           <h3 class="text-xl font-semibold leading-7 text-gray-900">
             {{ $t("user.alimentation") }}
           </h3>
