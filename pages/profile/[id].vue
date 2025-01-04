@@ -2,6 +2,10 @@
 import AccordionPanel from 'primevue/accordionpanel'
 import type { UserWithAvatar } from '~/types'
 
+const pseudo = ref('')
+const pseudoTitle = ref('')
+const updateSuccess = ref(false)
+
 const isDeleteAlertVisible = ref(false)
 const deleteAccountSuccess = ref(false)
 const openDeleteAlert = () => {
@@ -27,7 +31,8 @@ const {
 } = await auth.getUser()
 const metadata = user?.user_metadata
 
-const pseudo = computed(() => metadata?.alias || '')
+pseudo.value = metadata?.alias || ''
+pseudoTitle.value = metadata?.alias || ''
 const email = computed(() => user?.email || '')
 
 const user_id = user!.id
@@ -63,6 +68,24 @@ const updateAvatarInProfilePage = (newAvatar: string) => {
 watch(avatar, (newAvatar) => {
   console.log('Avatar mis à jour :', newAvatar)
 })
+
+const updateUserInformation = async (pseudo: string) => {
+  try {
+    const { data, error } = await auth.updateUser({
+      data: { alias: pseudo },
+    })
+    if (error) {
+      console.error('Erreur lors de la mise à jour de l’utilisateur :', error.message)
+      return
+    }
+    pseudoTitle.value = pseudo
+    updateSuccess.value = true
+    console.log('Utilisateur mis à jour avec succès :', data)
+  }
+  catch (err) {
+    console.error('Erreur inattendue :', err)
+  }
+}
 
 const deleteAccount = async (user_id: string) => {
   try {
@@ -232,11 +255,14 @@ const allergy = [
 
       <div class="text-center mt-2">
         <h2 class="font-semibold">
-          {{ pseudo }}
+          {{ pseudoTitle }}
         </h2>
       </div>
 
-      <form id="profile-details">
+      <form
+        id="profile-details"
+        @submit.prevent="updateUserInformation(pseudo)"
+      >
         <div class="border-y border-gray-900/10 py-6 my-6">
           <h3 class="text-xl font-semibold leading-7 text-gray-900">
             {{ $t("user.informations") }}
@@ -273,6 +299,7 @@ const allergy = [
                 name="email"
                 type="email"
                 autocomplete="email"
+                readonly
                 class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
             </div>
@@ -472,6 +499,7 @@ const allergy = [
           <button
             type="submit"
             class="min-w-32 mt-3 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            @click="updateUserInformation(pseudo)"
           >
             {{ $t("user.save") }}
           </button>

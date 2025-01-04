@@ -69,26 +69,30 @@ alter table public.guest enable row level security;
 
 
 /* Set up trigger */
-/* New user trigger */
-create function public.handle_new_user()
+/* New or update user trigger */
+create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
 security definer set search_path = ''
 as $$
 begin
   insert into public.user (user_id, email, alias)
-  values (new.id, new.email, new.raw_user_meta_data->>'alias');
+  values (new.id, new.email, new.raw_user_meta_data->>'alias')
+  ON CONFLICT (user_id)
+  DO UPDATE 
+    SET email = excluded.email,
+        alias = excluded.alias;
   return new;
 end;
 $$;
 
 create trigger on_auth_user_created
-after insert on auth.users
+after update or insert on auth.users
 for each row 
 execute procedure public.handle_new_user();
 
 /* Delete user trigger */
-create function public.handle_delete_auth_user()
+create function auth.handle_delete_user()
 returns trigger
 language plpgsql
 security definer set search_path = ''
@@ -103,26 +107,8 @@ $$;
 create trigger on_public_user_deleted
 after delete on public.user
 for each row 
-execute procedure public.handle_delete_auth_user();
+execute procedure auth.handle_delete_user();
 
-/* Update user information trigger */
-/* 
-create function update_user()
-returns trigger
-language plpgsql
-as $$
-begin
-  insert into public.user (user_id, firstname, lastname, email, alias)
-  values (new.id, new.raw_user_meta_data->>'firstname', new.raw_user_meta_data->>'lastname', new.email, new.raw_user_meta_data->>'alias');
-  return new;
-end;
-$$;
-
-create trigger user_update
-after update on auth.users
-for each row 
-execute function update_user();
- */
 
 /* Insertion of some data */
 INSERT INTO "public"."celebration_type" ("celebration_type_id", "category") 
