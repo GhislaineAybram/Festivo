@@ -6,7 +6,9 @@ definePageMeta({
 })
 
 const { auth } = useSupabaseClient()
-const { data: { user } } = await auth.getUser()
+const {
+  data: { user },
+} = await auth.getUser()
 
 const celebrationTitle = ref('')
 const celebrationType = ref('')
@@ -28,15 +30,22 @@ async function createNewCelebration() {
     || !celebrationAddress.value.trim()
   ) {
     errorMsg.value = 'Tous les champs sont obligatoires.'
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
     return
   }
 
-  const formattedDate = celebrationDate.value ? formatDate(celebrationDate.value) : null
-  const formattedTime = celebrationTime.value ? formatTime(celebrationTime.value) : null
+  const formattedDate = celebrationDate.value
+    ? formatDate(celebrationDate.value)
+    : null
+  const formattedTime = celebrationTime.value
+    ? formatTime(celebrationTime.value)
+    : null
 
   errorMsg.value = ''
 
-  const response = await $fetch('/api/celebration', {
+  const response = (await $fetch('/api/celebration', {
     method: 'POST',
     body: {
       name: celebrationTitle.value,
@@ -47,11 +56,17 @@ async function createNewCelebration() {
       address: celebrationAddress.value,
       author: user!.id,
     },
-  }) as { error?: string }
+  })) as { error?: string }
   alert(formattedDate)
   if (response.error) {
     errorMsg.value = `Erreur lors de la création de l’événement : ${response.error}`
-    console.error('Erreur lors de la création de l’événement :', response.error)
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
+    console.error(
+      'Erreur lors de la création de l’événement :',
+      response.error,
+    )
     return
   }
 
@@ -202,7 +217,9 @@ async function createNewCelebration() {
           <span
             v-if="errorMsg"
             class="text-sm text-red-500"
-          >{{ errorMsg }}</span>
+          >{{
+            errorMsg
+          }}</span>
           <button
             id="celebration-creation"
             type="submit"
@@ -243,7 +260,10 @@ h1 {
   background-color: $tangerine;
   color: $indigo;
 }
-input, select, option, textarea,
+input,
+select,
+option,
+textarea,
 #datepicker-timeonly *,
 #datepicker-month * {
   background-color: white !important;

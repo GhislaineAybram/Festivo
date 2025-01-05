@@ -23,6 +23,10 @@
     "other": "Others",
     "cancel": "Cancel",
     "save": "Save",
+    "update": {
+      "title": "Information updated",
+      "description": "Changes made have been correctly saved."
+    },
     "delete": {
       "title": "Delete my profile",
       "description": "Deleting your account will permanently and irrevocably remove your profile and details from our database. You will not be able to reinstate it in any way.",
@@ -63,6 +67,10 @@
         "copied": "copied",
         "guests": "Guests"
       }
+    },
+    "update": {
+      "title": "Information updated",
+      "description": "Changes made have been correctly saved."
     }
   },
   "login": {

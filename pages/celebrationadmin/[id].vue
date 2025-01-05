@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useToast } from 'primevue/usetoast'
 import type { CelebrationWithPictureAndAuthor } from '~/types'
+
+const toast = useToast()
+const { t } = useI18n()
 
 definePageMeta({
   middleware: 'auth',
@@ -33,7 +37,8 @@ async function loadCelebrationData(id: string) {
       console.error('Failed to fetch celebration data', celebrationError.value)
     }
     celebrationTitle.value = celebration.value.name
-    celebrationType.value = celebration.value.celebration_type.celebration_type_id
+    celebrationType.value
+      = celebration.value.celebration_type.celebration_type_id
     celebrationDescription.value = celebration.value.description
     celebrationDate.value = celebration.value.date
     celebrationTime.value = new Date(`1970-01-01T${celebration.value.hour}`)
@@ -42,6 +47,9 @@ async function loadCelebrationData(id: string) {
   catch (err) {
     console.error('Erreur lors du chargement de l’événement :', err)
     errorMsg.value = 'Impossible de charger les informations de l’événement.'
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
   }
 }
 
@@ -56,8 +64,12 @@ async function updateCelebrationInformations(id: string) {
     console.error('La date ou l\'heure n\'est pas définie.')
     return
   }
-  const formattedDate = celebrationDate.value ? formatDate(celebrationDate.value) : null
-  const formattedTime = celebrationTime.value ? formatTime(celebrationTime.value) : null
+  const formattedDate = celebrationDate.value
+    ? formatDate(celebrationDate.value)
+    : null
+  const formattedTime = celebrationTime.value
+    ? formatTime(celebrationTime.value)
+    : null
 
   const response = (await $fetch(`/api/celebration/${id}`, {
     method: 'PUT',
@@ -81,6 +93,12 @@ async function updateCelebrationInformations(id: string) {
   }
 
   updateSuccess.value = true
+  toast.add({
+    severity: 'success',
+    summary: t('celebration.update.title'),
+    detail: t('celebration.update.description'),
+    life: 3000,
+  })
 }
 </script>
 
@@ -211,10 +229,6 @@ async function updateCelebrationInformations(id: string) {
             </div>
           </div>
         </div>
-        <span
-          v-if="updateSuccess"
-          class="text-sm text-green-500"
-        >Evenement modifié avec succès</span>
         <div class="mt-10">
           <span
             v-if="errorMsg"
@@ -222,8 +236,11 @@ async function updateCelebrationInformations(id: string) {
           >{{
             errorMsg
           }}</span>
+          <Toast />
           <button
             id="celebration-creation"
+            label="Success"
+            severity="success"
             type="submit"
             class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             @click="updateCelebrationInformations(id)"
