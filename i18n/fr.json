@@ -23,6 +23,10 @@
     "other": "Autres",
     "cancel": "Annuler",
     "save": "Sauvegarder",
+    "update": {
+      "title": "Informations mises à jour",
+      "description": "Vos modifications ont bien été enregistrées."
+    },
     "delete": {
       "title": "Supprimer mon profil",
       "description": "La suppression de votre compte entraînera la suppression permanente et irréversible de votre profil et de vos informations de notre base de données. Vous ne pourrez pas les rétablir de quelque manière que ce soit.",
@@ -63,6 +67,10 @@
         "copied": "copié",
         "guests": "Invités"
       }
+    },
+    "update": {
+      "title": "Informations mises à jour",
+      "description": "Vos modifications ont bien été enregistrées."
     }
   },
   "login": {

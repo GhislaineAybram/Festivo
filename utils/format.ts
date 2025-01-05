@@ -8,7 +8,8 @@ export const formatName = (name: string): string => {
 // Date format
 export const formatDate = (date: Date | null): string | null => {
   if (!date) return null
-  return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+  const validDate = new Date(date)
+  return `${validDate.getFullYear()}-${(validDate.getMonth() + 1).toString().padStart(2, '0')}-${validDate.getDate().toString().padStart(2, '0')}`
 }
 
 // Time format

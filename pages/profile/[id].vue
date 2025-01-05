@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import AccordionPanel from 'primevue/accordionpanel'
+import { useToast } from 'primevue/usetoast'
 import type { UserWithAvatar } from '~/types'
+
+const toast = useToast()
+const { t } = useI18n()
 
 const pseudo = ref('')
 const pseudoTitle = ref('')
@@ -75,11 +79,20 @@ const updateUserInformation = async (pseudo: string) => {
       data: { alias: pseudo },
     })
     if (error) {
-      console.error('Erreur lors de la mise à jour de l’utilisateur :', error.message)
+      console.error(
+        'Erreur lors de la mise à jour de l’utilisateur :',
+        error.message,
+      )
       return
     }
-    pseudoTitle.value = pseudo
     updateSuccess.value = true
+    toast.add({
+      severity: 'success',
+      summary: t('user.update.title'),
+      detail: t('user.update.description'),
+      life: 3000,
+    })
+    pseudoTitle.value = pseudo
     console.log('Utilisateur mis à jour avec succès :', data)
   }
   catch (err) {
@@ -328,7 +341,9 @@ const allergy = [
                   >
                     {{ $t("user.diet") }}
                   </div>
-                  <div class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0">
+                  <div
+                    class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0"
+                  >
                     <div class="flex items-center gap-x-1">
                       <input
                         id="push-email"
@@ -402,7 +417,9 @@ const allergy = [
                   >
                     {{ $t("user.allergies") }}
                   </div>
-                  <div class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0">
+                  <div
+                    class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0"
+                  >
                     <div class="flex items-center gap-x-1">
                       <input
                         id="push-email"
@@ -496,15 +513,17 @@ const allergy = [
           >
             {{ $t("user.cancel") }}
           </button>
+          <Toast />
           <button
             type="submit"
+            label="Success"
+            severity="success"
             class="min-w-32 mt-3 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             @click="updateUserInformation(pseudo)"
           >
             {{ $t("user.save") }}
           </button>
         </div>
-
         <div
           class="bg-red-100 border-y border-gray-900/10 py-6 my-6 flex items-center justify-between"
         >
