@@ -16,6 +16,7 @@ export const formatDate = (date: Date | null): string | null => {
 export const formatTime = (time: Date | null): string | null => {
   if (!time) return null
   return time.toLocaleTimeString('fr-FR', {
+    timeZone: 'Europe/Paris', // Fuseau horaire explicitement défini
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
