@@ -63,6 +63,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
+    '@nuxt/test-utils/module',
   ],
 
   eslint: {
@@ -111,7 +112,6 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    bcryptSaltRound: 10,
     public: {
       apiUrl: process.env.API_URL || 'http://localhost:3000/api',
       url: process.env.PORT_FRONT || 'http://localhost:3000',
