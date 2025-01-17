@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const runtimeConfig = useRuntimeConfig()
+
 definePageMeta({
   middleware: 'auth',
 })
@@ -45,7 +47,7 @@ async function createNewCelebration() {
 
   errorMsg.value = ''
 
-  const response = (await $fetch('/api/celebration', {
+  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/celebration`, {
     method: 'POST',
     body: {
       name: celebrationTitle.value,

@@ -113,8 +113,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     bcryptSaltRound: 10,
     public: {
-      apiUrl: process.env.API_URL,
-      url: process.env.PORT_FRONT,
+      apiUrl: process.env.API_URL || 'http://localhost:3000/api',
+      url: process.env.PORT_FRONT || 'http://localhost:3000',
     },
     session: {
       name: 'nuxt-session',

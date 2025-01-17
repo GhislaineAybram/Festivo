@@ -52,7 +52,7 @@ const defaultAvatarUrl
 
 // add the invited user if not already done
 const checkAndRegisterInvitedUser = async () => {
-  const response = (await $fetch(`/api/guest`, {
+  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/guest`, {
     method: 'POST',
     body: {
       user_id: userId,
@@ -80,7 +80,7 @@ if (isComingError.value) {
 
 // add the response guest
 async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
-  const response = (await $fetch(`/api/guest/${userId}/${id}`, {
+  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/guest/${userId}/${id}`, {
     method: 'PUT',
     body: {
       userId: userId,

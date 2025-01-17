@@ -1,0 +1,9 @@
+/.nuxt
+/.output
+/node_modules
+/.github
+/.vercel
+.env
+
+.gitignore
+README.md

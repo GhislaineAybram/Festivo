@@ -274,5 +274,5 @@ export const deleteUser = async (id: string): Promise<boolean> => {
     console.error('Error deleting a user:', error)
     return false
   };
-  return true // Retourne `true` si la suppression a réussi
+  return true // Return `true` if the delete action succeeded
 }
