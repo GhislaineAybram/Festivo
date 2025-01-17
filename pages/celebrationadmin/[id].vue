@@ -71,7 +71,7 @@ async function updateCelebrationInformations(id: string) {
     ? formatTime(celebrationTime.value)
     : null
 
-  const response = (await $fetch(`/api/celebration/${id}`, {
+  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
     method: 'PUT',
     body: {
       celebration_id: id,

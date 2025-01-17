@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AccordionPanel from 'primevue/accordionpanel'
 import { useToast } from 'primevue/usetoast'
-import type { UserWithAvatar } from '~/types'
+import type { ErrorResponseWithSuccess, UserWithAvatar } from '~/types'
 
 const toast = useToast()
 const { t } = useI18n()
@@ -102,7 +102,7 @@ const updateUserInformation = async (pseudo: string) => {
 
 const deleteAccount = async (user_id: string) => {
   try {
-    const isUserDeleted = await $fetch(`/api/user/${user_id}`, {
+    const isUserDeleted = await $fetch<ErrorResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
       method: 'DELETE',
     })
     if (!isUserDeleted.body.success) {

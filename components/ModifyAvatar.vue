@@ -46,7 +46,7 @@ const closeModifyAvatar = () => {
 }
 
 async function updateAvatarInDatabase() {
-  const response = await $fetch(`/api/avatar/user/${props.userId}`, {
+  const response = await $fetch(`${runtimeConfig.public.apiUrl}/avatar/user/${props.userId}`, {
     method: 'PUT',
     body: {
       id: props.userId,
