@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
+const email = ref('')
 const new_password = ref('')
 const confirmPassword = ref('')
 const errorMsg = ref('')
@@ -7,14 +8,14 @@ const updateSuccess = ref(false)
 
 const { auth } = useSupabaseClient()
 
-const route = useRoute()
-const email = ref<string | null>(null)
-if (typeof route.query.email === 'string') {
-  email.value = route.query.email
-}
-else {
-  email.value = null
-}
+watchEffect(() => {
+  if (user.value) {
+    email.value = user.value.email || ''
+  }
+})
+console.log('user', user)
+console.log('email', email)
+console.log('auth', auth)
 
 const submitNewPasswordForm = async () => {
   if (new_password.value !== confirmPassword.value) {
