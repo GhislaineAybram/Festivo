@@ -50,13 +50,13 @@ h4 {
   font-weight: 600 !important; /* SemiBold */
   font-size: larger !important;
 }
-
 .main {
-  margin-top: 59px;
-  min-height: calc(100vh - 59px);
+  flex: 1;
+  margin-top: 64px;
+  min-height: calc(100vh - 132px);
 }
 .footer {
-  margin-top: auto;
+  height: auto;
 }
 :global(.alert) {
   position: absolute;
