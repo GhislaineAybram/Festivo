@@ -92,6 +92,20 @@
     "successfull": "Registration successful",
     "success_message": "You can now log in with your email address and password !"
   },
+  "reset_password": {
+    "title": "Reset account password",
+    "email": "Enter email address",
+    "button": "Request reset link",
+    "back": "Back to login page",
+    "successfull": "Check your email",
+    "success_message": "Please check your email address for instructions to reset your password."
+  },
+  "new_password": {
+    "title": "Set a new password",
+    "button": "Save new password",
+    "successfull": "New password successfully saved",
+    "success_message": "Your new password have been successfully saved !"
+  },
   "menubar": {
     "homepage": "Homepage",
     "event_creation": "Create my event",

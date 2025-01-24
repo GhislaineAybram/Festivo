@@ -92,6 +92,20 @@
     "successfull": "Inscription réussie",
     "success_message": "Vous pouvez maintenant vous identifier avec votre adresse email et votre mot de passe !"
   },
+  "reset_password": {
+    "title": "Réinitialiser le mot de passe du compte",
+    "email": "Saisissez l'adresse email",
+    "button": "Demander un lien de réinitialisation",
+    "back": "Retour à la page de connexion",
+    "successfull": "Vérifiez vos emails",
+    "success_message": "Veuillez vérifier votre boîte mail afin de suivre les instructions de réinitialisation de votre mot de passe."
+  },
+  "new_password": {
+    "title": "Définir un nouveau mot de passe",
+    "button": "Enregistrer le nouveau mot de passe",
+    "successfull": "Nouveau mot de passe enregistré avec succès",
+    "success_message": "Votre nouveau mot de passe a été enregistré avec succès !"
+  },
   "menubar": {
     "homepage": "Accueil",
     "event_creation": "Créer mon événement",
