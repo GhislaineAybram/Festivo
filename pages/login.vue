@@ -120,10 +120,11 @@ const submitLoginForm = async () => {
             id="password-forgot"
             class="text-sm"
           >
-            <a
-              href="#"
-              class="font-semibold text-indigo-600 hover:text-indigo-500"
-            >{{ $t("login.password_forgot") }}</a>
+            <NuxtLink to="/resetpassword">
+              <p
+                class="font-semibold text-indigo-600 hover:text-indigo-500"
+              >{{ $t("login.password_forgot") }}</p>
+            </NuxtLink>
           </div>
           <span
             v-if="errorMsg"
