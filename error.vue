@@ -31,7 +31,7 @@ defineProps({
         <a
           href="#"
           class="text-sm font-semibold text-gray-900"
-        >{{ $t("error.contact") }}<span aria-hidden="true">&rarr;</span></a>
+        >{{ $t("error.contact") }} <span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </main>

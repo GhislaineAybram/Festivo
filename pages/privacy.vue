@@ -37,7 +37,7 @@
       </ul>
       <p class="mb-4">
         <i18n-t keypath="privacy.article_1.text_7">
-          <a href="https://festivo-tawny.vercel.app/legal">https://festivo-tawny.vercel.app/legal</a>
+          <a href="https://festivo-tawny.vercel.app/legal"><NuxtLink to="/legal">https://festivo-tawny.vercel.app/legal</NuxtLink></a>
         </i18n-t>
       </p>
 

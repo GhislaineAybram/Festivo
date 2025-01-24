@@ -166,11 +166,13 @@ watchEffect(() => {
             id="accept-label"
             for="accept"
           >
-            <i18n-t keypath="register.agree.text">
-              <a href="https://festivo-tawny.vercel.app/privacy">
-                {{ $t('register.agree.link_text') }}
-              </a>
-            </i18n-t>
+            <NuxtLink to="/privacy">
+              <i18n-t keypath="register.agree.text">
+                <a href="https://festivo-tawny.vercel.app/privacy">
+                  {{ $t('register.agree.link_text') }}
+                </a>
+              </i18n-t>
+            </NuxtLink>
           </label>
         </div>
         <span

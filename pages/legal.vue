@@ -87,8 +87,8 @@
       </p>
       <p class="mb-4">
         <i18n-t keypath="legal.privacy.text_2.text">
-          <a href="https://festivo-tawny.vercel.app/privacy">
-            {{ $t('legal.privacy.text_2.link_text') }}
+          <a href="https://festivo-tawny.vercel.app/privacy"><NuxtLink to="/privacy">
+            {{ $t('legal.privacy.text_2.link_text') }}</NuxtLink>
           </a>
         </i18n-t>
       </p>
