@@ -1,14 +1,22 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
-const email = ref('')
 const new_password = ref('')
 const confirmPassword = ref('')
 const errorMsg = ref('')
-const registrationSuccess = ref(false)
+const updateSuccess = ref(false)
 
 const { auth } = useSupabaseClient()
 
-const submitRegisterForm = async () => {
+const route = useRoute()
+const email = ref<string | null>(null)
+if (typeof route.query.email === 'string') {
+  email.value = route.query.email
+}
+else {
+  email.value = null
+}
+
+const submitNewPasswordForm = async () => {
   if (new_password.value !== confirmPassword.value) {
     errorMsg.value = 'Passwords do not match!'
     new_password.value = ''
@@ -19,19 +27,23 @@ const submitRegisterForm = async () => {
     return
   }
 
+  if (!user.value) {
+    errorMsg.value = 'No user session detected. Please try again.'
+    return
+  }
+
   try {
-    const { error } = await auth.updateUser({
+    const { data, error } = await auth.updateUser({
       password: new_password.value,
     })
     if (error) throw error
 
     // Clear form
-    email.value = ''
     new_password.value = ''
     confirmPassword.value = ''
 
-    registrationSuccess.value = true
-    console.log('New password saved successfully')
+    updateSuccess.value = true
+    console.log('New password saved successfully', data)
   }
   catch (error) {
     console.error('Update password error:', error)
@@ -41,12 +53,6 @@ const submitRegisterForm = async () => {
     }, 3000)
   }
 }
-
-watchEffect(() => {
-  if (user.value) {
-    console.log('User logged in, redirecting to home')
-  }
-})
 </script>
 
 <template>
@@ -59,7 +65,7 @@ watchEffect(() => {
       <form
         v-focustrap
         class="w-full sm:w-80 flex flex-col gap-4"
-        @submit.prevent="submitRegisterForm"
+        @submit.prevent="submitNewPasswordForm"
       >
         <div
           id="form-inside"
@@ -88,6 +94,7 @@ watchEffect(() => {
             type="email"
             :placeholder="$t('user.email')"
             fluid
+            readonly
           />
         </IconField>
 
@@ -136,7 +143,7 @@ watchEffect(() => {
       </form>
     </div>
     <AlertRegistration
-      v-if="registrationSuccess"
+      v-if="updateSuccess"
       class="alert"
     />
   </main>
