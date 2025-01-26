@@ -34,7 +34,93 @@
     }
   },
   "avatar": {
-    "modification_title": "Merci de sélectionner l'avatar de votre choix"
+    "modification_title": "Merci de sélectionner l'avatar de votre choix",
+    "successfull": "Nouveau avatar sauvegardé avec succès",
+    "success_message": "Votre nouveau avatar a été enregistré avec succès !"
+  },
+  "diet": {
+    "lovegetarian": {
+      "name": "Lacto-ovo végétarien",
+      "explanation": "Adepte d'un régime alimentaire excluant toute chair animale (viande, poisson), mais qui admet la consommation d'aliments d'origine animale comme les oeufs, le lait et les produits laitiers (fromage, yaourts)."
+    },
+    "ovegetarian": {
+      "name": "Ovo-végétarien",
+      "explanation": "Adepte d'un régime alimentaire excluant toute chair animale (viande, poisson), mais qui admet la consommation d'oeufs."
+    },
+    "lvegetarian": {
+      "name": "Lacto-végétarien",
+      "explanation": "Adepte d'un régime alimentaire excluant toute chair animale (viande, poisson), mais qui admet la consommation de lait et de produits laitiers (fromage, yaourts)."
+    },
+    "vegan": {
+      "name": "Végétalien",
+      "explanation": "Adepte d'un régime alimentaire excluant tout aliment d'origine animale (oeufs, produits laitiers et miel)."
+    },
+    "vegetarian": {
+      "name": "Vegan",
+      "explanation": "Adepte d'un mode de vie alliant une alimentation exclusive par les végétaux (végétalisme) et le refus de consommer tout produit (vêtements, chaussures, cosmétiques, etc.) issu des animaux ou de leur exploitation (notamment les produits testés sur les animaux)."
+    },
+    "pescetarian": {
+      "name": "Pescétarien",
+      "explanation": "Adepte d'un régime alimentaire excluant la viande mais consommant du poisson et des fruits de mer, ainsi que des oeufs, du lait et des produits laitiers (fromage, yaourts)."
+    },
+    "frugivore": {
+      "name": "Frugivore",
+      "explanation": "Adepte d'un régime alimentaire composé principalement ou exclusivement de fruits frais, fruits secs, noix et graines."
+    },
+    "rawfoodist": {
+      "name": "Crudivore",
+      "explanation": "Adepte d'une alimentation composée exclusivement ou majoritairement d'aliments crus, non cuits et non transformés."
+    }
+  },
+  "allergy": {
+    "gluten": {
+      "name": "Gluten",
+      "explanation": "Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales."
+    },
+    "crustaceans": {
+      "name": "Crustacés",
+      "explanation": "Et produits à base de crustacés."
+    },
+    "eggs": {
+      "name": "Oeufs",
+      "explanation": "Et produits à base d'oeufs."
+    },
+    "peanuts": {
+      "name": "Arachides",
+      "explanation": "Et produits à base d'arachides."
+    },
+    "fish": {
+      "name": "Poissons",
+      "explanation": "Et produits à base de poissons."
+    },
+    "soy": {
+      "name": "Soja",
+      "explanation": "Et produits à base de soja."
+    },
+    "milk": {
+      "name": "Lait",
+      "explanation": "Et produits à base de lait (y compris de lactose)."
+    },
+    "nuts": {
+      "name": "Fruits à coques",
+      "explanation": "Amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches et produits à base de ces fruits."
+    },
+    "celery": {
+      "name": "Céleri",
+      "explanation": "Et produits à base de céleri."
+    },
+    "mustard": {
+      "name": "Moutarde",
+      "explanation": "Et produits à base de moutarde."
+    },
+    "sesame": {
+      "name": "Graines de sésame",
+      "explanation": "Et produits à base de graines de sésame."
+    },
+    "sulfite": {
+      "name": "Anhydride sulfureux et sulfites",
+      "explanation": "En concentration de plus de 10 mg/kg ou 10 mg/L."
+    }
   },
   "celebration": {
     "created": "créé par",

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AlertNewPassword from '~/components/AlertNewPassword.vue'
+
 const user = useSupabaseUser()
 const email = ref('')
 const new_password = ref('')
@@ -13,9 +15,6 @@ watchEffect(() => {
     email.value = user.value.email || ''
   }
 })
-console.log('user', user)
-console.log('email', email)
-console.log('auth', auth)
 
 const submitNewPasswordForm = async () => {
   if (new_password.value !== confirmPassword.value) {
@@ -143,7 +142,7 @@ const submitNewPasswordForm = async () => {
         />
       </form>
     </div>
-    <AlertRegistration
+    <AlertNewPassword
       v-if="updateSuccess"
       class="alert"
     />

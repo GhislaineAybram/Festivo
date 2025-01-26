@@ -7,7 +7,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { InformationCircleIcon } from '@heroicons/vue/24/outline'
+import { CheckCircleIcon } from '@heroicons/vue/24/outline'
 
 const open = ref(true)
 </script>
@@ -34,6 +34,7 @@ const open = ref(true)
           class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
         />
       </TransitionChild>
+
       <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div
           class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
@@ -55,7 +56,7 @@ const open = ref(true)
                   <div
                     class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
                   >
-                    <InformationCircleIcon
+                    <CheckCircleIcon
                       class="h-6 w-6 text-green-600"
                       aria-hidden="true"
                     />
@@ -65,11 +66,11 @@ const open = ref(true)
                       as="h3"
                       class="text-base font-semibold leading-6 text-gray-900"
                     >
-                      {{ $t("delete.success.title") }}
+                      {{ $t("new_password.successfull") }}
                     </DialogTitle>
                     <div class="mt-2">
                       <p class="text-sm text-gray-500">
-                        {{ $t("delete.success.subtitle") }}
+                        {{ $t("new_password.success_message") }}
                       </p>
                     </div>
                   </div>

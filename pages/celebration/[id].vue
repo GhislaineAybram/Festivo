@@ -12,11 +12,15 @@ import {
   TrophyIcon,
   UsersIcon,
 } from '@heroicons/vue/24/outline'
+import { useToast } from 'primevue/usetoast'
 import { useRuntimeConfig } from '#app'
 import type {
   CelebrationWithPictureAndAuthor,
   GuestWithUserInfo,
 } from '~/types'
+
+const { t } = useI18n()
+const toast = useToast()
 
 const { id } = useRoute().params
 const { auth } = useSupabaseClient()
@@ -52,18 +56,18 @@ const defaultAvatarUrl
 
 // add the invited user if not already done
 const checkAndRegisterInvitedUser = async () => {
-  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/guest`, {
+  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest`, {
     method: 'POST',
     body: {
       user_id: userId,
       celebration_id: id,
     },
-  })) as { error?: string }
+  })
 
-  if (response.error) {
+  if (error.value) {
     console.error(
       `Erreur lors de la création de l'invitation :`,
-      response.error,
+      error.value,
     )
     return
   }
@@ -80,23 +84,29 @@ if (isComingError.value) {
 
 // add the response guest
 async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
-  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/guest/${userId}/${id}`, {
+  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest/${userId}/${id}`, {
     method: 'PUT',
     body: {
       userId: userId,
       celebrationId: id,
       isComing: guestResponse,
     },
-  })) as { error?: string }
+  })
 
-  if (response.error) {
+  if (error.value) {
     console.error(
       `Erreur lors de la mise à jour de la réponse :`,
-      response.error,
+      error.value,
     )
     return
   }
   isComing.value = guestResponse
+  toast.add({
+    severity: 'success',
+    summary: t('avatar.successfull'),
+    detail: t('avatar.success_message'),
+    life: 3000,
+  })
 }
 </script>
 
@@ -168,6 +178,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
                 :class="{ 'opacity-40': isComing !== false }"
                 @click="updateIsComingGuestInDatabase(false)"
               />
+              <Toast />
             </div>
           </div>
 
@@ -341,6 +352,7 @@ h1 {
 #important-info {
   background-color: $seashell;
   padding-left: 1rem;
+  width: auto
 }
 #option-info {
   padding-left: 1rem;

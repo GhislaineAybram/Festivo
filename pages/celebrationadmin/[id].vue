@@ -71,7 +71,7 @@ async function updateCelebrationInformations(id: string) {
     ? formatTime(celebrationTime.value)
     : null
 
-  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
+  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
     method: 'PUT',
     body: {
       celebration_id: id,
@@ -82,12 +82,12 @@ async function updateCelebrationInformations(id: string) {
       hour: formattedTime,
       address: celebrationAddress.value,
     },
-  })) as { error?: string }
+  })
 
-  if (response.error) {
+  if (error.value) {
     console.error(
       `Erreur lors de la mise à jour de l'événement :`,
-      response.error,
+      error.value,
     )
     return
   }

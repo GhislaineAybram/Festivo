@@ -34,7 +34,93 @@
     }
   },
   "avatar": {
-    "modification_title": "Please select the avatar you want to use"
+    "modification_title": "Please select the avatar you want to use",
+    "successfull": "New avatar successfully saved",
+    "success_message": "Your new avatar have been successfully saved !"
+  },
+  "diet": {
+    "lovegetarian": {
+      "name": "Lacto-ovo vegetarian",
+      "explanation": "A follower of a diet that excludes all animal flesh (meat, fish) but allows the consumption of animal-derived foods such as eggs, milk, and dairy products (cheese, yogurt)."
+    },
+    "ovegetarian": {
+      "name": "Ovo-vegetarian",
+      "explanation": "A follower of a diet that excludes all animal flesh (meat, fish) but allows the consumption of eggs."
+    },
+    "lvegetarian": {
+      "name": "Lacto-vegetarian",
+      "explanation": "A follower of a diet that excludes all animal flesh (meat, fish) but allows the consumption of milk and dairy products (cheese, yogurt)."
+    },
+    "vegan": {
+      "name": "Vegan",
+      "explanation": "A follower of a lifestyle that combines an exclusively plant-based diet (veganism) with the refusal to consume any product (clothing, footwear, cosmetics, etc.) derived from animals or their exploitation (including products tested on animals)."
+    },
+    "vegetarian": {
+      "name": "Vegetarian",
+      "explanation": "A follower of a diet that excludes all animal flesh (meat, fish) and animal-derived products (eggs, dairy, and honey)."
+    },
+    "pescetarian": {
+      "name": "Pescetarian",
+      "explanation": "A follower of a diet that excludes meat but includes the consumption of fish, seafood, eggs, milk, and dairy products (cheese, yogurt)."
+    },
+    "frugivore": {
+      "name": "Frugivore",
+      "explanation": "A follower of a diet primarily or exclusively composed of fresh fruits, dried fruits, nuts, and seeds."
+    },
+    "rawfoodist": {
+      "name": "Raw Foodist",
+      "explanation": "A follower of a diet that consists exclusively or primarily of raw, uncooked, and unprocessed foods."
+    }
+  },
+  "allergy": {
+    "gluten": {
+      "name": "Gluten",
+      "explanation": "Cereals containing gluten (wheat, rye, barley, oats, spelt, kamut, or their hybridized strains) and products made from these cereals."
+    },
+    "crustaceans": {
+      "name": "Crustaceans",
+      "explanation": "And products made from crustaceans."
+    },
+    "eggs": {
+      "name": "Eggs",
+      "explanation": "And products made from eggs."
+    },
+    "peanuts": {
+      "name": "Peanuts",
+      "explanation": "And products made from peanuts."
+    },
+    "fish": {
+      "name": "Fish",
+      "explanation": "And products made from fish."
+    },
+    "soy": {
+      "name": "Soy",
+      "explanation": "And products made from soy."
+    },
+    "milk": {
+      "name": "Milk",
+      "explanation": "And products made from milk (including lactose)."
+    },
+    "nuts": {
+      "name": "Tree nuts",
+      "explanation": "Almonds, hazelnuts, walnuts, cashews, pecans, macadamia nuts, Brazil nuts, Queensland nuts, pistachios, and products made from these nuts."
+    },
+    "celery": {
+      "name": "Celery",
+      "explanation": "And products made from celery."
+    },
+    "mustard": {
+      "name": "Mustard",
+      "explanation": "And products made from mustard."
+    },
+    "sesame": {
+      "name": "Sesame seeds",
+      "explanation": "And products made from sesame seeds."
+    },
+    "sulfite": {
+      "name": "Sulfur dioxide and sulfites",
+      "explanation": "In concentrations of more than 10 mg/kg or 10 mg/L."
+    }
   },
   "celebration": {
     "created": "created by",
