@@ -8,6 +8,26 @@ const { t } = useI18n()
 
 const pseudo = ref('')
 const pseudoTitle = ref('')
+const isLOVegetarian = ref('')
+const isOVegetarian = ref('')
+const isLVegetarian = ref('')
+const isVegetalien = ref('')
+const isVegan = ref('')
+const isPescetarian = ref('')
+const isFrugivore = ref('')
+const isRawfoodist = ref('')
+const hasGlutenAllergy = ref('')
+const hasCrustaceansAllergy = ref('')
+const hasEggsAllergy = ref('')
+const hasPeanutsAllergy = ref('')
+const hasFishAllergy = ref('')
+const hasSoyAllergy = ref('')
+const hasMilkAllergy = ref('')
+const hasNutsAllergy = ref('')
+const hasCeleryAllergy = ref('')
+const hasMustardAllergy = ref('')
+const hasSesameAllergy = ref('')
+const hasSulfiteAllergy = ref('')
 const updateSuccess = ref(false)
 
 const isDeleteAlertVisible = ref(false)
@@ -76,7 +96,29 @@ watch(avatar, (newAvatar) => {
 const updateUserInformation = async (pseudo: string) => {
   try {
     const { data, error } = await auth.updateUser({
-      data: { alias: pseudo },
+      data: {
+        alias: pseudo,
+        is_l_o_vegetarian: isLOVegetarian,
+        is_o_vegetarian: isOVegetarian,
+        is_l_vegetarian: isLVegetarian,
+        is_vegetalien: isVegetalien,
+        is_vegan: isVegan,
+        is_pescetarian: isPescetarian,
+        is_frugivore: isFrugivore,
+        is_rawfoodist: isRawfoodist,
+        has_gluten_allergy: hasGlutenAllergy,
+        has_crustaceans_allergy: hasCrustaceansAllergy,
+        has_eggs_allergy: hasEggsAllergy,
+        has_peanuts_allergy: hasPeanutsAllergy,
+        has_fish_allergy: hasFishAllergy,
+        has_soy_allergy: hasSoyAllergy,
+        has_milk_allergy: hasMilkAllergy,
+        has_nuts_allergy: hasNutsAllergy,
+        has_celery_allergy: hasCeleryAllergy,
+        has_mustard_allergy: hasMustardAllergy,
+        has_sesame_allergy: hasSesameAllergy,
+        has_sulfite_allergy: hasSulfiteAllergy,
+      },
     })
     if (error) {
       console.error(
@@ -196,12 +238,12 @@ const allergy = getAllergyList()
         @submit.prevent="updateUserInformation(pseudo)"
       >
         <div class="border-y border-gray-900/10 py-6 my-6">
-          <h3 class="text-xl font-semibold leading-7 text-gray-900">
+          <h3 class="text-xl px-4 font-semibold leading-7 text-gray-900">
             {{ $t("user.informations") }}
           </h3>
         </div>
 
-        <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+        <div class="grid grid-cols-1 px-4 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
             <label
               for="username"
@@ -238,7 +280,7 @@ const allergy = getAllergyList()
           </div>
         </div>
 
-        <div class="border-y border-gray-900/10 mt-4 py-6">
+        <div class="border-y px-4 border-gray-900/10 mt-4 py-6">
           <h3 class="text-xl font-semibold leading-7 text-gray-900">
             {{ $t("user.alimentation") }}
           </h3>
@@ -250,7 +292,7 @@ const allergy = getAllergyList()
         <fieldset>
           <div class="card">
             <Accordion v-model:value="activeDiet">
-              <AccordionPanel value="1">
+              <AccordionPanel value="0">
                 <AccordionHeader
                   id="accordion-header"
                   class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
@@ -326,7 +368,7 @@ const allergy = getAllergyList()
         <fieldset>
           <div class="card">
             <Accordion v-model:value="activeAllergy">
-              <AccordionPanel value="1">
+              <AccordionPanel value="0">
                 <AccordionHeader
                   id="accordion-header"
                   class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
@@ -393,39 +435,13 @@ const allergy = getAllergyList()
                       </p>
                     </div>
                   </div>
-
-                  <div class="relative flex gap-x-3">
-                    <div class="flex h-6 items-center">
-                      <input
-                        id="offers"
-                        name="offers"
-                        type="checkbox"
-                        class="h-4 w-4 px-2 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      >
-                    </div>
-                    <div class="text-sm leading-6 grid grid-cols-2 gap-4">
-                      <label
-                        for="others"
-                        class="font-medium text-gray-900"
-                      >{{
-                        $t("user.other")
-                      }}</label>
-                      <input
-                        id="others"
-                        type="text"
-                        name="others"
-                        autocomplete="others"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      >
-                    </div>
-                  </div>
                 </AccordionContent>
               </AccordionPanel>
             </Accordion>
           </div>
         </fieldset>
 
-        <div class="mt-6 flex items-center justify-end gap-x-6">
+        <div class="mt-6 flex md:flex-row px-4 items-center justify-center md:justify-end gap-x-6">
           <button
             type="button"
             class="min-w-32 mt-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 hover:bg-gray-50"
@@ -444,7 +460,7 @@ const allergy = getAllergyList()
           </button>
         </div>
         <div
-          class="bg-red-100 border-y border-gray-900/10 py-6 my-6 flex items-center justify-between"
+          class="bg-red-100 px-4 border-y border-gray-900/10 py-6 my-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
         >
           <div>
             <h3 class="text-xl font-semibold leading-7 text-gray-900">
@@ -456,7 +472,7 @@ const allergy = getAllergyList()
           </div>
           <button
             type="submit"
-            class="min-w-32 rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            class="min-w-64 mx-auto md:mx-0 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
             @click="openDeleteAlert"
           >
             {{ $t("user.delete.button") }}

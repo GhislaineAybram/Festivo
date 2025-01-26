@@ -147,6 +147,26 @@ export type Database = {
           avatar: string | null
           created_at: string
           email: string | null
+          has_celery_allergy: boolean | null
+          has_crustaceans_allergy: boolean | null
+          has_eggs_allergy: boolean | null
+          has_fish_allergy: boolean | null
+          has_gluten_allergy: boolean | null
+          has_milk_allergy: boolean | null
+          has_mustard_allergy: boolean | null
+          has_nuts_allergy: boolean | null
+          has_peanuts_allergy: boolean | null
+          has_sesame_allergy: boolean | null
+          has_soy_allergy: boolean | null
+          has_sulfite_allergy: boolean | null
+          is_frugivore: boolean | null
+          is_l_o_vegetarian: boolean | null
+          is_l_vegetarian: boolean | null
+          is_o_vegetarian: boolean | null
+          is_pescetarian: boolean | null
+          is_rawfoodist: boolean | null
+          is_vegan: boolean | null
+          is_vegetalien: boolean | null
           user_id: string
         }
         Insert: {
@@ -154,6 +174,26 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           email?: string | null
+          has_celery_allergy?: boolean | null
+          has_crustaceans_allergy?: boolean | null
+          has_eggs_allergy?: boolean | null
+          has_fish_allergy?: boolean | null
+          has_gluten_allergy?: boolean | null
+          has_milk_allergy?: boolean | null
+          has_mustard_allergy?: boolean | null
+          has_nuts_allergy?: boolean | null
+          has_peanuts_allergy?: boolean | null
+          has_sesame_allergy?: boolean | null
+          has_soy_allergy?: boolean | null
+          has_sulfite_allergy?: boolean | null
+          is_frugivore?: boolean | null
+          is_l_o_vegetarian?: boolean | null
+          is_l_vegetarian?: boolean | null
+          is_o_vegetarian?: boolean | null
+          is_pescetarian?: boolean | null
+          is_rawfoodist?: boolean | null
+          is_vegan?: boolean | null
+          is_vegetalien?: boolean | null
           user_id: string
         }
         Update: {
@@ -161,6 +201,26 @@ export type Database = {
           avatar?: string | null
           created_at?: string
           email?: string | null
+          has_celery_allergy?: boolean | null
+          has_crustaceans_allergy?: boolean | null
+          has_eggs_allergy?: boolean | null
+          has_fish_allergy?: boolean | null
+          has_gluten_allergy?: boolean | null
+          has_milk_allergy?: boolean | null
+          has_mustard_allergy?: boolean | null
+          has_nuts_allergy?: boolean | null
+          has_peanuts_allergy?: boolean | null
+          has_sesame_allergy?: boolean | null
+          has_soy_allergy?: boolean | null
+          has_sulfite_allergy?: boolean | null
+          is_frugivore?: boolean | null
+          is_l_o_vegetarian?: boolean | null
+          is_l_vegetarian?: boolean | null
+          is_o_vegetarian?: boolean | null
+          is_pescetarian?: boolean | null
+          is_rawfoodist?: boolean | null
+          is_vegan?: boolean | null
+          is_vegetalien?: boolean | null
           user_id?: string
         }
         Relationships: [
