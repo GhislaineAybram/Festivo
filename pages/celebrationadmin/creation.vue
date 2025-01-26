@@ -47,7 +47,7 @@ async function createNewCelebration() {
 
   errorMsg.value = ''
 
-  const response = (await $fetch(`${runtimeConfig.public.apiUrl}/celebration`, {
+  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/celebration`, {
     method: 'POST',
     body: {
       name: celebrationTitle.value,
@@ -58,16 +58,16 @@ async function createNewCelebration() {
       address: celebrationAddress.value,
       author: user!.id,
     },
-  })) as { error?: string }
-  alert(formattedDate)
-  if (response.error) {
-    errorMsg.value = `Erreur lors de la création de l’événement : ${response.error}`
+  })
+
+  if (error.value) {
+    errorMsg.value = `Erreur lors de la création de l’événement : ${error.value}`
     setTimeout(() => {
       errorMsg.value = ''
     }, 3000)
     console.error(
       'Erreur lors de la création de l’événement :',
-      response.error,
+      error.value,
     )
     return
   }

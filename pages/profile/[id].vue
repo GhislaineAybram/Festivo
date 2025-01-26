@@ -102,18 +102,23 @@ const updateUserInformation = async (pseudo: string) => {
 
 const deleteAccount = async (user_id: string) => {
   try {
-    const isUserDeleted = await $fetch<ErrorResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
+    const { error } = await useFetch<ErrorResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
       method: 'DELETE',
     })
-    if (!isUserDeleted.body.success) {
+    if (error.value) {
       return {
         statusCode: 404,
         body: { success: false, error: 'User not found or deletion failed.' },
       }
     }
-    // TODO : mettre cette logique dans le component AlertDeleteSuccess
     // Will force a logout after completing it
     await auth.signOut()
+    toast.add({
+      severity: 'success',
+      summary: t('delete.success.title'),
+      detail: t('delete.success.subtitle'),
+      life: 3000,
+    })
     navigateTo('/login')
     return {
       statusCode: 200,
@@ -128,94 +133,8 @@ const deleteAccount = async (user_id: string) => {
     }
   }
 }
-
-const diet = [
-  {
-    name: 'Végétarien',
-    description: 'xxx',
-    selected: false,
-  },
-  {
-    name: 'Végétalien',
-    description: 'xxx',
-    selected: false,
-  },
-  {
-    name: 'Vegan',
-    description: 'xxx',
-    selected: false,
-  },
-  {
-    name: 'Pescetarien',
-    description: 'xxx',
-    selected: false,
-  },
-]
-
-const allergy = [
-  {
-    name: 'Gluten',
-    description:
-      'Céréales contenant du gluten (blé, seigle, orge, avoine, épeautre, kamut ou leurs souches hybridées) et produits à base de ces céréales',
-    selected: false,
-  },
-  {
-    name: 'Crustacés',
-    description: 'Et produits à base de crustacés',
-    selected: false,
-  },
-  {
-    name: 'Oeufs',
-    description: 'Et produits à base d’œufs',
-    selected: false,
-  },
-  {
-    name: 'Arachides',
-    description: 'Et produits à base d\'arachides',
-    selected: false,
-  },
-  {
-    name: 'Poissons',
-    description: 'Et produits à base de poissons',
-    selected: false,
-  },
-  {
-    name: 'Soja',
-    description: 'Et produits à base de soja',
-    selected: false,
-  },
-  {
-    name: 'Lait',
-    description: 'Et produits à base de lait (y compris de lactose)',
-    selected: false,
-  },
-  {
-    name: 'Fruits à coques',
-    description:
-      'Amandes, noisettes, noix, noix de cajou, pécan, macadamia, du Brésil, du Queensland, pistaches et produits à base de ces fruits',
-    selected: false,
-  },
-  {
-    name: 'Céleri',
-    description: 'Et produits à base de céleri',
-    selected: false,
-  },
-  {
-    name: 'Moutarde',
-    description: 'Et produits à base de moutarde',
-    selected: false,
-  },
-  {
-    name: 'Graines de sésame',
-    description: 'Et produits à base de graines de sésame',
-    selected: false,
-  },
-  {
-    name: 'Anhydride sulfureux et sulfites',
-    description: 'En concentration de plus de 10 mg/kg ou 10 mg/L',
-    selected: false,
-  },
-]
+const diet = getDietOptions()
+const allergy = getAllergyList()
 </script>
 
 <template>
@@ -549,10 +468,6 @@ const allergy = [
         class="alert"
         @confirm="confirmDeleteAccount"
         @cancel="closeDeleteAlert"
-      />
-      <AlertDeleteSuccess
-        v-if="deleteAccountSuccess"
-        class="alert"
       />
     </div>
     <div v-else>

@@ -46,16 +46,16 @@ const closeModifyAvatar = () => {
 }
 
 async function updateAvatarInDatabase() {
-  const response = await $fetch(`${runtimeConfig.public.apiUrl}/avatar/user/${props.userId}`, {
+  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/avatar/user/${props.userId}`, {
     method: 'PUT',
     body: {
       id: props.userId,
       newAvatar: selectedAvatarId.value,
     },
-  }) as { error?: string }
+  })
 
-  if (response.error) {
-    console.error(`Erreur lors de la mise à jour de l'avatar :`, response.error)
+  if (error.value) {
+    console.error(`Erreur lors de la mise à jour de l'avatar :`, error.value)
     return
   }
   props.updateAvatar(selectedAvatarId.value)

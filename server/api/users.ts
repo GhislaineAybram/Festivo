@@ -1,4 +1,4 @@
-// users
+// users (non utilisée)
 import type { UserWithAvatar } from '~/types'
 import { getUsers } from '~~/supabase'
 
