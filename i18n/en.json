@@ -51,13 +51,13 @@
       "name": "Lacto-vegetarian",
       "explanation": "A follower of a diet that excludes all animal flesh (meat, fish) but allows the consumption of milk and dairy products (cheese, yogurt)."
     },
+    "vegetalien": {
+      "name": "Strictly plant-based",
+      "explanation": "A follower of a diet that excludes all animal flesh (meat, fish) and animal-derived products (eggs, dairy, and honey)."
+    },
     "vegan": {
       "name": "Vegan",
       "explanation": "A follower of a lifestyle that combines an exclusively plant-based diet (veganism) with the refusal to consume any product (clothing, footwear, cosmetics, etc.) derived from animals or their exploitation (including products tested on animals)."
-    },
-    "vegetarian": {
-      "name": "Vegetarian",
-      "explanation": "A follower of a diet that excludes all animal flesh (meat, fish) and animal-derived products (eggs, dairy, and honey)."
     },
     "pescetarian": {
       "name": "Pescetarian",

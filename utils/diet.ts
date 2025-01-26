@@ -19,13 +19,13 @@ export function getDietOptions() {
       selected: false,
     },
     {
-      name: t('diet.vegan.name'),
-      description: t('diet.vegan.explanation'),
+      name: t('diet.vegetalien.name'),
+      description: t('diet.vegetalien.explanation'),
       selected: false,
     },
     {
-      name: t('diet.vegetarian.name'),
-      description: t('diet.vegetarian.explanation'),
+      name: t('diet.vegan.name'),
+      description: t('diet.vegan.explanation'),
       selected: false,
     },
     {

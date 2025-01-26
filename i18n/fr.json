@@ -51,11 +51,11 @@
       "name": "Lacto-végétarien",
       "explanation": "Adepte d'un régime alimentaire excluant toute chair animale (viande, poisson), mais qui admet la consommation de lait et de produits laitiers (fromage, yaourts)."
     },
-    "vegan": {
+    "vegetalien": {
       "name": "Végétalien",
       "explanation": "Adepte d'un régime alimentaire excluant tout aliment d'origine animale (oeufs, produits laitiers et miel)."
     },
-    "vegetarian": {
+    "vegan": {
       "name": "Vegan",
       "explanation": "Adepte d'un mode de vie alliant une alimentation exclusive par les végétaux (végétalisme) et le refus de consommer tout produit (vêtements, chaussures, cosmétiques, etc.) issu des animaux ou de leur exploitation (notamment les produits testés sur les animaux)."
     },
