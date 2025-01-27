@@ -176,7 +176,18 @@
     },
     "button": "Sign up",
     "successfull": "Registration successful",
-    "success_message": "You can now log in with your email address and password !"
+    "success_message": "You can now log in with your email address and password !",
+    "error": {
+      "agree": "You need to agree terms and conditions.",
+      "match": "Passwords do not match !",
+      "sentence": "The password must contain at least",
+      "length": "12 characters",
+      "lowercase": "a lowercase letter",
+      "uppercase": "an uppercase letter",
+      "number": "a number",
+      "symbol": "a symbol",
+      "session": "No user session detected. Please try again."
+    }
   },
   "reset_password": {
     "title": "Reset account password",

@@ -9,20 +9,33 @@ const accept = ref(false)
 const registrationSuccess = ref(false)
 
 const { auth } = useSupabaseClient()
+const { t } = useI18n()
 
 const submitRegisterForm = async () => {
+  // verify if the user agree terms and conditions
   if (!accept.value) {
-    errorMsg.value = 'Vous devez accepter les termes et conditions.'
+    errorMsg.value = t('register.error.agree')
     return
   }
 
+  // verify both password fields are identical
   if (password.value !== confirmPassword.value) {
-    errorMsg.value = 'Passwords do not match!'
+    errorMsg.value = t('register.error.match')
     password.value = ''
     confirmPassword.value = ''
     setTimeout(() => {
       errorMsg.value = ''
     }, 3000)
+    return
+  }
+
+  // verify if the password respect the security rules
+  const { isValid, errorMessage } = validatePassword(password.value, t)
+  if (!isValid) {
+    errorMsg.value = errorMessage
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 5000)
     return
   }
 

@@ -176,7 +176,18 @@
     },
     "button": "Créer votre compte",
     "successfull": "Inscription réussie",
-    "success_message": "Vous pouvez maintenant vous identifier avec votre adresse email et votre mot de passe !"
+    "success_message": "Vous pouvez maintenant vous identifier avec votre adresse email et votre mot de passe !",
+    "error": {
+      "agree": "Vous devez accepter les termes et conditions.",
+      "match": "Les mots de passe ne correspondent pas !",
+      "sentence": "Le mot de passe doit contenir au moins",
+      "length": "12 caractères",
+      "lowercase": "une lettre minuscule",
+      "uppercase": "une lettre majuscule",
+      "number": "un chiffre",
+      "symbol": "un symbole",
+      "session": "Aucune session utilisateur détectée. Veuillez réessayer."
+    }
   },
   "reset_password": {
     "title": "Réinitialiser le mot de passe du compte",

@@ -9,6 +9,7 @@ const errorMsg = ref('')
 const updateSuccess = ref(false)
 
 const { auth } = useSupabaseClient()
+const { t } = useI18n()
 
 watchEffect(() => {
   if (user.value) {
@@ -17,8 +18,9 @@ watchEffect(() => {
 })
 
 const submitNewPasswordForm = async () => {
+  // verify both password fields are identical
   if (new_password.value !== confirmPassword.value) {
-    errorMsg.value = 'Passwords do not match!'
+    errorMsg.value = t('register.error.match')
     new_password.value = ''
     confirmPassword.value = ''
     setTimeout(() => {
@@ -27,8 +29,19 @@ const submitNewPasswordForm = async () => {
     return
   }
 
+  // verify if the password respect the security rules
+  const { isValid, errorMessage } = validatePassword(new_password.value, t)
+  if (!isValid) {
+    errorMsg.value = errorMessage
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 5000)
+    return
+  }
+
+  // verify user is automatically logged in
   if (!user.value) {
-    errorMsg.value = 'No user session detected. Please try again.'
+    errorMsg.value = t('register.error.session')
     return
   }
 
