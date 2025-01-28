@@ -120,6 +120,14 @@
     "sulfite": {
       "name": "Anhydride sulfureux et sulfites",
       "explanation": "En concentration de plus de 10 mg/kg ou 10 mg/L."
+    },
+    "lupin": {
+      "name": "Lupin",
+      "explanation": "Et produits à base de lupin."
+    },
+    "sellfish": {
+      "name": "Mollusques",
+      "explanation": "Et produits à base de mollusques."
     }
   },
   "celebration": {

@@ -46,6 +46,19 @@ export const updateAvatarByUser = async (id: string, newAvatar: string): Promise
     .eq('user_id', id)
     .select()
   if (error) {
+    console.error('Error updating user avatar:', error)
+    return null
+  }
+  return data ? data[0] : null
+}
+
+export const updateFoodInformationByUser = async (id: string, field: string, value: boolean): Promise<User | null> => {
+  const { data, error } = await supabase
+    .from('user')
+    .update({ [field]: value })
+    .eq('user_id', id)
+    .select()
+  if (error) {
     console.error('Error updating user informations:', error)
     return null
   }
