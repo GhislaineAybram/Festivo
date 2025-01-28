@@ -120,6 +120,14 @@
     "sulfite": {
       "name": "Sulfur dioxide and sulfites",
       "explanation": "In concentrations of more than 10 mg/kg or 10 mg/L."
+    },
+    "lupin": {
+      "name": "Lupin",
+      "explanation": "And lupin-based products."
+    },
+    "sellfish": {
+      "name": "Sellfish",
+      "explanation": "And sellfish-based products."
     }
   },
   "celebration": {

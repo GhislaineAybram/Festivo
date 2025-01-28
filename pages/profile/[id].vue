@@ -8,26 +8,28 @@ const { t } = useI18n()
 
 const pseudo = ref('')
 const pseudoTitle = ref('')
-const isLOVegetarian = ref('')
-const isOVegetarian = ref('')
-const isLVegetarian = ref('')
-const isVegetalien = ref('')
-const isVegan = ref('')
-const isPescetarian = ref('')
-const isFrugivore = ref('')
-const isRawfoodist = ref('')
-const hasGlutenAllergy = ref('')
-const hasCrustaceansAllergy = ref('')
-const hasEggsAllergy = ref('')
-const hasPeanutsAllergy = ref('')
-const hasFishAllergy = ref('')
-const hasSoyAllergy = ref('')
-const hasMilkAllergy = ref('')
-const hasNutsAllergy = ref('')
-const hasCeleryAllergy = ref('')
-const hasMustardAllergy = ref('')
-const hasSesameAllergy = ref('')
-const hasSulfiteAllergy = ref('')
+// const isLOVegetarian = ref(false)
+// const isOVegetarian = ref(false)
+// const isLVegetarian = ref(false)
+// const isVegetalien = ref(false)
+// const isVegan = ref(false)
+// const isPescetarian = ref(false)
+// const isFrugivore = ref(false)
+// const isRawfoodist = ref(false)
+// const hasGlutenAllergy = ref(false)
+// const hasCrustaceansAllergy = ref(false)
+// const hasEggsAllergy = ref(false)
+// const hasPeanutsAllergy = ref(false)
+// const hasFishAllergy = ref(false)
+// const hasSoyAllergy = ref(false)
+// const hasMilkAllergy = ref(false)
+// const hasNutsAllergy = ref(false)
+// const hasCeleryAllergy = ref(false)
+// const hasMustardAllergy = ref(false)
+// const hasSesameAllergy = ref(false)
+// const hasSulfiteAllergy = ref(false)
+// const hasLupinAllergy = ref(false)
+// const hasSellfishAllergy = ref(false)
 const updateSuccess = ref(false)
 
 const isDeleteAlertVisible = ref(false)
@@ -69,13 +71,35 @@ const { data: userAvatar, error: userAvatarError }
 if (userAvatarError.value) {
   console.error('Failed to fetch user data', userAvatarError.value)
 }
+// isLOVegetarian.value = userAvatar.value.is_l_o_vegetarian ?? false
+// isOVegetarian.value = userAvatar.value.is_o_vegetarian ?? false
+// isLVegetarian.value = userAvatar.value.is_l_vegetarian ?? false
+// isVegetalien.value = userAvatar.value.is_vegetalien ?? false
+// isVegan.value = userAvatar.value.is_vegan ?? false
+// isPescetarian.value = userAvatar.value.is_pescetarian ?? false
+// isFrugivore.value = userAvatar.value.is_frugivore ?? false
+// isRawfoodist.value = userAvatar.value.is_rawfoodist ?? false
+// hasGlutenAllergy.value = userAvatar.value.has_gluten_allergy ?? false
+// hasCrustaceansAllergy.value = userAvatar.value.has_crustaceans_allergy ?? false
+// hasEggsAllergy.value = userAvatar.value.has_eggs_allergy ?? false
+// hasPeanutsAllergy.value = userAvatar.value.has_peanuts_allergy ?? false
+// hasFishAllergy.value = userAvatar.value.has_fish_allergy ?? false
+// hasSoyAllergy.value = userAvatar.value.has_soy_allergy ?? false
+// hasMilkAllergy.value = userAvatar.value.has_milk_allergy ?? false
+// hasNutsAllergy.value = userAvatar.value.has_nuts_allergy ?? false
+// hasCeleryAllergy.value = userAvatar.value.has_celery_allergy ?? false
+// hasMustardAllergy.value = userAvatar.value.has_mustard_allergy ?? false
+// hasSesameAllergy.value = userAvatar.value.has_sesame_allergy ?? false
+// hasSulfiteAllergy.value = userAvatar.value.has_sulfite_allergy ?? false
+// hasLupinAllergy.value = userAvatar.value.has_lupin_allergy ?? false
+// hasSellfishAllergy.value = userAvatar.value.has_sellfish_allergy ?? false
 
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
 
-const activeDiet = ref('0')
-const activeAllergy = ref('0')
+const activeDiet = ref('1')
+const activeAllergy = ref('1')
 
 const isModifyAvatarOpened = ref(false)
 
@@ -93,32 +117,10 @@ watch(avatar, (newAvatar) => {
   console.log('Avatar mis à jour :', newAvatar)
 })
 
-const updateUserInformation = async (pseudo: string) => {
+const updateUserAlias = async (pseudo: string) => {
   try {
     const { data, error } = await auth.updateUser({
-      data: {
-        alias: pseudo,
-        is_l_o_vegetarian: isLOVegetarian,
-        is_o_vegetarian: isOVegetarian,
-        is_l_vegetarian: isLVegetarian,
-        is_vegetalien: isVegetalien,
-        is_vegan: isVegan,
-        is_pescetarian: isPescetarian,
-        is_frugivore: isFrugivore,
-        is_rawfoodist: isRawfoodist,
-        has_gluten_allergy: hasGlutenAllergy,
-        has_crustaceans_allergy: hasCrustaceansAllergy,
-        has_eggs_allergy: hasEggsAllergy,
-        has_peanuts_allergy: hasPeanutsAllergy,
-        has_fish_allergy: hasFishAllergy,
-        has_soy_allergy: hasSoyAllergy,
-        has_milk_allergy: hasMilkAllergy,
-        has_nuts_allergy: hasNutsAllergy,
-        has_celery_allergy: hasCeleryAllergy,
-        has_mustard_allergy: hasMustardAllergy,
-        has_sesame_allergy: hasSesameAllergy,
-        has_sulfite_allergy: hasSulfiteAllergy,
-      },
+      data: { alias: pseudo },
     })
     if (error) {
       console.error(
@@ -127,18 +129,59 @@ const updateUserInformation = async (pseudo: string) => {
       )
       return
     }
-    updateSuccess.value = true
-    toast.add({
-      severity: 'success',
-      summary: t('user.update.title'),
-      detail: t('user.update.description'),
-      life: 3000,
-    })
     pseudoTitle.value = pseudo
     console.log('Utilisateur mis à jour avec succès :', data)
   }
   catch (err) {
     console.error('Erreur inattendue :', err)
+  }
+}
+
+const diet = getDietOptions()
+const allergy = getAllergyList()
+
+// const updateUserInformation = async () => {
+//   try {
+//     const { data, error } = await useFetch(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
+//       method: 'PUT',
+//       body: { diet, allergy }
+//     })
+//     if (error) {
+//       console.error('Erreur lors de la mise à jour :', error)
+//       return
+//     }
+//     console.log('Mise à jour réussie :', data)
+//     return {
+//       statusCode: 200,
+//       body: { success: true, message: 'User information updated successfully.' },
+//     }
+//   }
+//   catch (error) {
+//     console.error('Error updating user information:', error)
+//     return {
+//       statusCode: 500,
+//       body: { success: false, error: 'Internal server error.' },
+//     }
+//   }
+// }
+
+const updateUserProfile = async () => {
+  try {
+    // Update alias
+    await updateUserAlias(pseudo.value)
+
+    // Save diet and allergy preferences
+    // await updateUserInformation()
+    updateSuccess.value = true
+    toast.add({
+      severity: 'success',
+      summary: t('celebration.update.title'),
+      detail: t('celebration.update.subtitle'),
+      life: 3000,
+    })
+  }
+  catch (err) {
+    console.error('Error updating profile:', err)
   }
 }
 
@@ -175,8 +218,6 @@ const deleteAccount = async (user_id: string) => {
     }
   }
 }
-const diet = getDietOptions()
-const allergy = getAllergyList()
 </script>
 
 <template>
@@ -235,7 +276,6 @@ const allergy = getAllergyList()
 
       <form
         id="profile-details"
-        @submit.prevent="updateUserInformation(pseudo)"
       >
         <div class="border-y border-gray-900/10 py-6 my-6">
           <h3 class="text-xl px-4 font-semibold leading-7 text-gray-900">
@@ -307,27 +347,27 @@ const allergy = getAllergyList()
                   >
                     <div class="flex items-center gap-x-1">
                       <input
-                        id="push-email"
-                        name="push-notifications"
+                        id="diet-requirement-yes"
+                        name="diet-requirement-yes"
                         type="radio"
                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         @click="activeDiet = '1'"
                       >
                       <label
-                        for="push-email"
+                        for="diet-requirement-yes"
                         class="block text-sm font-medium leading-6 text-gray-900"
                       >{{ $t("user.yes") }}</label>
                     </div>
                     <div class="flex items-center gap-x-1">
                       <input
-                        id="push-nothing"
-                        name="push-notifications"
+                        id="diet-requirement-no"
+                        name="diet-requirement-no"
                         type="radio"
                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         @click="activeDiet = '0'"
                       >
                       <label
-                        for="push-nothing"
+                        for="diet-requirement-no"
                         class="block text-sm font-medium leading-6 text-gray-900"
                       >{{ $t("user.no") }}</label>
                     </div>
@@ -336,20 +376,21 @@ const allergy = getAllergyList()
                 <AccordionContent>
                   <div
                     v-for="item in diet"
-                    :key="item.name"
+                    :key="item.key"
                     class="relative flex gap-x-6"
                   >
                     <div class="flex h-6 items-center">
                       <input
-                        id="comments"
-                        name="comments"
+                        :id="item.key"
                         type="checkbox"
+                        :name="item.key"
+                        :checked="userAvatar[item.db]"
                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       >
                     </div>
                     <div class="text-sm leading-6">
                       <label
-                        for="comments"
+                        :for="item.key"
                         class="font-medium text-gray-900"
                       >{{
                         item.name
@@ -383,27 +424,27 @@ const allergy = getAllergyList()
                   >
                     <div class="flex items-center gap-x-1">
                       <input
-                        id="push-email"
-                        name="push-notifications"
+                        id="allergy-yes"
+                        name="allergy-yes"
                         type="radio"
                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         @click="activeAllergy = '1'"
                       >
                       <label
-                        for="push-email"
+                        for="allergy-yes"
                         class="block text-sm font-medium leading-6 text-gray-900"
                       >{{ $t("user.yes") }}</label>
                     </div>
                     <div class="flex items-center gap-x-1">
                       <input
-                        id="push-nothing"
-                        name="push-notifications"
+                        id="allergy-no"
+                        name="allergy-no"
                         type="radio"
                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         @click="activeAllergy = '0'"
                       >
                       <label
-                        for="push-nothing"
+                        for="allergy-no"
                         class="block text-sm font-medium leading-6 text-gray-900"
                       >{{ $t("user.no") }}</label>
                     </div>
@@ -412,24 +453,23 @@ const allergy = getAllergyList()
                 <AccordionContent>
                   <div
                     v-for="item in allergy"
-                    :key="item.name"
+                    :key="item.key"
                     class="relative flex gap-x-3"
                   >
                     <div class="flex h-6 items-center">
                       <input
-                        id="comments"
-                        name="comments"
+                        :id="item.key"
                         type="checkbox"
+                        :name="item.key"
+                        :checked="userAvatar[item.db]"
                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       >
                     </div>
                     <div class="text-sm leading-6">
                       <label
-                        for="comments"
+                        :for="item.key"
                         class="font-medium text-gray-900"
-                      >{{
-                        item.name
-                      }}</label>
+                      >{{ item.name }}</label>
                       <p class="text-gray-500">
                         {{ item.description }}
                       </p>
@@ -454,7 +494,7 @@ const allergy = getAllergyList()
             label="Success"
             severity="success"
             class="min-w-32 mt-3 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            @click="updateUserInformation(pseudo)"
+            @click="updateUserProfile"
           >
             {{ $t("user.save") }}
           </button>
