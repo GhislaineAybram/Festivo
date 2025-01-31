@@ -11,45 +11,34 @@ export default defineEventHandler(async (event) => {
         body: { error: 'User ID is required' },
       }
     };
+    const body = await readBody(event) // Attends que le corps de la requête soit résolu
+    console.log('Read Body:', body)
 
-    const updatedUserData = await readBody(event)
+    const dbField = Object.keys(body)[0] // Récupère le nom du champ dynamique
+    const value = body[dbField]
+    console.log(readBody(event))
+    console.log('Update attempt - ID:', userId, 'Field:', dbField, 'Value:', value)
 
-    if (!updatedUserData || Object.keys(updatedUserData).length === 0) {
+    if (dbField === undefined) {
       return {
         statusCode: 400,
-        body: { error: 'No updates provided or invalid data' },
+        body: { error: 'Field, and value are required' },
       }
     }
+    console.log(dbField)
+    console.log(value)
+    const updatedUser = await updateFoodInformationByUser(userId, dbField, value)
 
-    // Boucle sur les clés du body pour mettre à jour chaque champ
-    const updates = []
-    for (const [field, value] of Object.entries(updatedUserData)) {
-      if (typeof value !== 'boolean') {
-        return {
-          statusCode: 400,
-          body: { error: `Invalid value for field ${field}. Expected a boolean.` },
-        }
-      }
-
-      const update = await updateFoodInformationByUser(userId, field, value)
-      updates.push(update)
-    }
-
-    if (updates.some(update => update === null)) {
+    if (!updatedUser) {
       return {
-        statusCode: 500,
-        body: { error: 'One or more fields failed to update' },
+        statusCode: 404,
+        body: { error: 'Failed to update user food information' },
       }
     }
-
-    // Réponse finale avec toutes les mises à jour réussies
-    return {
-      statusCode: 200,
-      body: { message: 'User food information updated successfully', updates },
-    }
+    return updatedUser
   }
   catch (error) {
-    console.error('Error updating user:', error)
+    console.error(error)
     return {
       statusCode: 500,
       body: { error: 'Failed to update user information' },
