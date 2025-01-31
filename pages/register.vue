@@ -12,9 +12,13 @@ const { auth } = useSupabaseClient()
 const { t } = useI18n()
 
 const submitRegisterForm = async () => {
-  // verify if the user agree terms and conditions
-  if (!accept.value) {
-    errorMsg.value = t('register.error.agree')
+  // verify if the alias respect the rules
+  const { isValidAlias, errorMessageAlias } = validateAlias(alias.value, t)
+  if (!isValidAlias) {
+    errorMsg.value = errorMessageAlias
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 5000)
     return
   }
 
@@ -30,18 +34,22 @@ const submitRegisterForm = async () => {
   }
 
   // verify if the password respect the security rules
-  const { isValid, errorMessage } = validatePassword(password.value, t)
-  if (!isValid) {
-    errorMsg.value = errorMessage
+  const { isValidPassword, errorMessagePassword } = validatePassword(password.value, t)
+  if (!isValidPassword) {
+    errorMsg.value = errorMessagePassword
     setTimeout(() => {
       errorMsg.value = ''
     }, 5000)
     return
   }
 
-  // verify if the alias respect the rules
-
   // add verification of the email address ?
+
+  // verify if the user agree terms and conditions
+  if (!accept.value) {
+    errorMsg.value = t('register.error.agree')
+    return
+  }
 
   try {
     const { error } = await auth.signUp({
@@ -84,9 +92,6 @@ watchEffect(() => {
 <template>
   <main class="main flex flex-col items-center">
     <div class="card flex justify-center" />
-    <!-- <h1 class="text-3xl font-bold sm:text-4xl">
-      Page registration
-    </h1> -->
     <div
       id="register"
       class="card w-full sm:w-80 p-6 mb-6"
@@ -119,10 +124,14 @@ watchEffect(() => {
           <InputText
             id="alias"
             v-model="alias"
+            v-tooltip.focus.bottom="{
+              value: $t('register.error.alias-rules'),
+              class: 'bg-primary text-xs p-2 max-w-[200px]',
+            }"
             class="text"
             type="text"
             :placeholder="$t('user.alias')"
-            autofocus
+            size="small"
             fluid
           />
         </IconField>
@@ -137,6 +146,7 @@ watchEffect(() => {
             class="text"
             type="email"
             :placeholder="$t('user.email')"
+            size="small"
             fluid
           />
         </IconField>
@@ -148,9 +158,14 @@ watchEffect(() => {
           <InputText
             id="password1"
             v-model="password"
+            v-tooltip.focus.top="{
+              value: $t('register.error.password-rules'),
+              class: 'bg-primary text-xs p-2 max-w-[200px]',
+            }"
             class="text"
             type="password"
             :placeholder="$t('user.password')"
+            size="small"
             fluid
           />
         </IconField>
@@ -165,6 +180,7 @@ watchEffect(() => {
             class="text"
             type="password"
             :placeholder="$t('user.password_confirmed')"
+            size="small"
             fluid
           />
         </IconField>
@@ -183,13 +199,11 @@ watchEffect(() => {
             id="accept-label"
             for="accept"
           >
-            <NuxtLink to="/privacy">
-              <i18n-t keypath="register.agree.text">
-                <a href="https://festivo-tawny.vercel.app/privacy">
-                  {{ $t('register.agree.link_text') }}
-                </a>
-              </i18n-t>
-            </NuxtLink>
+            <i18n-t keypath="register.agree.text">
+              <a href="https://festivo-tawny.vercel.app/privacy">
+                {{ $t('register.agree.link_text') }}
+              </a>
+            </i18n-t>
           </label>
         </div>
         <span
@@ -201,7 +215,7 @@ watchEffect(() => {
           type="submit"
           label="sign-up-button"
           icon="pi pi-user-plus"
-          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-1 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           {{ $t('register.button') }}
         </button>

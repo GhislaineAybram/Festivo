@@ -14,50 +14,50 @@ describe('validateAlias', () => {
   }
   it('should return valid when alias is correct', () => {
     const result = validateAlias('validAlias', t)
-    expect(result.isValid).toBe(true)
-    expect(result.errorMessage).toBe('')
+    expect(result.isValidAlias).toBe(true)
+    expect(result.errorMessageAlias).toBe('')
   })
 
   it('should return invalid if alias is too short', () => {
     const result = validateAlias('ab', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe('Le pseudo doit être compris entre 3 et 20 caractères.')
+    expect(result.isValidAlias).toBe(false)
+    expect(result.errorMessageAlias).toBe('Le pseudo doit être compris entre 3 et 20 caractères.')
   })
 
   it('should return invalid if alias is too long', () => {
     const result = validateAlias('aaaaaaaaaaaaaaaaaaaaaaaa', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe('Le pseudo doit être compris entre 3 et 20 caractères.')
+    expect(result.isValidAlias).toBe(false)
+    expect(result.errorMessageAlias).toBe('Le pseudo doit être compris entre 3 et 20 caractères.')
   })
 
   it('should return invalid if alias contains invalid characters', () => {
     const result = validateAlias('invalid@alias', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe('Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores.')
+    expect(result.isValidAlias).toBe(false)
+    expect(result.errorMessageAlias).toBe('Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores.')
   })
 
   it('should return invalid if alias starts with a special character', () => {
     const result = validateAlias('_alias', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe('Le pseudo ne peut pas commencer ou se terminer par un caractère spécial (._-).')
+    expect(result.isValidAlias).toBe(false)
+    expect(result.errorMessageAlias).toBe('Le pseudo ne peut pas commencer ou se terminer par un caractère spécial (._-).')
   })
 
   it('should return invalid if alias ends with a special character', () => {
     const result = validateAlias('alias_', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe('Le pseudo ne peut pas commencer ou se terminer par un caractère spécial (._-).')
+    expect(result.isValidAlias).toBe(false)
+    expect(result.errorMessageAlias).toBe('Le pseudo ne peut pas commencer ou se terminer par un caractère spécial (._-).')
   })
 
   it('should return invalid if alias contains spaces', () => {
     const result = validateAlias('alias with spaces', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(`Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores, ne peut pas contenir d'espaces.`)
+    expect(result.isValidAlias).toBe(false)
+    expect(result.errorMessageAlias).toBe(`Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores, ne peut pas contenir d'espaces.`)
   })
 
   it('should return multiple error messages when multiple rules are violated', () => {
     const result = validateAlias('_alias with spaces$', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(`Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores, ne peut pas commencer ou se terminer par un caractère spécial (._-), ne peut pas contenir d'espaces.`)
+    expect(result.isValidAlias).toBe(false)
+    expect(result.errorMessageAlias).toBe(`Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores, ne peut pas commencer ou se terminer par un caractère spécial (._-), ne peut pas contenir d'espaces.`)
   })
 })
 
@@ -76,62 +76,62 @@ describe('validatePassword', () => {
 
   it('should return valid for a strong password', () => {
     const result = validatePassword('StrongP@ssword123', t)
-    expect(result.isValid).toBe(true)
-    expect(result.errorMessage).toBe('')
+    expect(result.isValidPassword).toBe(true)
+    expect(result.errorMessagePassword).toBe('')
   })
 
   it('should return invalid if the password is too short', () => {
     const result = validatePassword('Short1!', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(
+    expect(result.isValidPassword).toBe(false)
+    expect(result.errorMessagePassword).toBe(
       'Le mot de passe doit contenir au moins 12 caractères.',
     )
   })
 
   it('should return invalid if the password has no lowercase letter', () => {
     const result = validatePassword('PASSWORD123!', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(
+    expect(result.isValidPassword).toBe(false)
+    expect(result.errorMessagePassword).toBe(
       'Le mot de passe doit contenir au moins une lettre minuscule.',
     )
   })
 
   it('should return invalid if the password has no uppercase letter', () => {
     const result = validatePassword('password123!', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(
+    expect(result.isValidPassword).toBe(false)
+    expect(result.errorMessagePassword).toBe(
       'Le mot de passe doit contenir au moins une lettre majuscule.',
     )
   })
 
   it('should return invalid if the password has no number', () => {
     const result = validatePassword('Passwoooord!', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(
+    expect(result.isValidPassword).toBe(false)
+    expect(result.errorMessagePassword).toBe(
       'Le mot de passe doit contenir au moins un chiffre.',
     )
   })
 
   it('should return invalid if the password has no symbol', () => {
     const result = validatePassword('Passwoord123', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(
+    expect(result.isValidPassword).toBe(false)
+    expect(result.errorMessagePassword).toBe(
       'Le mot de passe doit contenir au moins un symbole.',
     )
   })
 
   it('should return all errors for a completely invalid password', () => {
     const result = validatePassword('short', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(
+    expect(result.isValidPassword).toBe(false)
+    expect(result.errorMessagePassword).toBe(
       'Le mot de passe doit contenir au moins 12 caractères, une lettre majuscule, un chiffre, un symbole.',
     )
   })
 
   it('should return multiple errors in a single sentence', () => {
     const result = validatePassword('PASSWORD', t)
-    expect(result.isValid).toBe(false)
-    expect(result.errorMessage).toBe(
+    expect(result.isValidPassword).toBe(false)
+    expect(result.errorMessagePassword).toBe(
       'Le mot de passe doit contenir au moins 12 caractères, une lettre minuscule, un chiffre, un symbole.',
     )
   })

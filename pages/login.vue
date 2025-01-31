@@ -98,6 +98,7 @@ const submitLoginForm = async () => {
             type="text"
             :placeholder="$t('user.email')"
             autofocus
+            size="small"
             fluid
           />
         </IconField>
@@ -113,6 +114,7 @@ const submitLoginForm = async () => {
               class="text"
               type="password"
               :placeholder="$t('user.password')"
+              size="small"
               fluid
             />
           </IconField>
@@ -137,7 +139,7 @@ const submitLoginForm = async () => {
           id="sign-in"
           type="submit"
           label="sign-in-button"
-          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-1 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           @click="submitLoginForm"
         >
           {{ $t('login.button') }}

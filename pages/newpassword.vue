@@ -30,9 +30,9 @@ const submitNewPasswordForm = async () => {
   }
 
   // verify if the password respect the security rules
-  const { isValid, errorMessage } = validatePassword(new_password.value, t)
-  if (!isValid) {
-    errorMsg.value = errorMessage
+  const { isValidPassword, errorMessagePassword } = validatePassword(new_password.value, t)
+  if (!isValidPassword) {
+    errorMsg.value = errorMessagePassword
     setTimeout(() => {
       errorMsg.value = ''
     }, 5000)
@@ -106,6 +106,7 @@ const submitNewPasswordForm = async () => {
             class="text"
             type="email"
             :placeholder="$t('user.email')"
+            size="small"
             fluid
             readonly
           />
@@ -118,9 +119,14 @@ const submitNewPasswordForm = async () => {
           <InputText
             id="password1"
             v-model="new_password"
+            v-tooltip.focus.top="{
+              value: $t('register.error.password-rules'),
+              class: 'bg-primary text-xs p-2 max-w-[200px]',
+            }"
             class="text"
             type="password"
             :placeholder="$t('user.password')"
+            size="small"
             fluid
           />
         </IconField>
@@ -135,6 +141,7 @@ const submitNewPasswordForm = async () => {
             class="text"
             type="password"
             :placeholder="$t('user.password_confirmed')"
+            size="small"
             fluid
           />
         </IconField>
@@ -151,7 +158,7 @@ const submitNewPasswordForm = async () => {
           id="new-password-button"
           type="submit"
           label="new-password-button"
-          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-1 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           {{ $t('new_password.button') }}
         </button>

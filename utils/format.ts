@@ -1,7 +1,7 @@
 // format.ts
 
 // Password format verification
-export const validatePassword = (password: string, t: (key: string) => string): { isValid: boolean, errorMessage: string } => {
+export const validatePassword = (password: string, t: (key: string) => string): { isValidPassword: boolean, errorMessagePassword: string } => {
   const errors: string[] = []
   const minLength = 12
 
@@ -22,15 +22,15 @@ export const validatePassword = (password: string, t: (key: string) => string): 
   }
 
   return {
-    isValid: errors.length === 0,
-    errorMessage: errors.length
+    isValidPassword: errors.length === 0,
+    errorMessagePassword: errors.length
       ? `${t('register.error.password-sentence')} ${errors.join(', ')}.`
       : '',
   }
 }
 
 // Alias format verification
-export const validateAlias = (alias: string, t: (key: string) => string): { isValid: boolean, errorMessage: string } => {
+export const validateAlias = (alias: string, t: (key: string) => string): { isValidAlias: boolean, errorMessageAlias: string } => {
   const errors: string[] = []
 
   if (alias.length < 3 || alias.length > 20) {
@@ -48,8 +48,8 @@ export const validateAlias = (alias: string, t: (key: string) => string): { isVa
   }
 
   return {
-    isValid: errors.length === 0,
-    errorMessage: errors.length
+    isValidAlias: errors.length === 0,
+    errorMessageAlias: errors.length
       ? `${t('register.error.alias-sentence')} ${errors.join(', ')}.`
       : '',
   }

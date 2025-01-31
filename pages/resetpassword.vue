@@ -78,6 +78,7 @@ const submitResetForm = async () => {
             class="text"
             type="email"
             :placeholder="$t('user.email')"
+            size="small"
             fluid
           />
         </IconField>
@@ -90,7 +91,7 @@ const submitResetForm = async () => {
           id="reset-password-button"
           type="submit"
           label="reset-password-button"
-          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-1 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           {{ $t('reset_password.button') }}
         </button>

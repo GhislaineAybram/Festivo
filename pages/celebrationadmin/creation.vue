@@ -232,7 +232,7 @@ async function createNewCelebration() {
           <button
             id="celebration-creation"
             type="submit"
-            class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="block w-full rounded-md bg-indigo-600 px-3.5 py-2 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             {{ $t("celebration.creation-button") }}
           </button>

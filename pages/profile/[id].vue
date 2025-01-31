@@ -6,8 +6,9 @@ import type { ErrorResponseWithSuccess, UserWithAvatar } from '~/types'
 const toast = useToast()
 const { t } = useI18n()
 
-const pseudo = ref('')
-const pseudoTitle = ref('')
+const alias = ref('')
+const aliasTitle = ref('')
+const errorMsg = ref('')
 const updateSuccess = ref(false)
 
 const isDeleteAlertVisible = ref(false)
@@ -35,8 +36,8 @@ const {
 } = await auth.getUser()
 const metadata = user?.user_metadata
 
-pseudo.value = metadata?.alias || ''
-pseudoTitle.value = metadata?.alias || ''
+alias.value = metadata?.alias || ''
+aliasTitle.value = metadata?.alias || ''
 const email = computed(() => user?.email || '')
 
 const user_id = user!.id
@@ -73,10 +74,20 @@ watch(avatar, (newAvatar) => {
   console.log('Avatar mis à jour :', newAvatar)
 })
 
-const updateUserAlias = async (pseudo: string) => {
+const updateUserAlias = async (alias: string) => {
+  // verify if the alias respect the rules
+  const { isValidAlias, errorMessageAlias } = validateAlias(alias, t)
+  if (!isValidAlias) {
+    errorMsg.value = errorMessageAlias
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 5000)
+    return
+  }
+
   try {
     const { data, error } = await auth.updateUser({
-      data: { alias: pseudo },
+      data: { alias: alias },
     })
     if (error) {
       console.error(
@@ -85,7 +96,7 @@ const updateUserAlias = async (pseudo: string) => {
       )
       return false
     }
-    pseudoTitle.value = pseudo
+    aliasTitle.value = alias
     console.log('Utilisateur mis à jour avec succès :', data)
     return true
   }
@@ -136,7 +147,7 @@ const updateUserProfile = async (event: Event) => {
   try {
     const results = await Promise.all([
       // Update alias
-      updateUserAlias(pseudo.value),
+      updateUserAlias(alias.value),
       // Save diet and allergy preferences
       updateUserInformation(event),
     ])
@@ -244,7 +255,7 @@ const deleteAccount = async (user_id: string) => {
 
       <div class="text-center mt-2">
         <h2 class="font-semibold">
-          {{ pseudoTitle }}
+          {{ aliasTitle }}
         </h2>
       </div>
 
@@ -265,11 +276,11 @@ const deleteAccount = async (user_id: string) => {
             >{{ $t("user.alias") }}</label>
             <div class="mt-2">
               <input
-                id="pseudo"
-                v-model="pseudo"
+                id="username"
+                v-model="alias"
                 type="text"
-                name="pseudo"
-                autocomplete="pseudo"
+                name="username"
+                autocomplete="alias"
                 class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
             </div>
