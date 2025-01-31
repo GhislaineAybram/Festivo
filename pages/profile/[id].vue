@@ -306,46 +306,19 @@ const deleteAccount = async (user_id: string) => {
         <fieldset>
           <div class="card">
             <Accordion v-model:value="activeDiet">
-              <AccordionPanel value="1">
+              <AccordionPanel
+                value="1"
+                class="px-4"
+              >
                 <AccordionHeader
                   id="accordion-header"
                   class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
                 >
-                  <div
-                    class="text-sm font-semibold leading-6 text-gray-900 w-full sm:w-auto mb-3 sm:mb-0"
+                  <h5
+                    class="text-m font-semibold leading-6 text-gray-900 w-full sm:w-auto mb-3 sm:mb-0"
                   >
                     {{ $t("user.diet") }}
-                  </div>
-                  <div
-                    class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0"
-                  >
-                    <div class="flex items-center gap-x-1">
-                      <input
-                        id="diet-requirement-yes"
-                        name="diet-requirement-yes"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        @click="activeDiet = '1'"
-                      >
-                      <label
-                        for="diet-requirement-yes"
-                        class="block text-sm font-medium leading-6 text-gray-900"
-                      >{{ $t("user.yes") }}</label>
-                    </div>
-                    <div class="flex items-center gap-x-1">
-                      <input
-                        id="diet-requirement-no"
-                        name="diet-requirement-no"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        @click="activeDiet = '0'"
-                      >
-                      <label
-                        for="diet-requirement-no"
-                        class="block text-sm font-medium leading-6 text-gray-900"
-                      >{{ $t("user.no") }}</label>
-                    </div>
-                  </div>
+                  </h5>
                 </AccordionHeader>
                 <AccordionContent>
                   <div
@@ -384,46 +357,19 @@ const deleteAccount = async (user_id: string) => {
         <fieldset>
           <div class="card">
             <Accordion v-model:value="activeAllergy">
-              <AccordionPanel value="1">
+              <AccordionPanel
+                value="1"
+                class="px-4"
+              >
                 <AccordionHeader
                   id="accordion-header"
                   class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
                 >
-                  <div
-                    class="text-sm font-semibold leading-6 text-gray-900 w-full sm:w-auto mb-3 sm:mb-0"
+                  <h5
+                    class="text-m font-semibold leading-6 text-gray-900 w-full sm:w-auto mb-3 sm:mb-0"
                   >
                     {{ $t("user.allergies") }}
-                  </div>
-                  <div
-                    class="flex flex-row items-center gap-x-6 sm:ml-auto sm:mr-12 sm:mt-0"
-                  >
-                    <div class="flex items-center gap-x-1">
-                      <input
-                        id="allergy-yes"
-                        name="allergy-yes"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        @click="activeAllergy = '1'"
-                      >
-                      <label
-                        for="allergy-yes"
-                        class="block text-sm font-medium leading-6 text-gray-900"
-                      >{{ $t("user.yes") }}</label>
-                    </div>
-                    <div class="flex items-center gap-x-1">
-                      <input
-                        id="allergy-no"
-                        name="allergy-no"
-                        type="radio"
-                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        @click="activeAllergy = '0'"
-                      >
-                      <label
-                        for="allergy-no"
-                        class="block text-sm font-medium leading-6 text-gray-900"
-                      >{{ $t("user.no") }}</label>
-                    </div>
-                  </div>
+                  </h5>
                 </AccordionHeader>
                 <AccordionContent>
                   <div

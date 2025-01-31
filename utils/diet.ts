@@ -1,6 +1,6 @@
 // diet.ts
 
-// return an array with the diet requirement information
+// Return an array with the diet requirement information
 export function getDietOptions() {
   const { t } = useI18n()
   return [
@@ -63,7 +63,7 @@ export function getDietOptions() {
   ]
 }
 
-// return an array with the food allergy information
+// Return an array with the food allergy information
 export function getAllergyList() {
   const { t } = useI18n()
   return [

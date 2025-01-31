@@ -183,12 +183,12 @@ watchEffect(async () => {
               class="relative hidden sm:ml-6 sm:block"
             >
               <MenuButton
-                class="flex items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                class="flex items-center rounded-full bg-gray-800 text-sm focus:outline-none"
               >
                 <img
                   :src="currentFlag"
                   :alt="currentLocale"
-                  class="h-7 w-10 object-cover rounded-md"
+                  class="h-6 w-8 object-cover rounded-md"
                 >
               </MenuButton>
               <transition
@@ -245,14 +245,14 @@ watchEffect(async () => {
             >
               <div>
                 <MenuButton
-                  class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  class="relative flex rounded-full bg-gray-800 text-sm ring-1 ring-white"
                 >
                   <span class="absolute -inset-1.5" />
                   <span class="sr-only">Open user menu</span>
                   <Avatar
                     v-if="user"
                     id="avatar-picture"
-                    class="h-8 w-8 rounded-full"
+                    class="h-10 w-10 rounded-full"
                     :style="{ backgroundImage: `url(${avatar})` }"
                     shape="circle"
                   />
@@ -355,7 +355,7 @@ watchEffect(async () => {
               alt="Français"
               src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg"
               class="flag flag-fr"
-              style="width: 18px"
+              style="width: 24px"
             >
             <span class="text-gray-300 hover:text-white">FR</span>
           </div>
@@ -371,7 +371,7 @@ watchEffect(async () => {
               alt="English"
               src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
               class="flag flag-en"
-              style="width: 18px"
+              style="width: 24px"
             >
             <span class="text-gray-300 hover:text-white">EN</span>
           </div>

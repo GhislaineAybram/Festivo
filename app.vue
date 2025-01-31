@@ -53,7 +53,13 @@ h4 {
 .main {
   flex: 1;
   margin-top: 64px;
+  // desktop : header is 64px and footer is 68px
   min-height: calc(100vh - 132px);
+  // mobile : header is 64px and footer is 172px
+  @media (max-width: 600px) {
+    flex: 1;
+    min-height: calc(100vh - 236px);
+  }
 }
 .footer {
   height: auto;
