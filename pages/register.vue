@@ -39,6 +39,10 @@ const submitRegisterForm = async () => {
     return
   }
 
+  // verify if the alias respect the rules
+
+  // add verification of the email address ?
+
   try {
     const { error } = await auth.signUp({
       email: email.value.toLowerCase(),

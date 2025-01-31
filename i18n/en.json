@@ -188,12 +188,17 @@
     "error": {
       "agree": "You need to agree terms and conditions.",
       "match": "Passwords do not match !",
-      "sentence": "The password must contain at least",
-      "length": "12 characters",
+      "password-sentence": "The password must contain at least",
+      "password-length": "12 characters",
       "lowercase": "a lowercase letter",
       "uppercase": "an uppercase letter",
       "number": "a number",
       "symbol": "a symbol",
+      "alias-sentence": "The username",
+      "alias-length": "must be between 3 and 20 characters",
+      "composition": "can only contain letters, numbers, dots, hyphens, and underscores",
+      "extremity": "cannot start or end with a special character (._-)",
+      "space": "cannot contain spaces",
       "session": "No user session detected. Please try again."
     }
   },

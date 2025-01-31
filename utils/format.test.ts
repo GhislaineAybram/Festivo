@@ -1,15 +1,75 @@
 // format.test.ts
 import { describe, expect, it } from 'vitest'
 
+describe('validateAlias', () => {
+  const t = (key: string) => {
+    const translations: Record<string, string> = {
+      'register.error.alias-length': 'doit être compris entre 3 et 20 caractères',
+      'register.error.composition': 'ne peut contenir que des lettres, chiffres, points, tirets et underscores',
+      'register.error.extremity': 'ne peut pas commencer ou se terminer par un caractère spécial (._-)',
+      'register.error.space': 'ne peut pas contenir d\'espaces',
+      'register.error.alias-sentence': 'Le pseudo',
+    }
+    return translations[key] || key
+  }
+  it('should return valid when alias is correct', () => {
+    const result = validateAlias('validAlias', t)
+    expect(result.isValid).toBe(true)
+    expect(result.errorMessage).toBe('')
+  })
+
+  it('should return invalid if alias is too short', () => {
+    const result = validateAlias('ab', t)
+    expect(result.isValid).toBe(false)
+    expect(result.errorMessage).toBe('Le pseudo doit être compris entre 3 et 20 caractères.')
+  })
+
+  it('should return invalid if alias is too long', () => {
+    const result = validateAlias('aaaaaaaaaaaaaaaaaaaaaaaa', t)
+    expect(result.isValid).toBe(false)
+    expect(result.errorMessage).toBe('Le pseudo doit être compris entre 3 et 20 caractères.')
+  })
+
+  it('should return invalid if alias contains invalid characters', () => {
+    const result = validateAlias('invalid@alias', t)
+    expect(result.isValid).toBe(false)
+    expect(result.errorMessage).toBe('Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores.')
+  })
+
+  it('should return invalid if alias starts with a special character', () => {
+    const result = validateAlias('_alias', t)
+    expect(result.isValid).toBe(false)
+    expect(result.errorMessage).toBe('Le pseudo ne peut pas commencer ou se terminer par un caractère spécial (._-).')
+  })
+
+  it('should return invalid if alias ends with a special character', () => {
+    const result = validateAlias('alias_', t)
+    expect(result.isValid).toBe(false)
+    expect(result.errorMessage).toBe('Le pseudo ne peut pas commencer ou se terminer par un caractère spécial (._-).')
+  })
+
+  it('should return invalid if alias contains spaces', () => {
+    const result = validateAlias('alias with spaces', t)
+    expect(result.isValid).toBe(false)
+    expect(result.errorMessage).toBe(`Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores, ne peut pas contenir d'espaces.`)
+  })
+
+  it('should return multiple error messages when multiple rules are violated', () => {
+    const result = validateAlias('_alias with spaces$', t)
+    expect(result.isValid).toBe(false)
+    expect(result.errorMessage).toBe(`Le pseudo ne peut contenir que des lettres, chiffres, points, tirets et underscores, ne peut pas commencer ou se terminer par un caractère spécial (._-), ne peut pas contenir d'espaces.`)
+  })
+})
+
 describe('validatePassword', () => {
   const t = (key: string) => {
     const translations: Record<string, string> = {
-      'register.error.length': '12 caractères',
+      'register.error.password-length': '12 caractères',
       'register.error.lowercase': 'une lettre minuscule',
       'register.error.uppercase': 'une lettre majuscule',
       'register.error.number': 'un chiffre',
       'register.error.symbol': 'un symbole',
-      'register.error.sentence': 'Le mot de passe doit contenir au moins',
+      'register.error.password-sentence': 'Le mot de passe doit contenir au moins',
     }
     return translations[key] || key
   }

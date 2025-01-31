@@ -188,12 +188,17 @@
     "error": {
       "agree": "Vous devez accepter les termes et conditions.",
       "match": "Les mots de passe ne correspondent pas !",
-      "sentence": "Le mot de passe doit contenir au moins",
-      "length": "12 caractères",
+      "password-sentence": "Le mot de passe doit contenir au moins",
+      "password-length": "12 caractères",
       "lowercase": "une lettre minuscule",
       "uppercase": "une lettre majuscule",
       "number": "un chiffre",
       "symbol": "un symbole",
+      "alias-sentence": "Le pseudo",
+      "alias-length": "doit être compris entre 3 et 20 caractères",
+      "composition": "ne peut contenir que des lettres, chiffres, points, tirets et underscores",
+      "extremity": "ne peut pas commencer ou se terminer par un caractère spécial (._-)",
+      "space": "ne peut pas contenir d'espaces",
       "session": "Aucune session utilisateur détectée. Veuillez réessayer."
     }
   },
