@@ -192,13 +192,15 @@ watchEffect(() => {
           v-if="errorMsg"
           class="text-sm text-red-500"
         >{{ errorMsg }}</span>
-        <Button
+        <button
           id="sign-up-button"
           type="submit"
-          :label="$t('register.button')"
+          label="sign-up-button"
           icon="pi pi-user-plus"
-          class="mt-2"
-        />
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          {{ $t('register.button') }}
+        </button>
       </form>
     </div>
     <AlertRegistration

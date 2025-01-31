@@ -147,12 +147,14 @@ const submitNewPasswordForm = async () => {
           v-if="errorMsg"
           class="text-sm text-red-500"
         >{{ errorMsg }}</span>
-        <Button
-          id="sign-up-button"
+        <button
+          id="new-password-button"
           type="submit"
-          :label="$t('new_password.button')"
-          class="mt-2"
-        />
+          label="new-password-button"
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          {{ $t('new_password.button') }}
+        </button>
       </form>
     </div>
     <AlertNewPassword
@@ -189,12 +191,12 @@ h3 {
 #register, a, a:hover, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span *, span {
   background-color: white;
 }
-#sign-up-button, #sign-up-button * {
+#new-password-button, #new-password-button * {
   background-color: $indigo;
   color: $seashell;
   border-color: $indigo;
 }
-#sign-up-button:hover, #sign-up-button:hover * {
+#new-password-button:hover, #new-password-button:hover * {
   background-color: $tangerine;
   color: $indigo;
   border-color: $indigo;

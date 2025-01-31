@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { CelebrationType } from '~/types'
 
 const runtimeConfig = useRuntimeConfig()
 
@@ -20,6 +21,13 @@ const celebrationTime = ref()
 const celebrationAddress = ref('')
 const creationSuccess = ref(false)
 const errorMsg = ref('')
+
+const { data: celebration_type_list, error } = await useFetch<CelebrationType[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrationtype`,
+)
+if (error.value) {
+  console.error('Failed to fetch celebration_type data', error.value)
+}
 
 async function createNewCelebration() {
   // all the fields must be filled
@@ -136,14 +144,13 @@ async function createNewCelebration() {
                 >
                   Choisissez un type
                 </option>
-                <option value="d016615d-6ca8-42a9-9abb-54a35a3234df">
-                  Anniversary
-                </option>
-                <option value="3d41671f-6103-480f-b3ae-16191fb1bd11">
-                  Baby shower
-                </option>
-                <option value="1bbb698b-6276-4e1f-91a0-544e045fca71">
-                  New Year
+                <option
+                  v-for="item in celebration_type_list"
+                  :id="item.key"
+                  :key="item.key"
+                  :value="item.celebration_type_id"
+                >
+                  {{ item.category }}
                 </option>
               </select>
             </div>

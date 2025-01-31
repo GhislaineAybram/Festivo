@@ -133,13 +133,15 @@ const submitLoginForm = async () => {
             errorMsg
           }}</span>
         </div>
-        <Button
+        <button
           id="sign-in"
           type="submit"
-          :label="$t('login.button')"
-          class="mt-2 button-validation-form"
+          label="sign-in-button"
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           @click="submitLoginForm"
-        />
+        >
+          {{ $t('login.button') }}
+        </button>
       </div>
     </div>
     <div class="register-container text-xs">

@@ -86,12 +86,14 @@ const submitResetForm = async () => {
           v-if="errorMsg"
           class="text-sm text-red-500"
         >{{ errorMsg }}</span>
-        <Button
-          id="sign-up-button"
+        <button
+          id="reset-password-button"
           type="submit"
-          :label="$t('reset_password.button')"
-          class="mt-2"
-        />
+          label="reset-password-button"
+          class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          {{ $t('reset_password.button') }}
+        </button>
         <Toast />
       </form>
     </div>
@@ -125,12 +127,12 @@ h3 {
 #register, a, a:hover, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span *, span {
   background-color: white;
 }
-#sign-up-button, #sign-up-button * {
+#reset-password-button, #reset-password-button * {
   background-color: $indigo;
   color: $seashell;
   border-color: $indigo;
 }
-#sign-up-button:hover, #sign-up-button:hover * {
+#reset-password-button:hover, #reset-password-button:hover * {
   background-color: $tangerine;
   color: $indigo;
   border-color: $indigo;

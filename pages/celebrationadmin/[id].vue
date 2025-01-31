@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
-import type { CelebrationWithPictureAndAuthor } from '~/types'
+import type { CelebrationType, CelebrationWithPictureAndAuthor } from '~/types'
 
 const toast = useToast()
 const { t } = useI18n()
@@ -26,6 +26,13 @@ const celebrationDate = ref<Date | null>(null)
 const celebrationTime = ref()
 const celebrationAddress = ref('')
 const updateSuccess = ref(false)
+
+const { data: celebration_type_list, error } = await useFetch<CelebrationType[]>(
+  () => `${runtimeConfig.public.apiUrl}/celebrationtype`,
+)
+if (error.value) {
+  console.error('Failed to fetch celebration_type data', error.value)
+}
 
 async function loadCelebrationData(id: string) {
   try {
@@ -148,14 +155,13 @@ async function updateCelebrationInformations(id: string) {
                 autocomplete="celebration-type"
                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option value="d016615d-6ca8-42a9-9abb-54a35a3234df">
-                  Anniversary
-                </option>
-                <option value="3d41671f-6103-480f-b3ae-16191fb1bd11">
-                  Baby shower
-                </option>
-                <option value="1bbb698b-6276-4e1f-91a0-544e045fca71">
-                  New Year
+                <option
+                  v-for="item in celebration_type_list"
+                  :id="item.key"
+                  :key="item.key"
+                  :value="item.celebration_type_id"
+                >
+                  {{ item.category }}
                 </option>
               </select>
             </div>

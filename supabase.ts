@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import type { Database } from './database.types'
-import type { Avatar, Celebration, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, UpdateCelebrationData, User, UserWithAvatar } from './types'
+import type { Avatar, Celebration, CelebrationType, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, UpdateCelebrationData, User, UserWithAvatar } from './types'
 
 const supabaseUrl = process.env.SUPABASE_URL!
 const supabaseKey = process.env.SUPABASE_KEY!
@@ -77,6 +77,18 @@ export const updateIsComingGuest = async (userId: string, celebrationId: string,
     return null
   }
   return data ? data[0] : null
+}
+
+export const getCelebrationTypes = async (): Promise<CelebrationType[] | null> => {
+  const { data, error } = await supabase
+    .from('celebration_type')
+    .select()
+
+  if (error) {
+    console.error('Error fetching celebration_type:', error)
+    return null
+  }
+  return data as CelebrationType[]
 }
 
 export const getCelebrationById = async (id: string): Promise<CelebrationWithPictureAndAuthor | null> => {
