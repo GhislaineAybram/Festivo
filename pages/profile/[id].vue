@@ -8,28 +8,6 @@ const { t } = useI18n()
 
 const pseudo = ref('')
 const pseudoTitle = ref('')
-// const isLOVegetarian = ref(false)
-// const isOVegetarian = ref(false)
-// const isLVegetarian = ref(false)
-// const isVegetalien = ref(false)
-// const isVegan = ref(false)
-// const isPescetarian = ref(false)
-// const isFrugivore = ref(false)
-// const isRawfoodist = ref(false)
-// const hasGlutenAllergy = ref(false)
-// const hasCrustaceansAllergy = ref(false)
-// const hasEggsAllergy = ref(false)
-// const hasPeanutsAllergy = ref(false)
-// const hasFishAllergy = ref(false)
-// const hasSoyAllergy = ref(false)
-// const hasMilkAllergy = ref(false)
-// const hasNutsAllergy = ref(false)
-// const hasCeleryAllergy = ref(false)
-// const hasMustardAllergy = ref(false)
-// const hasSesameAllergy = ref(false)
-// const hasSulfiteAllergy = ref(false)
-// const hasLupinAllergy = ref(false)
-// const hasSellfishAllergy = ref(false)
 const updateSuccess = ref(false)
 
 const isDeleteAlertVisible = ref(false)
@@ -71,35 +49,13 @@ const { data: userAvatar, error: userAvatarError }
 if (userAvatarError.value) {
   console.error('Failed to fetch user data', userAvatarError.value)
 }
-// isLOVegetarian.value = userAvatar.value.is_l_o_vegetarian ?? false
-// isOVegetarian.value = userAvatar.value.is_o_vegetarian ?? false
-// isLVegetarian.value = userAvatar.value.is_l_vegetarian ?? false
-// isVegetalien.value = userAvatar.value.is_vegetalien ?? false
-// isVegan.value = userAvatar.value.is_vegan ?? false
-// isPescetarian.value = userAvatar.value.is_pescetarian ?? false
-// isFrugivore.value = userAvatar.value.is_frugivore ?? false
-// isRawfoodist.value = userAvatar.value.is_rawfoodist ?? false
-// hasGlutenAllergy.value = userAvatar.value.has_gluten_allergy ?? false
-// hasCrustaceansAllergy.value = userAvatar.value.has_crustaceans_allergy ?? false
-// hasEggsAllergy.value = userAvatar.value.has_eggs_allergy ?? false
-// hasPeanutsAllergy.value = userAvatar.value.has_peanuts_allergy ?? false
-// hasFishAllergy.value = userAvatar.value.has_fish_allergy ?? false
-// hasSoyAllergy.value = userAvatar.value.has_soy_allergy ?? false
-// hasMilkAllergy.value = userAvatar.value.has_milk_allergy ?? false
-// hasNutsAllergy.value = userAvatar.value.has_nuts_allergy ?? false
-// hasCeleryAllergy.value = userAvatar.value.has_celery_allergy ?? false
-// hasMustardAllergy.value = userAvatar.value.has_mustard_allergy ?? false
-// hasSesameAllergy.value = userAvatar.value.has_sesame_allergy ?? false
-// hasSulfiteAllergy.value = userAvatar.value.has_sulfite_allergy ?? false
-// hasLupinAllergy.value = userAvatar.value.has_lupin_allergy ?? false
-// hasSellfishAllergy.value = userAvatar.value.has_sellfish_allergy ?? false
 
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
 
-const activeDiet = ref('1')
-const activeAllergy = ref('1')
+const activeDiet = ref('0')
+const activeAllergy = ref('0')
 
 const isModifyAvatarOpened = ref(false)
 
@@ -127,10 +83,11 @@ const updateUserAlias = async (pseudo: string) => {
         'Erreur lors de la mise à jour de l’utilisateur :',
         error.message,
       )
-      return
+      return false
     }
     pseudoTitle.value = pseudo
     console.log('Utilisateur mis à jour avec succès :', data)
+    return true
   }
   catch (err) {
     console.error('Erreur inattendue :', err)
@@ -139,49 +96,66 @@ const updateUserAlias = async (pseudo: string) => {
 
 const diet = getDietOptions()
 const allergy = getAllergyList()
+const allUserInformation = [...diet, ...allergy]
 
-// const updateUserInformation = async () => {
-//   try {
-//     const { data, error } = await useFetch(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
-//       method: 'PUT',
-//       body: { diet, allergy }
-//     })
-//     if (error) {
-//       console.error('Erreur lors de la mise à jour :', error)
-//       return
-//     }
-//     console.log('Mise à jour réussie :', data)
-//     return {
-//       statusCode: 200,
-//       body: { success: true, message: 'User information updated successfully.' },
-//     }
-//   }
-//   catch (error) {
-//     console.error('Error updating user information:', error)
-//     return {
-//       statusCode: 500,
-//       body: { success: false, error: 'Internal server error.' },
-//     }
-//   }
-// }
-
-const updateUserProfile = async () => {
+const updateUserInformation = async (event: Event) => {
+  const target = event.target as HTMLInputElement
+  const field = target.id
+  console.log(`Utilisateur mis à jour avec succès - ${field}`)
+  if (!field) return
+  const item = allUserInformation.find(item => item.key === field)
+  console.log(`Utilisateur mis à jour avec succès - ${item}`)
+  if (!item) return
+  const dbField = item.db
+  const value = target.checked ? true : false
+  userAvatar.value[dbField] = value
+  console.log(userAvatar.value) // Pour vérifier son contenu
+  console.log(userAvatar.value[dbField])
   try {
-    // Update alias
-    await updateUserAlias(pseudo.value)
-
-    // Save diet and allergy preferences
-    // await updateUserInformation()
-    updateSuccess.value = true
-    toast.add({
-      severity: 'success',
-      summary: t('celebration.update.title'),
-      detail: t('celebration.update.subtitle'),
-      life: 3000,
+    console.log(`Utilisateur mis à jour avec succès - ${dbField}: ${value}`)
+    const response = await useFetch(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
+      method: 'PUT',
+      body: { [dbField]: value },
     })
+
+    // Vérifie si l'API a renvoyé une erreur
+    if (response.error) {
+      console.error('Erreur lors de la mise à jour', response.error)
+      return false
+    }
+    console.log(`Utilisateur mis à jour avec succès - ${dbField}: ${value}`)
+    return true
   }
-  catch (err) {
-    console.error('Error updating profile:', err)
+  catch (error) {
+    console.error('Erreur lors de la mise à jour', error)
+    return false
+  }
+}
+
+const updateUserProfile = async (event: Event) => {
+  try {
+    const results = await Promise.all([
+      // Update alias
+      updateUserAlias(pseudo.value),
+      // Save diet and allergy preferences
+      updateUserInformation(event),
+    ])
+    if (results.every(res => res !== false)) {
+      console.log('Mise à jour réussie !')
+      updateSuccess.value = true
+      toast.add({
+        severity: 'success',
+        summary: t('user.update.title'),
+        detail: t('user.update.description'),
+        life: 3000,
+      })
+    }
+    else {
+      console.error('Une des mises à jour a échoué.')
+    }
+  }
+  catch (error) {
+    console.error('Erreur lors de la mise à jour :', error)
   }
 }
 
@@ -332,7 +306,7 @@ const deleteAccount = async (user_id: string) => {
         <fieldset>
           <div class="card">
             <Accordion v-model:value="activeDiet">
-              <AccordionPanel value="0">
+              <AccordionPanel value="1">
                 <AccordionHeader
                   id="accordion-header"
                   class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
@@ -386,6 +360,7 @@ const deleteAccount = async (user_id: string) => {
                         :name="item.key"
                         :checked="userAvatar[item.db]"
                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        @change="updateUserInformation"
                       >
                     </div>
                     <div class="text-sm leading-6">
@@ -409,7 +384,7 @@ const deleteAccount = async (user_id: string) => {
         <fieldset>
           <div class="card">
             <Accordion v-model:value="activeAllergy">
-              <AccordionPanel value="0">
+              <AccordionPanel value="1">
                 <AccordionHeader
                   id="accordion-header"
                   class="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 sm:gap-y-0 sm:justify-between"
@@ -463,6 +438,7 @@ const deleteAccount = async (user_id: string) => {
                         :name="item.key"
                         :checked="userAvatar[item.db]"
                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        @change="updateUserInformation"
                       >
                     </div>
                     <div class="text-sm leading-6">
@@ -494,7 +470,7 @@ const deleteAccount = async (user_id: string) => {
             label="Success"
             severity="success"
             class="min-w-32 mt-3 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            @click="updateUserProfile"
+            @click.prevent="updateUserProfile"
           >
             {{ $t("user.save") }}
           </button>

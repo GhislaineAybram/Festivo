@@ -5,7 +5,7 @@ export function getDietOptions() {
   const { t } = useI18n()
   return [
     {
-      key: 'lacto-ovo vegetarian',
+      key: 'lacto_ovo_vegetarian',
       db: 'is_l_o_vegetarian',
       name: t('diet.lovegetarian.name'),
       description: t('diet.lovegetarian.explanation'),
