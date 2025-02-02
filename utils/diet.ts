@@ -9,6 +9,7 @@ export function getDietOptions() {
       db: 'is_l_o_vegetarian',
       name: t('diet.lovegetarian.name'),
       description: t('diet.lovegetarian.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1738458242/vegan_quafs1.png', // TODO
       selected: false,
     },
     {
@@ -16,6 +17,7 @@ export function getDietOptions() {
       db: 'is_o_vegetarian',
       name: t('diet.ovegetarian.name'),
       description: t('diet.ovegetarian.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1738458242/vegan_quafs1.png', // TODO
       selected: false,
     },
     {
@@ -23,6 +25,7 @@ export function getDietOptions() {
       db: 'is_l_vegetarian',
       name: t('diet.lvegetarian.name'),
       description: t('diet.lvegetarian.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1738458242/vegan_quafs1.png', // TODO
       selected: false,
     },
     {
@@ -30,6 +33,7 @@ export function getDietOptions() {
       db: 'is_vegetalien',
       name: t('diet.vegetalien.name'),
       description: t('diet.vegetalien.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1738458242/vegan_quafs1.png',
       selected: false,
     },
     {
@@ -37,6 +41,7 @@ export function getDietOptions() {
       db: 'is_vegan',
       name: t('diet.vegan.name'),
       description: t('diet.vegan.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1738458127/Icons8-Windows-8-Food-Vegan-Symbol.512_beus71.png',
       selected: false,
     },
     {
@@ -44,6 +49,7 @@ export function getDietOptions() {
       db: 'is_pescetarian',
       name: t('diet.pescetarian.name'),
       description: t('diet.pescetarian.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1737851379/fish_allergen_food_allergens_icon_183655_k8ik7a.png',
       selected: false,
     },
     {
@@ -51,6 +57,7 @@ export function getDietOptions() {
       db: 'is_frugivore',
       name: t('diet.frugivore.name'),
       description: t('diet.frugivore.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1738459921/fruits_1624997_uljpd6.png',
       selected: false,
     },
     {
@@ -58,6 +65,7 @@ export function getDietOptions() {
       db: 'is_rawfoodist',
       name: t('diet.rawfoodist.name'),
       description: t('diet.rawfoodist.explanation'),
+      logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1738459271/fruit_10580500_qkdtgf.png',
       selected: false,
     },
   ]
@@ -109,7 +117,7 @@ export function getAllergyList() {
     },
     {
       key: 'soy',
-      db: 'hasSoyAllergy',
+      db: 'has_soy_allergy',
       name: t('allergy.soy.name'),
       description: t('allergy.soy.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1737851379/soy_allergen_food_allergens_icon_183654_tsew8i.png',

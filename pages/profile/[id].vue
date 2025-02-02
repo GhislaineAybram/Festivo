@@ -111,10 +111,10 @@ const allUserInformation = [...diet, ...allergy]
 
 const updateUserInformation = async (event: Event) => {
   const target = event.target as HTMLInputElement
-  const field = target.id
-  console.log(`Utilisateur mis à jour avec succès - ${field}`)
-  if (!field) return
-  const item = allUserInformation.find(item => item.key === field)
+  const restriction = target.id
+  console.log(`Utilisateur mis à jour avec succès - ${restriction}`)
+  if (!restriction) return
+  const item = allUserInformation.find(item => item.key === restriction)
   console.log(`Utilisateur mis à jour avec succès - ${item}`)
   if (!item) return
   const dbField = item.db

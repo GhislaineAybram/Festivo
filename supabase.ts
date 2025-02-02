@@ -52,10 +52,10 @@ export const updateAvatarByUser = async (id: string, newAvatar: string): Promise
   return data ? data[0] : null
 }
 
-export const updateFoodInformationByUser = async (id: string, field: string, value: boolean): Promise<User | null> => {
+export const updateFoodInformationByUser = async (id: string, restriction: string, value: boolean): Promise<User | null> => {
   const { data, error } = await supabase
     .from('user')
-    .update({ [field]: value })
+    .update({ [restriction]: value })
     .eq('user_id', id)
     .select()
   if (error) {
@@ -170,6 +170,65 @@ export const getGuestsByCelebration = async (id: string): Promise<GuestWithUserI
   }
   return data as GuestWithUserInfo[]
 }
+
+export const getComingGuestsByCelebration = async (id: string): Promise<GuestWithUserInfo[] | null> => {
+  const { data, error } = await supabase
+    .from('guest')
+    .select(`
+      guest_id,
+      celebration_id,
+      is_coming,
+      created_at,
+      user_id:user(
+        user_id,
+        email,
+        alias,
+        avatar:avatar(*),
+        is_l_o_vegetarian,
+        is_o_vegetarian,
+        is_l_vegetarian,
+        is_vegetalien,
+        is_vegan,
+        is_pescetarian,
+        is_frugivore,
+        is_rawfoodist,
+        has_gluten_allergy,
+        has_crustaceans_allergy,
+        has_eggs_allergy,
+        has_peanuts_allergy,
+        has_fish_allergy,
+        has_soy_allergy,
+        has_milk_allergy,
+        has_nuts_allergy,
+        has_celery_allergy,
+        has_mustard_allergy,
+        has_sesame_allergy,
+        has_sulfite_allergy,
+        has_lupin_allergy,
+        has_sellfish_allergy
+      )
+    `)
+    .eq('celebration_id', id)
+    .eq('is_coming', true)
+  if (error) {
+    console.error('Error fetching coming guests list:', error)
+    return null
+  }
+  return data as GuestWithUserInfo[]
+}
+
+// export const hasRestrictionByUserId = async (userId: string, restriction: UserRestrictions): Promise<boolean | null> => {
+//   const { data, error } = await supabase
+//     .from('user')
+//     .select(restriction)
+//     .eq('user_id', userId)
+//     .single();
+//   if (error) {
+//     console.error(`Error fetching restriction '${restriction}' for user ${userId}:`, error);
+//     return null;
+//   }
+//   return data ? data[restriction] : null
+// }
 
 export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<CelebrationWithPictureAndAuthor[] | null> => {
   const { data, error } = await supabase
