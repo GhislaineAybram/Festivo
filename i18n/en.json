@@ -165,6 +165,11 @@
     "update": {
       "title": "Information updated",
       "description": "Changes made have been correctly saved."
+    },
+    "delete": {
+      "title": "Delete your event",
+      "description": "Deleting your event will permanently and irrevocably remove your event and details from our database. You will not be able to reinstate it in any way.",
+      "button": "Delete my event"
     }
   },
   "login": {
@@ -255,6 +260,10 @@
       "text_2": "the deletion of your account and all your personal data,",
       "text_3": "the deletion of all events you have created,",
       "text_4": "the loss of your invitations and participation in events."
+    },
+    "delete_celebration": {
+      "title": "Are you sure you want to delete your event ?",
+      "subtitle": "Deleting your event will permanently and irrevocably remove your event and details from our database. You will not be able to reinstate it in any way."
     },
     "delete_success": {
       "title": "Account deleted successful",

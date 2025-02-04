@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Popover from 'primevue/popover'
 import { ref } from 'vue'
+import { ShareIcon } from '@heroicons/vue/24/outline'
 import type { GuestWithUserInfo } from '~/types'
 
 const op = ref()
@@ -46,13 +47,19 @@ const copyToClipboard = async () => {
 
 <template>
   <div class="card flex justify-center">
-    <Button
+    <button
+      id="share"
       type="button"
       icon="pi pi-share-alt"
-      :label="$t('celebration.modification.share.button')"
+      class="flex w-full items-center justify-center gap-4 rounded-md px-7 py-3 text-center font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       @click="toggle"
-    />
-
+    >
+      <ShareIcon
+        class="h-6 w-6"
+        aria-hidden="true"
+      />
+      {{ $t('celebration.modification.share.button') }}
+    </button>
     <Popover
       ref="op"
       class="popover-container"
@@ -113,4 +120,14 @@ const copyToClipboard = async () => {
 </template>
 
 <style lang="scss" scoped>
+#share:hover {
+  background-color: $indigo;
+  color: $tangerine;
+  border-color: $indigo;
+}
+#share {
+  background-color: $tangerine;
+  color: $indigo;
+  border-color: $indigo;
+}
 </style>

@@ -360,3 +360,15 @@ export const deleteUser = async (id: string): Promise<boolean> => {
   };
   return true // Return `true` if the delete action succeeded
 }
+
+export const deleteCelebration = async (celebrationId: string): Promise<boolean> => {
+  const { error } = await supabase
+    .from('celebration')
+    .delete()
+    .eq('celebration_id', celebrationId)
+  if (error) {
+    console.error('Error deleting a celebration:', error)
+    return false
+  };
+  return true // Return `true` if the delete action succeeded
+}

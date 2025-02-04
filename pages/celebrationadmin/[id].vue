@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
-import type { CelebrationType, CelebrationWithPictureAndAuthor } from '~/types'
+import type { CelebrationType, CelebrationWithPictureAndAuthor, ErrorResponseWithSuccess } from '~/types'
 
 definePageMeta({
   middleware: 'auth',
@@ -26,7 +26,21 @@ const celebrationDate = ref<Date | null>(null)
 const celebrationTime = ref()
 const celebrationAddress = ref('')
 const updateSuccess = ref(false)
-
+const isDeleteAlertVisible = ref(false)
+const deleteCelebrationSuccess = ref(false)
+const openDeleteAlert = () => {
+  isDeleteAlertVisible.value = true
+}
+const closeDeleteAlert = () => {
+  isDeleteAlertVisible.value = false
+}
+const confirmDeleteCelebration = async () => {
+  const success = await deleteCelebration(id)
+  if (success.body.success) {
+    deleteCelebrationSuccess.value = true
+    isDeleteAlertVisible.value = false
+  }
+}
 const { data: celebration_type_list, error } = await useFetch<CelebrationType[]>(
   () => `${runtimeConfig.public.apiUrl}/celebrationtype`,
 )
@@ -106,6 +120,40 @@ async function updateCelebrationInformations(id: string) {
     detail: t('celebration.update.description'),
     life: 3000,
   })
+}
+
+const deleteCelebration = async (id: string) => {
+  try {
+    const { error } = await useFetch<ErrorResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
+      method: 'DELETE',
+    })
+    if (error.value) {
+      return {
+        statusCode: 404,
+        body: { success: false, error: 'Celebration not found or deletion failed.' },
+      }
+    }
+    toast.add({
+      severity: 'success',
+      summary: t('delete.success.title'),
+      detail: t('delete.success.subtitle'),
+      life: 3000,
+    })
+    setTimeout(() => {
+      navigateTo('/')
+    }, 1000)
+    return {
+      statusCode: 200,
+      body: { success: true, message: 'Celebration deleted successfully.' },
+    }
+  }
+  catch (error) {
+    console.error('Error deleting celebration:', error)
+    return {
+      statusCode: 500,
+      body: { success: false, error: 'Internal server error.' },
+    }
+  }
 }
 </script>
 
@@ -235,7 +283,7 @@ async function updateCelebrationInformations(id: string) {
             </div>
           </div>
         </div>
-        <div class="mt-10">
+        <div class="mt-8">
           <span
             v-if="errorMsg"
             class="text-sm text-red-500"
@@ -245,8 +293,6 @@ async function updateCelebrationInformations(id: string) {
           <Toast />
           <button
             id="celebration-creation"
-            label="Success"
-            severity="success"
             type="submit"
             class="block w-full rounded-md bg-indigo-600 px-3.5 py-2 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             @click="updateCelebrationInformations(id)"
@@ -254,7 +300,22 @@ async function updateCelebrationInformations(id: string) {
             {{ $t("celebration.modification.save") }}
           </button>
         </div>
+        <div class="mt-6">
+          <button
+            type="submit"
+            class="min-w-64 mx-auto md:mx-0 rounded-md !bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            @click="openDeleteAlert"
+          >
+            {{ $t("celebration.delete.button") }}
+          </button>
+        </div>
       </form>
+      <AlertDeleteCelebration
+        v-if="isDeleteAlertVisible"
+        class="alert"
+        @confirm="confirmDeleteCelebration"
+        @cancel="closeDeleteAlert"
+      />
     </div>
     <div v-else>
       <AlertNotLoggedIn class="alert" />
