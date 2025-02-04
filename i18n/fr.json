@@ -165,6 +165,11 @@
     "update": {
       "title": "Informations mises à jour",
       "description": "Vos modifications ont bien été enregistrées."
+    },
+    "delete": {
+      "title": "Supprimer mon événement",
+      "description": "La suppression de votre événement entraînera la suppression permanente et irréversible de votre événement et de ses informations de notre base de données. Vous ne pourrez pas les rétablir de quelque manière que ce soit.",
+      "button": "Supprimer mon événement"
     }
   },
   "login": {
@@ -255,6 +260,10 @@
       "text_2": "la suppression de votre compte et de toutes vos données personnelles,",
       "text_3": "la suppression de tous les événements que vous avez créés,",
       "text_4": "la perte de vos invitations et participations à des événements."
+    },
+    "delete_celebration": {
+      "title": "Etes-vous sûr(e) de vouloir supprimer votre événement ?",
+      "subtitle": "La suppression de votre événement entraînera la suppression permanente et irréversible de votre événement et de ses informations de notre base de données. Vous ne pourrez pas les rétablir de quelque manière que ce soit."
     },
     "delete_success": {
       "title": "Compte supprimé avec succès",
