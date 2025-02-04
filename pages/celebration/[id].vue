@@ -26,9 +26,15 @@ const toast = useToast()
 
 const { id } = useRoute().params
 const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
+const { data: { user } } = await auth.getUser()
+
+onMounted(async () => {
+  if (!user) {
+    localStorage.setItem('redirectAfterLogin', `/celebration/${id}`)
+    console.log(localStorage.setItem('redirectAfterLogin', `/celebration/${id}`))
+    navigateTo('/login')
+  }
+})
 const userId = user?.id
 
 const runtimeConfig = useRuntimeConfig()
@@ -61,20 +67,22 @@ const defaultAvatarUrl
 
 // add the invited user if not already done
 const checkAndRegisterInvitedUser = async () => {
-  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest`, {
-    method: 'POST',
-    body: {
-      user_id: userId,
-      celebration_id: id,
-    },
-  })
+  if (userId !== celebration.value.author) {
+    const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest`, {
+      method: 'POST',
+      body: {
+        user_id: userId,
+        celebration_id: id,
+      },
+    })
 
-  if (error.value) {
-    console.error(
-      `Erreur lors de la création de l'invitation :`,
-      error.value,
-    )
-    return
+    if (error.value) {
+      console.error(
+        `Erreur lors de la création de l'invitation :`,
+        error.value,
+      )
+      return
+    }
   }
 }
 
@@ -247,7 +255,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <ExclamationTriangleIcon
-                class="icon rounded-lg size-8 text-white p-1.5"
+                class="icon-attention rounded-lg size-8 text-white p-1.5"
               />
               <div class="font-medium text-gray-900 flex px-2">
                 Attention
@@ -436,6 +444,11 @@ h3 {
 }
 .icon {
   background-color: $indigo;
+  color: $tangerine;
+}
+.icon-attention {
+  background-color: $tangerine;
+  color: $indigo;
 }
 @media (min-width: 1024px) {
   #celebration-details {

@@ -19,7 +19,14 @@ const {
   data: { user },
 } = await auth.getUser()
 const metadata = user?.user_metadata
-const alias = computed(() => metadata?.alias || '')
+const alias = ref(metadata?.alias || '')
+
+watch(() => user, (newUser) => {
+  if (newUser) {
+    const updatedMetadata = newUser.user_metadata
+    alias.value = updatedMetadata?.alias || ''
+  }
+}, { immediate: true })
 
 const userLogout = async () => {
   await auth.signOut()

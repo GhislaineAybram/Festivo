@@ -3,12 +3,12 @@ import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import type { CelebrationType, CelebrationWithPictureAndAuthor } from '~/types'
 
-const toast = useToast()
-const { t } = useI18n()
-
 definePageMeta({
   middleware: 'auth',
 })
+
+const toast = useToast()
+const { t } = useI18n()
 
 const { auth } = useSupabaseClient()
 const {
