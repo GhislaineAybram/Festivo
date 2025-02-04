@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { isAuthApiError } from '@supabase/supabase-js'
+const toast = useToast()
+const { t } = useI18n()
 
 const email = ref('')
 const password = ref('')
@@ -23,39 +24,30 @@ const submitLoginForm = async () => {
     password.value = ''
 
     loginSuccess.value = true
+    toast.add({
+      severity: 'success',
+      summary: t('login.successfull'),
+      detail: t('login.success_message'),
+      life: 3000,
+    })
+    setTimeout(() => {
+      console.log(localStorage)
+      console.log(localStorage.getItem('redirectAfterLogin'))
+      const redirectPath = localStorage.getItem('redirectAfterLogin') || '/'
+      localStorage.removeItem('redirectAfterLogin')
+      navigateTo(redirectPath)
+    }, 1000)
   }
   catch (error) {
-    // Vérifie le code et le nom de l'erreur pour gérer différents cas
-    if (isAuthApiError(error)) {
-      switch (error.code) {
-        case '400':
-          errorMsg.value
-            = 'Erreur de requête. Veuillez vérifier vos informations.'
-          break
-        case '401':
-          errorMsg.value = 'Non autorisé. Vérifiez vos identifiants.'
-          break
-        default:
-          errorMsg.value = 'Erreur d\'authentification inconnue.'
-          break
-      }
+    if (error instanceof Error) {
+      errorMsg.value = error.message
     }
-    else if (error) {
-      switch ((error as { name: string }).name) {
-        case 'InvalidCredentialsError':
-          errorMsg.value = 'Identifiants incorrects.'
-          break
-        case 'NetworkError':
-          errorMsg.value = 'Erreur réseau. Veuillez réessayer.'
-          break
-        default:
-          errorMsg.value = 'Erreur d\'authentification du client.'
-          break
-      }
-      setTimeout(() => {
-        errorMsg.value = ''
-      }, 3000)
+    else {
+      errorMsg.value = 'Une erreur inconnue est survenue'
     }
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
   }
 }
 </script>
@@ -63,9 +55,6 @@ const submitLoginForm = async () => {
 <template>
   <main class="main flex flex-col items-center">
     <div class="card flex justify-center" />
-    <!-- <h1 class="text-3xl font-bold sm:text-4xl">
-      Page login
-    </h1> -->
     <div
       id="login"
       class="card w-full sm:w-80 p-6 mb-6"
@@ -146,6 +135,7 @@ const submitLoginForm = async () => {
         </button>
       </div>
     </div>
+    <Toast />
     <div class="register-container text-xs">
       <p>{{ $t("login.no_account") }}</p>
       <NuxtLink to="/register">
@@ -154,10 +144,6 @@ const submitLoginForm = async () => {
         </p>
       </NuxtLink>
     </div>
-    <AlertLoggedIn
-      v-if="loginSuccess"
-      class="alert"
-    />
   </main>
 </template>
 

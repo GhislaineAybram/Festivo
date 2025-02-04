@@ -17,20 +17,41 @@ create table
     constraint celebration_type_pkey primary key (celebration_type_id)
   ) tablespace pg_default;
 
-create table
-  public.user (
-    alias character varying null,
-    email character varying null,
-    created_at timestamp with time zone not null default now(),
-    user_id uuid not null,
-    avatar uuid null default '1fc5e9e4-891e-4360-b912-ed11b7ba3c1a'::uuid,
-    constraint user_pkey primary key (user_id),
-    constraint user_alias_key unique (alias),
-    constraint user_email_key unique (email),
-    constraint user_user_id_key unique (user_id),
-    constraint user_avatar_fkey foreign key (avatar) references avatar (avatar_id) on update cascade on delete set default,
-    constraint user_user_id_fkey foreign key (user_id) references auth.users (id) on update cascade on delete cascade
-  ) tablespace pg_default;
+create table public.user (
+  alias character varying null,
+  email character varying null,
+  created_at timestamp with time zone not null default now(),
+  user_id uuid not null,
+  avatar uuid null default '1fc5e9e4-891e-4360-b912-ed11b7ba3c1a'::uuid,
+  is_l_o_vegetarian boolean null default false,
+  is_o_vegetarian boolean null default false,
+  is_l_vegetarian boolean null default false,
+  is_vegetalien boolean null default false,
+  is_vegan boolean null default false,
+  is_pescetarian boolean null default false,
+  is_frugivore boolean null default false,
+  is_rawfoodist boolean null default false,
+  has_gluten_allergy boolean null default false,
+  has_crustaceans_allergy boolean null default false,
+  has_eggs_allergy boolean null default false,
+  has_peanuts_allergy boolean null default false,
+  has_fish_allergy boolean null default false,
+  has_soy_allergy boolean null default false,
+  has_milk_allergy boolean null default false,
+  has_nuts_allergy boolean null default false,
+  has_celery_allergy boolean null default false,
+  has_mustard_allergy boolean null default false,
+  has_sesame_allergy boolean null default false,
+  has_sulfite_allergy boolean null default false,
+  has_lupin_allergy boolean null default false,
+  has_sellfish_allergy boolean null default false,
+  constraint user_pkey primary key (user_id),
+  constraint user_alias_key unique (alias),
+  constraint user_email_key unique (email),
+  constraint user_user_id_key unique (user_id),
+  constraint user_avatar_fkey foreign KEY (avatar) references avatar (avatar_id) on update CASCADE on delete set default,
+  constraint user_user_id_fkey foreign KEY (user_id) references auth.users (id) on update CASCADE on delete CASCADE
+) TABLESPACE pg_default;
 
 create table
   public.celebration (

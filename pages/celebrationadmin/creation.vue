@@ -2,12 +2,11 @@
 import { ref } from 'vue'
 import type { CelebrationType } from '~/types'
 
-const runtimeConfig = useRuntimeConfig()
-
 definePageMeta({
   middleware: 'auth',
 })
 
+const runtimeConfig = useRuntimeConfig()
 const { auth } = useSupabaseClient()
 const {
   data: { user },

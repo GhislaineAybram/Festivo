@@ -5,10 +5,12 @@ import {
   CalendarIcon,
   ClockIcon,
   EnvelopeOpenIcon,
+  ExclamationTriangleIcon,
   GiftIcon,
   InformationCircleIcon,
   MapPinIcon,
   MusicalNoteIcon,
+  NoSymbolIcon,
   TrophyIcon,
   UsersIcon,
 } from '@heroicons/vue/24/outline'
@@ -24,9 +26,15 @@ const toast = useToast()
 
 const { id } = useRoute().params
 const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
+const { data: { user } } = await auth.getUser()
+
+onMounted(async () => {
+  if (!user) {
+    localStorage.setItem('redirectAfterLogin', `/celebration/${id}`)
+    console.log(localStorage.setItem('redirectAfterLogin', `/celebration/${id}`))
+    navigateTo('/login')
+  }
+})
 const userId = user?.id
 
 const runtimeConfig = useRuntimeConfig()
@@ -50,26 +58,31 @@ if (guestsListError.value) {
 }
 const nbGuests = computed(() => guestsList.value.nb_guests || 0)
 const guestInfoList = computed(() => guestsList.value.guests_list || [])
+const restrictionsguestsList = computed(() => guestsList.value.restrictionsCounts || [])
+const diet = getDietOptions()
+const allergy = getAllergyList()
 
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 
 // add the invited user if not already done
 const checkAndRegisterInvitedUser = async () => {
-  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest`, {
-    method: 'POST',
-    body: {
-      user_id: userId,
-      celebration_id: id,
-    },
-  })
+  if (userId !== celebration.value.author) {
+    const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest`, {
+      method: 'POST',
+      body: {
+        user_id: userId,
+        celebration_id: id,
+      },
+    })
 
-  if (error.value) {
-    console.error(
-      `Erreur lors de la création de l'invitation :`,
-      error.value,
-    )
-    return
+    if (error.value) {
+      console.error(
+        `Erreur lors de la création de l'invitation :`,
+        error.value,
+      )
+      return
+    }
   }
 }
 
@@ -235,7 +248,60 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
               </div>
             </div>
             <div class="text-sm text-gray-500 self-center">
-              blablaa
+              blablabla
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
+            <div class="flex items-center">
+              <ExclamationTriangleIcon
+                class="icon-attention rounded-lg size-8 text-white p-1.5"
+              />
+              <div class="font-medium text-gray-900 flex px-2">
+                Attention
+              </div>
+            </div>
+            <div class="flex text-sm text-gray-500 self-center">
+              <div
+                v-for="item in diet"
+                :key="item.key"
+              >
+                <div v-if="restrictionsguestsList?.[item.db] > 0">
+                  <div
+                    v-tooltip.top="{
+                      value: restrictionsguestsList?.[item.db] + ' guests ' + item.name + ' = ' + item.description,
+                      class: 'bg-primary text-xs p-2 max-w-[200px]',
+                    }"
+                    :style="{
+                      backgroundImage: `url(${
+                        item.logo || defaultAvatarUrl
+                      })`,
+                    }"
+                    class="inline-block size-10 rounded-full guest-avatar"
+                    :title="item.name || 'Restriction logo'"
+                  />
+                </div>
+              </div>
+              <div
+                v-for="item in allergy"
+                :key="item.key"
+              >
+                <div v-if="restrictionsguestsList?.[item.db] > 0">
+                  <NoSymbolIcon
+                    v-tooltip.top="{
+                      value: restrictionsguestsList?.[item.db] + ' guests ' + item.name + ' = ' + item.description,
+                      class: 'bg-primary text-xs p-2 max-w-[200px]',
+                    }"
+                    :style="{
+                      backgroundImage: `url(${
+                        item.logo || defaultAvatarUrl
+                      })`,
+                    }"
+                    class="inline-block size-10 rounded-full guest-avatar"
+                    :title="item.name || 'Restriction logo'"
+                  />
+                </div>
+              </div>
             </div>
             <div class="mt-0" />
           </div>
@@ -378,6 +444,11 @@ h3 {
 }
 .icon {
   background-color: $indigo;
+  color: $tangerine;
+}
+.icon-attention {
+  background-color: $tangerine;
+  color: $indigo;
 }
 @media (min-width: 1024px) {
   #celebration-details {

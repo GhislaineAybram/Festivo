@@ -152,10 +152,12 @@ export type Database = {
           has_eggs_allergy: boolean | null
           has_fish_allergy: boolean | null
           has_gluten_allergy: boolean | null
+          has_lupin_allergy: boolean | null
           has_milk_allergy: boolean | null
           has_mustard_allergy: boolean | null
           has_nuts_allergy: boolean | null
           has_peanuts_allergy: boolean | null
+          has_sellfish_allergy: boolean | null
           has_sesame_allergy: boolean | null
           has_soy_allergy: boolean | null
           has_sulfite_allergy: boolean | null
@@ -179,10 +181,12 @@ export type Database = {
           has_eggs_allergy?: boolean | null
           has_fish_allergy?: boolean | null
           has_gluten_allergy?: boolean | null
+          has_lupin_allergy?: boolean | null
           has_milk_allergy?: boolean | null
           has_mustard_allergy?: boolean | null
           has_nuts_allergy?: boolean | null
           has_peanuts_allergy?: boolean | null
+          has_sellfish_allergy?: boolean | null
           has_sesame_allergy?: boolean | null
           has_soy_allergy?: boolean | null
           has_sulfite_allergy?: boolean | null
@@ -206,10 +210,12 @@ export type Database = {
           has_eggs_allergy?: boolean | null
           has_fish_allergy?: boolean | null
           has_gluten_allergy?: boolean | null
+          has_lupin_allergy?: boolean | null
           has_milk_allergy?: boolean | null
           has_mustard_allergy?: boolean | null
           has_nuts_allergy?: boolean | null
           has_peanuts_allergy?: boolean | null
+          has_sellfish_allergy?: boolean | null
           has_sesame_allergy?: boolean | null
           has_soy_allergy?: boolean | null
           has_sulfite_allergy?: boolean | null

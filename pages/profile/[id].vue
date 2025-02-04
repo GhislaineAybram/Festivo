@@ -3,6 +3,10 @@ import AccordionPanel from 'primevue/accordionpanel'
 import { useToast } from 'primevue/usetoast'
 import type { ErrorResponseWithSuccess, UserWithAvatar } from '~/types'
 
+definePageMeta({
+  middleware: 'auth',
+})
+
 const toast = useToast()
 const { t } = useI18n()
 
@@ -70,9 +74,6 @@ const closeModifyAvatar = () => {
 const updateAvatarInProfilePage = (newAvatar: string) => {
   avatar.value = newAvatar
 }
-watch(avatar, (newAvatar) => {
-  console.log('Avatar mis à jour :', newAvatar)
-})
 
 const updateUserAlias = async (alias: string) => {
   // verify if the alias respect the rules
@@ -111,10 +112,10 @@ const allUserInformation = [...diet, ...allergy]
 
 const updateUserInformation = async (event: Event) => {
   const target = event.target as HTMLInputElement
-  const field = target.id
-  console.log(`Utilisateur mis à jour avec succès - ${field}`)
-  if (!field) return
-  const item = allUserInformation.find(item => item.key === field)
+  const restriction = target.id
+  console.log(`Utilisateur mis à jour avec succès - ${restriction}`)
+  if (!restriction) return
+  const item = allUserInformation.find(item => item.key === restriction)
   console.log(`Utilisateur mis à jour avec succès - ${item}`)
   if (!item) return
   const dbField = item.db
@@ -343,7 +344,7 @@ const deleteAccount = async (user_id: string) => {
                         type="checkbox"
                         :name="item.key"
                         :checked="userAvatar[item.db]"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        class="checkbox h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         @change="updateUserInformation"
                       >
                     </div>
@@ -517,5 +518,8 @@ h2 {
 #accordion-header {
   padding-left: 0;
   padding-right: 0;
+}
+.checkbox:checked {
+  accent-color: $indigo;
 }
 </style>
