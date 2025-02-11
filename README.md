@@ -34,6 +34,26 @@ npm run build
 npm run dev
 ```
 
+
+## Docker
+**Docker compose**
+La façon la plus simple de démarrer l'application est d'utiliser Docker Compose. Pour cela, à la racine du repo, exécutez :
+```bash
+docker-compose up
+```
+L'application tourne maintenant sur : http://localhost:3000/
+
+**Construction et lancement de l'image Docker**
+Construisez l'image docker en exécutant :
+```bash
+docker build -t festivo .
+```
+
+Lancement du conteneur basé sur cette image docker : 
+```bash
+docker run -env-file .env -p 3000:3000 festivo
+```
+
 ## Aperçu du projet
 
 (visuels à venir)
