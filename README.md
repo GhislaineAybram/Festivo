@@ -16,16 +16,14 @@ Configuration des variables d'environnement :
 cd Festivo
 cp .env.dist .env
 ```
-Modifiez les variables d'environnement SUPABASE_URL et SUPABASE_KEY du fichier .env avec les informations du projet.
+puis modifiez les variables d'environnement SUPABASE_URL et SUPABASE_KEY du fichier .env avec les informations du projet.
 
 Installation des dépendances :
-
 ```bash
 npm install
 ```
 
 Lancement serveur local et exécution Nuxt :
-
 ```bash
 npm run build
 ```
@@ -34,10 +32,11 @@ npm run build
 npm run dev
 ```
 
-
 ## Docker
-**Docker compose**
-La façon la plus simple de démarrer l'application est d'utiliser Docker Compose. Pour cela, à la racine du repo, exécutez :
+
+Une configuration Docker a été mise en place avec un Dockerfile et un compose.yaml pour permettre l'exécution de l’application dans un environnement conteneurisé.
+
+**Création du docker compose**
 ```bash
 docker-compose up
 ```
@@ -85,7 +84,7 @@ docker run -env-file .env -p 3000:3000 festivo
   - affichage du nombre d'invités et de leurs réponses (via un cercle de couleur autour de leur avatar)
   - affichage des restrictions ou allergies alimentaires des invités ayant confirmé leur présence
 
-**Page de profil utilisateur**
+**Page profil utilisateur**
 - [X] Affichage et modification possible des informations de l'utilisateur :
   - pseudo
   - avatar
