@@ -10,7 +10,6 @@ import {
   InformationCircleIcon,
   MapPinIcon,
   MusicalNoteIcon,
-  NoSymbolIcon,
   TrophyIcon,
   UsersIcon,
 } from '@heroicons/vue/24/outline'
@@ -287,7 +286,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
                 :key="item.key"
               >
                 <div v-if="restrictionsguestsList?.[item.db] > 0">
-                  <NoSymbolIcon
+                  <div
                     v-tooltip.top="{
                       value: restrictionsguestsList?.[item.db] + ' guests ' + item.name + ' = ' + item.description,
                       class: 'bg-primary text-xs p-2 max-w-[200px]',
