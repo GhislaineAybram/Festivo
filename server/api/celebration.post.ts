@@ -1,6 +1,6 @@
 // celebration.post
 import type { Celebration, NewCelebrationData } from '~/types'
-import { newCelebration } from '~~/supabase'
+import { newCelebration } from '~/src'
 
 export default defineEventHandler(async (event): Promise<{ statusCode: number, body: Celebration | { error: string } }> => {
   try {
@@ -8,7 +8,7 @@ export default defineEventHandler(async (event): Promise<{ statusCode: number, b
     const body = await readBody(event)
 
     // Vérifie si les données essentielles sont présentes
-    if (!body.name || !body.description || !body.address || !body.date || !body.hour || !body.author || !body.celebration_type) {
+    if (!body.name || !body.description || !body.address || !body.date || !body.hour || !body.author || !body.celebrationType) {
       return {
         statusCode: 400,
         body: { error: 'Missing required celebration data' },
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event): Promise<{ statusCode: number, b
       date: body.date,
       hour: body.hour,
       author: body.author,
-      celebration_type: body.celebration_type,
+      celebrationType: body.celebrationType,
     }
 
     const celebration = await newCelebration(celebrationData)

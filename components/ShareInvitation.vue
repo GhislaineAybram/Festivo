@@ -30,7 +30,7 @@ const toggle = (event: MouseEvent) => {
   op.value.toggle(event)
 }
 
-const shareLink = `${runtimeConfig.public.url}/celebration/${props.celebrationId}`
+const shareLink = `Hey viens à ma fête :\n\n${runtimeConfig.public.url}/celebration/${props.celebrationId}`
 const copyToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(shareLink)
@@ -104,12 +104,12 @@ const copyToClipboard = async () => {
               class="flex items-center gap-2"
             >
               <img
-                :src="guest.user_id.avatar.picture || defaultAvatarUrl"
-                :alt="guest.user_id.avatar.picture_description || 'User avatar'"
+                :src="guest.userId.avatar.picture || defaultAvatarUrl"
+                :alt="guest.userId.avatar.pictureDescription || 'User avatar'"
                 style="width: 32px; border: 1px solid #180161; border-radius: 50%;"
               >
               <div>
-                <span class="font-medium">{{ guest.user_id.alias }}</span>
+                <span class="font-medium">{{ guest.userId.alias }}</span>
               </div>
             </li>
           </ul>

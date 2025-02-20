@@ -1,5 +1,5 @@
 // celebration/[id].put
-import { updateCelebrationById } from '~~/supabase'
+import { updateCelebrationById } from '~/src'
 
 export default defineEventHandler(async (event) => {
   try {

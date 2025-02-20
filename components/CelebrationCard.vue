@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { CelebrationWithGuestsAndType } from '~/types'
+import type { CelebrationWithPictureAndAuthor } from '~/types'
 
 export function getMonth(dateString: string) {
   const date = new Date(dateString)
@@ -15,7 +15,7 @@ export default defineComponent({
   name: 'CelebrationsList',
   props: {
     celebrations: {
-      type: Array as PropType<CelebrationWithGuestsAndType[]>,
+      type: Array as PropType<CelebrationWithPictureAndAuthor[]>,
       required: true,
     },
     userId: {
@@ -43,21 +43,21 @@ export default defineComponent({
   >
     <div
       v-for="celebration in formattedCelebrations"
-      :key="celebration.celebration_id"
+      :key="celebration.celebrationId"
       class="parent"
     >
       <div class="card ">
         <div
           class="card-image"
-          :style="{ backgroundImage: `url(${celebration.celebration_type.picture})` }"
+          :style="{ backgroundImage: `url(${celebration.celebrationType.picture})` }"
         />
         <div class="title">
           <div class="category line-clamp-2">
             {{ celebration.name }}
           </div>
-          <NuxtLink :to="`/celebrationadmin/${celebration.celebration_id}`">
+          <NuxtLink :to="`/celebrationadmin/${celebration.celebrationId}`">
             <button
-              v-if="celebration.author === userId"
+              v-if="celebration.author.id === userId"
               class="edit-button"
             >
               <svg
@@ -80,7 +80,7 @@ export default defineComponent({
         </div>
         <a
           class="action place-content-between"
-          :href="`/celebration/${celebration.celebration_id}`"
+          :href="`/celebration/${celebration.celebrationId}`"
         >
           {{ $t("welcome.event_link") }}
           <span aria-hidden="true">→</span>

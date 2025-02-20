@@ -1,6 +1,6 @@
 // avatar/user/[id].ts
 import type { User } from '~/types'
-import { updateAvatarByUser } from '~~/supabase'
+import { updateAvatarByUser } from '~/src'
 
 export default defineEventHandler(async (event): Promise<User | null> => {
   try {

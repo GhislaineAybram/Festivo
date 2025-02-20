@@ -45,7 +45,7 @@ const { data: celebration_type_list, error } = await useFetch<CelebrationType[]>
   () => `${runtimeConfig.public.apiUrl}/celebrationtype`,
 )
 if (error.value) {
-  console.error('Failed to fetch celebration_type data', error.value)
+  console.error('Failed to fetch celebrationType data', error.value)
 }
 
 async function loadCelebrationData(id: string) {
@@ -59,7 +59,7 @@ async function loadCelebrationData(id: string) {
     }
     celebrationTitle.value = celebration.value.name
     celebrationType.value
-      = celebration.value.celebration_type.celebration_type_id
+      = celebration.value.celebrationType.celebrationTypeId
     celebrationDescription.value = celebration.value.description
     celebrationDate.value = celebration.value.date
     celebrationTime.value = new Date(`1970-01-01T${celebration.value.hour}`)
@@ -95,9 +95,9 @@ async function updateCelebrationInformations(id: string) {
   const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
     method: 'PUT',
     body: {
-      celebration_id: id,
+      celebrationId: id,
       name: celebrationTitle.value,
-      celebration_type: celebrationType.value,
+      celebrationType: celebrationType.value,
       description: celebrationDescription.value,
       date: formattedDate,
       hour: formattedTime,
@@ -207,7 +207,7 @@ const deleteCelebration = async (id: string) => {
                   v-for="item in celebration_type_list"
                   :id="item.key"
                   :key="item.key"
-                  :value="item.celebration_type_id"
+                  :value="item.celebrationTypeId"
                 >
                   {{ item.category }}
                 </option>

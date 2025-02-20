@@ -66,12 +66,12 @@ const defaultAvatarUrl
 
 // add the invited user if not already done
 const checkAndRegisterInvitedUser = async () => {
-  if (userId !== celebration.value.author) {
+  if (userId !== celebration.value.author.id) {
     const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest`, {
       method: 'POST',
       body: {
-        user_id: userId,
-        celebration_id: id,
+        userId: userId,
+        celebrationId: id,
       },
     })
 
@@ -115,8 +115,8 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
   isComing.value = guestResponse
   toast.add({
     severity: 'success',
-    summary: t('avatar.successfull'),
-    detail: t('avatar.success_message'),
+    summary: t('guest.successfull'),
+    detail: t('guest.success_message'),
     life: 3000,
   })
 }
@@ -132,7 +132,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
             {{ celebration?.name }}
           </h1>
           <img
-            :src="celebration?.celebration_type.picture"
+            :src="celebration?.celebrationType.picture"
             alt="photo de ballons"
             class="photo-celebration"
           >
@@ -333,21 +333,21 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
               <div
                 :style="{
                   backgroundImage: `url(${
-                    guest.user_id.avatar.picture || defaultAvatarUrl
+                    guest.userId.avatar.picture || defaultAvatarUrl
                   })`,
                 }"
                 :alt="
-                  guest.user_id.avatar.picture_description || 'User avatar'
+                  guest.userId.avatar.pictureDescription || 'User avatar'
                 "
                 class="inline-block size-12 rounded-full ring-2 guest-avatar"
                 :class="{
-                  'ring-green-500': guest.is_coming === true,
-                  'ring-red-500': guest.is_coming === false,
-                  'ring-gray-500': guest.is_coming === null,
+                  'ring-green-500': guest.isComing === true,
+                  'ring-red-500': guest.isComing === false,
+                  'ring-gray-500': guest.isComing === null,
                 }"
               />
               <p class="mt-1 text-xs text-gray-900 text-center">
-                {{ guest.user_id.alias }}
+                {{ guest.userId.alias }}
               </p>
             </div>
           </div>

@@ -113,16 +113,12 @@ const allUserInformation = [...diet, ...allergy]
 const updateUserInformation = async (event: Event) => {
   const target = event.target as HTMLInputElement
   const restriction = target.id
-  console.log(`Utilisateur mis à jour avec succès - ${restriction}`)
   if (!restriction) return
   const item = allUserInformation.find(item => item.key === restriction)
-  console.log(`Utilisateur mis à jour avec succès - ${item}`)
   if (!item) return
   const dbField = item.db
   const value = target.checked ? true : false
   userAvatar.value[dbField] = value
-  console.log(userAvatar.value) // Pour vérifier son contenu
-  console.log(userAvatar.value[dbField])
   try {
     console.log(`Utilisateur mis à jour avec succès - ${dbField}: ${value}`)
     const response = await useFetch(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
@@ -213,7 +209,7 @@ const deleteAccount = async (user_id: string) => {
         <ModifyAvatar
           :is-opened="isModifyAvatarOpened"
           :close-modify-avatar="closeModifyAvatar"
-          :initial-avatar="userAvatar.avatar.avatar_id"
+          :initial-avatar="userAvatar.avatar.avatarId"
           :user-id="user_id"
           :update-avatar="updateAvatarInProfilePage"
           @close="closeModifyAvatar"
@@ -395,7 +391,7 @@ const deleteAccount = async (user_id: string) => {
                         type="checkbox"
                         :name="item.key"
                         :checked="userAvatar[item.db]"
-                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        class="checkbox h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                         @change="updateUserInformation"
                       >
                     </div>

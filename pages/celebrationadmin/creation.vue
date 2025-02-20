@@ -25,7 +25,7 @@ const { data: celebration_type_list, error } = await useFetch<CelebrationType[]>
   () => `${runtimeConfig.public.apiUrl}/celebrationtype`,
 )
 if (error.value) {
-  console.error('Failed to fetch celebration_type data', error.value)
+  console.error('Failed to fetch celebrationType data', error.value)
 }
 
 async function createNewCelebration() {
@@ -58,7 +58,7 @@ async function createNewCelebration() {
     method: 'POST',
     body: {
       name: celebrationTitle.value,
-      celebration_type: celebrationType.value,
+      celebrationType: celebrationType.value,
       description: celebrationDescription.value,
       date: formattedDate,
       hour: formattedTime,
@@ -147,7 +147,7 @@ async function createNewCelebration() {
                   v-for="item in celebration_type_list"
                   :id="item.key"
                   :key="item.key"
-                  :value="item.celebration_type_id"
+                  :value="item.celebrationTypeId"
                 >
                   {{ item.category }}
                 </option>
