@@ -1,6 +1,6 @@
 // celebrations/author/[id]
 import type { CelebrationsByAuthorResponse } from '~/types'
-import { getPastCelebrationsByAuthor, getUpcomingCelebrationsByAuthor } from '~~/supabase'
+import { getPastCelebrationsByAuthor, getUpcomingCelebrationsByAuthor } from '~/src'
 
 export default defineEventHandler(async (event): Promise<CelebrationsByAuthorResponse> => {
   try {

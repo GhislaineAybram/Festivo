@@ -1,6 +1,6 @@
 // celebration/[id]
 import type { CelebrationWithPictureAndAuthor } from '~/types'
-import { getCelebrationById } from '~~/supabase'
+import { getCelebrationById } from '~/src'
 
 export default defineEventHandler(async (event): Promise<CelebrationWithPictureAndAuthor | { statusCode: number, body: { error: string } }> => {
   try {

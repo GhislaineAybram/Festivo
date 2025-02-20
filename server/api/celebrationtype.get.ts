@@ -1,6 +1,6 @@
 // celebration_types
+import { getCelebrationTypes } from '~/src'
 import type { CelebrationType } from '~/types'
-import { getCelebrationTypes } from '~~/supabase'
 
 export default defineEventHandler(async (): Promise <CelebrationType[] | { statusCode: number, body: { error: string } }> => {
   try {

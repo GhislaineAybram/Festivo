@@ -1,6 +1,6 @@
 // celebration/[id].delete
 import type { ErrorResponseWithSuccess } from '~/types'
-import { deleteCelebration } from '~~/supabase'
+import { deleteCelebration } from '~/src'
 
 export default defineEventHandler(async (event): Promise<ErrorResponseWithSuccess> => {
   try {

@@ -1,51 +1,31 @@
-type User = Tables<'user'>
-type Avatar = Tables<'avatar'>
-type UserWithAvatar = Tables<'user'> & {
-  avatar?: Tables<'avatar'>
-}
-export type Celebration = {
-  celebration_id: string
-  created_at: string
-  address: string | null
-  author: string
-  celebration_type: string | null
-  date: string | null
-  description: string | null
-  hour: string | null
-  name: string | null
-}
-type CelebrationType = Tables<'celebration_type'>
-type CelebrationWithPictureAndAuthor = Tables<'celebration'> & {
-  celebration_type?: Pick<CelebrationType, 'celebration_type_id' | 'picture' | 'category'>
-  author?: Pick<Tables<'user'>, 'alias'>
-}
-type CelebrationWithGuestsAndType = Tables<'celebration'> & {
-  celebration_type?: Pick<CelebrationType, 'picture'>
-  guest?: {
-    user_id: string
-  }[]
+export type CelebrationType = InferSelectModel<typeof celebrationType>
+export type Celebration = InferSelectModel<typeof celebration>
+export type Avatar = InferSelectModel<typeof avatar>
+export type User = InferSelectModel<typeof user>
+export type Guest = InferSelectModel<typeof guest>
+
+// user formats
+export type UserWithAvatar = InferSelectModel<typeof user> & {
+  avatar: Pick<Avatar, 'picture' | 'pictureDescription'> | null
 }
 
-type Guest = Tables<'guest'>
-type GuestWithUserInfo = Guest & {
-  user_id: Pick<User, 'user_id' | 'email' | 'alias'> & {
+// celebration formats
+export type CelebrationWithPictureAndAuthor = InferSelectModel<typeof celebration> & {
+  celebrationType: Pick<InferSelectModel<typeof celebrationType>, 'picture'>
+  author: Pick<InferSelectModel<typeof user>, 'userId', 'alias'>
+}
+export type NewCelebrationData = Omit<InferSelectModel<typeof celebration>, 'celebrationId', 'createdAt'>
+export type UpdateCelebrationData = Omit<InferSelectModel<typeof celebration>, 'celebrationId', 'createdAt', 'author'>
+
+// guest formats
+export type GuestWithUserInfo = InferSelectModel<typeof guest> & {
+  userId: Pick<User, 'userId' | 'email' | 'alias'> & {
     avatar?: Avatar
   }
 }
-type NewCelebrationData = Omit<
-  Celebration,
-  'celebration_id' | 'created_at'
->
-type UpdateCelebrationData = Omit<
-  Celebration,
-  'created_at' | 'author'
->
+export type NewGuestData = Pick<InferSelectModel<typeof guest>, 'userId' | 'celebrationId'>
 
-type NewGuestData = {
-  user_id: string
-  celebration_id: string
-}
-
+// error format
 interface ErrorResponse {
   statusCode: number
   body: { error: string }
@@ -67,28 +47,28 @@ interface CelebrationGuestsInfo {
 }
 
 type UserRestrictions =
-  | is_l_o_vegetarian
-  | is_o_vegetarian
-  | is_l_vegetarian
-  | is_vegetalien
-  | is_vegan
-  | is_pescetarian
-  | is_frugivore
-  | is_rawfoodist
-  | has_gluten_allergy
-  | has_crustaceans_allergy
-  | has_eggs_allergy
-  | has_peanuts_allergy
-  | has_fish_allergy
-  | has_soy_allergy
-  | has_milk_allergy
-  | has_nuts_allergy
-  | has_celery_allergy
-  | has_mustard_allergy
-  | has_sesame_allergy
-  | has_sulfite_allergy
-  | has_lupin_allergy
-  | has_sellfish_allergy
+  | isLOVegetarian
+  | isOVegetarian
+  | isLVegetarian
+  | isVegetalien
+  | isVegan
+  | isPescetarian
+  | isFrugivore
+  | isRawfoodist
+  | hasGlutenAllergy
+  | hasCrustaceansAllergy
+  | hasEggsAllergy
+  | hasPeanutsAllergy
+  | hasFishAllergy
+  | hasSoyAllergy
+  | hasMilkAllergy
+  | hasNutsAllergy
+  | hasCeleryAllergy
+  | hasMustardAllergy
+  | hasSesameAllergy
+  | hasSulfiteAllergy
+  | hasLupinAllergy
+  | hasSellfishAllergy
 
 type CelebrationGuestsResponse = CelebrationGuestsInfo | ErrorResponse
 
@@ -100,8 +80,8 @@ interface CelebrationsByAuthor {
 type CelebrationsByAuthorResponse = CelebrationsByAuthor | ErrorResponse
 
 interface CelebrationsByGuest {
-  past: CelebrationWithGuestsAndType[]
-  upcoming: CelebrationWithGuestsAndType[]
+  past: CelebrationWithPictureAndAuthor[]
+  upcoming: CelebrationWithPictureAndAuthor[]
 }
 
 type CelebrationsByGuestResponse = CelebrationsByGuest | ErrorResponse

@@ -1,5 +1,5 @@
+import { getUserById } from '~/src'
 import type { UserWithAvatar } from '~/types'
-import { getUserById } from '~~/supabase'
 
 export default defineEventHandler(async (event): Promise<UserWithAvatar | { statusCode: number, body: { error: string } }> => {
   try {

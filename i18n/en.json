@@ -36,7 +36,11 @@
   "avatar": {
     "modification_title": "Please select the avatar you want to use",
     "successfull": "New avatar successfully saved",
-    "success_message": "Your new avatar have been successfully saved !"
+    "success_message": "Your new avatar has been successfully saved !"
+  },
+  "guest": {
+    "successfull": "New answer successfully saved",
+    "success_message": "Your answer has been successfully saved !"
   },
   "diet": {
     "lovegetarian": {
@@ -221,7 +225,7 @@
     "title": "Set a new password",
     "button": "Save new password",
     "successfull": "New password successfully saved",
-    "success_message": "Your new password have been successfully saved !"
+    "success_message": "Your new password has been successfully saved !"
   },
   "menubar": {
     "homepage": "Homepage",

@@ -6,7 +6,7 @@ export function getDietOptions() {
   return [
     {
       key: 'lacto_ovo_vegetarian',
-      db: 'is_l_o_vegetarian',
+      db: 'isLOVegetarian',
       name: t('diet.lovegetarian.name'),
       description: t('diet.lovegetarian.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739616558/lacto_ovo_vegetarian_qiiowk.png',
@@ -14,7 +14,7 @@ export function getDietOptions() {
     },
     {
       key: 'ovo_vegetarian',
-      db: 'is_o_vegetarian',
+      db: 'isOVegetarian',
       name: t('diet.ovegetarian.name'),
       description: t('diet.ovegetarian.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739616481/ovo_vegetarian_xgpvoh.png',
@@ -22,7 +22,7 @@ export function getDietOptions() {
     },
     {
       key: 'lacto_vegetarian',
-      db: 'is_l_vegetarian',
+      db: 'isLVegetarian',
       name: t('diet.lvegetarian.name'),
       description: t('diet.lvegetarian.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739616339/lacto_vegetarian_kfx50a.png',
@@ -30,7 +30,7 @@ export function getDietOptions() {
     },
     {
       key: 'strictly_plant_based',
-      db: 'is_vegetalien',
+      db: 'isVegetalien',
       name: t('diet.vegetalien.name'),
       description: t('diet.vegetalien.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739614007/vegan_quafs1.png',
@@ -38,7 +38,7 @@ export function getDietOptions() {
     },
     {
       key: 'vegan',
-      db: 'is_vegan',
+      db: 'isVegan',
       name: t('diet.vegan.name'),
       description: t('diet.vegan.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613997/Icons8-Windows-8-Food-Vegan-Symbol.512_beus71.png',
@@ -46,7 +46,7 @@ export function getDietOptions() {
     },
     {
       key: 'pescetarian',
-      db: 'is_pescetarian',
+      db: 'isPescetarian',
       name: t('diet.pescetarian.name'),
       description: t('diet.pescetarian.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739612798/pescetarian_j7bpf1.png',
@@ -54,7 +54,7 @@ export function getDietOptions() {
     },
     {
       key: 'frugivore',
-      db: 'is_frugivore',
+      db: 'isFrugivore',
       name: t('diet.frugivore.name'),
       description: t('diet.frugivore.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739614546/frugivore_i4gatm.png',
@@ -62,7 +62,7 @@ export function getDietOptions() {
     },
     {
       key: 'raw_foodist',
-      db: 'is_rawfoodist',
+      db: 'isRawfoodist',
       name: t('diet.rawfoodist.name'),
       description: t('diet.rawfoodist.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739614763/raw_foodist_lo0ufu.png',
@@ -77,7 +77,7 @@ export function getAllergyList() {
   return [
     {
       key: 'gluten',
-      db: 'has_gluten_allergy',
+      db: 'hasGlutenAllergy',
       name: t('allergy.gluten.name'),
       description: t('allergy.gluten.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613431/gluten_allergen_food_allergens_icon_183663_ull2d5.png',
@@ -85,7 +85,7 @@ export function getAllergyList() {
     },
     {
       key: 'crustaceans',
-      db: 'has_crustaceans_allergy',
+      db: 'hasCrustaceansAllergy',
       name: t('allergy.crustaceans.name'),
       description: t('allergy.crustaceans.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613477/crustaceans_allergen_food_allergens_icon_183662_mnsyn9.png',
@@ -93,7 +93,7 @@ export function getAllergyList() {
     },
     {
       key: 'eggs',
-      db: 'has_eggs_allergy',
+      db: 'hasEggsAllergy',
       name: t('allergy.eggs.name'),
       description: t('allergy.eggs.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613535/egg_allergen_food_allergens_icon_183650_pitcah.png',
@@ -101,7 +101,7 @@ export function getAllergyList() {
     },
     {
       key: 'peanuts',
-      db: 'has_peanuts_allergy',
+      db: 'hasPeanutsAllergy',
       name: t('allergy.peanuts.name'),
       description: t('allergy.peanuts.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613551/peanut_allergen_food_allergens_icon_183659_yxthfu.png',
@@ -109,7 +109,7 @@ export function getAllergyList() {
     },
     {
       key: 'fish',
-      db: 'has_fish_allergy',
+      db: 'hasFishAllergy',
       name: t('allergy.fish.name'),
       description: t('allergy.fish.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613488/fish_allergen_food_allergens_icon_183655_k8ik7a.png',
@@ -117,7 +117,7 @@ export function getAllergyList() {
     },
     {
       key: 'soy',
-      db: 'has_soy_allergy',
+      db: 'hasSoyAllergy',
       name: t('allergy.soy.name'),
       description: t('allergy.soy.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613417/soy_allergen_food_allergens_icon_183654_tsew8i.png',
@@ -125,7 +125,7 @@ export function getAllergyList() {
     },
     {
       key: 'milk',
-      db: 'has_milk_allergy',
+      db: 'hasMilkAllergy',
       name: t('allergy.milk.name'),
       description: t('allergy.milk.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613466/milk_allergen_food_allergens_icon_183656_y3yjwv.png',
@@ -133,7 +133,7 @@ export function getAllergyList() {
     },
     {
       key: 'nuts',
-      db: 'has_nuts_allergy',
+      db: 'hasNutsAllergy',
       name: t('allergy.nuts.name'),
       description: t('allergy.nuts.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613505/nuts_allergen_food_allergens_icon_183660_pleszx.png',
@@ -141,7 +141,7 @@ export function getAllergyList() {
     },
     {
       key: 'celery',
-      db: 'has_celery_allergy',
+      db: 'hasCeleryAllergy',
       name: t('allergy.celery.name'),
       description: t('allergy.celery.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613594/celery_allergen_food_allergens_icon_183661_flfdes.png',
@@ -149,7 +149,7 @@ export function getAllergyList() {
     },
     {
       key: 'mustard',
-      db: 'has_mustard_allergy',
+      db: 'hasMustardAllergy',
       name: t('allergy.mustard.name'),
       description: t('allergy.mustard.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613571/mustard_allergen_food_allergens_icon_183651_mbwu1w.png',
@@ -157,7 +157,7 @@ export function getAllergyList() {
     },
     {
       key: 'sesame',
-      db: 'has_sesame_allergy',
+      db: 'hasSesameAllergy',
       name: t('allergy.sesame.name'),
       description: t('allergy.sesame.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613522/sesame_allergen_food_allergens_icon_183653_ac2dgl.png',
@@ -165,7 +165,7 @@ export function getAllergyList() {
     },
     {
       key: 'sulfite',
-      db: 'has_sulfite_allergy',
+      db: 'hasSulfiteAllergy',
       name: t('allergy.sulfite.name'),
       description: t('allergy.sulfite.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613443/sulfites_allergen_food_allergens_icon_183658_igbgzx.png',
@@ -173,7 +173,7 @@ export function getAllergyList() {
     },
     {
       key: 'lupin',
-      db: 'has_lupin_allergy',
+      db: 'hasLupinAllergy',
       name: t('allergy.lupin.name'),
       description: t('allergy.lupin.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613583/lupins_allergen_food_allergens_icon_183652_egw1ye.png',
@@ -181,7 +181,7 @@ export function getAllergyList() {
     },
     {
       key: 'sellfish',
-      db: 'has_sellfish_allergy',
+      db: 'hasSellfishAllergy',
       name: t('allergy.sellfish.name'),
       description: t('allergy.sellfish.explanation'),
       logo: 'https://res.cloudinary.com/dyqzhy0rv/image/upload/v1739613454/shellfish_allergen_food_allergens_icon_183657_clff8b.png',

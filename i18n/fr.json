@@ -38,6 +38,10 @@
     "successfull": "Nouveau avatar sauvegardé avec succès",
     "success_message": "Votre nouveau avatar a été enregistré avec succès !"
   },
+  "guest": {
+    "successfull": "Nouvelle réponse sauvegardée avec succès",
+    "success_message": "Votre réponse a été enregistrée avec succès !"
+  },
   "diet": {
     "lovegetarian": {
       "name": "Lacto-ovo végétarien",

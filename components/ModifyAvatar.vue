@@ -120,18 +120,18 @@ async function updateAvatarInDatabase() {
                   v-for="(avatar, index) in avatars"
                   :key="index"
                   class="avatar"
-                  :class="{ 'selected-avatar': avatar.avatar_id === selectedAvatarId }"
+                  :class="{ 'selected-avatar': avatar.avatarId === selectedAvatarId }"
                   :style="{
                     backgroundImage: `url(${
                       avatar.picture || defaultAvatarUrl
                     })`,
                   }"
-                  :aria-label="avatar.picture_description"
-                  @click="selectAvatar(avatar.avatar_id)"
+                  :aria-label="avatar.pictureDescription"
+                  @click="selectAvatar(avatar.avatarId)"
                 >
                   <img
                     :src="avatar.picture || defaultAvatarUrl"
-                    :alt="avatar.picture_description || 'User avatar'"
+                    :alt="avatar.pictureDescription || 'User avatar'"
                     class="hidden"
                   >
                 </div>

@@ -1,6 +1,6 @@
 // guest/[user]/[celebration].put.ts
 import type { Guest } from '~/types'
-import { updateIsComingGuest } from '~~/supabase'
+import { updateIsComingGuest } from '~/src'
 
 export default defineEventHandler(async (event): Promise<Guest | null> => {
   try {

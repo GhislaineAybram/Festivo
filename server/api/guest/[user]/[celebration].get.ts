@@ -1,5 +1,5 @@
 // guest/[user]/[celebration].get.ts
-import { getIsComingGuest } from '~~/supabase'
+import { getIsComingGuest } from '~/src'
 
 export default defineEventHandler(
   async (
@@ -20,13 +20,6 @@ export default defineEventHandler(
 
     try {
       const isComing = await getIsComingGuest(userId, celebrationId)
-
-      if (isComing === null) {
-        return {
-          statusCode: 404,
-          body: { error: 'Guest response not found' },
-        }
-      }
 
       return isComing
     }

@@ -1,5 +1,5 @@
 // user.delete
-import { deleteUser } from '~/supabase'
+import { deleteUser } from '~/src'
 import type { ErrorResponseWithSuccess } from '~/types'
 
 export default defineEventHandler(async (event): Promise<ErrorResponseWithSuccess> => {

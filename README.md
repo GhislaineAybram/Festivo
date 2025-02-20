@@ -8,7 +8,7 @@ Festivo est une plateforme de gestion d’événements conçue pour simplifier l
 Cloner le repo :
 
 ```bash
-git clone git@github.com:GhislaineAybram/Festify.git Festivo
+git clone git@github.com:GhislaineAybram/Festivo.git Festivo
 ```
 
 Configuration des variables d'environnement :
@@ -43,6 +43,7 @@ docker-compose up
 L'application tourne maintenant sur : http://localhost:3000/
 
 **Construction et lancement de l'image Docker**
+
 Construisez l'image docker en exécutant :
 ```bash
 docker build -t festivo .

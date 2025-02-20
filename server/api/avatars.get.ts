@@ -1,6 +1,6 @@
 // avatars
+import { getAvatars } from '~/src'
 import type { Avatar } from '~/types'
-import { getAvatars } from '~~/supabase'
 
 export default defineEventHandler(async (): Promise<Avatar[] | { statusCode: number, body: { error: string } }> => {
   try {

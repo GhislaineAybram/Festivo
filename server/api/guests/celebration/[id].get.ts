@@ -1,6 +1,6 @@
 // guests/celebration/[id]
 import type { CelebrationGuestsResponse, UserRestrictions } from '~/types'
-import { getGuestsByCelebration, getComingGuestsByCelebration, getNumberGuestsByCelebration } from '~~/supabase'
+import { getNumberGuestsByCelebration, getGuestsByCelebration, getComingGuestsByCelebration } from '~/src'
 
 export default defineEventHandler(async (event): Promise<CelebrationGuestsResponse> => {
   try {
@@ -21,32 +21,32 @@ export default defineEventHandler(async (event): Promise<CelebrationGuestsRespon
     const coming_guests_list = (await getComingGuestsByCelebration(celebrationId)) || []
 
     const restrictionsCounts: Record<UserRestrictions, number> = {
-      is_l_o_vegetarian: 0,
-      is_o_vegetarian: 0,
-      is_l_vegetarian: 0,
-      is_vegetalien: 0,
-      is_vegan: 0,
-      is_pescetarian: 0,
-      is_frugivore: 0,
-      is_rawfoodist: 0,
-      has_gluten_allergy: 0,
-      has_crustaceans_allergy: 0,
-      has_eggs_allergy: 0,
-      has_peanuts_allergy: 0,
-      has_fish_allergy: 0,
-      has_soy_allergy: 0,
-      has_milk_allergy: 0,
-      has_nuts_allergy: 0,
-      has_celery_allergy: 0,
-      has_mustard_allergy: 0,
-      has_sesame_allergy: 0,
-      has_sulfite_allergy: 0,
-      has_lupin_allergy: 0,
-      has_sellfish_allergy: 0,
+      isLOVegetarian: 0,
+      isOVegetarian: 0,
+      isLVegetarian: 0,
+      isVegetalien: 0,
+      isVegan: 0,
+      isPescetarian: 0,
+      isFrugivore: 0,
+      isRawfoodist: 0,
+      hasGlutenAllergy: 0,
+      hasCrustaceansAllergy: 0,
+      hasEggsAllergy: 0,
+      hasPeanutsAllergy: 0,
+      hasFishAllergy: 0,
+      hasSoyAllergy: 0,
+      hasMilkAllergy: 0,
+      hasNutsAllergy: 0,
+      hasCeleryAllergy: 0,
+      hasMustardAllergy: 0,
+      hasSesameAllergy: 0,
+      hasSulfiteAllergy: 0,
+      hasLupinAllergy: 0,
+      hasSellfishAllergy: 0,
     }
     coming_guests_list.forEach((guest) => {
       Object.keys(restrictionsCounts).forEach((restriction) => {
-        if (guest.user_id[restriction]) {
+        if (guest.userId[restriction]) {
           restrictionsCounts[restriction]++
         }
       })
