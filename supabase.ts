@@ -1,4 +1,10 @@
-// file used to make direct request to supabase without ORM
+/**
+ * @file supabase.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * File used to make direct request to supabase without ORM.
+ */
 
 // import { createClient } from '@supabase/supabase-js'
 // import type { Database } from './database.types'

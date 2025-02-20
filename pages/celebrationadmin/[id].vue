@@ -1,4 +1,18 @@
 <script setup lang="ts">
+/**
+ * @file pages/celebrationadmin/[id].vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Administrative interface for event hosts with :
+ * - Guest list management (share link generation)
+ * - Event details editing
+ *
+ * @route /celebrationadmin/[id]
+ * @auth required
+ * @param {string} id - Celebration identifier
+ */
+
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import type { CelebrationType, CelebrationWithPictureAndAuthor, ErrorResponseWithSuccess } from '~/types'

@@ -1,4 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+/**
+ * @file pages/privacy.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Privacy Policy page detailing data handling practices :
+ * - Data collection and usage
+ * - User rights and options
+ * - Third-party services
+ * - Contact information
+ *
+ * @route /privacy
+ * @auth public
+ */
+</script>
 
 <template>
   <main class="main">

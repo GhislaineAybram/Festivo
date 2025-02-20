@@ -1,4 +1,16 @@
 <script setup lang="ts">
+/**
+ * @file pages/about.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * About page presenting Festivo's story and mission :
+ * - Website story creation
+ * - Platform mission and values
+ *
+ * @route /about
+ * @auth public
+ */
 </script>
 
 <template>

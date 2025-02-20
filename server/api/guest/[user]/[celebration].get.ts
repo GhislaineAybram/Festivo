@@ -1,4 +1,16 @@
-// guest/[user]/[celebration].get.ts
+/**
+ * @file server/api/guest/[user]/[celebration].get.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to retrieve guest status for specific user and celebration combination.
+ *
+ * @route GET /api/guest/:user/:celebration
+ *
+ * @param {string} user User ID
+ * @param {string} celebration Celebration ID
+ */
+
 import { getIsComingGuest } from '~/src'
 
 export default defineEventHandler(

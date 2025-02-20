@@ -1,4 +1,12 @@
 <script setup lang="ts">
+/**
+ * @file app.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Main component of Nuxt application.
+ */
+
 const nuxtApp = useNuxtApp()
 const loading = ref(false)
 nuxtApp.hook('page:start', () => {

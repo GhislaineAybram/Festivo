@@ -1,4 +1,12 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+/**
+ * @file nuxt.config.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Configuration file.
+ * For more information : https://nuxt.com/docs/api/configuration/nuxt-config
+ */
+
 import { resolve } from 'path'
 import Aura from '@primevue/themes/aura'
 import { defineNuxtConfig } from 'nuxt/config'

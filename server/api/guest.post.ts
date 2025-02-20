@@ -1,4 +1,14 @@
-// guest.post
+/**
+ * @file server/api/guest.post.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to create a new guest entry.
+ *
+ * @route POST /api/guest
+ * @body {GuestCreateDTO} New guest data
+ */
+
 import { isExistingGuest, newGuest } from '~/src'
 import type { Guest, NewGuestData } from '~/types'
 

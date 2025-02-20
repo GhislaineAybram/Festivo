@@ -1,4 +1,16 @@
-// celebration/[id].delete
+/**
+ * @file server/api/celebration/[id].delete.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to delete a celebration : removes celebration and all associated data.
+ *
+ * @route DELETE /api/celebration/:id
+ *
+ * @param {string} id Celebration ID
+ * @body {CelebrationUpdateDTO} Updated celebration data
+ */
+
 import type { ErrorResponseWithSuccess } from '~/types'
 import { deleteCelebration } from '~/src'
 

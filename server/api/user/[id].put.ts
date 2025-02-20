@@ -1,4 +1,16 @@
-// // user.put
+/**
+ * @file server/api/user/[id].put.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to update detailed user information.
+ *
+ * @route PUT /api/user/:id
+ *
+ * @param {string} id User ID
+ * @body {UserUpdateDTO} Updated user data
+ */
+
 import { updateFoodInformationByUser } from '~/src'
 
 export default defineEventHandler(async (event) => {

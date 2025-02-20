@@ -1,4 +1,17 @@
 <script setup lang="ts">
+/**
+ * @file pages/index.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Homepage showcasing:
+ * - Hosted celebrations list (created by the user)
+ * - Celebrations list for which the user is invited
+ *
+ * @route /
+ * @auth public
+ */
+
 import type {
   CelebrationsByAuthorResponse,
   CelebrationsByGuestResponse,

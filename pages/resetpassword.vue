@@ -1,4 +1,15 @@
 <script setup lang="ts">
+/**
+ * @file pages/resetpassword.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Provides a secure interface for users to request a password reset link.
+ *
+ * @route /resetpassword
+ * @auth public
+ */
+
 import { useToast } from 'primevue/usetoast'
 
 const { t } = useI18n()

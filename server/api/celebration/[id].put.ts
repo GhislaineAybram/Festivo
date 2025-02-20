@@ -1,4 +1,16 @@
-// celebration/[id].put
+/**
+ * @file server/api/celebration/[id].put.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to update celebration details.
+ *
+ * @route PUT /api/celebration/:id
+ *
+ * @param {string} id Celebration ID
+ * @body {CelebrationUpdateDTO} Updated celebration data
+ */
+
 import { updateCelebrationById } from '~/src'
 
 export default defineEventHandler(async (event) => {

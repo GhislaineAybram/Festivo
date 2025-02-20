@@ -1,3 +1,11 @@
+/**
+ * @file src/index.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * File used to make request to supabase database within Drizzle ORM.
+ */
+
 import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { and, asc, desc, eq, gte, lt } from 'drizzle-orm'

@@ -1,4 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+/**
+ * @file pages/legal.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Legal terms and conditions page including:
+ * - Terms of service
+ * - User agreements
+ * - Copyright information
+ * - Liability disclaimers
+ * - Dispute resolution
+ *
+ * @route /legal
+ * @auth public
+ */
+</script>
 
 <template>
   <main class="main">

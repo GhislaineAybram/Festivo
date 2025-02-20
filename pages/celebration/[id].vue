@@ -1,4 +1,20 @@
 <script setup lang="ts">
+/**
+ * @file pages/celebration/[id].vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Interactive celebration page for guests featuring:
+ * - Event details and schedule
+ * - RSVP functionality
+ * - Guests list with coming status
+ * - Food allergy & diet requirement status for incoming guests group
+ *
+ * @route /celebration/[id]
+ * @auth required
+ * @param {string} id - Celebration identifier
+ */
+
 import { useRoute } from 'vue-router'
 import Button from 'primevue/button'
 import {

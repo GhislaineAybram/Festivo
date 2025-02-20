@@ -1,4 +1,13 @@
-// celebration_types
+/**
+ * @file server/api/celebrationtype.get.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to retrieve all celebration types.
+ *
+ * @route PUT /api/celebrationtype
+ */
+
 import { getCelebrationTypes } from '~/src'
 import type { CelebrationType } from '~/types'
 

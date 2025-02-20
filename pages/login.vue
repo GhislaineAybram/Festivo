@@ -1,4 +1,17 @@
 <script setup lang="ts">
+/**
+ * @file pages/login.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Authentication page for existing users :
+ * - Email/password authentication
+ * - Password reset link
+ *
+ * @route /login
+ * @auth public
+ */
+
 const toast = useToast()
 const { t } = useI18n()
 

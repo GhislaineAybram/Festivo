@@ -1,4 +1,18 @@
 <script setup lang="ts">
+/**
+ * @file pages/celebrationadmin/creation/[id].vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * New celebration creation interface including:
+ * - Event type selection
+ * - Mandatory event details and schedule (title, description, date and hour planning...)
+ * - Optionnal event details and schedule (collaboratory playlist, gift list link...)
+ *
+ * @route /celebrationadmin/creation
+ * @auth required
+ */
+
 import { ref } from 'vue'
 import type { CelebrationType } from '~/types'
 

@@ -1,4 +1,17 @@
-// celebrations/author/[id]
+/**
+ * @file server/api/celebrations/author/[id].get.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to retrieves all celebrations & details created by the user :
+ * - ended celebrations list,
+ * - upcoming celebrations list.
+ *
+ * @route GET /api/celebrations/author/:id
+ *
+ * @param {string} id User ID
+ */
+
 import type { CelebrationsByAuthorResponse } from '~/types'
 import { getPastCelebrationsByAuthor, getUpcomingCelebrationsByAuthor } from '~/src'
 

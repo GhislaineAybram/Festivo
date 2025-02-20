@@ -1,4 +1,15 @@
-// celebration.post
+/**
+ * @file server/api/celebration.post.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to create a new celebration with initial setup, validation and default template application.
+ *
+ * @route POST /api/celebration
+ *
+ * @body {CelebrationCreateDTO} New celebration data
+ */
+
 import type { Celebration, NewCelebrationData } from '~/types'
 import { newCelebration } from '~/src'
 

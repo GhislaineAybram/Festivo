@@ -1,4 +1,12 @@
 <script setup lang="ts">
+/**
+ * @file error.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Error page in Nuxt application.
+ */
+
 import type { NuxtError } from '#app'
 
 defineProps({

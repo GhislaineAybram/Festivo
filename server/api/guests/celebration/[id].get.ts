@@ -1,4 +1,19 @@
-// guests/celebration/[id]
+/**
+ * @file server/api/guests/celebration/[id].get.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to retrieve detailed guest information for a specific celebration, including :
+ * - total guests count for the celebration,
+ * - complete guests list with RSVP status,
+ * - list of confirmed attending guests,
+ * - total dietary restrictions & food allergy counts of confirmed attending guests.
+ *
+ * @route GET /api/guests/celebration/:id
+ *
+ * @param {string} id Celebration ID
+ */
+
 import type { CelebrationGuestsResponse, UserRestrictions } from '~/types'
 import { getNumberGuestsByCelebration, getGuestsByCelebration, getComingGuestsByCelebration } from '~/src'
 

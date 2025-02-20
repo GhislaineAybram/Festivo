@@ -1,4 +1,16 @@
-// user.delete
+/**
+ * @file server/api/user/[id].delete.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to delete the user account : removes user account and all associated data.
+ * GDPR compliance.
+ *
+ * @route DELETE /api/user/:id
+ *
+ * @param {string} id User ID
+ */
+
 import { deleteUser } from '~/src'
 import type { ErrorResponseWithSuccess } from '~/types'
 

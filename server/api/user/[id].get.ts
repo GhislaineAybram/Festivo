@@ -1,3 +1,15 @@
+/**
+ * @file server/api/user/[id].get.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to retrieve detailed user information.
+ *
+ * @route GET /api/user/:id
+ *
+ * @param {string} id User ID
+ */
+
 import { getUserById } from '~/src'
 import type { UserWithAvatar } from '~/types'
 

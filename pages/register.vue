@@ -1,4 +1,17 @@
 <script setup lang="ts">
+/**
+ * @file pages/register.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * User registration page for creating a new account :
+ * - Username, email and password validation
+ * - Terms and conditions acceptance
+ *
+ * @route /register
+ * @auth public
+ */
+
 const user = useSupabaseUser()
 const alias = ref('')
 const email = ref('')

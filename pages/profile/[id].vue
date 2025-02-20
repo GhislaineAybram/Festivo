@@ -1,4 +1,19 @@
 <script setup lang="ts">
+/**
+ * @file pages/profile/[id].vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * User profile page displaying :
+ * - User information and preferences
+ * - Profile customisation options (username, avatar, diet requirement, food allergy)
+ * - Delete account option
+ *
+ * @route /profile/[id]
+ * @auth required
+ * @param {string} id - User identifier
+ */
+
 import AccordionPanel from 'primevue/accordionpanel'
 import { useToast } from 'primevue/usetoast'
 import type { ErrorResponseWithSuccess, UserWithAvatar } from '~/types'

@@ -1,4 +1,17 @@
-// celebrations/guest/[id]
+/**
+ * @file server/api/celebrations/guest/[id].get.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Endpoint to retrieves all celebrations & details where user is invited :
+ * - ended celebrations list,
+ * - upcoming celebrations list.
+ *
+ * @route GET /api/celebrations/guest/:id
+ *
+ * @param {string} id User ID
+ */
+
 import type { CelebrationsByGuestResponse } from '~/types'
 import { getPastCelebrationsByGuest, getUpcomingCelebrationsByGuest } from '~/src'
 

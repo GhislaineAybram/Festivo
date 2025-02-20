@@ -1,3 +1,11 @@
+/**
+ * @file types.d.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * Types used for the project
+ */
+
 export type CelebrationType = InferSelectModel<typeof celebrationType>
 export type Celebration = InferSelectModel<typeof celebration>
 export type Avatar = InferSelectModel<typeof avatar>

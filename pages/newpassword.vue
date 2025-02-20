@@ -1,4 +1,19 @@
 <script setup lang="ts">
+/**
+ * @file pages/newpassword.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @fileoverview Provides a secure interface for users to define a new password.
+ *
+ * @description
+ * Password reset completion page :
+ * - Enter and confirm new password
+ * - Get redirected after successful reset
+ *
+ * @route /newpassword
+ * @auth required (by clicking on link received by email)
+ */
+
 import AlertNewPassword from '~/components/AlertNewPassword.vue'
 
 const user = useSupabaseUser()
