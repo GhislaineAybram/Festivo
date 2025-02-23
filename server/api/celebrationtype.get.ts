@@ -8,6 +8,7 @@
  * @route PUT /api/celebrationtype
  */
 
+import { defineEventHandler } from 'h3'
 import { getCelebrationTypes } from '~/src'
 import type { CelebrationType } from '~/types'
 
