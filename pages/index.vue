@@ -15,7 +15,7 @@
 import type {
   CelebrationsByAuthorResponse,
   CelebrationsByGuestResponse,
-} from '~/types'
+} from '@/types'
 
 const { auth } = useSupabaseClient()
 const { data: { user } } = await auth.getUser()

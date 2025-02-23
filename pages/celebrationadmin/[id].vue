@@ -15,7 +15,7 @@
 
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
-import type { CelebrationType, CelebrationWithPictureAndAuthor, ErrorResponseWithSuccess } from '~/types'
+import type { CelebrationType, CelebrationWithPictureAndAuthor, ErrorResponseWithSuccess } from '@/types'
 
 definePageMeta({
   middleware: 'auth',

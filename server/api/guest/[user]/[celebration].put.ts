@@ -12,8 +12,8 @@
  * @body {GuestUpdateDTO} Updated guest data
  */
 
-import type { Guest } from '~/types'
-import { updateIsComingGuest } from '~/src'
+import type { Guest } from '@/types'
+import { updateIsComingGuest } from '@/src'
 
 export default defineEventHandler(async (event): Promise<Guest | null> => {
   try {

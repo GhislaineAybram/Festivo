@@ -10,8 +10,8 @@
  * @body {AvatarUpdateDTO} Avatar update data
  */
 
-import type { User } from '~/types'
-import { updateAvatarByUser } from '~/src'
+import type { User } from '@/types'
+import { updateAvatarByUser } from '@/src'
 
 export default defineEventHandler(async (event): Promise<User | null> => {
   try {

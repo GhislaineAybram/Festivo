@@ -11,7 +11,7 @@
  * @body {CelebrationUpdateDTO} Updated celebration data
  */
 
-import { updateCelebrationById } from '~/src'
+import { updateCelebrationById } from '@/src'
 
 export default defineEventHandler(async (event) => {
   try {

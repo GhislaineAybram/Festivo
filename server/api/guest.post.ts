@@ -9,8 +9,8 @@
  * @body {GuestCreateDTO} New guest data
  */
 
-import { isExistingGuest, newGuest } from '~/src'
-import type { Guest, NewGuestData } from '~/types'
+import { isExistingGuest, newGuest } from '@/src'
+import type { Guest, NewGuestData } from '@/types'
 
 export default defineEventHandler(async (event): Promise<{ statusCode: number, body: Guest | { error: string } }> => {
   try {

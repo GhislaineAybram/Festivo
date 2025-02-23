@@ -10,8 +10,8 @@
  * @param {string} id User ID
  */
 
-import { getUserById } from '~/src'
-import type { UserWithAvatar } from '~/types'
+import { getUserById } from '@/src'
+import type { UserWithAvatar } from '@/types'
 
 export default defineEventHandler(async (event): Promise<UserWithAvatar | { statusCode: number, body: { error: string } }> => {
   try {

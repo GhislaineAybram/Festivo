@@ -10,8 +10,8 @@
  * @param {string} id Celebration ID
  */
 
-import type { CelebrationWithPictureAndAuthor } from '~/types'
-import { getCelebrationById } from '~/src'
+import type { CelebrationWithPictureAndAuthor } from '@/types'
+import { getCelebrationById } from '@/src'
 
 export default defineEventHandler(async (event): Promise<CelebrationWithPictureAndAuthor | { statusCode: number, body: { error: string } }> => {
   try {

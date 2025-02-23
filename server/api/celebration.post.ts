@@ -10,8 +10,8 @@
  * @body {CelebrationCreateDTO} New celebration data
  */
 
-import type { Celebration, NewCelebrationData } from '~/types'
-import { newCelebration } from '~/src'
+import type { Celebration, NewCelebrationData } from '@/types'
+import { newCelebration } from '@/src'
 
 export default defineEventHandler(async (event): Promise<{ statusCode: number, body: Celebration | { error: string } }> => {
   try {

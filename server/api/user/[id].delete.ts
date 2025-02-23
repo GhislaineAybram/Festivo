@@ -11,8 +11,8 @@
  * @param {string} id User ID
  */
 
-import { deleteUser } from '~/src'
-import type { ErrorResponseWithSuccess } from '~/types'
+import { deleteUser } from '@/src'
+import type { ErrorResponseWithSuccess } from '@/types'
 
 export default defineEventHandler(async (event): Promise<ErrorResponseWithSuccess> => {
   try {

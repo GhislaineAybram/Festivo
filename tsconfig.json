@@ -4,7 +4,10 @@
   "compilerOptions": {
     "types": [
       "@types/node"
-    ]
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "exclude": ["node_modules", "my-module"]
 }

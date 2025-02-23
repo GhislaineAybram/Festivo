@@ -8,8 +8,9 @@
  * @route PUT /api/celebrationtype
  */
 
-import { getCelebrationTypes } from '~/src'
-import type { CelebrationType } from '~/types'
+import { defineEventHandler } from 'h3'
+import { getCelebrationTypes } from '@/src'
+import type { CelebrationType } from '@/types'
 
 export default defineEventHandler(async (): Promise <CelebrationType[] | { statusCode: number, body: { error: string } }> => {
   try {

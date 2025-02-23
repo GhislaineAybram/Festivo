@@ -11,8 +11,8 @@
  * @body {CelebrationUpdateDTO} Updated celebration data
  */
 
-import type { ErrorResponseWithSuccess } from '~/types'
-import { deleteCelebration } from '~/src'
+import type { ErrorResponseWithSuccess } from '@/types'
+import { deleteCelebration } from '@/src'
 
 export default defineEventHandler(async (event): Promise<ErrorResponseWithSuccess> => {
   try {
