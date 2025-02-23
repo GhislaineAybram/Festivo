@@ -11,7 +11,7 @@
  * @param {string} celebration Celebration ID
  */
 
-import { getIsComingGuest } from '~/src'
+import { getIsComingGuest } from '@/src'
 
 export default defineEventHandler(
   async (

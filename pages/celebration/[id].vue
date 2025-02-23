@@ -30,11 +30,10 @@ import {
   UsersIcon,
 } from '@heroicons/vue/24/outline'
 import { useToast } from 'primevue/usetoast'
-import { useRuntimeConfig } from '#app'
 import type {
   CelebrationWithPictureAndAuthor,
   GuestWithUserInfo,
-} from '~/types'
+} from '@/types'
 
 const { t } = useI18n()
 const toast = useToast()

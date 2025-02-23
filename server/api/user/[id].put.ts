@@ -11,7 +11,7 @@
  * @body {UserUpdateDTO} Updated user data
  */
 
-import { updateFoodInformationByUser } from '~/src'
+import { updateFoodInformationByUser } from '@/src'
 
 export default defineEventHandler(async (event) => {
   try {

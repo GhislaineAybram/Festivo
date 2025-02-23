@@ -7,7 +7,7 @@
  * Error page in Nuxt application.
  */
 
-import type { NuxtError } from '#app'
+import type { NuxtError } from 'nuxt/app'
 
 defineProps({
   error: Object as () => NuxtError,

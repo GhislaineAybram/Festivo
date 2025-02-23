@@ -13,9 +13,6 @@
  * @route /newpassword
  * @auth required (by clicking on link received by email)
  */
-
-import AlertNewPassword from '~/components/AlertNewPassword.vue'
-
 const user = useSupabaseUser()
 const email = ref('')
 const new_password = ref('')

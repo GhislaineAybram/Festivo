@@ -13,7 +13,7 @@ import postgres from 'postgres'
 import * as schema from './db/schema'
 
 import { avatar, celebration, celebrationType, guest, user } from './db/schema'
-import type { Avatar, Celebration, CelebrationType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, UpdateCelebrationData, User, UserWithAvatar } from '~/types'
+import type { Avatar, Celebration, CelebrationType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, UpdateCelebrationData, User, UserWithAvatar } from '@/types'
 
 const client = postgres(process.env.DATABASE_URL!)
 export const db = drizzle(client, { schema })

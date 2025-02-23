@@ -16,7 +16,7 @@
 
 import AccordionPanel from 'primevue/accordionpanel'
 import { useToast } from 'primevue/usetoast'
-import type { ErrorResponseWithSuccess, UserWithAvatar } from '~/types'
+import type { ErrorResponseWithSuccess, UserWithAvatar } from '@/types'
 
 definePageMeta({
   middleware: 'auth',

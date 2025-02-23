@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { CelebrationWithPictureAndAuthor } from '~/types'
+import type { CelebrationWithPictureAndAuthor } from '@/types'
 
 export function getMonth(dateString: string) {
   const date = new Date(dateString)

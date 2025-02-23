@@ -12,8 +12,8 @@
  * @param {string} id User ID
  */
 
-import type { CelebrationsByGuestResponse } from '~/types'
-import { getPastCelebrationsByGuest, getUpcomingCelebrationsByGuest } from '~/src'
+import type { CelebrationsByGuestResponse } from '@/types'
+import { getPastCelebrationsByGuest, getUpcomingCelebrationsByGuest } from '@/src'
 
 export default defineEventHandler(async (event): Promise<CelebrationsByGuestResponse> => {
   try {

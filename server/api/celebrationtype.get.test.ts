@@ -3,7 +3,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import type { H3Event } from 'h3'
 import celebrationTypeHandler from './celebrationtype.get'
-import type { CelebrationType } from '~/types'
+import type { CelebrationType } from '@/types'
 
 // Mock de la fonction getCelebrationTypes
 vi.mock('~/src', () => ({
@@ -18,7 +18,7 @@ describe('GET /api/celebrationtype', () => {
     ]
 
     // Utilisation de vi.spyOn pour espionner la fonction getCelebrationTypes
-    const spy = vi.spyOn(await import('~/src'), 'getCelebrationTypes').mockResolvedValue(mockCelebrationTypes)
+    const spy = vi.spyOn(await import('@/src'), 'getCelebrationTypes').mockResolvedValue(mockCelebrationTypes)
 
     const event = {} as H3Event // Mock minimal d'événement
     const response = await celebrationTypeHandler(event)
@@ -28,7 +28,7 @@ describe('GET /api/celebrationtype', () => {
   })
 
   it('devrait retourner une erreur 404 si aucun type de célébration n\'est trouvé', async () => {
-    const spy = vi.spyOn(await import('~/src'), 'getCelebrationTypes').mockResolvedValue(null)
+    const spy = vi.spyOn(await import('@/src'), 'getCelebrationTypes').mockResolvedValue(null)
 
     const event = {} as H3Event // Mock minimal d'événement
     const response = await celebrationTypeHandler(event)
@@ -41,7 +41,7 @@ describe('GET /api/celebrationtype', () => {
   })
 
   it('devrait retourner une erreur 500 en cas d\'erreur interne', async () => {
-    const spy = vi.spyOn(await import('~/src'), 'getCelebrationTypes').mockRejectedValue(new Error('Database error'))
+    const spy = vi.spyOn(await import('@/src'), 'getCelebrationTypes').mockRejectedValue(new Error('Database error'))
 
     const event = {} as H3Event // Mock minimal d'événement
     const response = await celebrationTypeHandler(event)

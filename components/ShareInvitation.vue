@@ -2,7 +2,7 @@
 import Popover from 'primevue/popover'
 import { ref } from 'vue'
 import { ShareIcon } from '@heroicons/vue/24/outline'
-import type { GuestWithUserInfo } from '~/types'
+import type { GuestWithUserInfo } from '@/types'
 
 const op = ref()
 const copySuccess = ref(false)

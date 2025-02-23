@@ -14,7 +14,7 @@
  */
 
 import { ref } from 'vue'
-import type { CelebrationType } from '~/types'
+import type { CelebrationType } from '@/types'
 
 definePageMeta({
   middleware: 'auth',
