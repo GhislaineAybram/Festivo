@@ -135,7 +135,6 @@ const updateUserInformation = async (event: Event) => {
   const value = target.checked ? true : false
   userAvatar.value[dbField] = value
   try {
-    console.log(`Utilisateur mis à jour avec succès - ${dbField}: ${value}`)
     const response = await useFetch(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
       method: 'PUT',
       body: { [dbField]: value },
@@ -164,7 +163,6 @@ const updateUserProfile = async (event: Event) => {
       updateUserInformation(event),
     ])
     if (results.every(res => res !== false)) {
-      console.log('Mise à jour réussie !')
       updateSuccess.value = true
       toast.add({
         severity: 'success',
@@ -187,6 +185,7 @@ const deleteAccount = async (user_id: string) => {
     const { error } = await useFetch<ErrorResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
       method: 'DELETE',
     })
+    console.log(error.value)
     if (error.value) {
       return {
         statusCode: 404,

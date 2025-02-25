@@ -88,7 +88,10 @@ export default defineComponent({
       </div>
     </div>
   </div>
-  <div v-else>
+  <div
+    v-else
+    class="mt-6 mb-6"
+  >
     <p>{{ $t("celebration.no-celebration-created") }}</p>
   </div>
 </template>

@@ -9,6 +9,9 @@ import {
 } from '@headlessui/vue'
 import type { Avatar } from '~/types'
 
+const toast = useToast()
+const { t } = useI18n()
+
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 
@@ -58,6 +61,12 @@ async function updateAvatarInDatabase() {
     console.error(`Erreur lors de la mise à jour de l'avatar :`, error.value)
     return
   }
+  toast.add({
+    severity: 'success',
+    summary: t('user.update.title'),
+    detail: t('user.update.description'),
+    life: 3000,
+  })
   props.updateAvatar(selectedAvatarId.value)
   props.closeModifyAvatar()
   window.location.reload()
@@ -146,6 +155,7 @@ async function updateAvatarInDatabase() {
                 >
                   {{ $t("button.save") }}
                 </button>
+                <Toast />
                 <button
                   ref="cancelButtonRef"
                   type="button"
