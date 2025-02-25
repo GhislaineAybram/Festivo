@@ -137,6 +137,7 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           additionalData: '@use "~/assets/_colors.scss" as *;',
+          silenceDeprecations: ['legacy-js-api'],
         },
       },
     },

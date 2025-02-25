@@ -15,75 +15,67 @@
 import type {
   CelebrationsByAuthorResponse,
   CelebrationsByGuestResponse,
+  User,
 } from '~/types'
 
 const { auth } = useSupabaseClient()
-const { data: { user } } = await auth.getUser()
+const user = ref<User | null>(null)
+const runtimeConfig = useRuntimeConfig()
 
-watchEffect(() => {
-  if (!user) {
-    return navigateTo('/login')
+onMounted(async () => {
+  const { data } = await auth.getUser()
+  user.value = data.user
+
+  if (user.value) {
+    await fetchCelebrations() // Ne récupère les événements que si l'utilisateur est connecté
   }
 })
 
-const runtimeConfig = useRuntimeConfig()
+// Fonction pour récupérer les célébrations
+const celebrationsByAuthor = ref<CelebrationsByAuthorResponse | null>(null)
+const celebrationsByGuest = ref<CelebrationsByGuestResponse | null>(null)
 
-// celebrations list by author
-const { data: celebrationsByAuthor, error: celebrationsByAuthorError }
-  = await useFetch<CelebrationsByAuthorResponse>(
-    () => `${runtimeConfig.public.apiUrl}/celebrations/author/${user!.id}`,
+const fetchCelebrations = async () => {
+  if (!user.value) return
+
+  const { data: authorData, error: authorError } = await useFetch<CelebrationsByAuthorResponse>(
+    `${runtimeConfig.public.apiUrl}/celebrations/author/${user.value.id}`,
   )
-if (celebrationsByAuthorError.value) {
-  console.error(
-    'Failed to fetch celebrations by author',
-    celebrationsByAuthorError.value,
+  if (authorError.value) console.error('Failed to fetch celebrations by author', authorError.value)
+  celebrationsByAuthor.value = authorData.value
+
+  const { data: guestData, error: guestError } = await useFetch<CelebrationsByGuestResponse>(
+    `${runtimeConfig.public.apiUrl}/celebrations/guest/${user.value.id}`,
   )
+  if (guestError.value) console.error('Failed to fetch celebrations by guest', guestError.value)
+  celebrationsByGuest.value = guestData.value
 }
 
-// celebrations list by guest
-const { data: celebrationsByGuest, error: celebrationsByGuestError }
-  = await useFetch<CelebrationsByGuestResponse>(
-    () => `${runtimeConfig.public.apiUrl}/celebrations/guest/${user!.id}`,
-  )
-if (celebrationsByGuestError.value) {
-  console.error(
-    'Failed to fetch celebrations by guest',
-    celebrationsByGuestError.value,
-  )
-}
-
+// Computed properties pour afficher les données uniquement si elles sont chargées
 const celebrationsListByAuthor = computed(() => {
-  if (celebrationsByAuthor.value && 'upcoming' in celebrationsByAuthor.value) {
+  if (celebrationsByAuthor.value && 'past' in celebrationsByAuthor.value && 'upcoming' in celebrationsByAuthor.value) {
     return {
-      upcoming: celebrationsByAuthor.value?.upcoming ?? [],
-      past: celebrationsByAuthor.value?.past ?? [],
+      upcoming: celebrationsByAuthor.value.upcoming ?? [],
+      past: celebrationsByAuthor.value.past ?? [],
     }
   }
-  return { upcoming: [], past: [] } // Valeurs par défaut en cas d'erreur
+  return { upcoming: [], past: [] } // 🔹 Valeur par défaut si l'API renvoie une erreur
 })
 
 const celebrationsListByGuest = computed(() => {
-  if (celebrationsByGuest.value && 'upcoming' in celebrationsByGuest.value) {
+  if (celebrationsByGuest.value && 'past' in celebrationsByGuest.value && 'upcoming' in celebrationsByGuest.value) {
     return {
       upcoming: celebrationsByGuest.value.upcoming ?? [],
       past: celebrationsByGuest.value.past ?? [],
     }
   }
-  return { upcoming: [], past: [] } // Valeurs par défaut en cas d'erreur
+  return { upcoming: [], past: [] } // 🔹 Valeur par défaut si erreur
 })
 
-const upcomingCelebrationsCreated = computed(
-  () => celebrationsListByAuthor.value.upcoming,
-)
-const pastCelebrationsCreated = computed(
-  () => celebrationsListByAuthor.value.past,
-)
-const upcomingCelebrationsInvited = computed(
-  () => celebrationsListByGuest.value.upcoming,
-)
-const pastCelebrationsInvited = computed(
-  () => celebrationsListByGuest.value.past,
-)
+const upcomingCelebrationsCreated = computed(() => celebrationsListByAuthor.value.upcoming)
+const pastCelebrationsCreated = computed(() => celebrationsListByAuthor.value.past)
+const upcomingCelebrationsInvited = computed(() => celebrationsListByGuest.value.upcoming)
+const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.past)
 </script>
 
 <template>
@@ -121,13 +113,21 @@ const pastCelebrationsInvited = computed(
     </div>
 
     <div v-else>
-      <h1>{{ $t("welcome.not_logged") }}</h1>
-      <NuxtLink to="login">
-        <Button
-          label="Login with password"
-          class="mt-2 button-validation"
-        />
-      </NuxtLink>
+      <h1
+        class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight"
+      >
+        {{ $t("welcome.not_logged") }}
+      </h1>
+      <div class="flex justify-center min-h-screen">
+        <NuxtLink to="login">
+          <button
+            type="button"
+            class="mt-8 min-w-32 mt-3 rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 hover:bg-gray-50"
+          >
+            {{ $t("button.login") }}
+          </button>
+        </NuxtLink>
+      </div>
     </div>
   </main>
 </template>

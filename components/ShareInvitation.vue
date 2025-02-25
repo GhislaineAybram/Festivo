@@ -4,6 +4,8 @@ import { ref } from 'vue'
 import { ShareIcon } from '@heroicons/vue/24/outline'
 import type { GuestWithUserInfo } from '~/types'
 
+const { t } = useI18n()
+
 const op = ref()
 const copySuccess = ref(false)
 
@@ -30,7 +32,7 @@ const toggle = (event: MouseEvent) => {
   op.value.toggle(event)
 }
 
-const shareLink = `Hey viens à ma fête :\n\n${runtimeConfig.public.url}/celebration/${props.celebrationId}`
+const shareLink = `${t('celebration.modification.share.sentence')} :\n\n${runtimeConfig.public.url}/celebration/${props.celebrationId}`
 const copyToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(shareLink)
@@ -62,7 +64,7 @@ const copyToClipboard = async () => {
     </button>
     <Popover
       ref="op"
-      class="popover-container"
+      class="popover-container p-popover ml-6 sm:ml-0"
     >
       <div class="flex flex-col gap-4 justify-center w-[20rem]">
         <div>
@@ -107,6 +109,7 @@ const copyToClipboard = async () => {
                 :src="guest.userId.avatar.picture || defaultAvatarUrl"
                 :alt="guest.userId.avatar.pictureDescription || 'User avatar'"
                 style="width: 32px; border: 1px solid #180161; border-radius: 50%;"
+                class="avatar"
               >
               <div>
                 <span class="font-medium">{{ guest.userId.alias }}</span>
@@ -129,5 +132,8 @@ const copyToClipboard = async () => {
   background-color: $tangerine;
   color: $indigo;
   border-color: $indigo;
+}
+.avatar {
+  background-color: $seashell;
 }
 </style>

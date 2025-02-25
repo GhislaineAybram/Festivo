@@ -161,6 +161,7 @@
       "save": "Sauvegarder les modifications",
       "share": {
         "button": "Partager",
+        "sentence": "Rejoins-moi pour cet événement spécial",
         "title": "Partager le lien",
         "copied": "copié",
         "guests": "Invités"
@@ -193,7 +194,7 @@
     },
     "button": "Créer votre compte",
     "successfull": "Inscription réussie",
-    "success_message": "Vous pouvez maintenant vous identifier avec votre adresse email et votre mot de passe !",
+    "success_message": "Vous allez maintenant être redirigé vers la page d'accueil.",
     "error": {
       "agree": "Vous devez accepter les termes et conditions.",
       "match": "Les mots de passe ne correspondent pas !",
