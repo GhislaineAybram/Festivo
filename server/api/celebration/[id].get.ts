@@ -13,16 +13,14 @@
 import type { CelebrationWithPictureAndAuthor } from '~/types'
 import { getCelebrationById } from '~/src'
 
-export default defineEventHandler(async (event): Promise<CelebrationWithPictureAndAuthor | { statusCode: number, body: { error: string } }> => {
+export default defineEventHandler(async (event): Promise<CelebrationWithPictureAndAuthor> => {
   try {
     // Extraire l'ID de l'URL
     const id = getRouterParam(event, 'id')
 
     if (!id) {
-      return {
-        statusCode: 400,
-        body: { error: 'Celebration ID is required' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'Celebration ID is required' })
     };
 
     const celebrationId = id
@@ -30,19 +28,15 @@ export default defineEventHandler(async (event): Promise<CelebrationWithPictureA
     const celebration = await getCelebrationById(celebrationId)
 
     if (!celebration) {
-      return {
-        statusCode: 404,
-        body: { error: 'Celebration not found' },
-      }
-    };
+      setResponseStatus(event, 404)
+      throw createError({ message: 'Celebration not found' })
+    }
 
+    setResponseStatus(event, 200)
     return celebration
   }
   catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: { error: 'Failed to fetch celebration' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

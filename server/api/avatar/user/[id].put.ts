@@ -18,28 +18,22 @@ export default defineEventHandler(async (event): Promise<User | null> => {
     const { id, newAvatar } = await readBody(event)
 
     if (!id || !newAvatar) {
-      return {
-        statusCode: 400,
-        body: { error: 'User ID and newAvatar is required' },
-      }
-    };
+      setResponseStatus(event, 400)
+      throw createError({ message: 'User ID and newAvatar is required' })
+    }
 
     const updatedUser = await updateAvatarByUser(id, newAvatar)
 
     if (!updatedUser) {
-      return {
-        statusCode: 404,
-        body: { error: 'Failed to update avatar user' },
-      }
-    };
+      setResponseStatus(event, 500)
+      throw createError({ message: 'Failed to update avatar user' })
+    }
 
+    setResponseStatus(event, 200)
     return updatedUser
   }
   catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: { error: 'Failed to fetch avatar user' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

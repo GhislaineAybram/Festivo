@@ -16,7 +16,7 @@
 
 import AccordionPanel from 'primevue/accordionpanel'
 import { useToast } from 'primevue/usetoast'
-import type { ErrorResponseWithSuccess, UserWithAvatar } from '~/types'
+import type { ResponseWithSuccess, UserWithAvatar } from '~/types'
 
 definePageMeta({
   middleware: 'auth',
@@ -97,8 +97,24 @@ const updateUserAlias = async (alias: string) => {
     errorMsg.value = errorMessageAlias
     setTimeout(() => {
       errorMsg.value = ''
-    }, 5000)
-    return
+    }, 3000)
+    return false
+  }
+
+  // verify if the alias already exists in the database
+  const { data: aliasData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
+    method: 'POST',
+    body: {
+      alias: alias,
+    },
+  })
+  console.log(aliasData.value)
+  if (aliasData.value) {
+    errorMsg.value = t('register.error.alias-exists')
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
+    return false
   }
 
   try {
@@ -182,7 +198,7 @@ const updateUserProfile = async (event: Event) => {
 
 const deleteAccount = async (user_id: string) => {
   try {
-    const { error } = await useFetch<ErrorResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
+    const { error } = await useFetch<ResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
       method: 'DELETE',
     })
     console.log(error.value)
@@ -424,7 +440,10 @@ const deleteAccount = async (user_id: string) => {
             </Accordion>
           </div>
         </fieldset>
-
+        <span
+          v-if="errorMsg"
+          class="mt-6 flex text-sm text-red-500 items-center justify-center"
+        >{{ errorMsg }}</span>
         <div class="mt-6 flex md:flex-row px-4 items-center justify-center md:justify-end gap-x-6">
           <button
             type="button"

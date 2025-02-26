@@ -12,36 +12,33 @@
  */
 
 import { deleteUser } from '~/src'
-import type { ErrorResponseWithSuccess } from '~/types'
+import type { ResponseWithSuccess } from '~/types'
 
-export default defineEventHandler(async (event): Promise<ErrorResponseWithSuccess> => {
+export default defineEventHandler(async (event): Promise<ResponseWithSuccess> => {
   try {
     // Extraire l'ID de l'URL
     const id = getRouterParam(event, 'id')
+
     if (!id) {
-      return {
-        statusCode: 400,
-        body: { success: false, error: 'User ID is required' },
-      }
-    };
+      setResponseStatus(event, 400)
+      throw createError({ message: 'User ID is required' })
+    }
+
     const userId = id
     const isUserDeleted = await deleteUser(userId)
+
     if (!isUserDeleted) {
-      return {
-        statusCode: 404,
-        body: { success: false, error: 'User not found or deletion failed.' },
-      }
+      setResponseStatus(event, 500)
+      throw createError({ message: 'User not found or deletion failed.' })
     }
+
+    setResponseStatus(event, 200)
     return {
-      statusCode: 200,
       body: { success: true, message: 'User deleted successfully.' },
     }
   }
   catch (error) {
-    console.error('Error deleting user:', error)
-    return {
-      statusCode: 500,
-      body: { success: false, error: 'Internal Server Error.' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

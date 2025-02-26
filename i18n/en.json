@@ -205,6 +205,8 @@
       "uppercase": "an uppercase letter",
       "number": "a number",
       "symbol": "a symbol",
+      "email-exists": "Something went wrong.",
+      "alias-exists": "This username already exists, please use a different username.",
       "alias-rules": "The username must be between 3 and 20 characters, can only contain letters, numbers, dots, hyphens, and underscores, cannot start or end with a special character (._-) and cannot contain spaces.",
       "alias-sentence": "The username",
       "alias-length": "must be between 3 and 20 characters",

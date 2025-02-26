@@ -12,24 +12,22 @@
 import { isExistingGuest, newGuest } from '~/src'
 import type { Guest, NewGuestData } from '~/types'
 
-export default defineEventHandler(async (event): Promise<{ statusCode: number, body: Guest | { error: string } }> => {
+export default defineEventHandler(async (event): Promise<{ body: Guest | string }> => {
   try {
     const body = await readBody(event)
+    const { userId, celebrationId } = body
 
     if (!body.userId || !body.celebrationId) {
-      return {
-        statusCode: 400,
-        body: { error: 'Missing required guest data' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'Missing required guest data' })
     }
 
-    const { userId, celebrationId } = body
     const checkExistingGuest = await isExistingGuest(userId, celebrationId)
 
     if (checkExistingGuest) {
+      setResponseStatus(event, 200)
       return {
-        statusCode: 200,
-        body: checkExistingGuest,
+        body: { message: 'User already added to the guests list.' },
       }
     }
 
@@ -41,22 +39,16 @@ export default defineEventHandler(async (event): Promise<{ statusCode: number, b
     const guest = await newGuest(guestData)
 
     if (!guest) {
-      return {
-        statusCode: 404,
-        body: { error: 'Failed to create the guest' },
-      }
+      setResponseStatus(event, 500)
+      throw createError({ message: 'Failed to create the guest' })
     }
-
+    setResponseStatus(event, 201)
     return {
-      statusCode: 201,
       body: guest,
     }
   }
   catch (error) {
-    console.error('Error creating guest:', error)
-    return {
-      statusCode: 500,
-      body: { error: 'Server error while creating guest' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

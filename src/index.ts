@@ -8,7 +8,7 @@
 
 import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/postgres-js'
-import { and, asc, desc, eq, gte, lt } from 'drizzle-orm'
+import { and, asc, desc, eq, gte, lt, sql } from 'drizzle-orm'
 import postgres from 'postgres'
 import * as schema from './db/schema'
 
@@ -46,6 +46,24 @@ export const getUserById = async (id: string): Promise<UserWithAvatar | null> =>
         }
       : null,
   }
+}
+
+export const checkEmailExists = async (email: string): Promise<boolean> => {
+  const result = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(user)
+    .where(eq(user.email, email))
+
+  return result[0].count > 0
+}
+
+export const checkAliasExists = async (alias: string): Promise<boolean> => {
+  const result = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(user)
+    .where(eq(user.alias, alias))
+
+  return result[0].count > 0
 }
 
 export const updateAvatarByUser = async (id: string, newAvatar: string): Promise<User | null> => {
@@ -376,15 +394,16 @@ export const newCelebration = async (newCelebrationData: NewCelebrationData): Pr
   return result[0] || null
 }
 
-export const isExistingGuest = async (userId: string, celebrationId: string): Promise<Guest | null> => {
-  const result = await db.query.guest.findFirst({
-    where: and(
+export const isExistingGuest = async (userId: string, celebrationId: string): Promise<boolean> => {
+  const result = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(guest)
+    .where(and(
       eq(guest.userId, userId),
-      eq(guest.celebrationId, celebrationId),
-    ),
-  })
+      eq(guest.celebrationId, celebrationId,
+      )))
 
-  return result || null
+  return result[0].count > 0
 }
 
 export const newGuest = async (newGuestData: NewGuestData): Promise<Guest | null> => {

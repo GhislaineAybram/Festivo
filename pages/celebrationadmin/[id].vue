@@ -15,7 +15,7 @@
 
 import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
-import type { CelebrationType, CelebrationWithPictureAndAuthor, ErrorResponseWithSuccess } from '~/types'
+import type { CelebrationType, CelebrationWithPictureAndAuthor, ResponseWithSuccess } from '~/types'
 
 definePageMeta({
   middleware: 'auth',
@@ -138,7 +138,7 @@ async function updateCelebrationInformations(id: string) {
 
 const deleteCelebration = async (id: string) => {
   try {
-    const { error } = await useFetch<ErrorResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
+    const { error } = await useFetch<ResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
       method: 'DELETE',
     })
     if (error.value) {

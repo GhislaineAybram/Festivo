@@ -13,36 +13,30 @@
 import { getUserById } from '~/src'
 import type { UserWithAvatar } from '~/types'
 
-export default defineEventHandler(async (event): Promise<UserWithAvatar | { statusCode: number, body: { error: string } }> => {
+export default defineEventHandler(async (event): Promise<UserWithAvatar> => {
   try {
     // Extraire l'ID de l'URL
     const id = getRouterParam(event, 'id')
 
     if (!id) {
-      return {
-        statusCode: 400,
-        body: { error: 'User ID is required' },
-      }
-    };
+      setResponseStatus(event, 400)
+      throw createError({ message: 'User ID is required' })
+    }
 
     const userId = id
 
     const user = await getUserById(userId)
 
     if (!user) {
-      return {
-        statusCode: 404,
-        body: { error: 'User not found' },
-      }
-    };
+      setResponseStatus(event, 404)
+      throw createError({ message: 'User not found' })
+    }
 
+    setResponseStatus(event, 200)
     return user
   }
   catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: { error: 'Failed to fetch user' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

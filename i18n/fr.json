@@ -205,6 +205,8 @@
       "uppercase": "une lettre majuscule",
       "number": "un chiffre",
       "symbol": "un symbole",
+      "email-exists": "Une erreur s'est produite.",
+      "alias-exists": "Ce nom d'utilisateur existe déjà, veuillez utiliser un autre nom d'utilisateur.",
       "alias-rules": "Le pseudo doit être compris entre 3 et 20 caractères, ne peut contenir que des lettres, chiffres, points, tirets et underscores, ne peut pas commencer ou se terminer par un caractère spécial (._-) et ne peut pas contenir d'espaces.",
       "alias-sentence": "Le pseudo",
       "alias-length": "doit être compris entre 3 et 20 caractères",
