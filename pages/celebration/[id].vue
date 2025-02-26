@@ -76,6 +76,10 @@ const guestInfoList = computed(() => guestsList.value.guests_list || [])
 const restrictionsguestsList = computed(() => guestsList.value.restrictionsCounts || [])
 const diet = getDietOptions()
 const allergy = getAllergyList()
+const restrictions = [
+  ...diet.map(item => ({ ...item, type: 'diet' })),
+  ...allergy.map(item => ({ ...item, type: 'allergy' })),
+]
 
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
@@ -92,10 +96,7 @@ const checkAndRegisterInvitedUser = async () => {
     })
 
     if (error.value) {
-      console.error(
-        `Erreur lors de la création de l'invitation :`,
-        error.value,
-      )
+      console.log(`Erreur lors de la création de l'invitation :`, error.value)
       return
     }
   }
@@ -278,12 +279,12 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
             </div>
             <div class="flex text-sm text-gray-500 self-center">
               <div
-                v-for="item in diet"
+                v-for="item in restrictions"
                 :key="item.key"
               >
                 <div v-if="restrictionsguestsList?.[item.db] > 0">
                   <div
-                    v-tooltip.top="{
+                    v-tooltip.autoPosition.fit.focus="{
                       value: restrictionsguestsList?.[item.db] + ' guests ' + item.name + ' = ' + item.description,
                       class: 'bg-primary text-xs p-2 max-w-[200px]',
                     }"
@@ -294,26 +295,7 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
                     }"
                     class="inline-block size-10 rounded-full guest-avatar"
                     :title="item.name || 'Restriction logo'"
-                  />
-                </div>
-              </div>
-              <div
-                v-for="item in allergy"
-                :key="item.key"
-              >
-                <div v-if="restrictionsguestsList?.[item.db] > 0">
-                  <div
-                    v-tooltip.top="{
-                      value: restrictionsguestsList?.[item.db] + ' guests ' + item.name + ' = ' + item.description,
-                      class: 'bg-primary text-xs p-2 max-w-[200px]',
-                    }"
-                    :style="{
-                      backgroundImage: `url(${
-                        item.logo || defaultAvatarUrl
-                      })`,
-                    }"
-                    class="inline-block size-10 rounded-full guest-avatar"
-                    :title="item.name || 'Restriction logo'"
+                    tabindex="0"
                   />
                 </div>
               </div>

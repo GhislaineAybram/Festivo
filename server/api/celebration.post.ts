@@ -13,17 +13,15 @@
 import type { Celebration, NewCelebrationData } from '~/types'
 import { newCelebration } from '~/src'
 
-export default defineEventHandler(async (event): Promise<{ statusCode: number, body: Celebration | { error: string } }> => {
+export default defineEventHandler(async (event): Promise<{ body: Celebration }> => {
   try {
     // Récupérer le corps de la requête
     const body = await readBody(event)
 
     // Vérifie si les données essentielles sont présentes
     if (!body.name || !body.description || !body.address || !body.date || !body.hour || !body.author || !body.celebrationType) {
-      return {
-        statusCode: 400,
-        body: { error: 'Missing required celebration data' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'Missing required celebration data' })
     }
 
     // Prépare les données pour la création de l'événement
@@ -40,22 +38,16 @@ export default defineEventHandler(async (event): Promise<{ statusCode: number, b
     const celebration = await newCelebration(celebrationData)
 
     if (!celebration) {
-      return {
-        statusCode: 404,
-        body: { error: 'Failed to create celebration' },
-      }
+      setResponseStatus(event, 500)
+      throw createError({ message: 'Failed to create celebration' })
     }
-
+    setResponseStatus(event, 201)
     return {
-      statusCode: 201,
       body: celebration,
     }
   }
   catch (error) {
-    console.error('Error creating celebration:', error)
-    return {
-      statusCode: 500,
-      body: { error: 'Server error while creating celebration' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

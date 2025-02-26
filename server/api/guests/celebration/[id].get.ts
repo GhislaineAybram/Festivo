@@ -23,10 +23,8 @@ export default defineEventHandler(async (event): Promise<CelebrationGuestsRespon
     const id = getRouterParam(event, 'id')
 
     if (!id) {
-      return {
-        statusCode: 400,
-        body: { error: 'Celebration ID is required' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'Celebration ID is required' })
     }
 
     const celebrationId = id
@@ -75,10 +73,7 @@ export default defineEventHandler(async (event): Promise<CelebrationGuestsRespon
     }
   }
   catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: { error: 'Failed to fetch celebration guests' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

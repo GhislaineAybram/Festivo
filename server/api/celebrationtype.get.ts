@@ -5,29 +5,26 @@
  * @description
  * Endpoint to retrieve all celebration types.
  *
- * @route PUT /api/celebrationtype
+ * @route GET /api/celebrationtype
  */
 
 import { getCelebrationTypes } from '~/src'
 import type { CelebrationType } from '~/types'
 
-export default defineEventHandler(async (): Promise <CelebrationType[] | { statusCode: number, body: { error: string } }> => {
+export default defineEventHandler(async (event): Promise <CelebrationType[]> => {
   try {
     const celebration_types = await getCelebrationTypes()
 
     if (!celebration_types) {
-      return {
-        statusCode: 404,
-        body: { error: 'No celebration_type found' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'No celebration_type found' })
     }
+
+    setResponseStatus(event, 200)
     return celebration_types
   }
   catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: { error: 'Failed to fetch celebration_type' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

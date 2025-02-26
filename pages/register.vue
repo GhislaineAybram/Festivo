@@ -24,6 +24,8 @@ const registrationSuccess = ref(false)
 const { auth } = useSupabaseClient()
 const { t } = useI18n()
 
+const runtimeConfig = useRuntimeConfig()
+
 const submitRegisterForm = async () => {
   // verify if the alias respect the rules
   const { isValidAlias, errorMessageAlias } = validateAlias(alias.value, t)
@@ -31,7 +33,39 @@ const submitRegisterForm = async () => {
     errorMsg.value = errorMessageAlias
     setTimeout(() => {
       errorMsg.value = ''
-    }, 5000)
+    }, 3000)
+    return
+  }
+
+  // verify if the alias already exists in the database
+  const { data: aliasData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
+    method: 'POST',
+    body: {
+      alias: alias.value,
+    },
+  })
+
+  if (aliasData.value) {
+    errorMsg.value = t('register.error.alias-exists')
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
+    return
+  }
+
+  // verify if the email already exists in the database
+  const { data: emailData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/email`, {
+    method: 'POST',
+    body: {
+      email: email.value,
+    },
+  })
+
+  if (emailData.value) {
+    errorMsg.value = t('register.error.email-exists')
+    setTimeout(() => {
+      errorMsg.value = ''
+    }, 3000)
     return
   }
 
@@ -52,13 +86,11 @@ const submitRegisterForm = async () => {
     errorMsg.value = errorMessagePassword
     setTimeout(() => {
       errorMsg.value = ''
-    }, 5000)
+    }, 3000)
     return
   }
 
-  // add verification of the email address ?
-
-  // verify if the user agree terms and conditions
+  // verify if the user agrees terms and conditions
   if (!accept.value) {
     errorMsg.value = t('register.error.agree')
     return

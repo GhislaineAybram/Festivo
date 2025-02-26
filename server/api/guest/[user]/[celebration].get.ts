@@ -13,34 +13,29 @@
 
 import { getIsComingGuest } from '~/src'
 
-export default defineEventHandler(
-  async (
-    event,
-  ): Promise<
-    boolean | null | { statusCode: number, body: { error: string } }
-  > => {
+export default defineEventHandler(async (event): Promise<boolean> => {
+  try {
     // Extraire l'ID de l'URL
     const userId = getRouterParam(event, 'user')
     const celebrationId = getRouterParam(event, 'celebration')
 
     if (!userId || !celebrationId) {
-      return {
-        statusCode: 400,
-        body: { error: 'User ID and celebration ID are required' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'User ID and celebration ID are required' })
     }
 
-    try {
-      const isComing = await getIsComingGuest(userId, celebrationId)
+    const isComing = await getIsComingGuest(userId, celebrationId)
 
-      return isComing
+    if (!isComing) {
+      setResponseStatus(event, 404)
+      throw createError({ message: 'Guest response not found' })
     }
-    catch (error) {
-      console.error(error)
-      return {
-        statusCode: 500,
-        body: { error: 'Failed to fetch isComing Guest' },
-      }
-    }
-  },
-)
+
+    setResponseStatus(event, 200)
+    return isComing
+  }
+  catch (error) {
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
+  }
+})

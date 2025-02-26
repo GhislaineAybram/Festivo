@@ -20,28 +20,22 @@ export default defineEventHandler(async (event): Promise<Guest | null> => {
     const { userId, celebrationId, isComing } = await readBody(event)
 
     if (!userId || !celebrationId || isComing === undefined) {
-      return {
-        statusCode: 400,
-        body: { error: 'User ID, celebration ID and isComing is required' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'User ID, celebration ID and isComing is required' })
     };
 
     const updatedIsComingGuest = await updateIsComingGuest(userId, celebrationId, isComing)
 
     if (!updatedIsComingGuest) {
-      return {
-        statusCode: 404,
-        body: { error: 'Failed to update isComing guest' },
-      }
-    };
+      setResponseStatus(event, 500)
+      throw createError({ message: 'Failed to update coming status guest.' })
+    }
 
+    setResponseStatus(event, 200)
     return updatedIsComingGuest
   }
   catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: { error: 'Failed to fetch isComing Guest' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

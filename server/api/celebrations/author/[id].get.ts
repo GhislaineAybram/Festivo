@@ -19,24 +19,22 @@ export default defineEventHandler(async (event): Promise<CelebrationsByAuthorRes
   try {
     // Extraire l'ID de l'URL
     const id = getRouterParam(event, 'id')
+
     if (!id) {
-      return {
-        statusCode: 400,
-        body: { error: 'Missing user ID' },
-      }
+      setResponseStatus(event, 400)
+      throw createError({ message: 'User ID is required' })
     }
+
     const celebrationsPast = await getPastCelebrationsByAuthor(id)
     const celebrationsUpcoming = await getUpcomingCelebrationsByAuthor(id)
+
     return {
       past: celebrationsPast ?? [],
       upcoming: celebrationsUpcoming ?? [],
     }
   }
   catch (error) {
-    console.error(error)
-    return {
-      statusCode: 500,
-      body: { error: 'Failed to fetch celebrations by author' },
-    }
+    setResponseStatus(event, 500)
+    throw createError({ message: 'Internal Server Error: ', data: error })
   }
 })

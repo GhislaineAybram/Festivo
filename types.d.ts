@@ -33,14 +33,17 @@ export type GuestWithUserInfo = InferSelectModel<typeof guest> & {
 }
 export type NewGuestData = Pick<InferSelectModel<typeof guest>, 'userId' | 'celebrationId'>
 
-// error format
-interface ErrorResponse {
-  statusCode: number
-  body: { error: string }
-}
+// HTTP codes
+// 200 OK : indique que la demande a réussi.
+// 201 Créé : indique la création réussie d'une nouvelle ressource.
+// 204 Aucun contenu : indique la demande réussie sans contenu supplémentaire à renvoyer.
+// 400 Bad Request : indique une entrée mal formée ou invalide du client.
+// 401 Non autorisé : indique des informations d'authentification manquantes ou incorrectes.
+// 403 Interdit : indique des droits d'accès insuffisants à la ressource demandée.
+// 404 Not Found : indique que la ressource demandée n’a pas été trouvée.
+// 500 Erreur interne du serveur : indique une erreur générale côté serveur.
 
-interface ErrorResponseWithSuccess {
-  statusCode: number
+interface ResponseWithSuccess {
   body: {
     success: boolean
     message?: string
