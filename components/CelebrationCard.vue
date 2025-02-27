@@ -1,4 +1,15 @@
 <script lang="ts">
+/**
+ * @component components/CelebrationCard.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * This component is the descripted card of a upcoming celebration.
+ *
+ * @example
+ * <CelebrationCard :celebrations="upcomingCelebrations" />
+ */
+
 import { defineComponent } from 'vue'
 import type { CelebrationWithPictureAndAuthor } from '~/types'
 

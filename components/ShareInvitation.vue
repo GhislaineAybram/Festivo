@@ -1,4 +1,17 @@
 <script setup lang="ts">
+/**
+ * @component components/ShareInvitation.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * This component is intended to be used for sharing event invitations.
+ * This component allows the user to copy the event's URL to the clipboard
+ * and view the list of current attendees.
+ *
+ * @example
+ * <ShareInvitation :celebration-id="id" />
+ */
+
 import Popover from 'primevue/popover'
 import { ref } from 'vue'
 import { ShareIcon } from '@heroicons/vue/24/outline'

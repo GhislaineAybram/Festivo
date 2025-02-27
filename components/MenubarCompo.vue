@@ -1,4 +1,14 @@
 <script setup lang="ts">
+/**
+ * @component components/MenubarCompo.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * This component is the navigation bar of Festivo website.
+ *
+ * @example
+ * <MenubarCompo />
+ */
 import {
   Disclosure,
   DisclosureButton,
