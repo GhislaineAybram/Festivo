@@ -9,6 +9,11 @@
  *
  * @param {string} id Celebration ID
  * @body {CelebrationUpdateDTO} Updated celebration data
+ *
+ * @throws {Error} 400 - If the celebration ID is missing.
+ * @throws {Error} 500 - If there is an internal server error or deletion fails.
+ *
+ * @returns {Promise<ResponseWithSuccess>} Returns an object indicating the success of the deletion.
  */
 
 import type { ResponseWithSuccess } from '~/types'

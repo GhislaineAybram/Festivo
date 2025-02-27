@@ -6,6 +6,13 @@
  * Endpoint to check if an email address already exists in the database.
  *
  * @route POST /api/users/check/email
+ *
+ * @param {string} email - The email to check for existence in the database.
+ *
+ * @throws {Error} 400 - If the email is not provided or is not a string.
+ * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
+ *
+ * @returns {Promise<boolean>} - Returns `true` if the email exists, `false` if it does not.
  */
 
 import { checkEmailExists } from '~/src'

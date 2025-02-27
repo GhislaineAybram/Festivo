@@ -12,6 +12,15 @@
  * @route GET /api/guests/celebration/:id
  *
  * @param {string} id Celebration ID
+ *
+ * @throws {Error} 400 - If the celebration ID is missing.
+ * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
+ *
+ * @returns {Promise<CelebrationGuestsResponse>} Returns an object containing:
+ * `nb_guests`: Total number of guests for the celebration.
+ * `guests_list`: List of all guests with their RSVP status.
+ * `coming_guests_list`: List of guests who are confirmed to attend the celebration.
+ * `restrictionsCounts`: Total dietary restrictions & food allergy counts of confirmed attending guests.
  */
 
 import type { CelebrationGuestsResponse, UserRestrictions } from '~/types'

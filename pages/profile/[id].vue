@@ -101,20 +101,21 @@ const updateUserAlias = async (alias: string) => {
     return false
   }
 
-  // verify if the alias already exists in the database
-  const { data: aliasData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
-    method: 'POST',
-    body: {
-      alias: alias,
-    },
-  })
-  console.log(aliasData.value)
-  if (aliasData.value) {
-    errorMsg.value = t('register.error.alias-exists')
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return false
+  // verify if the alias already exists in the database if the user has modified it
+  if (alias !== aliasTitle.value) {
+    const { data: aliasData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
+      method: 'POST',
+      body: {
+        alias: alias,
+      },
+    })
+    if (aliasData.value) {
+      errorMsg.value = t('register.error.alias-exists')
+      setTimeout(() => {
+        errorMsg.value = ''
+      }, 3000)
+      return false
+    }
   }
 
   try {

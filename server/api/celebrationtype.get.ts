@@ -6,6 +6,11 @@
  * Endpoint to retrieve all celebration types.
  *
  * @route GET /api/celebrationtype
+ *
+ * @throws {Error} 404 - If no celebration types is found.
+ * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
+ *
+ * @returns {Promise<CelebrationType[]>} Returns list of celebration types.
  */
 
 import { getCelebrationTypes } from '~/src'
@@ -16,8 +21,8 @@ export default defineEventHandler(async (event): Promise <CelebrationType[]> => 
     const celebration_types = await getCelebrationTypes()
 
     if (!celebration_types) {
-      setResponseStatus(event, 400)
-      throw createError({ message: 'No celebration_type found' })
+      setResponseStatus(event, 404)
+      throw createError({ message: 'No celebration type found' })
     }
 
     setResponseStatus(event, 200)

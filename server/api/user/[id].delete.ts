@@ -9,6 +9,11 @@
  * @route DELETE /api/user/:id
  *
  * @param {string} id User ID
+ *
+ * @throws {Error} 400 - If the user ID is missing.
+ * @throws {Error} 500 - If there is an internal server error or deletion fails.
+ *
+ * @returns {Promise<ResponseWithSuccess>} Returns an object indicating the success of the deletion.
  */
 
 import { deleteUser } from '~/src'

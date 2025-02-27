@@ -8,6 +8,12 @@
  * @route GET /api/celebration/:id
  *
  * @param {string} id Celebration ID
+ *
+ * @throws {Error} 400 - If the celebration ID is missing.
+ * @throws {Error} 404 - If the celebration is not found.
+ * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
+ *
+ * @returns {Promise<CelebrationWithPictureAndAuthor>} Returns celebration details.
  */
 
 import type { CelebrationWithPictureAndAuthor } from '~/types'

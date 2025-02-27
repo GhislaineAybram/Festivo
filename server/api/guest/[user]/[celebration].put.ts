@@ -10,6 +10,11 @@
  * @param {string} user User ID
  * @param {string} celebration Celebration ID
  * @body {GuestUpdateDTO} Updated guest data
+ *
+ * @throws {Error} 400 - If the user ID or celebration ID are missing or invalid.
+ * @throws {Error} 500 - If there is an internal server error or update fails.
+ *
+ * @returns {Promise<Guest | null>} Returns the updated guest information
  */
 
 import type { Guest } from '~/types'
