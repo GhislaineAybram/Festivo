@@ -1,6 +1,18 @@
-// diet.ts
+/**
+ * @file utils/diet.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * This file contains utility functions for retrieving dietary preferences and allergy information.
+ * It provides lists of diet options and common food allergies,
+ * including their database keys, names, descriptions, and associated icons.
+ */
 
-// Return an array with the diet requirement information
+/**
+ * Returns an array of dietary preferences with their respective details.
+ *
+ * @returns {Array} A list of diet options including key, database field, name, description, and logo.
+ */
 export function getDietOptions() {
   const { t } = useI18n()
   return [
@@ -71,7 +83,11 @@ export function getDietOptions() {
   ]
 }
 
-// Return an array with the food allergy information
+/**
+ * Returns an array of common food allergies with their respective details.
+ *
+ * @returns {Array} A list of food allergies including key, database field, name, description, and logo.
+ */
 export function getAllergyList() {
   const { t } = useI18n()
   return [

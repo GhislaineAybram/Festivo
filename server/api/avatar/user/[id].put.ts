@@ -3,11 +3,16 @@
  * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
  *
  * @description
- * Endpoint to retrieve all available user avatars.
+ * Endpoint to update a user's avatar.
  *
  * @route PUT /api/avatar/user/:id
  * @param {string} id User ID
  * @body {AvatarUpdateDTO} Avatar update data
+ *
+ * @throws {Error} 400 - If the user ID or avatar ID are missing or invalid.
+ * @throws {Error} 500 - If there is an internal server error or update fails.
+ *
+ * @returns {Promise<User | null>} Returns the updated user
  */
 
 import type { User } from '~/types'

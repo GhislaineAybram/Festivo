@@ -1,6 +1,20 @@
-// format.ts
+/**
+ * @file utils/format.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * This file contains utility functions for user input validation (password, alias),
+ * and date/time formatting.
+ */
 
-// Password format verification
+/**
+ * Validates a password against security criteria.
+ * @param {string} password - The password to validate.
+ * @param {(key: string) => string} t - Translation function.
+ * @returns {{ isValidPassword: boolean, errorMessagePassword: string }}
+ * - `isValidPassword`: true if the password is valid, false otherwise.
+ * - `errorMessagePassword`: Detailed error message if the password is invalid.
+ */
 export const validatePassword = (password: string, t: (key: string) => string): { isValidPassword: boolean, errorMessagePassword: string } => {
   const errors: string[] = []
   const minLength = 12
@@ -29,14 +43,21 @@ export const validatePassword = (password: string, t: (key: string) => string): 
   }
 }
 
-// Alias format verification
+/**
+ * Validates a user alias against predefined criteria.
+ * @param {string} alias - The alias to validate.
+ * @param {(key: string) => string} t - Translation function.
+ * @returns {{ isValidAlias: boolean, errorMessageAlias: string }}
+ * - `isValidAlias`: true if the alias is valid, false otherwise.
+ * - `errorMessageAlias`: Detailed error message if the alias is invalid.
+ */
 export const validateAlias = (alias: string, t: (key: string) => string): { isValidAlias: boolean, errorMessageAlias: string } => {
   const errors: string[] = []
 
   if (alias.length < 3 || alias.length > 20) {
     errors.push(t('register.error.alias-length'))
   }
-  const validPattern = /^[a-zA-Z0-9._-]+$/
+  const validPattern = /^[\p{L}\p{N}._-]+$/u
   if (!validPattern.test(alias)) {
     errors.push(t('register.error.composition'))
   }
@@ -55,14 +76,23 @@ export const validateAlias = (alias: string, t: (key: string) => string): { isVa
   }
 }
 
-// Date format
+/**
+ * Formats a date into `YYYY-MM-DD` format.
+ * @param {Date | null} date - The date to format.
+ * @returns {string | null} - The formatted date or `null` if invalid.
+ */
 export const formatDate = (date: Date | null): string | null => {
   if (!date) return null
   const validDate = new Date(date)
   return `${validDate.getFullYear()}-${(validDate.getMonth() + 1).toString().padStart(2, '0')}-${validDate.getDate().toString().padStart(2, '0')}`
 }
 
-// Time format
+/**
+ * Formats a time into `HH:mm:ss` format based on the specified time zone.
+ * @param {Date | null} time - The time to format.
+ * @param {string} [timeZone='Europe/Paris'] - The time zone to use.
+ * @returns {string | null} - The formatted time or `null` if invalid.
+ */
 export const formatTime = (time: Date | null): string | null => {
   if (!time) return null
   return time.toLocaleTimeString('fr-FR', {

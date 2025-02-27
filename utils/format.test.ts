@@ -1,4 +1,12 @@
-// format.test.ts
+/**
+ * @file utils/format.test.ts
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * This file contains unit tests for the format utility functions
+ * (password, alias, date, and time formatting).
+ */
+
 import { describe, expect, it } from 'vitest'
 
 describe('validateAlias', () => {

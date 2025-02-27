@@ -9,11 +9,17 @@
  *
  * @param {string} id Celebration ID
  * @body {CelebrationUpdateDTO} Updated celebration data
+ *
+ * @throws {Error} 400 - If the celebration ID is missing or celebrations details are invalid.
+ * @throws {Error} 500 - If there is an internal server error or update fails.
+ *
+ * @returns {Promise<CelebrationWithPictureAndAuthor | null>} Returns the updated celebration
  */
 
 import { updateCelebrationById } from '~/src'
+import type { CelebrationWithPictureAndAuthor } from '~/types'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<CelebrationWithPictureAndAuthor | null> => {
   try {
     // Extraire l'ID de l'URL
     const celebrationId = getRouterParam(event, 'id')

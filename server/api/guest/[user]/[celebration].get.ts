@@ -9,11 +9,20 @@
  *
  * @param {string} user User ID
  * @param {string} celebration Celebration ID
+ *
+ * @throws {Error} 400 - If the user ID or celebration ID is missing.
+ * @throws {Error} 404 - If the guest response is not found.
+ * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
+ *
+ * @returns {Promise<boolean | null>} Returns guest answer :
+ * `true` if the guest is attending,
+ * `false` if not attending,
+ * `null` if no response has been given.
  */
 
 import { getIsComingGuest } from '~/src'
 
-export default defineEventHandler(async (event): Promise<boolean> => {
+export default defineEventHandler(async (event): Promise<boolean | null> => {
   try {
     // Extraire l'ID de l'URL
     const userId = getRouterParam(event, 'user')

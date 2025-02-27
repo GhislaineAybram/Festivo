@@ -9,11 +9,17 @@
  *
  * @param {string} id User ID
  * @body {UserUpdateDTO} Updated user data
+ *
+ * @throws {Error} 400 - If the user ID is missing or user details are invalid.
+ * @throws {Error} 500 - If there is an internal server error or update fails.
+ *
+ * @returns {Promise<User | null>} Returns the updated user
  */
 
 import { updateFoodInformationByUser } from '~/src'
+import type { User } from '~/types'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<User | null> => {
   try {
     // Extraire l'ID de l'URL
     const userId = getRouterParam(event, 'id')

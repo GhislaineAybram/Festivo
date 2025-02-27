@@ -7,6 +7,11 @@
  *
  * @route POST /api/guest
  * @body {GuestCreateDTO} New guest data
+ *
+ * @throws {Error} 400 - If the user ID or celebration ID is missing.
+ * @throws {Error} 500 - If there is an internal server error or the creation fails.
+ *
+ * @returns {Promise<Guest | string>} Returns created guest.
  */
 
 import { isExistingGuest, newGuest } from '~/src'
@@ -19,7 +24,7 @@ export default defineEventHandler(async (event): Promise<{ body: Guest | string 
 
     if (!body.userId || !body.celebrationId) {
       setResponseStatus(event, 400)
-      throw createError({ message: 'Missing required guest data' })
+      throw createError({ message: 'User ID and celebration ID are required' })
     }
 
     const checkExistingGuest = await isExistingGuest(userId, celebrationId)

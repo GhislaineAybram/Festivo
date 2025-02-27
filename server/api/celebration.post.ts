@@ -8,6 +8,11 @@
  * @route POST /api/celebration
  *
  * @body {CelebrationCreateDTO} New celebration data
+ *
+ * @throws {Error} 400 - If the celebrations details are missing or invalid.
+ * @throws {Error} 500 - If there is an internal server error or the creation fails.
+ *
+ * @returns {Promise<Celebration>} Returns created celebration.
  */
 
 import type { Celebration, NewCelebrationData } from '~/types'

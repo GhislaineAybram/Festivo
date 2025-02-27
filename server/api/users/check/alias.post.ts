@@ -6,6 +6,13 @@
  * Endpoint to check if an alias already exists in the database.
  *
  * @route POST /api/users/check/alias
+ *
+ * @param {string} alias - The alias to check for existence in the database.
+ *
+ * @throws {Error} 400 - If the alias is not provided or is not a string.
+ * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
+ *
+ * @returns {Promise<boolean>} - Returns `true` if the alias exists, `false` if it does not.
  */
 
 import { checkAliasExists } from '~/src'

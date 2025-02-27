@@ -10,6 +10,11 @@
  * @route GET /api/celebrations/author/:id
  *
  * @param {string} id User ID
+ *
+ * @throws {Error} 400 - If the user ID is missing.
+ * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
+ *
+ * @returns {Promise<CelebrationsByAuthorResponse>} Returns user's celebrations.
  */
 
 import type { CelebrationsByAuthorResponse } from '~/types'
