@@ -331,9 +331,6 @@ const deleteCelebration = async (id: string) => {
         @cancel="closeDeleteAlert"
       />
     </div>
-    <div v-else>
-      <AlertNotLoggedIn class="alert" />
-    </div>
   </main>
 </template>
 

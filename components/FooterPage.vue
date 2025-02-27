@@ -1,4 +1,15 @@
 <script setup lang="ts">
+/**
+ * @component components/FooterPage.vue
+ * @copyright Copyright (c) 2024-2025 Festivo. All rights reserved.
+ *
+ * @description
+ * This component is the footer of Festivo website.
+ *
+ * @example
+ * <FooterPage />
+ */
+
 import IconGitHub from './icons/IconGitHub.vue'
 </script>
 

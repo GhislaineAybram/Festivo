@@ -3,7 +3,10 @@
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "types": [
-      "@types/node"
+      "@types/node",
+      "@vue/test-utils",
+      "vite/client",
+      "node"
     ]
   },
   "exclude": ["node_modules", "my-module"]

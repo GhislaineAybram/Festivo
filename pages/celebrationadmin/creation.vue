@@ -256,9 +256,6 @@ async function createNewCelebration() {
         class="alert"
       />
     </div>
-    <div v-else>
-      <AlertNotLoggedIn class="alert" />
-    </div>
   </main>
 </template>
 

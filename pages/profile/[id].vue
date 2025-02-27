@@ -238,10 +238,10 @@ const deleteAccount = async (user_id: string) => {
     <div v-if="user">
       <div v-if="isModifyAvatarOpened">
         <ModifyAvatar
-          :is-opened="isModifyAvatarOpened"
-          :close-modify-avatar="closeModifyAvatar"
           :initial-avatar="userAvatar.avatar.avatarId"
+          :is-opened="isModifyAvatarOpened"
           :user-id="user_id"
+          :close-modify-avatar="closeModifyAvatar"
           :update-avatar="updateAvatarInProfilePage"
           @close="closeModifyAvatar"
         />
@@ -489,9 +489,6 @@ const deleteAccount = async (user_id: string) => {
         @confirm="confirmDeleteAccount"
         @cancel="closeDeleteAlert"
       />
-    </div>
-    <div v-else>
-      <AlertNotLoggedIn class="alert" />
     </div>
   </main>
 </template>
