@@ -102,3 +102,14 @@ export const formatTime = (time: Date | null): string | null => {
     second: '2-digit',
   })
 }
+
+/**
+ * Displays an error message with auto-dismiss
+ * @param message - The error message to display
+ */
+export const showError = (errorMsg: Ref<string>, message: string) => {
+  errorMsg.value = message
+  setTimeout(() => {
+    errorMsg.value = ''
+  }, 3000)
+}

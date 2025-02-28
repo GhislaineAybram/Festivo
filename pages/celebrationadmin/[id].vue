@@ -17,37 +17,39 @@ import { ref } from 'vue'
 import { useToast } from 'primevue/usetoast'
 import type { CelebrationType, CelebrationWithPictureAndAuthor, ResponseWithSuccess } from '~/types'
 
+// Middleware setup
 definePageMeta({
   middleware: 'auth',
 })
 
 const toast = useToast()
+const runtimeConfig = useRuntimeConfig()
 const { t } = useI18n()
-
 const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
+const { data: { user } } = await auth.getUser()
 
+// Get the celebration ID from the route parameters
 const { id } = useRoute().params as { id: string }
 
-const runtimeConfig = useRuntimeConfig()
-
+// Form inputs
 const celebrationTitle = ref<string>('')
-const celebrationType = ref('')
-const celebrationDescription = ref('')
+const celebrationType = ref<string>('')
+const celebrationDescription = ref<string>('')
 const celebrationDate = ref<Date | null>(null)
-const celebrationTime = ref()
-const celebrationAddress = ref('')
-const updateSuccess = ref(false)
-const isDeleteAlertVisible = ref(false)
-const deleteCelebrationSuccess = ref(false)
-const openDeleteAlert = () => {
-  isDeleteAlertVisible.value = true
-}
-const closeDeleteAlert = () => {
-  isDeleteAlertVisible.value = false
-}
+const celebrationTime = ref<Date | null>(null)
+const celebrationAddress = ref<string>('')
+const updateSuccess = ref<boolean>(false)
+const isDeleteAlertVisible = ref<boolean>(false)
+const deleteCelebrationSuccess = ref<boolean>(false)
+const errorMsg = ref<string>('')
+
+// Functions for handling the delete confirmation dialog
+const openDeleteAlert = () => { isDeleteAlertVisible.value = true }
+const closeDeleteAlert = () => { isDeleteAlertVisible.value = false }
+
+/**
+ * Delete the celebration
+ */
 const confirmDeleteCelebration = async () => {
   const success = await deleteCelebration(id)
   if (success.body.success) {
@@ -55,6 +57,8 @@ const confirmDeleteCelebration = async () => {
     isDeleteAlertVisible.value = false
   }
 }
+
+// Fetch available celebration types
 const { data: celebration_type_list, error } = await useFetch<CelebrationType[]>(
   () => `${runtimeConfig.public.apiUrl}/celebrationtype`,
 )
@@ -62,7 +66,11 @@ if (error.value) {
   console.error('Failed to fetch celebrationType data', error.value)
 }
 
-async function loadCelebrationData(id: string) {
+/**
+ * Load celebration data from the API
+ * @param {string} id - Celebration identifier
+ */
+const loadCelebrationData = async (id: string) => {
   try {
     const { data: celebration, error: celebrationError }
       = await useFetch<CelebrationWithPictureAndAuthor>(
@@ -71,71 +79,87 @@ async function loadCelebrationData(id: string) {
     if (celebrationError.value) {
       console.error('Failed to fetch celebration data', celebrationError.value)
     }
+    // Populate form fields with fetched data
     celebrationTitle.value = celebration.value.name
-    celebrationType.value
-      = celebration.value.celebrationType.celebrationTypeId
+    celebrationType.value = celebration.value.celebrationType.celebrationTypeId
     celebrationDescription.value = celebration.value.description
     celebrationDate.value = celebration.value.date
     celebrationTime.value = new Date(`1970-01-01T${celebration.value.hour}`)
     celebrationAddress.value = celebration.value.address
   }
   catch (err) {
-    console.error('Erreur lors du chargement de l’événement :', err)
-    errorMsg.value = 'Impossible de charger les informations de l’événement.'
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
+    console.error('Unexpected error loading celebration data:', err)
   }
 }
 
+// Load celebration data when the component is mounted
 onMounted(() => {
   loadCelebrationData(id)
 })
 
-const errorMsg = ref('')
-
-async function updateCelebrationInformations(id: string) {
-  if (!celebrationDate.value || !celebrationTime.value) {
-    console.error('La date ou l\'heure n\'est pas définie.')
-    return
-  }
-  const formattedDate = celebrationDate.value
-    ? formatDate(celebrationDate.value)
-    : null
-  const formattedTime = celebrationTime.value
-    ? formatTime(celebrationTime.value)
-    : null
-
-  const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
-    method: 'PUT',
-    body: {
-      celebrationId: id,
-      name: celebrationTitle.value,
-      celebrationType: celebrationType.value,
-      description: celebrationDescription.value,
-      date: formattedDate,
-      hour: formattedTime,
-      address: celebrationAddress.value,
-    },
-  })
-
-  if (error.value) {
-    console.error(
-      `Erreur lors de la mise à jour de l'événement :`,
-      error.value,
-    )
-    return
-  }
-
-  updateSuccess.value = true
-  toast.add({
-    severity: 'success',
-    summary: t('celebration.update.title'),
-    detail: t('celebration.update.description'),
-    life: 3000,
-  })
+/**
+ * Validates if the mandatory fields are filled.
+ * @returns {boolean} true if all mandatory fields are filled.
+ */
+const validateForm = (): boolean => {
+  return (
+    !!celebrationTitle.value
+    && !!celebrationType.value
+    && !!celebrationDescription.value.trim()
+    && celebrationDate.value !== null
+    && celebrationTime.value !== null
+    && !!celebrationAddress.value.trim()
+  )
 }
 
+/**
+ * Updates celebration information
+ * @param {string} id - Celebration identifier
+ */
+const updateCelebrationInformations = async (id: string) => {
+  try {
+    if (!validateForm()) {
+      return showError(errorMsg, t('celebration.creation-all-fiels-required'))
+    }
+
+    const formattedDate = formatDate(celebrationDate.value!)
+    const formattedTime = formatTime(celebrationTime.value!)
+
+    const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
+      method: 'PUT',
+      body: {
+        celebrationId: id,
+        name: celebrationTitle.value,
+        celebrationType: celebrationType.value,
+        description: celebrationDescription.value,
+        date: formattedDate,
+        hour: formattedTime,
+        address: celebrationAddress.value,
+      },
+    })
+
+    if (error.value) {
+      throw new Error('Unable to process your request. Please try again later.')
+    }
+
+    updateSuccess.value = true
+    toast.add({
+      severity: 'success',
+      summary: t('celebration.update.title'),
+      detail: t('celebration.update.description'),
+      life: 3000,
+    })
+  }
+  catch (err) {
+    console.error('Unexpected error updating celebration information:', err)
+  }
+}
+
+/**
+ * Deletes a celebration
+ * @param {string} id - Celebration Id
+ * @returns {Promise<ResponseWithSuccess>} - Success status and message
+ */
 const deleteCelebration = async (id: string) => {
   try {
     const { error } = await useFetch<ResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/celebration/${id}`, {
@@ -153,6 +177,8 @@ const deleteCelebration = async (id: string) => {
       detail: t('delete.success.subtitle'),
       life: 3000,
     })
+
+    // Redirect to the homepage after deletion
     setTimeout(() => {
       navigateTo('/')
     }, 1000)

@@ -15,25 +15,32 @@ import { useToast } from 'primevue/usetoast'
 const { t } = useI18n()
 const toast = useToast()
 
-const email = ref('')
-const errorMsg = ref('')
-const resetSuccess = ref(false)
+// Form input
+const email = ref<string>('')
+const errorMsg = ref<string>('')
+const resetSuccess = ref<boolean>(false)
 
 const { auth } = useSupabaseClient()
 
+/**
+ * Handles password reset request by sending an email with a reset link.
+ * Displays a success message on success or an error message on failure.
+ */
 const submitResetForm = async () => {
+  errorMsg.value = ''
   try {
     const { error } = await auth.resetPasswordForEmail(email.value, {
       redirectTo: 'https://festivo-tawny.vercel.app/newpassword',
     })
 
-    if (error) throw error
+    if (error) {
+      throw new Error('Unable to process your request. Please try again later.')
+    }
 
-    // Clear form
+    // Clear form field
     email.value = ''
-
     resetSuccess.value = true
-    console.log('Password reset successfully')
+
     toast.add({
       severity: 'success',
       summary: t('reset_password.successfull'),
@@ -42,7 +49,6 @@ const submitResetForm = async () => {
     })
   }
   catch (error) {
-    console.error('Reset password error:', error)
     errorMsg.value = (error as { message: string }).message
     setTimeout(() => {
       errorMsg.value = ''

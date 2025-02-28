@@ -17,64 +17,63 @@
 import AlertNewPassword from '~/components/AlertNewPassword.vue'
 
 const user = useSupabaseUser()
-const email = ref('')
-const new_password = ref('')
-const confirmPassword = ref('')
-const errorMsg = ref('')
-const updateSuccess = ref(false)
+
+// Form inputs
+const email = ref<string>('')
+const new_password = ref<string>('')
+const confirmPassword = ref<string>('')
+const errorMsg = ref<string>('')
+const updateSuccess = ref<boolean>(false)
 
 const { auth } = useSupabaseClient()
 const { t } = useI18n()
 
+/**
+ * Automatically fills in the user's email if logged in.
+ */
 watchEffect(() => {
   if (user.value) {
     email.value = user.value.email || ''
   }
 })
 
+/**
+ * Handles the password reset form submission.
+ * - Validates the password confirmation.
+ * - Ensures password meets security requirements.
+ * - Updates the user's password via Supabase.
+ */
 const submitNewPasswordForm = async () => {
-  // verify both password fields are identical
+  // Validate password match
   if (new_password.value !== confirmPassword.value) {
-    errorMsg.value = t('register.error.match')
-    new_password.value = ''
-    confirmPassword.value = ''
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return
+    return showError(errorMsg, t('register.error.match'))
   }
 
-  // verify if the password respect the security rules
+  // Validate password strength
   const { isValidPassword, errorMessagePassword } = validatePassword(new_password.value, t)
   if (!isValidPassword) {
-    errorMsg.value = errorMessagePassword
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 5000)
-    return
+    return showError(errorMsg, errorMessagePassword)
   }
 
-  // verify user is automatically logged in
+  // Verify user is automatically logged in
   if (!user.value) {
-    errorMsg.value = t('register.error.session')
-    return
+    return showError(errorMsg, t('register.error.session'))
   }
 
   try {
-    const { data, error } = await auth.updateUser({
+    const { error } = await auth.updateUser({
       password: new_password.value,
     })
-    if (error) throw error
+    if (error) {
+      throw new Error('Unable to process your request. Please try again later.')
+    }
 
-    // Clear form
+    // Clear form after a successful update
     new_password.value = ''
     confirmPassword.value = ''
-
     updateSuccess.value = true
-    console.log('New password saved successfully', data)
   }
   catch (error) {
-    console.error('Update password error:', error)
     errorMsg.value = (error as { message: string }).message
     setTimeout(() => {
       errorMsg.value = ''

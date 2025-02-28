@@ -16,25 +16,30 @@
 import { ref } from 'vue'
 import type { CelebrationType } from '~/types'
 
+// Middleware setup
 definePageMeta({
   middleware: 'auth',
 })
 
 const runtimeConfig = useRuntimeConfig()
+const { t } = useI18n()
 const { auth } = useSupabaseClient()
+
 const {
   data: { user },
 } = await auth.getUser()
 
-const celebrationTitle = ref('')
-const celebrationType = ref('')
-const celebrationDescription = ref('')
+// Form inputs
+const celebrationTitle = ref<string>('')
+const celebrationType = ref<string>('')
+const celebrationDescription = ref<string>('')
 const celebrationDate = ref<Date | null>(null)
-const celebrationTime = ref()
-const celebrationAddress = ref('')
-const creationSuccess = ref(false)
-const errorMsg = ref('')
+const celebrationTime = ref<Date | null>(null)
+const celebrationAddress = ref<string>('')
+const creationSuccess = ref<boolean>(false)
+const errorMsg = ref<string>('')
 
+// Fetch available celebration types
 const { data: celebration_type_list, error } = await useFetch<CelebrationType[]>(
   () => `${runtimeConfig.public.apiUrl}/celebrationtype`,
 )
@@ -42,32 +47,39 @@ if (error.value) {
   console.error('Failed to fetch celebrationType data', error.value)
 }
 
-async function createNewCelebration() {
-  // all the fields must be filled
-  if (
-    !celebrationTitle.value.trim()
-    || !celebrationType.value
-    || !celebrationDescription.value.trim()
-    || !celebrationDate.value
-    || !celebrationTime.value
-    || !celebrationAddress.value.trim()
-  ) {
-    errorMsg.value = 'Tous les champs sont obligatoires.'
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return
+/**
+ * Validates if the mandatory fields are filled.
+ * @returns {boolean} true if all mandatory fields are filled.
+ */
+const validateForm = (): boolean => {
+  return (
+    !!celebrationTitle.value
+    && !!celebrationType.value
+    && !!celebrationDescription.value.trim()
+    && celebrationDate.value !== null
+    && celebrationTime.value !== null
+    && !!celebrationAddress.value.trim()
+  )
+}
+
+/**
+ * Handles the form submission and celebration creation.
+ * - Validates the form.
+ * - Sends a request to create a new celebration.
+ * - Clears the form and shows a success message.
+ */
+const createNewCelebration = async () => {
+  // Validate the form fields
+  if (!validateForm()) {
+    return showError(errorMsg, t('celebration.creation-all-fiels-required'))
   }
 
-  const formattedDate = celebrationDate.value
-    ? formatDate(celebrationDate.value)
-    : null
-  const formattedTime = celebrationTime.value
-    ? formatTime(celebrationTime.value)
-    : null
+  const formattedDate = formatDate(celebrationDate.value!)
+  const formattedTime = formatTime(celebrationTime.value!)
 
   errorMsg.value = ''
 
+  // Send a request to create a new celebration
   const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/celebration`, {
     method: 'POST',
     body: {
@@ -82,18 +94,10 @@ async function createNewCelebration() {
   })
 
   if (error.value) {
-    errorMsg.value = `Erreur lors de la création de l’événement : ${error.value}`
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    console.error(
-      'Erreur lors de la création de l’événement :',
-      error.value,
-    )
-    return
+    throw new Error('Unable to process your request. Please try again later.')
   }
 
-  // Clear form
+  // Clear form after successful creation
   celebrationTitle.value = ''
   celebrationType.value = ''
   celebrationDescription.value = ''

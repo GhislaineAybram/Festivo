@@ -7,7 +7,7 @@
  * (password, alias, date, and time formatting).
  */
 
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 describe('validateAlias', () => {
   const t = (key: string) => {
@@ -174,5 +174,20 @@ describe('formatTime', () => {
   it('should return null for null input', () => {
     const result = formatTime(null)
     expect(result).toBeNull()
+  })
+})
+
+describe('showError', () => {
+  it('should set and clear the error message after 3 seconds', () => {
+    const errorMsg = ref('')
+
+    vi.useFakeTimers()
+    showError(errorMsg, 'Test error')
+    expect(errorMsg.value).toBe('Test error')
+
+    vi.advanceTimersByTime(3000)
+    expect(errorMsg.value).toBe('')
+
+    vi.useRealTimers()
   })
 })

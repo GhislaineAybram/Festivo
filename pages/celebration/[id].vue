@@ -36,23 +36,36 @@ import type {
   GuestWithUserInfo,
 } from '~/types'
 
-const { t } = useI18n()
 const toast = useToast()
-
-const { id } = useRoute().params
+const runtimeConfig = useRuntimeConfig()
+const { t } = useI18n()
 const { auth } = useSupabaseClient()
 const { data: { user } } = await auth.getUser()
 
+// Get the celebration ID from the route parameters
+const { id } = useRoute().params as { id: string }
+const userId = user?.id
+
+const defaultAvatarUrl
+  = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+
+// Dietary and allergy options for guest restrictions
+const diet = getDietOptions()
+const allergy = getAllergyList()
+const restrictions = [
+  ...diet.map(item => ({ ...item, type: 'diet' })),
+  ...allergy.map(item => ({ ...item, type: 'allergy' })),
+]
+
+// Redirect unauthenticated users to login
 onMounted(async () => {
   if (!user) {
     localStorage.setItem('redirectAfterLogin', `/celebration/${id}`)
-    console.log(localStorage.setItem('redirectAfterLogin', `/celebration/${id}`))
     navigateTo('/login')
   }
 })
-const userId = user?.id
 
-const runtimeConfig = useRuntimeConfig()
+// Fetch celebration details
 const { data: celebration, error: celebrationError }
   = await useFetch<CelebrationWithPictureAndAuthor>(
     () => `${runtimeConfig.public.apiUrl}/celebration/${id}`,
@@ -61,6 +74,7 @@ if (celebrationError.value) {
   console.error('Failed to fetch celebration data', celebrationError.value)
 }
 
+// Fetch guest list for this celebration
 const { data: guestsList, error: guestsListError }
   = await useFetch<GuestWithUserInfo>(
     () => `${runtimeConfig.public.apiUrl}/guests/celebration/${id}`,
@@ -71,20 +85,13 @@ if (guestsListError.value) {
     guestsListError.value,
   )
 }
+
+// Computed properties for guests data
 const nbGuests = computed(() => guestsList.value.nb_guests || 0)
 const guestInfoList = computed(() => guestsList.value.guests_list || [])
 const restrictionsguestsList = computed(() => guestsList.value.restrictionsCounts || [])
-const diet = getDietOptions()
-const allergy = getAllergyList()
-const restrictions = [
-  ...diet.map(item => ({ ...item, type: 'diet' })),
-  ...allergy.map(item => ({ ...item, type: 'allergy' })),
-]
 
-const defaultAvatarUrl
-  = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-
-// add the invited user if not already done
+// Automatically register the invited user if they are not the event author
 const checkAndRegisterInvitedUser = async () => {
   if (userId !== celebration.value.author.id) {
     const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest`, {
@@ -102,8 +109,10 @@ const checkAndRegisterInvitedUser = async () => {
   }
 }
 
+// ?
 checkAndRegisterInvitedUser()
 
+// Fetch the user's attendance status for this celebration
 const { data: isComing, error: isComingError } = await useFetch<boolean | null>(
   () => `${runtimeConfig.public.apiUrl}/guest/${userId}/${id}`,
 )
@@ -111,8 +120,8 @@ if (isComingError.value) {
   console.error('Failed to fetch guest response data', isComingError.value)
 }
 
-// add the response guest
-async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
+// Update guest attendance status
+const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
   const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/guest/${userId}/${id}`, {
     method: 'PUT',
     body: {
@@ -123,12 +132,10 @@ async function updateIsComingGuestInDatabase(guestResponse: boolean | null) {
   })
 
   if (error.value) {
-    console.error(
-      `Erreur lors de la mise à jour de la réponse :`,
-      error.value,
-    )
+    console.error(`Erreur lors de la mise à jour de la réponse :`, error.value)
     return
   }
+
   isComing.value = guestResponse
   toast.add({
     severity: 'success',

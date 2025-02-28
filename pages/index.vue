@@ -19,22 +19,30 @@ import type {
 } from '~/types'
 
 const { auth } = useSupabaseClient()
-const user = ref<User | null>(null)
 const runtimeConfig = useRuntimeConfig()
 
+// Reactive state for user and celebrations
+const user = ref<User | null>(null)
+const celebrationsByAuthor = ref<CelebrationsByAuthorResponse | null>(null)
+const celebrationsByGuest = ref<CelebrationsByGuestResponse | null>(null)
+
+/**
+ * Fetches the authenticated user and celebrations if logged in.
+ */
 onMounted(async () => {
   const { data } = await auth.getUser()
   user.value = data.user
 
   if (user.value) {
-    await fetchCelebrations() // Ne récupère les événements que si l'utilisateur est connecté
+    await fetchCelebrations()
   }
 })
 
-// Fonction pour récupérer les célébrations
-const celebrationsByAuthor = ref<CelebrationsByAuthorResponse | null>(null)
-const celebrationsByGuest = ref<CelebrationsByGuestResponse | null>(null)
-
+/**
+ * Fetches celebrations for both created and invited events.
+ * - Retrieves celebrations created by the user.
+ * - Retrieves celebrations where the user is a guest.
+ */
 const fetchCelebrations = async () => {
   if (!user.value) return
 
@@ -51,27 +59,21 @@ const fetchCelebrations = async () => {
   celebrationsByGuest.value = guestData.value
 }
 
-// Computed properties pour afficher les données uniquement si elles sont chargées
-const celebrationsListByAuthor = computed(() => {
-  if (celebrationsByAuthor.value && 'past' in celebrationsByAuthor.value && 'upcoming' in celebrationsByAuthor.value) {
-    return {
-      upcoming: celebrationsByAuthor.value.upcoming ?? [],
-      past: celebrationsByAuthor.value.past ?? [],
-    }
-  }
-  return { upcoming: [], past: [] } // 🔹 Valeur par défaut si l'API renvoie une erreur
-})
+/**
+ * Extracts upcoming and past celebrations for the user.
+ * Ensures data integrity even if API response is incomplete or erroneous.
+ */
+const celebrationsListByAuthor = computed(() => ({
+  upcoming: celebrationsByAuthor.value?.upcoming ?? [],
+  past: celebrationsByAuthor.value?.past ?? [],
+}))
 
-const celebrationsListByGuest = computed(() => {
-  if (celebrationsByGuest.value && 'past' in celebrationsByGuest.value && 'upcoming' in celebrationsByGuest.value) {
-    return {
-      upcoming: celebrationsByGuest.value.upcoming ?? [],
-      past: celebrationsByGuest.value.past ?? [],
-    }
-  }
-  return { upcoming: [], past: [] } // 🔹 Valeur par défaut si erreur
-})
+const celebrationsListByGuest = computed(() => ({
+  upcoming: celebrationsByGuest.value?.upcoming ?? [],
+  past: celebrationsByGuest.value?.past ?? [],
+}))
 
+// Computed properties for easier template access
 const upcomingCelebrationsCreated = computed(() => celebrationsListByAuthor.value.upcoming)
 const pastCelebrationsCreated = computed(() => celebrationsListByAuthor.value.past)
 const upcomingCelebrationsInvited = computed(() => celebrationsListByGuest.value.upcoming)
