@@ -14,14 +14,19 @@
 
 const toast = useToast()
 const { t } = useI18n()
-
-const email = ref('')
-const password = ref('')
-const errorMsg = ref('')
-const loginSuccess = ref(false)
-
 const { auth } = useSupabaseClient()
 
+// Form inputs
+const email = ref<string>('')
+const password = ref<string>('')
+const errorMsg = ref<string>('')
+const loginSuccess = ref<boolean>(false)
+
+/**
+ * Handles the login form submission
+ * - Authenticates user with email & password
+ * - Displays success or error messages
+ */
 const submitLoginForm = async () => {
   try {
     const { data: _data, error } = await auth.signInWithPassword({
@@ -30,12 +35,14 @@ const submitLoginForm = async () => {
     })
 
     if (error) {
-      throw error
+      throw new Error('Unable to process your request. Please try again later.')
     }
 
+    // Clear form inputs
     email.value = ''
     password.value = ''
 
+    // Show success message
     loginSuccess.value = true
     toast.add({
       severity: 'success',
@@ -43,21 +50,16 @@ const submitLoginForm = async () => {
       detail: t('login.success_message'),
       life: 3000,
     })
+
+    // Redirect user after successful login
     setTimeout(() => {
-      console.log(localStorage)
-      console.log(localStorage.getItem('redirectAfterLogin'))
       const redirectPath = localStorage.getItem('redirectAfterLogin') || '/'
       localStorage.removeItem('redirectAfterLogin')
       navigateTo(redirectPath)
     }, 1000)
   }
   catch (error) {
-    if (error instanceof Error) {
-      errorMsg.value = error.message
-    }
-    else {
-      errorMsg.value = 'Une erreur inconnue est survenue'
-    }
+    errorMsg.value = (error as { message: string }).message
     setTimeout(() => {
       errorMsg.value = ''
     }, 3000)

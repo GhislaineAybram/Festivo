@@ -18,168 +18,169 @@ import AccordionPanel from 'primevue/accordionpanel'
 import { useToast } from 'primevue/usetoast'
 import type { ResponseWithSuccess, UserWithAvatar } from '~/types'
 
+// Middleware setup
 definePageMeta({
   middleware: 'auth',
 })
 
 const toast = useToast()
-const { t } = useI18n()
-
-const alias = ref('')
-const aliasTitle = ref('')
-const errorMsg = ref('')
-const updateSuccess = ref(false)
-
-const isDeleteAlertVisible = ref(false)
-const deleteAccountSuccess = ref(false)
-const openDeleteAlert = () => {
-  isDeleteAlertVisible.value = true
-}
-const closeDeleteAlert = () => {
-  isDeleteAlertVisible.value = false
-}
-const confirmDeleteAccount = async () => {
-  const success = await deleteAccount(user_id)
-  if (success.body.success) {
-    deleteAccountSuccess.value = true
-    isDeleteAlertVisible.value = false
-  }
-}
-definePageMeta({
-  middleware: 'auth',
-})
-
-const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
-const metadata = user?.user_metadata
-
-alias.value = metadata?.alias || ''
-aliasTitle.value = metadata?.alias || ''
-const email = computed(() => user?.email || '')
-
-const user_id = user!.id
 const runtimeConfig = useRuntimeConfig()
-
-const { data: userAvatar, error: userAvatarError }
-  = await useFetch<UserWithAvatar>(
-    () => `${runtimeConfig.public.apiUrl}/user/${user_id}`,
-  )
-if (userAvatarError.value) {
-  console.error('Failed to fetch user data', userAvatarError.value)
-}
+const { t } = useI18n()
+const { auth } = useSupabaseClient()
 
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
 
-const activeDiet = ref('0')
-const activeAllergy = ref('0')
+const { data: { user } } = await auth.getUser()
+const userId = user!.id
+const metadata = user?.user_metadata
+const email = computed(() => user?.email || '')
 
-const isModifyAvatarOpened = ref(false)
+// Form inputs
+const alias = ref<string>('')
+const aliasTitle = ref<string>('')
+const errorMsg = ref<string>('')
+const updateSuccess = ref<boolean>(false)
+const activeDiet = ref<string>('0')
+const activeAllergy = ref<string>('0')
 
-const openModifyAvatar = () => {
-  isModifyAvatarOpened.value = true
-}
-const closeModifyAvatar = () => {
-  isModifyAvatarOpened.value = false
-}
+// Modal states
+const isModifyAvatarOpened = ref<boolean>(false)
+const isDeleteAlertVisible = ref<boolean>(false)
+const deleteAccountSuccess = ref<boolean>(false)
 
-const updateAvatarInProfilePage = (newAvatar: string) => {
-  avatar.value = newAvatar
-}
-
-const updateUserAlias = async (alias: string) => {
-  // verify if the alias respect the rules
-  const { isValidAlias, errorMessageAlias } = validateAlias(alias, t)
-  if (!isValidAlias) {
-    errorMsg.value = errorMessageAlias
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return false
-  }
-
-  // verify if the alias already exists in the database if the user has modified it
-  if (alias !== aliasTitle.value) {
-    const { data: aliasData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
-      method: 'POST',
-      body: {
-        alias: alias,
-      },
-    })
-    if (aliasData.value) {
-      errorMsg.value = t('register.error.alias-exists')
-      setTimeout(() => {
-        errorMsg.value = ''
-      }, 3000)
-      return false
-    }
-  }
-
-  try {
-    const { data, error } = await auth.updateUser({
-      data: { alias: alias },
-    })
-    if (error) {
-      console.error(
-        'Erreur lors de la mise à jour de l’utilisateur :',
-        error.message,
-      )
-      return false
-    }
-    aliasTitle.value = alias
-    console.log('Utilisateur mis à jour avec succès :', data)
-    return true
-  }
-  catch (err) {
-    console.error('Erreur inattendue :', err)
-  }
-}
-
+// Dietary and allergy options for guest restrictions
 const diet = getDietOptions()
 const allergy = getAllergyList()
 const allUserInformation = [...diet, ...allergy]
 
-const updateUserInformation = async (event: Event) => {
-  const target = event.target as HTMLInputElement
-  const restriction = target.id
-  if (!restriction) return
-  const item = allUserInformation.find(item => item.key === restriction)
-  if (!item) return
-  const dbField = item.db
-  const value = target.checked ? true : false
-  userAvatar.value[dbField] = value
-  try {
-    const response = await useFetch(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
-      method: 'PUT',
-      body: { [dbField]: value },
-    })
+alias.value = metadata?.alias || ''
+aliasTitle.value = metadata?.alias || ''
 
-    // Vérifie si l'API a renvoyé une erreur
-    if (response.error) {
-      console.error('Erreur lors de la mise à jour', response.error)
+/**
+ * Fetch user profile data including avatar
+ */
+const { data: userAvatar, error: userAvatarError }
+  = await useFetch<UserWithAvatar>(
+    () => `${runtimeConfig.public.apiUrl}/user/${userId}`,
+  )
+if (userAvatarError.value) {
+  console.error('Failed to fetch user data', userAvatarError.value)
+}
+const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
+
+// Functions for handling the user avatar modification pop up
+const openModifyAvatar = () => { isModifyAvatarOpened.value = true }
+const closeModifyAvatar = () => { isModifyAvatarOpened.value = false }
+const openDeleteAlert = () => { isDeleteAlertVisible.value = true }
+const closeDeleteAlert = () => { isDeleteAlertVisible.value = false }
+
+/**
+ * Updates the avatar in the profile page
+ * @param {string} newAvatar - URL of the new avatar image
+ */
+const updateAvatarInProfilePage = (newAvatar: string) => {
+  avatar.value = newAvatar
+}
+
+/**
+ * Validates and updates the user's alias
+ * @param {string} aliasValue - New alias to set
+ * @returns {Promise<boolean>} - Success status of the operation
+ */
+const updateUserAlias = async (aliasValue: string) => {
+  // Validate alias format
+  const { isValidAlias, errorMessageAlias } = validateAlias(aliasValue, t)
+  if (!isValidAlias) {
+    showError(errorMsg, errorMessageAlias)
+    return false
+  }
+
+  // Check if alias already exists (only if changed)
+  if (aliasValue !== aliasTitle.value) {
+    const { data: aliasExists } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
+      method: 'POST',
+      body: {
+        alias: aliasValue,
+      },
+    })
+    if (aliasExists.value) {
+      showError(errorMsg, t('register.error.alias-exists'))
       return false
     }
-    console.log(`Utilisateur mis à jour avec succès - ${dbField}: ${value}`)
+  }
+
+  try {
+    // Update user metadata with new alias
+    const { error } = await auth.updateUser({
+      data: { alias: alias },
+    })
+    if (error) {
+      console.error('Error updating user alias:', error.message)
+      return false
+    }
+    aliasTitle.value = aliasValue
     return true
   }
-  catch (error) {
-    console.error('Erreur lors de la mise à jour', error)
+  catch (err) {
+    console.error('Unexpected error updating alias:', err)
     return false
   }
 }
 
+/**
+ * Updates user preference (diet or allergy)
+ * @param {Event} event - Form event
+ * @returns {Promise<boolean>} - Success status of the operation
+ */
+const updateUserPreference = async (event: Event): Promise<boolean> => {
+  const target = event.target as HTMLInputElement
+  const restriction = target.id
+  if (!restriction) {
+    console.warn('No restriction ID found in the event target')
+    return false
+  }
+  const item = allUserInformation.find(item => item.key === restriction)
+  if (!item) {
+    console.warn(`Restriction '${restriction}' not found in user information options`)
+    return false
+  }
+  const dbField = item.db
+  const value = target.checked ? true : false
+
+  // Update local state
+  userAvatar.value[dbField] = value
+  try {
+    // Send update to API
+    const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/user/${userId}`, {
+      method: 'PUT',
+      body: { [dbField]: value },
+    })
+
+    if (error.value) {
+      console.error(`Error updating user preference '${dbField}':`, error.value)
+      return false
+    }
+    return true
+  }
+  catch (error) {
+    console.error(`Error updating user preference '${dbField}':`, error)
+    return false
+  }
+}
+
+/**
+ * Updates all user profile information
+ * @param {Event} event - Form event
+ */
 const updateUserProfile = async (event: Event) => {
   try {
     const results = await Promise.all([
-      // Update alias
       updateUserAlias(alias.value),
-      // Save diet and allergy preferences
-      updateUserInformation(event),
+      updateUserPreference(event),
     ])
-    if (results.every(res => res !== false)) {
+    const allSuccessful = results.every(result => result === true)
+    if (allSuccessful) {
       updateSuccess.value = true
       toast.add({
         severity: 'success',
@@ -197,27 +198,54 @@ const updateUserProfile = async (event: Event) => {
   }
 }
 
-const deleteAccount = async (user_id: string) => {
+/**
+ * Delete the user account
+ */
+const confirmDeleteAccount = async () => {
+  const success = await deleteAccount(userId)
+  if (success.body.success) {
+    deleteAccountSuccess.value = true
+    isDeleteAlertVisible.value = false
+  }
+}
+
+/**
+ * Deletes the user account and handles session cleanup
+ * @param {string} userId - User Id
+ * @returns {Promise<ResponseWithSuccess>} - Success status and message
+ */
+const deleteAccount = async (userId: string) => {
   try {
-    const { error } = await useFetch<ResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${user_id}`, {
+    const { error } = await useFetch<ResponseWithSuccess>(`${runtimeConfig.public.apiUrl}/user/${userId}`, {
       method: 'DELETE',
     })
-    console.log(error.value)
     if (error.value) {
+      console.error('Error deleting user account:', error.value)
       return {
         statusCode: 404,
-        body: { success: false, error: 'User not found or deletion failed.' },
+        body: {
+          success: false,
+          error: 'User not found or deletion failed.',
+        },
       }
     }
-    // Will force a logout after completing it
-    await auth.signOut()
+    // Sign out user and clean up session
+    try {
+      await auth.signOut()
+    }
+    catch (signOutError) {
+      console.error('Error signing out after account deletion:', signOutError)
+    }
+
     toast.add({
       severity: 'success',
       summary: t('delete.success.title'),
       detail: t('delete.success.subtitle'),
       life: 3000,
     })
+
     navigateTo('/login')
+
     return {
       statusCode: 200,
       body: { success: true, message: 'User deleted successfully.' },
@@ -240,7 +268,7 @@ const deleteAccount = async (user_id: string) => {
         <ModifyAvatar
           :initial-avatar="userAvatar.avatar.avatarId"
           :is-opened="isModifyAvatarOpened"
-          :user-id="user_id"
+          :user-id="userId"
           :close-modify-avatar="closeModifyAvatar"
           :update-avatar="updateAvatarInProfilePage"
           @close="closeModifyAvatar"
@@ -372,7 +400,7 @@ const deleteAccount = async (user_id: string) => {
                         :name="item.key"
                         :checked="userAvatar[item.db]"
                         class="checkbox h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        @change="updateUserInformation"
+                        @change="updateUserPreference"
                       >
                     </div>
                     <div class="text-sm leading-6">
@@ -423,7 +451,7 @@ const deleteAccount = async (user_id: string) => {
                         :name="item.key"
                         :checked="userAvatar[item.db]"
                         class="checkbox h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        @change="updateUserInformation"
+                        @change="updateUserPreference"
                       >
                     </div>
                     <div class="text-sm leading-6">
@@ -477,7 +505,7 @@ const deleteAccount = async (user_id: string) => {
           <button
             type="submit"
             class="min-w-64 mx-auto md:mx-0 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-            @click="openDeleteAlert"
+            @click.prevent="openDeleteAlert"
           >
             {{ $t("user.delete.button") }}
           </button>

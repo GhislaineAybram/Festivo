@@ -151,6 +151,7 @@
     "accept-privacy": "By selecting this, you agree to our",
     "privacy-policy": "privacy policy",
     "creation-button": "Create my event",
+    "creation-all-fiels-required": "All mandatory fields are required",
     "no-celebration-created": "No event created",
     "no-celebration-invited": "No invitation",
     "successfull": "Celebration creation successful",

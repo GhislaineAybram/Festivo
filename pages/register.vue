@@ -13,89 +13,74 @@
  */
 
 const user = useSupabaseUser()
-const alias = ref('')
-const email = ref('')
-const password = ref('')
-const confirmPassword = ref('')
-const errorMsg = ref('')
-const accept = ref(false)
-const registrationSuccess = ref(false)
+
+// Form inputs
+const alias = ref<string>('')
+const email = ref<string>('')
+const password = ref<string>('')
+const confirmPassword = ref<string>('')
+const accept = ref<boolean>(false)
+const errorMsg = ref<string>('')
+const registrationSuccess = ref<boolean>(false)
 
 const { auth } = useSupabaseClient()
 const { t } = useI18n()
-
 const runtimeConfig = useRuntimeConfig()
 
+/**
+ * Handles the registration form submission
+ * Validates user inputs and attempts to register the user via Supabase
+ */
 const submitRegisterForm = async () => {
-  // verify if the alias respect the rules
+  // Validate alias format
   const { isValidAlias, errorMessageAlias } = validateAlias(alias.value, t)
   if (!isValidAlias) {
-    errorMsg.value = errorMessageAlias
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return
+    return showError(errorMsg, errorMessageAlias)
   }
 
-  // verify if the alias already exists in the database
-  const { data: aliasData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
+  // Check if alias already exists in the database
+  const { data: aliasExists } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
     method: 'POST',
     body: {
       alias: alias.value,
     },
   })
 
-  if (aliasData.value) {
-    errorMsg.value = t('register.error.alias-exists')
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return
+  if (aliasExists.value) {
+    return showError(errorMsg, t('register.error.alias-exists'))
   }
 
-  // verify if the email already exists in the database
-  const { data: emailData } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/email`, {
+  // Check if the email already exists in the database
+  const { data: emailExists } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/email`, {
     method: 'POST',
     body: {
       email: email.value,
     },
   })
 
-  if (emailData.value) {
-    errorMsg.value = t('register.error.email-exists')
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return
+  if (emailExists.value) {
+    return showError(errorMsg, t('register.error.email-exists'))
   }
 
-  // verify both password fields are identical
+  // Validate password match
   if (password.value !== confirmPassword.value) {
-    errorMsg.value = t('register.error.match')
     password.value = ''
     confirmPassword.value = ''
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return
+    return showError(errorMsg, t('register.error.match'))
   }
 
-  // verify if the password respect the security rules
+  // Validate password strength
   const { isValidPassword, errorMessagePassword } = validatePassword(password.value, t)
   if (!isValidPassword) {
-    errorMsg.value = errorMessagePassword
-    setTimeout(() => {
-      errorMsg.value = ''
-    }, 3000)
-    return
+    return showError(errorMsg, errorMessagePassword)
   }
 
-  // verify if the user agrees terms and conditions
+  // Ensure user accepts terms and conditions
   if (!accept.value) {
-    errorMsg.value = t('register.error.agree')
-    return
+    return showError(errorMsg, t('register.error.agree'))
   }
 
+  // Attempt user registration
   try {
     const { error } = await auth.signUp({
       email: email.value.toLowerCase(),
@@ -107,19 +92,18 @@ const submitRegisterForm = async () => {
       },
     })
 
-    if (error) throw error
+    if (error) {
+      throw new Error('Unable to process your request. Please try again later.')
+    }
 
     // Clear form
+    alias.value = ''
     email.value = ''
     password.value = ''
     confirmPassword.value = ''
-    alias.value = ''
-
     registrationSuccess.value = true
-    console.log('User signed up successfully')
   }
   catch (error) {
-    console.error('Sign up error:', error)
     errorMsg.value = (error as { message: string }).message
     setTimeout(() => {
       errorMsg.value = ''
@@ -127,6 +111,7 @@ const submitRegisterForm = async () => {
   }
 }
 
+// Redirect user if already logged in
 watchEffect(() => {
   if (user.value) {
     console.log('User logged in, redirecting to home')
