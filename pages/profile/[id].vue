@@ -70,10 +70,18 @@ if (userAvatarError.value) {
 const avatar = ref(userAvatar.value?.avatar?.picture || defaultAvatarUrl)
 
 // Functions for handling the user avatar modification pop up
-const openModifyAvatar = () => { isModifyAvatarOpened.value = true }
-const closeModifyAvatar = () => { isModifyAvatarOpened.value = false }
-const openDeleteAlert = () => { isDeleteAlertVisible.value = true }
-const closeDeleteAlert = () => { isDeleteAlertVisible.value = false }
+const openModifyAvatar = () => {
+  isModifyAvatarOpened.value = true
+}
+const closeModifyAvatar = () => {
+  isModifyAvatarOpened.value = false
+}
+const openDeleteAlert = () => {
+  isDeleteAlertVisible.value = true
+}
+const closeDeleteAlert = () => {
+  isDeleteAlertVisible.value = false
+}
 
 /**
  * Updates the avatar in the profile page

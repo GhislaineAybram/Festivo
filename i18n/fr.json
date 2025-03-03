@@ -174,6 +174,7 @@
     },
     "delete": {
       "title": "Supprimer mon événement",
+      "subtitle": "Cette action est irréversible.",
       "description": "La suppression de votre événement entraînera la suppression permanente et irréversible de votre événement et de ses informations de notre base de données. Vous ne pourrez pas les rétablir de quelque manière que ce soit.",
       "button": "Supprimer mon événement"
     }

@@ -13,6 +13,7 @@
  * @returns {Promise<CelebrationType[]>} Returns list of celebration types.
  */
 
+import { defineEventHandler, createError } from 'h3'
 import { getCelebrationTypes } from '~/src'
 import type { CelebrationType } from '~/types'
 
@@ -29,7 +30,12 @@ export default defineEventHandler(async (event): Promise <CelebrationType[]> => 
     return celebration_types
   }
   catch (error) {
-    setResponseStatus(event, 500)
-    throw createError({ message: 'Internal Server Error: ', data: error })
+    if (error instanceof Error && !(error.message.includes('No celebration type found'))) {
+      setResponseStatus(event, 500)
+      throw createError({ message: 'Internal Server Error: ', data: error })
+    }
+
+    // Relancer l'erreur originale si c'est déjà une erreur de notre API
+    throw error
   }
 })
