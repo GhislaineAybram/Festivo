@@ -25,9 +25,7 @@ const runtimeConfig = useRuntimeConfig()
 const { t } = useI18n()
 const { auth } = useSupabaseClient()
 
-const {
-  data: { user },
-} = await auth.getUser()
+const { data: { user } } = await auth.getUser()
 
 // Form inputs
 const celebrationTitle = ref<string>('')

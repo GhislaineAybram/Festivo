@@ -29,11 +29,13 @@ import type { Avatar } from '~/types'
 
 const toast = useToast()
 const { t } = useI18n()
+const runtimeConfig = useRuntimeConfig()
 
+// Default avatar fallback URL
 const defaultAvatarUrl
   = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 
-const runtimeConfig = useRuntimeConfig()
+// Fetch available avatars from the API
 const { data: avatars, error } = await useFetch<Avatar[]>(
   () => `${runtimeConfig.public.apiUrl}/avatars`,
 )
@@ -51,22 +53,35 @@ const props = defineProps<{
 
 const open = ref(props.isOpened)
 
+// Watch for changes in isOpened prop to sync with local state
 watch(() => props.isOpened, (newVal) => {
   open.value = newVal
 })
 
 const selectedAvatarId = ref(props.initialAvatar)
 
-function selectAvatar(id: string) {
+/**
+ * Sets the selected avatar
+ * @param {string} id - The ID of the selected avatar
+ */
+const selectAvatar = (id: string): void => {
   selectedAvatarId.value = id
 }
 
-const closeModifyAvatar = () => {
+/**
+ * Closes the avatar modification dialog
+ * Emits an event to notify the parent component
+ */
+const closeModifyAvatar = (): void => {
   open.value = false
   props.closeModifyAvatar()
 }
 
-async function updateAvatarInDatabase() {
+/**
+ * Updates the user's avatar in the database
+ * Shows a success toast and emits events on successful update
+ */
+const updateAvatarInDatabase = async (): Promise<void> => {
   const { error } = await useFetch(`${runtimeConfig.public.apiUrl}/avatar/user/${props.userId}`, {
     method: 'PUT',
     body: {
@@ -79,6 +94,7 @@ async function updateAvatarInDatabase() {
     console.error(`Erreur lors de la mise à jour de l'avatar :`, error.value)
     return
   }
+  // Show success notification
   toast.add({
     severity: 'success',
     summary: t('user.update.title'),
@@ -87,6 +103,7 @@ async function updateAvatarInDatabase() {
   })
   props.updateAvatar(selectedAvatarId.value)
   props.closeModifyAvatar()
+  // Refresh the page to reflect changes
   window.location.reload()
 }
 </script>

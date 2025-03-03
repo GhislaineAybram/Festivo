@@ -13,11 +13,22 @@
 import { defineComponent } from 'vue'
 import type { CelebrationWithPictureAndAuthor } from '~/types'
 
-export function getMonth(dateString: string) {
+/**
+ * Extracts and formats the month from a date string
+ * @param {string} dateString - The date string to process
+ * @returns {string} Formatted month name
+ */
+export const getMonth = (dateString: string) => {
   const date = new Date(dateString)
   return date.toLocaleString('default', { month: 'long' })
 }
-export function getDay(dateString: string) {
+
+/**
+ * Extracts the day number from a date string
+ * @param {string} dateString - The date string to process
+ * @returns {number} Day of the month
+ */
+export const getDay = (dateString: string) => {
   const date = new Date(dateString)
   return date.getDate()
 }

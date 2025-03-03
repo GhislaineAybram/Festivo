@@ -6,14 +6,14 @@
  * File used to make direct request to supabase without ORM.
  */
 
-// import { createClient } from '@supabase/supabase-js'
-// import type { Database } from './database.types'
+import { createClient } from '@supabase/supabase-js'
+import type { Database } from './database.types'
 // import type { Avatar, Celebration, CelebrationType, CelebrationWithGuestsAndType, CelebrationWithPictureAndAuthor, Guest, GuestWithUserInfo, NewCelebrationData, NewGuestData, UpdateCelebrationData, User, UserWithAvatar } from './types'
 
-// const supabaseUrl = process.env.SUPABASE_URL!
-// const supabaseKey = process.env.SUPABASE_KEY!
+const supabaseUrl = process.env.SUPABASE_URL!
+const supabaseKey = process.env.SUPABASE_KEY!
 
-// export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
+export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
 // export const getUserById = async (id: string): Promise<UserWithAvatar | null> => {
 //   const { data, error } = await supabase

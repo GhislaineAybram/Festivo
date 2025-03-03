@@ -97,7 +97,10 @@ const updateUserAlias = async (aliasValue: string) => {
   }
 
   // Check if alias already exists (only if changed)
-  if (aliasValue !== aliasTitle.value) {
+  if (aliasValue === aliasTitle.value) {
+    return true
+  }
+  else {
     const { data: aliasExists } = await useFetch<boolean>(`${runtimeConfig.public.apiUrl}/users/check/alias`, {
       method: 'POST',
       body: {
@@ -108,23 +111,25 @@ const updateUserAlias = async (aliasValue: string) => {
       showError(errorMsg, t('register.error.alias-exists'))
       return false
     }
-  }
-
-  try {
-    // Update user metadata with new alias
-    const { error } = await auth.updateUser({
-      data: { alias: alias },
-    })
-    if (error) {
-      console.error('Error updating user alias:', error.message)
-      return false
+    else {
+      try {
+        // Update user metadata with new alias
+        const { data, error } = await auth.updateUser({
+          data: { alias: aliasValue },
+        })
+        if (error) {
+          console.error('Error updating user alias:', error.message)
+          return false
+        }
+        aliasTitle.value = aliasValue
+        console.log('Success with data update:', data)
+        return true
+      }
+      catch (err) {
+        console.error('Unexpected error updating alias:', err)
+        return false
+      }
     }
-    aliasTitle.value = aliasValue
-    return true
-  }
-  catch (err) {
-    console.error('Unexpected error updating alias:', err)
-    return false
   }
 }
 
@@ -138,7 +143,7 @@ const updateUserPreference = async (event: Event): Promise<boolean> => {
   const restriction = target.id
   if (!restriction) {
     console.warn('No restriction ID found in the event target')
-    return false
+    return true // block the response if false
   }
   const item = allUserInformation.find(item => item.key === restriction)
   if (!item) {
@@ -317,6 +322,7 @@ const deleteAccount = async (userId: string) => {
 
       <form
         id="profile-details"
+        @submit.prevent
       >
         <div class="border-y border-gray-900/10 py-6 my-6">
           <h3 class="text-xl px-4 font-semibold leading-7 text-gray-900">
@@ -482,7 +488,7 @@ const deleteAccount = async (userId: string) => {
           </button>
           <Toast />
           <button
-            type="submit"
+            type="button"
             label="Success"
             severity="success"
             class="min-w-32 mt-3 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -503,7 +509,7 @@ const deleteAccount = async (userId: string) => {
             </p>
           </div>
           <button
-            type="submit"
+            type="button"
             class="min-w-64 mx-auto md:mx-0 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
             @click.prevent="openDeleteAlert"
           >

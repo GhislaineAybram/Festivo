@@ -13,7 +13,7 @@
  * @throws {Error} 404 - If the user is not found.
  * @throws {Error} 500 - If there is an internal server error or the data retrieval fails.
  *
- * @returns {Promise<UserWithAvatar>} Returns celebration details.
+ * @returns {Promise<UserWithAvatar>} Returns user with details.
  */
 
 import { getUserById } from '~/src'

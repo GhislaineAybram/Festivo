@@ -8,12 +8,12 @@ Festivo est une plateforme de gestion d’événements conçue pour simplifier l
 Cloner le repo :
 
 ```bash
-git clone git@github.com:GhislaineAybram/Festivo.git Festivo
+git clone git@github.com:GhislaineAybram/Festivo.git festivo
 ```
 
 Configuration des variables d'environnement :
 ```bash
-cd Festivo
+cd festivo
 cp .env.dist .env
 ```
 puis modifiez les variables d'environnement SUPABASE_URL et SUPABASE_KEY du fichier .env avec les informations du projet.

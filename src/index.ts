@@ -18,6 +18,11 @@ import type { Avatar, Celebration, CelebrationType, CelebrationWithPictureAndAut
 const client = postgres(process.env.DATABASE_URL!)
 export const db = drizzle(client, { schema })
 
+/**
+ * Retrieves a user by their ID, including their avatar information
+ * @param id - User ID
+ * @returns A user object with avatar details, or null if not found
+ */
 export const getUserById = async (id: string): Promise<UserWithAvatar | null> => {
   const results = await db
     .select({
@@ -48,6 +53,11 @@ export const getUserById = async (id: string): Promise<UserWithAvatar | null> =>
   }
 }
 
+/**
+ * Checks if an email already exists in the database
+ * @param email - The email to check
+ * @returns True if the email exists, false otherwise
+ */
 export const checkEmailExists = async (email: string): Promise<boolean> => {
   const result = await db
     .select({ count: sql<number>`count(*)` })
@@ -57,6 +67,11 @@ export const checkEmailExists = async (email: string): Promise<boolean> => {
   return result[0].count > 0
 }
 
+/**
+ * Checks if an alias already exists in the database
+ * @param alias - The alias to check
+ * @returns True if the alias exists, false otherwise
+ */
 export const checkAliasExists = async (alias: string): Promise<boolean> => {
   const result = await db
     .select({ count: sql<number>`count(*)` })
@@ -66,6 +81,12 @@ export const checkAliasExists = async (alias: string): Promise<boolean> => {
   return result[0].count > 0
 }
 
+/**
+ * Updates a user's avatar by their ID
+ * @param id - User ID
+ * @param newAvatar - The new avatar ID
+ * @returns The updated user object, or null if not found
+ */
 export const updateAvatarByUser = async (id: string, newAvatar: string): Promise<User | null> => {
   const result = await db
     .update(user)
@@ -76,6 +97,13 @@ export const updateAvatarByUser = async (id: string, newAvatar: string): Promise
   return result[0] || null
 }
 
+/**
+ * Updates a user's food restriction preference
+ * @param id - User ID
+ * @param restriction - The food restriction field to update
+ * @param value - The new value for the restriction
+ * @returns The updated user object, or null if not found
+ */
 export const updateFoodInformationByUser = async (id: string, restriction: string, value: boolean): Promise<User | null> => {
   const result = await db
     .update(user)
@@ -86,6 +114,13 @@ export const updateFoodInformationByUser = async (id: string, restriction: strin
   return result[0] || null
 }
 
+/**
+ * Updates the attendance status of a guest for a specific celebration
+ * @param userId - Guest's user ID
+ * @param celebrationId - Celebration ID
+ * @param isComing - The attendance status
+ * @returns The updated guest object, or null if not found.
+ */
 export const updateIsComingGuest = async (userId: string, celebrationId: string, isComing: boolean): Promise<Guest | null> => {
   const result = await db
     .update(guest)
@@ -101,6 +136,12 @@ export const updateIsComingGuest = async (userId: string, celebrationId: string,
   return result[0] || null
 }
 
+/**
+ * Updates a celebration's details by its ID
+ * @param id - Celebration ID
+ * @param newCelebrationData - The updated celebration data
+ * @returns The updated celebration object, or null if not found
+ */
 export const updateCelebrationById = async (id: string, newCelebrationData: UpdateCelebrationData): Promise<CelebrationWithPictureAndAuthor | null> => {
   const result = await db
     .update(celebration)
@@ -111,6 +152,12 @@ export const updateCelebrationById = async (id: string, newCelebrationData: Upda
   return result[0] || null
 }
 
+/**
+ * Retrieves the attendance status of a guest for a specific celebration
+ * @param userId - Guest's user ID
+ * @param celebrationId - Celebration ID
+ * @returns True if the guest is attending, false if not, or null if not found
+ */
 export const getIsComingGuest = async (userId: string, celebrationId: string): Promise<boolean | null> => {
   const result = await db.query.guest.findFirst({
     where: and(
@@ -125,10 +172,19 @@ export const getIsComingGuest = async (userId: string, celebrationId: string): P
   return result?.isComing ?? null
 }
 
+/**
+ * Fetches all available celebration types
+ * @returns An array of celebration types, or null if none are found
+ */
 export async function getCelebrationTypes(): Promise<CelebrationType[] | null> {
   return db.select().from(celebrationType)
 }
 
+/**
+ * Retrieves a celebration by its ID, including its type and author information
+ * @param id - Celebration ID
+ * @returns A celebration object with additional details, or null if not found
+ */
 export const getCelebrationById = async (id: string): Promise<CelebrationWithPictureAndAuthor | null> => {
   const results = await db
     .select({
@@ -158,6 +214,11 @@ export const getCelebrationById = async (id: string): Promise<CelebrationWithPic
   } as CelebrationWithPictureAndAuthor
 }
 
+/**
+ * Fetches upcoming celebrations created by a specific author
+ * @param id - Author's user ID
+ * @returns An array of upcoming celebrations, or null if none are found
+ */
 export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<CelebrationWithPictureAndAuthor[] | null> => {
   const results = await db
     .select({
@@ -190,6 +251,11 @@ export const getUpcomingCelebrationsByAuthor = async (id: string): Promise<Celeb
   })) as CelebrationWithPictureAndAuthor[]
 }
 
+/**
+ * Fetches past celebrations created by a specific author
+ * @param id - Author's user ID
+ * @returns An array of past celebrations, or null if none are found
+ */
 export const getPastCelebrationsByAuthor = async (id: string): Promise<CelebrationWithPictureAndAuthor[] | null> => {
   const results = await db
     .select({
@@ -222,6 +288,11 @@ export const getPastCelebrationsByAuthor = async (id: string): Promise<Celebrati
   })) as CelebrationWithPictureAndAuthor[]
 }
 
+/**
+ * Retrieves upcoming celebrations where a user is a guest
+ * @param id - Guest's user ID
+ * @returns An array of upcoming celebrations, or null if none are found
+ */
 export const getUpcomingCelebrationsByGuest = async (id: string): Promise<CelebrationWithPictureAndAuthor[] | null> => {
   const results = await db
     .select({
@@ -255,6 +326,11 @@ export const getUpcomingCelebrationsByGuest = async (id: string): Promise<Celebr
   })) as CelebrationWithPictureAndAuthor[]
 }
 
+/**
+ * Retrieves past celebrations where a user was a guest
+ * @param id - Guest's user ID
+ * @returns An array of past celebrations, or null if none are found
+ */
 export const getPastCelebrationsByGuest = async (id: string): Promise<CelebrationWithPictureAndAuthor[] | null> => {
   const results = await db
     .select({
@@ -288,10 +364,20 @@ export const getPastCelebrationsByGuest = async (id: string): Promise<Celebratio
   })) as CelebrationWithPictureAndAuthor[]
 }
 
+/**
+ * Retrieves the number of guests for a specific celebration
+ * @param {string} id - Celebration ID
+ * @returns {Promise<number | null>} The number of guests or null if not found
+ */
 export const getNumberGuestsByCelebration = async (id: string): Promise<number | null> => {
   return await db.$count(guest, eq(guest.celebrationId, id))
 }
 
+/**
+ * Retrieves the list of guests for a specific celebration, including user and avatar details
+ * @param {string} id - Celebration ID
+ * @returns {Promise<GuestWithUserInfo[] | null>} The list of guests or null if no guests are found
+ */
 export const getGuestsByCelebration = async (id: string): Promise<GuestWithUserInfo[] | null> => {
   const results = await db
     .select()
@@ -323,6 +409,12 @@ export const getGuestsByCelebration = async (id: string): Promise<GuestWithUserI
   }))
 }
 
+/**
+ * Retrieves the list of guests who confirmed attendance for a specific celebration
+ * Includes user details and dietary restrictions
+ * @param {string} id - Celebration ID
+ * @returns {Promise<GuestWithUserInfo[] | null>} The list of confirmed guests or null if none are found
+ */
 export const getComingGuestsByCelebration = async (id: string): Promise<GuestWithUserInfo[] | null> => {
   const results = await db
     .select()
@@ -381,10 +473,19 @@ export const getComingGuestsByCelebration = async (id: string): Promise<GuestWit
   }))
 }
 
+/**
+ * Retrieves all avatars stored in the database
+ * @returns {Promise<Avatar[]>} The list of avatars
+ */
 export async function getAvatars(): Promise<Avatar[]> {
   return db.select().from(avatar)
 }
 
+/**
+ * Creates a new celebration event in the database
+ * @param {NewCelebrationData} newCelebrationData - The data of the new celebration
+ * @returns {Promise<Celebration | null>} The created celebration or null if creation failed
+ */
 export const newCelebration = async (newCelebrationData: NewCelebrationData): Promise<Celebration | null> => {
   const result = await db
     .insert(celebration)
@@ -394,6 +495,12 @@ export const newCelebration = async (newCelebrationData: NewCelebrationData): Pr
   return result[0] || null
 }
 
+/**
+ * Checks if a user is already a guest at a specific celebration
+ * @param {string} userId - User ID
+ * @param {string} celebrationId - Celebration ID
+ * @returns {Promise<boolean>} True if the user is already a guest, false otherwise
+ */
 export const isExistingGuest = async (userId: string, celebrationId: string): Promise<boolean> => {
   const result = await db
     .select({ count: sql<number>`count(*)` })
@@ -406,6 +513,11 @@ export const isExistingGuest = async (userId: string, celebrationId: string): Pr
   return result[0].count > 0
 }
 
+/**
+ * Adds a new guest to a celebration
+ * @param {NewGuestData} newGuestData - The data of the new guest
+ * @returns {Promise<Guest | null>} The created guest entry or null if creation failed
+ */
 export const newGuest = async (newGuestData: NewGuestData): Promise<Guest | null> => {
   const result = await db
     .insert(guest)
@@ -415,6 +527,11 @@ export const newGuest = async (newGuestData: NewGuestData): Promise<Guest | null
   return result[0] || null
 }
 
+/**
+ * Deletes a user from the database
+ * @param {string} id - User ID
+ * @returns {Promise<boolean>} True if the user was deleted, false otherwise
+ */
 export const deleteUser = async (id: string): Promise<boolean> => {
   const result = await db
     .delete(user)
@@ -424,6 +541,11 @@ export const deleteUser = async (id: string): Promise<boolean> => {
   return result.length > 0
 }
 
+/**
+ * Deletes a celebration from the database
+ * @param {string} celebrationId - Celebration ID
+ * @returns {Promise<boolean>} True if the celebration was deleted, false otherwise
+ */
 export const deleteCelebration = async (celebrationId: string): Promise<boolean> => {
   const result = await db
     .delete(celebration)

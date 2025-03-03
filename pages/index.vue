@@ -18,6 +18,11 @@ import type {
   User,
 } from '~/types'
 
+// Middleware setup
+definePageMeta({
+  middleware: 'auth',
+})
+
 const { auth } = useSupabaseClient()
 const runtimeConfig = useRuntimeConfig()
 
