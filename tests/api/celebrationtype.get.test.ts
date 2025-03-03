@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
+import type { H3Event } from 'h3'
 import getCelebrationTypeHandler from '~/server/api/celebrationtype.get'
 import { getCelebrationTypes } from '~/src'
 
@@ -18,7 +19,7 @@ describe('GET /api/celebrationtype', () => {
     vi.mocked(getCelebrationTypes).mockResolvedValue(mockCelebrationTypes)
 
     // Simule un event Nuxt
-    const event = {} as any
+    const event = {} as H3Event
     const response = await getCelebrationTypeHandler(event)
 
     expect(response).toEqual(mockCelebrationTypes)
@@ -27,7 +28,7 @@ describe('GET /api/celebrationtype', () => {
   it('should return 404 if no celebration types found', async () => {
     vi.mocked(getCelebrationTypes).mockResolvedValue(null)
 
-    const event = {} as any
+    const event = {} as H3Event
 
     await expect(getCelebrationTypeHandler(event)).rejects.toThrow('No celebration type found')
   })
@@ -37,7 +38,7 @@ describe('GET /api/celebrationtype', () => {
       throw new Error('Database Error')
     })
 
-    const event = {} as any
+    const event = {} as H3Event
 
     await expect(getCelebrationTypeHandler(event)).rejects.toThrow('Internal Server Error')
   })

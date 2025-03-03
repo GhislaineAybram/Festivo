@@ -44,8 +44,12 @@ const deleteCelebrationSuccess = ref<boolean>(false)
 const errorMsg = ref<string>('')
 
 // Functions for handling the delete confirmation dialog
-const openDeleteAlert = () => { isDeleteAlertVisible.value = true }
-const closeDeleteAlert = () => { isDeleteAlertVisible.value = false }
+const openDeleteAlert = () => {
+  isDeleteAlertVisible.value = true
+}
+const closeDeleteAlert = () => {
+  isDeleteAlertVisible.value = false
+}
 
 /**
  * Delete the celebration
