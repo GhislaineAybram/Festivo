@@ -23,17 +23,42 @@ import type { UserWithAvatar } from '~/types'
 
 const { setLocale } = useI18n()
 const { t } = useI18n()
+const runtimeConfig = useRuntimeConfig()
 
 const { auth } = useSupabaseClient()
 const { data: { user } } = await auth.getUser()
 const metadata = user?.user_metadata
 const alias = ref(metadata?.alias || '')
+// Initialize user avatar
+const avatar = ref('pi pi-user')
 
 // Watch for user changes to update alias
 watch(() => user, (newUser) => {
   if (newUser) {
     const updatedMetadata = newUser.user_metadata
     alias.value = updatedMetadata?.alias || ''
+  }
+}, { immediate: true })
+
+/**
+ * Fetch and update user avatar when user ID is available
+ */
+watch(() => user, async (newUser) => {
+  if (newUser && newUser.id) {
+    const { data: userAvatar, error: userAvatarError } = await useFetch<UserWithAvatar>(
+      () => `${runtimeConfig.public.apiUrl}/user/${newUser.id}`,
+    )
+
+    if (userAvatarError.value) {
+      // Fallback to default icon
+      avatar.value = 'pi pi-user'
+    }
+    else {
+      avatar.value = userAvatar.value?.avatar?.picture || 'pi pi-user'
+    }
+  }
+  else {
+    avatar.value = 'pi pi-user'
   }
 }, { immediate: true })
 
@@ -127,27 +152,6 @@ if (metadata?.language) {
   currentLocale.value = metadata.language
   currentFlag.value = languages.find(lang => lang.code === metadata.language)?.flag || currentFlag.value
 }
-
-// Initialize user avatar
-const avatar = ref('pi pi-user')
-const runtimeConfig = useRuntimeConfig()
-
-/**
- * Fetch and update user avatar when user ID is available
- */
-watchEffect(async () => {
-  if (user && user.id) {
-    const { data: userAvatar, error: userAvatarError }
-      = await useFetch<UserWithAvatar>(
-        () => `${runtimeConfig.public.apiUrl}/user/${user!.id}`,
-      )
-    if (userAvatarError.value) {
-      // Fallback to default icon
-      avatar.value = 'pi pi-user'
-    }
-    avatar.value = userAvatar.value?.avatar?.picture || 'pi pi-user'
-  }
-})
 </script>
 
 <template>

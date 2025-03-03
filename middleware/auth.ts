@@ -5,7 +5,7 @@
  * @description
  * This middleware is used to ensure user is logged in before accessing protected routes.
  * It checks the current user's session using Supabase's authentication system
- * and redirects to the homepage if the user is not authenticated.
+ * and redirects to the login if the user is not authenticated.
  */
 
 export default defineNuxtRouteMiddleware(async (_to, _from) => {
