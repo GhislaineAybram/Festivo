@@ -333,16 +333,26 @@ const deleteCelebration = async (id: string) => {
           <Toast />
           <button
             id="celebration-creation"
-            type="submit"
+            type="button"
             class="block w-full rounded-md bg-indigo-600 px-3.5 py-2 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             @click="updateCelebrationInformations(id)"
           >
             {{ $t("celebration.modification.save") }}
           </button>
         </div>
-        <div class="mt-6">
+        <div
+          class="!bg-red-100 px-4 border-y border-gray-900/10 py-6 my-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+        >
+          <div class="!bg-red-100">
+            <h3 class="!bg-red-100 text-xl font-semibold leading-7 text-gray-900">
+              {{ $t("celebration.delete.title") }}
+            </h3>
+            <p class="!bg-red-100 mt-1 text-sm leading-6 text-gray-600">
+              {{ $t("celebration.delete.subtitle") }}
+            </p>
+          </div>
           <button
-            type="submit"
+            type="button"
             class="min-w-64 mx-auto md:mx-0 rounded-md !bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
             @click="openDeleteAlert"
           >

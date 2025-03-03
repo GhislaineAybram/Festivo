@@ -12,7 +12,11 @@
  * @auth public
  */
 
+const toast = useToast()
+const { t } = useI18n()
+const runtimeConfig = useRuntimeConfig()
 const user = useSupabaseUser()
+const { auth } = useSupabaseClient()
 
 // Form inputs
 const alias = ref<string>('')
@@ -22,10 +26,6 @@ const confirmPassword = ref<string>('')
 const accept = ref<boolean>(false)
 const errorMsg = ref<string>('')
 const registrationSuccess = ref<boolean>(false)
-
-const { auth } = useSupabaseClient()
-const { t } = useI18n()
-const runtimeConfig = useRuntimeConfig()
 
 /**
  * Handles the registration form submission
@@ -101,7 +101,21 @@ const submitRegisterForm = async () => {
     email.value = ''
     password.value = ''
     confirmPassword.value = ''
+
     registrationSuccess.value = true
+    toast.add({
+      severity: 'success',
+      summary: t('register.successfull'),
+      detail: t('register.success_message'),
+      life: 3000,
+    })
+
+    // Redirect user after successful login
+    setTimeout(() => {
+      const redirectPath = localStorage.getItem('redirectAfterLogin') || '/'
+      localStorage.removeItem('redirectAfterLogin')
+      navigateTo(redirectPath)
+    }, 1000)
   }
   catch (error) {
     errorMsg.value = (error as { message: string }).message
@@ -251,10 +265,6 @@ watchEffect(() => {
         </button>
       </form>
     </div>
-    <AlertRegistration
-      v-if="registrationSuccess"
-      class="alert"
-    />
   </main>
 </template>
 
