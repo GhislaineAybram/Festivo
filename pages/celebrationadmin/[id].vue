@@ -19,7 +19,7 @@ import type { CelebrationType, CelebrationWithPictureAndAuthor, ResponseWithSucc
 
 // Middleware setup
 definePageMeta({
-  middleware: 'auth',
+  middleware: 'author',
 })
 
 const toast = useToast()

@@ -36,6 +36,11 @@ import type {
   GuestWithUserInfo,
 } from '~/types'
 
+// Middleware setup
+definePageMeta({
+  middleware: 'invitation',
+})
+
 const toast = useToast()
 const runtimeConfig = useRuntimeConfig()
 const { t } = useI18n()
@@ -57,14 +62,6 @@ const restrictions = [
   ...allergy.map(item => ({ ...item, type: 'allergy' })),
 ]
 
-// Redirect unauthenticated users to login
-onMounted(async () => {
-  if (!user) {
-    localStorage.setItem('redirectAfterLogin', `/celebration/${id}`)
-    navigateTo('/login')
-  }
-})
-
 // Fetch celebration details
 const { data: celebration, error: celebrationError }
   = await useFetch<CelebrationWithPictureAndAuthor>(
@@ -75,7 +72,7 @@ if (celebrationError.value) {
 }
 
 // Fetch guest list for this celebration
-const { data: guestsList, error: guestsListError }
+const { data: guestsList, error: guestsListError, refresh: refreshGuestsList }
   = await useFetch<GuestWithUserInfo>(
     () => `${runtimeConfig.public.apiUrl}/guests/celebration/${id}`,
   )
@@ -109,7 +106,6 @@ const checkAndRegisterInvitedUser = async () => {
   }
 }
 
-// ?
 checkAndRegisterInvitedUser()
 
 // Fetch the user's attendance status for this celebration
@@ -137,6 +133,8 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
   }
 
   isComing.value = guestResponse
+  // update avatar circle color
+  await refreshGuestsList()
   toast.add({
     severity: 'success',
     summary: t('guest.successfull'),
@@ -203,7 +201,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
                 severity="warn"
                 rounded
                 aria-label="Notification"
-                :class="{ 'opacity-40': isComing !== null }"
+                :class="{ 'opacity-40': isComing != null }"
                 @click="updateIsComingGuestInDatabase(null)"
               />
               <Button

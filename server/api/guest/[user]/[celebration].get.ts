@@ -35,11 +35,6 @@ export default defineEventHandler(async (event): Promise<boolean | null> => {
 
     const isComing = await getIsComingGuest(userId, celebrationId)
 
-    if (!isComing) {
-      setResponseStatus(event, 404)
-      throw createError({ message: 'Guest response not found' })
-    }
-
     setResponseStatus(event, 200)
     return isComing
   }
