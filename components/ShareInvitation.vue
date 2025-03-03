@@ -18,12 +18,17 @@ import { ShareIcon } from '@heroicons/vue/24/outline'
 import type { GuestWithUserInfo } from '~/types'
 
 const { t } = useI18n()
+const runtimeConfig = useRuntimeConfig()
 
+// Reactive references for UI state
 const op = ref()
 const copySuccess = ref(false)
 
-const runtimeConfig = useRuntimeConfig()
+// Default fallback for user avatars
+const defaultAvatarUrl
+  = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 
+// Component props definition
 const props = defineProps({
   celebrationId: {
     type: String,
@@ -31,21 +36,34 @@ const props = defineProps({
   },
 })
 
+/**
+ * Fetch the guest list for the celebration
+ * @returns {Promise<GuestWithUserInfo>} The list of guests with their user information
+ */
 const { data: guestsList, error: guestsListError } = await useFetch<GuestWithUserInfo>(
   () => `${runtimeConfig.public.apiUrl}/guests/celebration/${props.celebrationId}`,
 )
 if (guestsListError.value) {
   console.error('Failed to fetch nb of guest celebration', guestsListError.value)
 }
+// Computed property to safely access the guest list
 const guestInfoList = computed(() => guestsList.value.guests_list || [])
-const defaultAvatarUrl
-  = 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 
+/**
+ * Toggle the popover visibility
+ * @param {MouseEvent} event - The mouse event that triggered the toggle
+ */
 const toggle = (event: MouseEvent) => {
   op.value.toggle(event)
 }
 
+// Prepare the sharing message with the celebration link
 const shareLink = `${t('celebration.modification.share.sentence')} :\n\n${runtimeConfig.public.url}/celebration/${props.celebrationId}`
+
+/**
+ * Copy the celebration sharing link to clipboard
+ * Shows a temporary success message upon successful copy
+ */
 const copyToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(shareLink)

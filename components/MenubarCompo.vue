@@ -25,12 +25,11 @@ const { setLocale } = useI18n()
 const { t } = useI18n()
 
 const { auth } = useSupabaseClient()
-const {
-  data: { user },
-} = await auth.getUser()
+const { data: { user } } = await auth.getUser()
 const metadata = user?.user_metadata
 const alias = ref(metadata?.alias || '')
 
+// Watch for user changes to update alias
 watch(() => user, (newUser) => {
   if (newUser) {
     const updatedMetadata = newUser.user_metadata
@@ -38,15 +37,25 @@ watch(() => user, (newUser) => {
   }
 }, { immediate: true })
 
+/**
+ * Sign out the current user and redirect to login page
+ */
 const userLogout = async () => {
   await auth.signOut()
   navigateTo('/login')
 }
 
+/**
+ * Get the appropriate profile page URL
+ * @returns {string} URL to the user's profile or homepage
+ */
 const getProfilePage = () => {
   return user ? `/profile/${user.id}` : '/' // Redirige vers le profil si l'utilisateur est connecté
 }
 
+/**
+ * Dynamic navigation links based on authentication status
+ */
 const navigation = computed(() => {
   const baseLinks = [
     { name: t('menubar.homepage'), href: '/', current: false },
@@ -57,10 +66,10 @@ const navigation = computed(() => {
     },
   ]
 
-  // Ajouter le lien "Login" seulement si l'utilisateur n'est pas connecté
+  // Add login link only for unauthenticated users
   if (!user) {
     baseLinks.push({
-      name: t('menubar.login'), // Traduction pour le login
+      name: t('menubar.login'),
       href: '/login',
       current: false,
     })
@@ -69,6 +78,9 @@ const navigation = computed(() => {
   return baseLinks
 })
 
+/**
+ * Available languages with display information
+ */
 const languages = [
   {
     code: 'fr',
@@ -81,37 +93,48 @@ const languages = [
     flag: 'https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg',
   },
 ]
+
+// Initialize reactive language state
 const currentLocale = ref('fr')
 const currentFlag = ref(
   'https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg',
 )
 
+/**
+ * Change the application language and update user preferences
+ * @param code - Language code ('en' or 'fr')
+ */
 const changeLanguage = async (code: 'en' | 'fr') => {
+  // Update i18n locale configuration
   setLocale(code)
+  // Update local reactive state for UI rendering
   currentLocale.value = code
+  // Update flag icon based on selected language
   currentFlag.value
     = languages.find(lang => lang.code === code)?.flag || currentFlag.value
-  // Mise à jour de la session utilisateur avec la langue sélectionnée
+  // Persist user language preference in database through auth service
   const { error } = await auth.updateUser({
     data: { language: code },
   })
   if (error) {
-    console.error('Erreur lors de la mise à jour de la langue dans la session:', error.message)
-  }
-  else {
-    console.log('Langue mise à jour dans la session:', code)
+    console.error('Error updating user preference language:', error)
   }
 }
 
-// Récupération de la langue à partir des métadonnées au chargement
+// Initialize language preference from user metadata on page load
 if (metadata?.language) {
   setLocale(metadata.language)
   currentLocale.value = metadata.language
   currentFlag.value = languages.find(lang => lang.code === metadata.language)?.flag || currentFlag.value
 }
+
+// Initialize user avatar
 const avatar = ref('pi pi-user')
 const runtimeConfig = useRuntimeConfig()
 
+/**
+ * Fetch and update user avatar when user ID is available
+ */
 watchEffect(async () => {
   if (user && user.id) {
     const { data: userAvatar, error: userAvatarError }
@@ -119,7 +142,8 @@ watchEffect(async () => {
         () => `${runtimeConfig.public.apiUrl}/user/${user!.id}`,
       )
     if (userAvatarError.value) {
-      console.error('Failed to fetch user data', userAvatarError.value)
+      // Fallback to default icon
+      avatar.value = 'pi pi-user'
     }
     avatar.value = userAvatar.value?.avatar?.picture || 'pi pi-user'
   }
