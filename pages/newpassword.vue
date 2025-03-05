@@ -16,6 +16,14 @@
 
 import AlertNewPassword from '~/components/AlertNewPassword.vue'
 
+const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.newpassword') },
+  ],
+})
+
 const user = useSupabaseUser()
 
 // Form inputs
@@ -26,7 +34,6 @@ const errorMsg = ref<string>('')
 const updateSuccess = ref<boolean>(false)
 
 const { auth } = useSupabaseClient()
-const { t } = useI18n()
 
 /**
  * Automatically fills in the user's email if logged in.

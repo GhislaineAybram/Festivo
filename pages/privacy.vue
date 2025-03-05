@@ -13,6 +13,14 @@
  * @route /privacy
  * @auth public
  */
+
+const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.privacy') },
+  ],
+})
 </script>
 
 <template>

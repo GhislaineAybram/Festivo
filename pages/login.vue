@@ -12,8 +12,14 @@
  * @auth public
  */
 
-const toast = useToast()
 const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.login') },
+  ],
+})
+const toast = useToast()
 const { auth } = useSupabaseClient()
 
 // Form inputs
@@ -54,7 +60,9 @@ const submitLoginForm = async () => {
     // Redirect user after successful login
     setTimeout(() => {
       const redirectPath = localStorage.getItem('redirectAfterLogin') || '/'
+      console.log(localStorage.getItem('redirectAfterLogin'))
       localStorage.removeItem('redirectAfterLogin')
+      console.log('Après removeItem:', localStorage.getItem('redirectAfterLogin'))
       navigateTo(redirectPath)
     }, 1000)
   }

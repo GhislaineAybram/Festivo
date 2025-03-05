@@ -6,6 +6,20 @@
     "event_link": "Vers la page de l'événement",
     "not_logged": "Vous n'êtes pas connecté"
   },
+    "metadescription": {
+    "about": "Découvrez Festivo, notre mission et nos valeurs. Rejoignez-nous pour organiser et partager des événements inoubliables !",
+    "index": "Festivo, la plateforme pour organiser et rejoindre des événements. Créez, partagez et célébrez facilement avec vos proches !",
+    "legal": "Consultez nos conditions générales d'utilisation et vos droits pour une expérience sécurisée sur Festivo.",
+    "login": "Connectez-vous à votre compte Festivo pour accéder à vos événements et gérer vos invitations.",
+    "newpassword": "Sécurisez votre compte Festivo en définissant un nouveau mot de passe.",
+    "privacy": "Découvrez comment Festivo protège vos données et respecte votre vie privée.",
+    "register": "Inscrivez-vous sur Festivo et commencez à organiser et rejoindre des événements en quelques clics !",
+    "resetpassword": "Vous avez oublié votre mot de passe ? Réinitialisez-le facilement pour retrouver l'accès à votre compte.",
+    "celebration": "Découvrez les détails de votre invitation sur Festivo ! Rejoignez l'événement et créez des souvenirs mémorables.",
+    "celebrationadmin": "Gérez vos événements Festivo avec notre interface admin intuitive. Modifiez, personnalisez et invitez vos proches.",
+    "celebrationadmin_creation": "Créez facilement des événements sur Festivo avec nos outils simples et efficaces.",
+    "profile": "Accédez à votre profil Festivo pour gérer vos informations personnelles et suivre vos événements."
+  },
   "user": {
     "informations": "Informations de profil",
     "alias": "Pseudo",

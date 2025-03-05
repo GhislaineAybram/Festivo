@@ -38,12 +38,19 @@ import type {
 
 // Middleware setup
 definePageMeta({
-  middleware: 'invitation',
+  middleware: ['invitation'],
+})
+
+const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.celebration') },
+  ],
 })
 
 const toast = useToast()
 const runtimeConfig = useRuntimeConfig()
-const { t } = useI18n()
 const { auth } = useSupabaseClient()
 const { data: { user } } = await auth.getUser()
 

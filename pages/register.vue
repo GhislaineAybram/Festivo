@@ -12,8 +12,15 @@
  * @auth public
  */
 
-const toast = useToast()
 const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.register') },
+  ],
+})
+
+const toast = useToast()
 const runtimeConfig = useRuntimeConfig()
 const user = useSupabaseUser()
 const { auth } = useSupabaseClient()

@@ -21,8 +21,15 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const runtimeConfig = useRuntimeConfig()
 const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.celebrationadmin_creation') },
+  ],
+})
+
+const runtimeConfig = useRuntimeConfig()
 const { auth } = useSupabaseClient()
 
 const { data: { user } } = await auth.getUser()

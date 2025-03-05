@@ -156,6 +156,7 @@ export default defineNuxtConfig({
       Cinzel: true,
       Quattrocento: true,
     },
+    display: 'swap',
   },
 
   compatibilityDate: '2024-07-12',
