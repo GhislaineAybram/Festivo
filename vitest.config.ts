@@ -5,7 +5,9 @@ export default defineVitestConfig({
     environment: 'nuxt',
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'lcov', 'json-summary'],
+      include: ['pages/**/*.vue', 'components/**/*.vue', 'utils/**/*.ts', 'server/api/**/*.ts'],
+      exclude: ['node_modules/', 'dist/', 'coverage/', 'nuxt.config.ts', 'server/middleware/*.ts', 'components/icons/**/*.vue'],
     },
     // you can optionally set Nuxt-specific environment options
     // environmentOptions: {
