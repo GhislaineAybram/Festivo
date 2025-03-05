@@ -9,6 +9,13 @@
 
 const nuxtApp = useNuxtApp()
 const loading = ref(false)
+const { locale } = useI18n()
+
+useHead({
+  htmlAttrs: {
+    lang: locale.value,
+  },
+})
 nuxtApp.hook('page:start', () => {
   loading.value = true
 })

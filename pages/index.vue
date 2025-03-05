@@ -23,6 +23,14 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.index') },
+  ],
+})
+
 const { auth } = useSupabaseClient()
 const runtimeConfig = useRuntimeConfig()
 

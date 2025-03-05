@@ -23,9 +23,16 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const { t } = useI18n()
+
+useHead({
+  meta: [
+    { name: 'description', content: t('metadescription.profile') },
+  ],
+})
+
 const toast = useToast()
 const runtimeConfig = useRuntimeConfig()
-const { t } = useI18n()
 const { auth } = useSupabaseClient()
 
 const defaultAvatarUrl
