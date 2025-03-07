@@ -12,6 +12,10 @@
  * @auth public
  */
 
+const route = useRoute()
+const router = useRouter()
+const redirectPath = ref(route.query.redirect || '/')
+
 const { t } = useI18n()
 
 useHead({
@@ -59,11 +63,7 @@ const submitLoginForm = async () => {
 
     // Redirect user after successful login
     setTimeout(() => {
-      const redirectPath = localStorage.getItem('redirectAfterLogin') || '/'
-      console.log(localStorage.getItem('redirectAfterLogin'))
-      localStorage.removeItem('redirectAfterLogin')
-      console.log('Après removeItem:', localStorage.getItem('redirectAfterLogin'))
-      navigateTo(redirectPath)
+      router.push(redirectPath.value.toString())
     }, 1000)
   }
   catch (error) {
@@ -161,7 +161,12 @@ const submitLoginForm = async () => {
     <Toast />
     <div class="register-container text-xs">
       <p>{{ $t("login.no_account") }}</p>
-      <NuxtLink to="/register">
+      <NuxtLink
+        :to="{
+          path: '/register',
+          query: { redirect: redirectPath },
+        }"
+      >
         <p id="sign-up-link">
           {{ $t("login.sign_up") }}
         </p>

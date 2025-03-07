@@ -16,9 +16,9 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
   const user = useSupabaseUser()
 
   if (!user.value) {
-    // stocke l'URL de redirection dans le localStorage
-    localStorage.setItem('redirectAfterLogin', to.fullPath)
-
-    return navigateTo('/login')
+    return navigateTo({
+      path: '/login',
+      query: { redirect: to.fullPath },
+    })
   }
 })
