@@ -79,13 +79,6 @@ h4 {
 .footer {
   height: auto;
 }
-// bloque les alert
-// .alert {
-//   position: fixed;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-// }
 .p-toast {
   max-width: 90vw !important;
   max-height: 90vh !important;

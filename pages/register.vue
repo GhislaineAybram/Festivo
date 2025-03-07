@@ -19,6 +19,9 @@ useHead({
     { name: 'description', content: t('metadescription.register') },
   ],
 })
+const route = useRoute()
+const router = useRouter()
+const redirectPath = ref(route.query.redirect || '/dashboard')
 
 const toast = useToast()
 const runtimeConfig = useRuntimeConfig()
@@ -119,9 +122,7 @@ const submitRegisterForm = async () => {
 
     // Redirect user after successful login
     setTimeout(() => {
-      const redirectPath = localStorage.getItem('redirectAfterLogin') || '/'
-      localStorage.removeItem('redirectAfterLogin')
-      navigateTo(redirectPath)
+      router.push(redirectPath.value.toString())
     }, 1000)
   }
   catch (error) {
