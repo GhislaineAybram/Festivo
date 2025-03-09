@@ -153,7 +153,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
   <main class="main">
     <div class="bg-white">
       <div class="grid grid-cols-1 sm:grid-cols-[650px_1fr]">
-        <!-- bloc d'en-tête de l'événement -->
+        <!-- event header -->
         <div id="photo-title-celebration">
           <h1 class="text-3xl font-bold sm:text-4xl">
             {{ celebration?.name }}
@@ -175,7 +175,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
           {{ celebration?.description }}
         </h3>
 
-        <!-- bloc de réponse de l'utilisateur -->
+        <!-- answer guest section -->
         <div
           id="important-info"
           class="content-center"
@@ -221,7 +221,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
             </div>
           </div>
 
-          <!-- bloc info importantes événement -->
+          <!-- important event info -->
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <CalendarIcon
