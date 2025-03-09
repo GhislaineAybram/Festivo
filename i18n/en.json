@@ -154,6 +154,7 @@
     "the": "The",
     "hour": "Hour",
     "at": "at",
+    "guest": "{count} guest | {count} guests",
     "guests": "Guests",
     "answer": "My answer",
     "creation-title": "Create your event",
