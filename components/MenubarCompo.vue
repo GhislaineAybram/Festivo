@@ -26,14 +26,14 @@ const { t } = useI18n()
 const runtimeConfig = useRuntimeConfig()
 
 const { auth } = useSupabaseClient()
-const { data: { user } } = await auth.getUser()
-const metadata = user?.user_metadata
-const alias = ref(metadata?.alias || '')
+const user = useSupabaseUser()
+const metadata = computed(() => user.value?.user_metadata || {})
+const alias = ref(metadata.value?.alias || '')
 // Initialize user avatar
 const avatar = ref('pi pi-user')
 
 // Watch for user changes to update alias
-watch(() => user, (newUser) => {
+watch(() => user.value, (newUser) => {
   if (newUser) {
     const updatedMetadata = newUser.user_metadata
     alias.value = updatedMetadata?.alias || ''
@@ -43,7 +43,7 @@ watch(() => user, (newUser) => {
 /**
  * Fetch and update user avatar when user ID is available
  */
-watch(() => user, async (newUser) => {
+watch(() => user.value, async (newUser) => {
   if (newUser && newUser.id) {
     const { data: userAvatar, error: userAvatarError } = await useFetch<UserWithAvatar>(
       () => `${runtimeConfig.public.apiUrl}/user/${newUser.id}`,
@@ -67,6 +67,8 @@ watch(() => user, async (newUser) => {
  */
 const userLogout = async () => {
   await auth.signOut()
+  user.value = null
+  alias.value = null
   navigateTo('/login')
 }
 
@@ -75,7 +77,7 @@ const userLogout = async () => {
  * @returns {string} URL to the user's profile or homepage
  */
 const getProfilePage = () => {
-  return user ? `/profile/${user.id}` : '/' // Redirige vers le profil si l'utilisateur est connecté
+  return user.value ? `/profile/${user.value.id}` : '/'
 }
 
 /**
@@ -147,10 +149,10 @@ const changeLanguage = async (code: 'en' | 'fr') => {
 }
 
 // Initialize language preference from user metadata on page load
-if (metadata?.language) {
-  setLocale(metadata.language)
-  currentLocale.value = metadata.language
-  currentFlag.value = languages.find(lang => lang.code === metadata.language)?.flag || currentFlag.value
+if (metadata.value?.language) {
+  setLocale(metadata.value.language)
+  currentLocale.value = metadata.value.language
+  currentFlag.value = languages.find(lang => lang.code === metadata.value.language)?.flag || currentFlag.value
 }
 </script>
 
@@ -277,12 +279,6 @@ if (metadata?.language) {
               </transition>
             </Menu>
 
-            <!-- <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <span class="absolute -inset-1.5" />
-            <span class="sr-only">View notifications</span>
-            <BellIcon class="h-6 w-6" aria-hidden="true" />
-          </button> -->
-
             <!-- Profile dropdown -->
             <Menu
               as="div"
@@ -308,7 +304,6 @@ if (metadata?.language) {
                     style="background-color: #fff6f0; color: #180161"
                     shape="circle"
                   />
-                  <!-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> -->
                 </MenuButton>
               </div>
               <transition

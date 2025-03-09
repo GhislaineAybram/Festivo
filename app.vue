@@ -7,8 +7,9 @@
  * Main component of Nuxt application.
  */
 
-const nuxtApp = useNuxtApp()
-const loading = ref(false)
+import { ref } from 'vue'
+import { useRouter } from 'nuxt/app'
+
 const { locale } = useI18n()
 
 useHead({
@@ -16,23 +17,35 @@ useHead({
     lang: locale.value,
   },
 })
-nuxtApp.hook('page:start', () => {
-  loading.value = true
-})
-nuxtApp.hook('page:finish', () => {
-  loading.value = false
+
+const isLoading = ref(false)
+const router = useRouter()
+
+onMounted(() => {
+  router.beforeEach((to, from) => {
+    // Ne pas afficher lors du chargement initial
+    if (from.name !== undefined) {
+      isLoading.value = true
+    }
+    return true
+  })
+
+  router.afterEach(() => {
+    // Petit délai pour éviter le clignotement
+    setTimeout(() => {
+      isLoading.value = false
+    }, 200)
+  })
 })
 </script>
 
 <template>
+  <NuxtLoadingIndicator />
   <header>
     <MenubarCompo />
   </header>
   <div class="main">
-    <div
-      v-if="loading"
-      class="fixed left-0 top-0 h-0.5 w-full z-50 bg-green-500"
-    />
+    <LoadingSpinner v-if="isLoading" />
     <NuxtPage />
     <slot />
   </div>

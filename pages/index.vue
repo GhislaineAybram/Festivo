@@ -101,6 +101,12 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
       >
         {{ $t("welcome.events") }}
       </h1>
+      <!-- If no celebration created -->
+      <div v-if="!upcomingCelebrationsCreated.length && !pastCelebrationsCreated.length">
+        <p class="text-center mt-6 mb-6">
+          {{ $t("celebration.no-celebration-created") }}
+        </p>
+      </div>
       <!-- upcoming celebrations created -->
       <div class="celebrations-gallery">
         <CelebrationCard
@@ -117,6 +123,12 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
       >
         {{ $t("welcome.invitations") }}
       </h1>
+      <!-- If no invitation -->
+      <div v-if="!upcomingCelebrationsInvited.length && !pastCelebrationsInvited.length">
+        <p class="text-center mt-6 mb-6">
+          {{ $t("celebration.no-celebration-invited") }}
+        </p>
+      </div>
       <!-- upcoming invitations -->
       <div class="celebrations-gallery">
         <CelebrationCard :celebrations="upcomingCelebrationsInvited" />
@@ -124,24 +136,6 @@ const pastCelebrationsInvited = computed(() => celebrationsListByGuest.value.pas
       <!-- past invitations -->
       <div class="celebrations-gallery">
         <CelebrationCardPast :celebrations="pastCelebrationsInvited" />
-      </div>
-    </div>
-
-    <div v-else>
-      <h1
-        class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight"
-      >
-        {{ $t("welcome.not_logged") }}
-      </h1>
-      <div class="flex justify-center min-h-screen">
-        <NuxtLink to="login">
-          <button
-            type="button"
-            class="mt-8 min-w-32 mt-3 rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 hover:bg-gray-50"
-          >
-            {{ $t("button.login") }}
-          </button>
-        </NuxtLink>
       </div>
     </div>
   </main>

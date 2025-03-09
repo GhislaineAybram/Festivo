@@ -4,7 +4,8 @@
     "events": "Vos événements",
     "invitations": "Vos invitations",
     "event_link": "Vers la page de l'événement",
-    "not_logged": "Vous n'êtes pas connecté"
+    "not_logged": "Vous n'êtes pas connecté",
+    "loading": "Chargement en cours..."
   },
     "metadescription": {
     "about": "Découvrez Festivo, notre mission et nos valeurs. Rejoignez-nous pour organiser et partager des événements inoubliables !",
