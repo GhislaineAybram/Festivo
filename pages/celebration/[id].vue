@@ -23,10 +23,8 @@ import {
   EnvelopeOpenIcon,
   ExclamationTriangleIcon,
   GiftIcon,
-  InformationCircleIcon,
   MapPinIcon,
   MusicalNoteIcon,
-  TrophyIcon,
   UsersIcon,
 } from '@heroicons/vue/24/outline'
 import { useToast } from 'primevue/usetoast'
@@ -154,7 +152,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
 <template>
   <main class="main">
     <div class="bg-white">
-      <div class="grid grid-cols-1 sm:grid-cols-2">
+      <div class="grid grid-cols-1 sm:grid-cols-[650px_1fr]">
         <!-- bloc d'en-tête de l'événement -->
         <div id="photo-title-celebration">
           <h1 class="text-3xl font-bold sm:text-4xl">
@@ -162,8 +160,8 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
           </h1>
           <img
             :src="celebration?.celebrationType.picture"
-            alt="photo de ballons"
-            class="photo-celebration"
+            alt="event picture"
+            class="w-full max-w-[650px] mx-auto photo-celebration"
           >
           <p
             id="celebration-author-name"
@@ -182,7 +180,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
           id="important-info"
           class="content-center"
         >
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
             <div class="flex items-center mt-4">
               <EnvelopeOpenIcon
                 class="icon rounded-lg size-8 text-white p-1.5"
@@ -224,7 +222,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
           </div>
 
           <!-- bloc info importantes événement -->
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <CalendarIcon
                 class="icon rounded-lg size-8 text-white p-1.5"
@@ -238,7 +236,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <ClockIcon
                 class="icon rounded-lg size-8 text-white p-1.5"
@@ -252,7 +250,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <MapPinIcon
                 class="icon rounded-lg size-8 text-white p-1.5"
@@ -266,7 +264,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
+          <!-- <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <InformationCircleIcon
                 class="icon rounded-lg size-8 text-white p-1.5"
@@ -278,9 +276,9 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
             <div class="text-sm text-gray-500 self-center">
               blablabla
             </div>
-          </div>
+          </div> -->
 
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 border-t border-orange-200 pt-4 mt-4">
+          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 border-t border-orange-200 pt-4 mt-4">
             <div class="flex items-center">
               <ExclamationTriangleIcon
                 class="icon-attention rounded-lg size-8 text-white p-1.5"
@@ -289,15 +287,18 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
                 Attention
               </div>
             </div>
-            <div class="flex text-sm text-gray-500 self-center">
+            <div class="flex flex-wrap text-sm text-gray-500 self-center">
               <div
                 v-for="item in restrictions"
                 :key="item.key"
               >
-                <div v-if="restrictionsguestsList?.[item.db] > 0">
+                <div
+                  v-if="restrictionsguestsList?.[item.db] > 0"
+                  class="relative"
+                >
                   <div
                     v-tooltip.autoPosition.fit.focus="{
-                      value: restrictionsguestsList?.[item.db] + ' guests ' + item.name + ' = ' + item.description,
+                      value: t('celebration.guest', restrictionsguestsList?.[item.db]) + ' ' + item.name + ' = ' + item.description,
                       class: 'bg-primary text-xs p-2 max-w-[200px]',
                     }"
                     :style="{
@@ -305,9 +306,10 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
                         item.logo || defaultAvatarUrl
                       })`,
                     }"
-                    class="inline-block size-10 rounded-full guest-avatar"
+                    class="inline-block size-12 rounded-full guest-avatar relative"
                     :title="item.name || 'Restriction logo'"
                     tabindex="0"
+                    :pt="{ appendTo: 'body' }"
                   />
                 </div>
               </div>
@@ -322,48 +324,48 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
         </h3>
       </div>
 
-      <div
-        id="option-info"
-        class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
-      >
-        <div class="border-t border-gray-200">
-          <div class="flex items-center pt-4">
-            <UsersIcon
-              class="icon rounded-lg size-8 text-white p-1.5"
-            />
-            <div class="font-medium text-gray-900 flex px-2">
-              {{ nbGuests }} {{ $t("celebration.guests") }}
-            </div>
-          </div>
-          <div class="flex space-x-1 mt-4">
-            <div
-              v-for="(guest, index) in guestInfoList"
-              :key="index"
-            >
-              <div
-                :style="{
-                  backgroundImage: `url(${
-                    guest.userId.avatar.picture || defaultAvatarUrl
-                  })`,
-                }"
-                :alt="
-                  guest.userId.avatar.pictureDescription || 'User avatar'
-                "
-                class="inline-block size-12 rounded-full ring-2 guest-avatar"
-                :class="{
-                  'ring-green-500': guest.isComing === true,
-                  'ring-red-500': guest.isComing === false,
-                  'ring-gray-500': guest.isComing === null,
-                }"
-              />
-              <p class="mt-1 text-xs text-gray-900 text-center">
-                {{ guest.userId.alias }}
-              </p>
-            </div>
+      <div class="border-t border-gray-200 gap-x-8 pl-4 flex">
+        <div class="flex items-center mt-4">
+          <UsersIcon
+            class="icon rounded-lg size-8 text-white p-1.5"
+          />
+          <div class="font-medium text-gray-900 flex px-2">
+            {{ nbGuests }} {{ $t("celebration.guests") }}
           </div>
         </div>
+        <div class="flex space-x-3 mt-4">
+          <div
+            v-for="(guest, index) in guestInfoList"
+            :key="index"
+          >
+            <div
+              :style="{
+                backgroundImage: `url(${
+                  guest.userId.avatar.picture || defaultAvatarUrl
+                })`,
+              }"
+              :alt="
+                guest.userId.avatar.pictureDescription || 'User avatar'
+              "
+              class="inline-block size-12 rounded-full ring-2 guest-avatar"
+              :class="{
+                'ring-green-500': guest.isComing === true,
+                'ring-red-500': guest.isComing === false,
+                'ring-gray-500': guest.isComing === null,
+              }"
+            />
+            <p class="mt-1 text-xs text-gray-900 text-center">
+              {{ guest.userId.alias }}
+            </p>
+          </div>
+        </div>
+      </div>
 
-        <div class="border-t border-gray-200 pt-4 flex">
+      <div
+        id="option-info"
+        class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 pb-4"
+      >
+        <div class="border-t border-gray-200 pt-4 mt-4 flex">
           <GiftIcon class="icon rounded-lg size-8 text-white p-1.5" />
           <div class="flex items-center">
             <div class="font-medium text-gray-900 flex px-2">
@@ -372,7 +374,7 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
           </div>
         </div>
 
-        <div class="border-t border-gray-200 pt-4 flex">
+        <div class="border-t border-gray-200 pt-4 mt-4 flex">
           <MusicalNoteIcon
             class="icon rounded-lg size-8 text-white p-1.5"
           />
@@ -383,14 +385,14 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
           </div>
         </div>
 
-        <div class="border-t border-gray-200 pt-4 mb-4 flex">
+        <!-- <div class="border-t border-gray-200 pt-4 mb-4 flex">
           <TrophyIcon class="icon rounded-lg size-8 text-white p-1.5" />
           <div class="flex items-center">
             <div class="font-medium text-gray-900 flex px-2">
               Concours déguisement
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </main>
@@ -401,8 +403,6 @@ const updateIsComingGuestInDatabase = async (guestResponse: boolean | null) => {
   position: relative;
 }
 .photo-celebration {
-  max-height: 600px;
-  width: auto;
   filter: opacity(35%);
   z-index: -1;
 }
