@@ -1,7 +1,9 @@
 # Festivo - projet RNCP
 
 Ce projet est créé dans le cadre du RNCP 37873 TP Concepteur développeur d'applications – Niveau VI.
-Festivo est une plateforme de gestion d’événements conçue pour simplifier l’organisation de rassemblements. Les invités peuvent notamment partager leurs allergies ou restrictions alimentaires.
+
+Festivo est une plateforme de gestion d’événements qui répond au double défi de simplifier l’organisation de rassemblements tout en sensibilisant aux différentes restrictions alimentaires souvent mal comprises.
+Ainsi, Festivo a comme objectif de transformer la gestion des préférences alimentaires et des besoins spécifiques en un véritable levier de partage et d’échange, plutôt qu’une contrainte organisationnelle.
 
 ## Lancement du projet
 
@@ -54,41 +56,52 @@ Lancement du conteneur basé sur cette image docker :
 docker run -env-file .env -p 3000:3000 festivo
 ```
 
-## Aperçu du projet
-
-(visuels à venir)
-
 ## Tech Stack
 
 - **Langages:** Typescript, CSS
 - **Framework Full-stack:** Nuxt (serveur Nitro)
 - **Library:** Tailwind, Primevue
 - **Database:** Supabase (PostgreSQL)
+- **ORM:** Drizzle
 - **Conteneurisation:** Docker
 - **Mise en production:** Vercel
+
+## Aperçu du projet
+
+![image](https://github.com/user-attachments/assets/87b9cc05-75e6-48e0-aa8f-3c52d79c17bd)
+Page d'accueil du site Festivo
+
+![image](https://github.com/user-attachments/assets/b822f1b0-c193-4eb1-a7bd-bb9f4a6b6c10)
+Page événement du site Festivo
+
+![image](https://github.com/user-attachments/assets/8f386a9f-06d9-4a24-91fb-39cd26b9bdb6)
+Page profil du site Festivo
 
 ## Fonctionnalités ajoutées
 
 **Système d'authentification**
-- [X] Inscription et connexion des utilisateurs via Supabase (authentification sécurisée)
-- [X] Affichage de messages d’erreur en cas de non-respect de règles (règles de création du mot de passe, champs non renseigné, …)
+- [X] Inscription et authentification des utilisateurs via Supabase (authentification sécurisée)
+- [X] Affichage de messages d’erreur en cas de non-respect des règles (règles de définition du mot de passe, champs non renseigné, …)
 - [X] Lien de réinitialisation du mot de passe
 - [X] Page de redéfinition du mot de passe (accessible via lien reçu par email)
 
 **Gestion des événements**
 - [X] Création d’un événement : formulaire accessible aux utilisateurs authentifiés
-- [X] Page événement modifiable par son auteur authentifié
-- [X] Invitation des invités via un lien
-- [X] Page événement (vision invité) :
+- [X] Page événement modifiable par son auteur authentifié (via un middleware)
+- [X] Invitation des invités via un lien généré
+- [X] Page événement :
   - affichage des informations de l'événement
   - envoi de la réponse à l'événement par l'utilisateur connecté
-  - affichage du nombre d'invités et de leurs réponses (via un cercle de couleur autour de leur avatar)
-  - affichage des restrictions ou allergies alimentaires des invités ayant confirmé leur présence
+  - affichage du nombre d'invités et de leurs réponses (via un cercle de couleur autour de l'avatar)
+  - affichage des restrictions ou allergies alimentaires "présentes" à l'événement (correspondant aux utilisateurs ayant confirmé leur présence)
 
 **Page profil utilisateur**
 - [X] Affichage et modification possible des informations de l'utilisateur :
   - pseudo
   - avatar
-  - restrictions alimentaires
+  - régimes alimentaires
   - allergies alimentaires
 - [X] Possibilité de supprimer son compte utilisateur (et données associées) : conformité RGPD
+
+**Application bilingue**
+Site disponible en anglais / français
