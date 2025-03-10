@@ -64,6 +64,7 @@ docker run -env-file .env -p 3000:3000 festivo
 - **Database:** Supabase (PostgreSQL)
 - **ORM:** Drizzle
 - **Conteneurisation:** Docker
+- **Intégration Continue:** GitHub Actions
 - **Mise en production:** Vercel
 
 ## Aperçu du projet
