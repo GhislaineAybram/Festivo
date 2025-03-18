@@ -497,7 +497,7 @@ const deleteAccount = async (userId: string) => {
         <div class="mt-6 flex md:flex-row px-4 items-center justify-center md:justify-end gap-x-6">
           <button
             type="button"
-            class="min-w-32 mt-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 hover:bg-gray-50"
+            class="min-w-48 button-cancel"
           >
             {{ $t("user.cancel") }}
           </button>
@@ -506,7 +506,7 @@ const deleteAccount = async (userId: string) => {
             type="button"
             label="Success"
             severity="success"
-            class="min-w-32 mt-3 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="min-w-48 button-action"
             @click.prevent="updateUserProfile"
           >
             {{ $t("user.save") }}
@@ -525,7 +525,7 @@ const deleteAccount = async (userId: string) => {
           </div>
           <button
             type="button"
-            class="min-w-64 mx-auto md:mx-0 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            class="min-w-64 button-delete"
             @click.prevent="openDeleteAlert"
           >
             {{ $t("user.delete.button") }}
@@ -557,23 +557,42 @@ h2 {
   overflow: visible;
 }
 .edit-button {
-  background-color: $indigo;
+  align-items: center;
+  background-color: $indigo !important;
+  border: 1px solid $indigo;
+  border-radius: .5rem;
+  box-shadow: #B9B2CF 0 1px 3px 0;
+  box-sizing: border-box;
+  color: $indigo;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
   width: 29px;
   height: 29px;
-  border-radius: 10px;
-  border: 1px solid $indigo;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-  cursor: pointer;
-  transition-duration: 0.3s;
-  overflow: hidden;
-  text-decoration: none !important;
+  margin-top: 9px;
   position: absolute;
   bottom: 0;
   right: 0;
+}
+.edit-button:hover,
+.edit-button:focus {
+ box-shadow: #B9B2CF 0 4px 12px;
+ color: $indigo;
+}
+.edit-button:hover {
+ transform: translateY(-1px);
+}
+.edit-button:active {
+ background-color: #2F1A70!important;
+ border-color: $seashell;
+ box-shadow: #B9B2CF 0 2px 4px;
+ color: $seashell;
+ transform: translateY(0);
 }
 .edit-svgIcon {
   width: 17px;

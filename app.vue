@@ -98,4 +98,169 @@ h4 {
   word-wrap: break-word !important;
   overflow: hidden !important;
 }
+// action button
+.button-action {
+  font-size: 0.875rem;
+  align-items: center;
+  background-color: $indigo !important;
+  border: 1.5px solid $indigo;
+  border-radius: .375rem;
+  box-shadow: #B9B2CF 0 1px 3px 0;
+  box-sizing: border-box;
+  color: $seashell;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 2.2rem;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+}
+.button-action:hover,
+.button-action:focus {
+ box-shadow: #B9B2CF 0 4px 12px;
+ color: $tangerine;
+}
+.button-action:hover {
+ transform: translateY(-1px);
+}
+.button-action:active {
+ background-color: #2F1A70!important;
+ box-shadow: #B9B2CF 0 2px 4px;
+ color: $tangerine;
+ transform: translateY(0);
+}
+// validation button
+.button-validation {
+  font-size: 0.875rem;
+ align-items: center;
+ background-color: $tangerine !important;
+ border: 1.5px solid $indigo;
+ border-radius: .375rem;
+ box-shadow: #FFC69D 0 1px 3px 0;
+ box-sizing: border-box;
+ color: $indigo;
+ cursor: pointer;
+ display: inline-flex;
+ justify-content: center;
+ min-height: 2.2rem;
+ transition: all 250ms;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ vertical-align: baseline;
+}
+.button-validation:hover,
+.button-validation:focus {
+ box-shadow: #FFC69D 0 4px 12px;
+ color: $indigo;
+}
+.button-validation:hover {
+ transform: translateY(-1px);
+}
+.button-validation:active {
+ background-color: #FF8C37!important;
+ border-color: $seashell;
+ box-shadow: #FFC69D 0 2px 4px;
+ color: $seashell;
+ transform: translateY(0);
+}
+// cancel button
+.button-cancel {
+  font-size: 0.875rem;
+ align-items: center;
+ background-color: $haze !important;
+ border: 1.5px solid $indigo;
+ border-radius: .375rem;
+ box-shadow: #B9B2CF 0 1px 3px 0;
+ box-sizing: border-box;
+ color: $indigo;
+ cursor: pointer;
+ display: inline-flex;
+ justify-content: center;
+ min-height: 2.2rem;
+ transition: all 250ms;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ vertical-align: baseline;
+}
+.button-cancel:hover,
+.button-cancel:focus {
+ box-shadow: #B9B2CF 0 4px 12px;
+}
+.button-cancel:hover {
+ transform: translateY(-1px);
+}
+.button-cancel:active {
+ background-color: #B5ADCB !important;
+ box-shadow: #B9B2CF 0 2px 4px;
+ transform: translateY(0);
+}
+// info button
+.button-info {
+  font-size: 0.875rem;
+ align-items: center;
+ background-color: $seashell !important;
+ border: 1.5px solid $indigo;
+ border-radius: .375rem;
+ box-shadow: #FFD7BD 0 1px 3px 0;
+ box-sizing: border-box;
+ color: $indigo;
+ cursor: pointer;
+ display: inline-flex;
+ justify-content: center;
+ min-height: 2.2rem;
+ transition: all 250ms;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ vertical-align: baseline;
+}
+.button-info:hover,
+.button-info:focus {
+ box-shadow: #FFD7BD 0 4px 12px;
+}
+.button-info:hover {
+ transform: translateY(-1px);
+}
+.button-info:active {
+ background-color: #FFD7BD !important;
+ box-shadow: #FFD7BD 0 2px 4px;
+ transform: translateY(0);
+}
+// delete button
+.button-delete {
+  font-size: 0.875rem;
+ align-items: center;
+ background-color: #fb2c36 !important;
+ border: 1.5px solid #fb2c36;
+ border-radius: .375rem;
+ box-shadow: #fc777e 0 1px 3px 0;
+ box-sizing: border-box;
+ color: $whisper;
+ cursor: pointer;
+ display: inline-flex;
+ justify-content: center;
+ min-height: 2.2rem;
+ transition: all 250ms;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ vertical-align: baseline;
+}
+.button-delete:hover,
+.button-delete:focus {
+ box-shadow: #fc777e 0 4px 12px;
+}
+.button-delete:hover {
+ transform: translateY(-1px);
+}
+.button-delete:active {
+ background-color: #d6040e !important;
+ box-shadow: #fc777e 0 2px 4px;
+ transform: translateY(0);
+}
 </style>

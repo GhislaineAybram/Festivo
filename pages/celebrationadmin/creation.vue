@@ -254,7 +254,7 @@ const createNewCelebration = async () => {
           <button
             id="celebration-creation"
             type="submit"
-            class="block w-full rounded-md bg-indigo-600 px-3.5 py-2 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="w-full button-validation"
           >
             {{ $t("celebration.creation-button") }}
           </button>
@@ -283,10 +283,6 @@ h1 {
   gap: 0.5rem;
   flex-direction: column;
   width: 95%;
-}
-#celebration-creation {
-  background-color: $tangerine;
-  color: $indigo;
 }
 input,
 select,

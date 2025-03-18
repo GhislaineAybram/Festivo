@@ -151,7 +151,7 @@ const submitLoginForm = async () => {
           id="sign-in"
           type="submit"
           label="sign-in-button"
-          class="block w-full rounded-md bg-indigo-600 px-3.5 py-1 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="button-action"
           @click="submitLoginForm"
         >
           {{ $t('login.button') }}
@@ -220,18 +220,6 @@ h1 {
   align-content: center;
   text-align: center;
 }
-#sign-in,
-#sign-in * {
-  background-color: $indigo;
-  color: $seashell;
-  border-color: $indigo;
-}
-#sign-in:hover,
-#sign-in:hover * {
-  background-color: $tangerine;
-  color: $indigo;
-  border-color: $indigo;
-}
 #sign-up-link {
   font-weight: bold;
   color: $indigo;
@@ -240,7 +228,6 @@ h1 {
   padding-top: 5px;
   text-align: right;
 }
-
 a {
   color: $indigo;
   text-decoration: underline;

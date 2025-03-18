@@ -84,7 +84,7 @@ const copyToClipboard = async () => {
       id="share"
       type="button"
       icon="pi pi-share-alt"
-      class="flex w-full items-center justify-center gap-4 rounded-md px-7 py-3 text-center font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      class="px-7 py-3 gap-4 button-action"
       @click="toggle"
     >
       <ShareIcon
@@ -154,16 +154,6 @@ const copyToClipboard = async () => {
 </template>
 
 <style lang="scss" scoped>
-#share:hover {
-  background-color: $indigo;
-  color: $tangerine;
-  border-color: $indigo;
-}
-#share {
-  background-color: $tangerine;
-  color: $indigo;
-  border-color: $indigo;
-}
 .avatar {
   background-color: $seashell;
 }

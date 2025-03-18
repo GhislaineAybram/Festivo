@@ -100,13 +100,15 @@ export default defineComponent({
         <div class="heading line-clamp-3">
           {{ celebration.description }}
         </div>
-        <a
-          class="action place-content-between"
-          :href="`/celebration/${celebration.celebrationId}`"
-        >
-          {{ $t("welcome.event_link") }}
-          <span aria-hidden="true">→</span>
-        </a>
+        <NuxtLink :to="`/celebration/${celebration.celebrationId}`">
+          <button
+            type="button"
+            class="w-full button-action gap-4"
+          >
+            {{ $t("welcome.event_link") }}
+            <span aria-hidden="true">→</span>
+          </button>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -128,7 +130,9 @@ export default defineComponent({
   gap: 1.5rem;
   padding: 2rem;
 }
-
+.button-action {
+  font-size: 0.8rem;
+}
 .card {
   position: relative;
   display: flex;
@@ -217,40 +221,40 @@ export default defineComponent({
   color: $indigo;
 }
 
-.action {
-  display: inline-flex;
-  margin-top: auto;
-  color: $indigo;
-  font-size: 0.8rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  align-items: center;
-  gap: 0.25rem;
-  background-color: $tangerine;
-  padding: 4px 8px;
-  border-radius: 10px;
-  border: 1px solid $indigo;
-}
-.action span {
-  background-color: $tangerine;
-}
-
 .edit-button {
-  background-color: $tangerine;
+  align-items: center;
+  background-color: $tangerine !important;
+  border: 1px solid $indigo;
+  border-radius: .375rem;
+  box-shadow: #FFC69D 0 1px 3px 0;
+  box-sizing: border-box;
+  color: $indigo;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
   width: 29px;
   height: 29px;
-  border-radius: 10px;
-  border: 1px solid $indigo;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-  cursor: pointer;
-  transition-duration: 0.3s;
-  overflow: hidden;
-  text-decoration: none !important;
   margin-top: 9px;
+}
+.edit-button:hover,
+.edit-button:focus {
+ box-shadow: #FFC69D 0 4px 12px;
+ color: $indigo;
+}
+.edit-button:hover {
+ transform: translateY(-1px);
+}
+.edit-button:active {
+ background-color: #FF8C37!important;
+ border-color: $seashell;
+ box-shadow: #FFC69D 0 2px 4px;
+ color: $seashell;
+ transform: translateY(0);
 }
 .edit-svgIcon {
   width: 17px;
