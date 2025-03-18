@@ -179,7 +179,7 @@ const submitNewPasswordForm = async () => {
           id="new-password-button"
           type="submit"
           label="new-password-button"
-          class="block w-full rounded-md bg-indigo-600 px-3.5 py-1 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="button-action"
         >
           {{ $t('new_password.button') }}
         </button>
@@ -218,16 +218,6 @@ h3 {
 }
 #register, a, a:hover, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span *, span {
   background-color: white;
-}
-#new-password-button, #new-password-button * {
-  background-color: $indigo;
-  color: $seashell;
-  border-color: $indigo;
-}
-#new-password-button:hover, #new-password-button:hover * {
-  background-color: $tangerine;
-  color: $indigo;
-  border-color: $indigo;
 }
 #accept-conditions {
   color: $indigo;

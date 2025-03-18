@@ -345,7 +345,7 @@ const deleteCelebration = async (id: string) => {
           <button
             id="celebration-creation"
             type="button"
-            class="block w-full rounded-md bg-indigo-600 px-3.5 py-2 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            class="w-full button-validation"
             @click="updateCelebrationInformations(id)"
           >
             {{ $t("celebration.modification.save") }}
@@ -364,7 +364,7 @@ const deleteCelebration = async (id: string) => {
           </div>
           <button
             type="button"
-            class="min-w-64 mx-auto md:mx-0 rounded-md !bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            class="min-w-64 button-delete text-sm"
             @click="openDeleteAlert"
           >
             {{ $t("celebration.delete.button") }}

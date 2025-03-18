@@ -267,7 +267,7 @@ watchEffect(() => {
           type="submit"
           label="sign-up-button"
           icon="pi pi-user-plus"
-          class="block w-full rounded-md bg-indigo-600 px-3.5 py-1 text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="button-validation"
         >
           {{ $t('register.button') }}
         </button>
@@ -302,16 +302,6 @@ h3 {
 }
 #register, a, a:hover, #register form, #accept-conditions, #accept-label, #form-inside, #form-inside img, span *, span {
   background-color: white;
-}
-#sign-up-button, #sign-up-button * {
-  background-color: $indigo;
-  color: $seashell;
-  border-color: $indigo;
-}
-#sign-up-button:hover, #sign-up-button:hover * {
-  background-color: $tangerine;
-  color: $indigo;
-  border-color: $indigo;
 }
 #accept-conditions {
   color: $indigo;

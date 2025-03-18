@@ -83,13 +83,15 @@ export default defineComponent({
         <div class="heading line-clamp-3">
           {{ celebration.description }}
         </div>
-        <a
-          class="action place-content-between"
-          :href="`/celebration/${celebration.celebrationId}`"
-        >
-          {{ $t("welcome.event_link") }}
-          <span aria-hidden="true">→</span>
-        </a>
+        <NuxtLink :to="`/celebration/${celebration.celebrationId}`">
+          <button
+            type="button"
+            class="w-full button-info gap-4"
+          >
+            {{ $t("welcome.event_link") }}
+            <span aria-hidden="true">→</span>
+          </button>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -106,7 +108,9 @@ export default defineComponent({
   padding: 2rem;
   opacity: 0.5;
 }
-
+.button-info {
+  font-size: 0.8rem;
+}
 .card {
   position: relative;
   display: flex;
@@ -193,25 +197,6 @@ export default defineComponent({
   font-size: 20px;
   font-weight: 900;
   color: $indigo;
-}
-
-.action {
-  display: inline-flex;
-  margin-top: auto;
-  color: $indigo;
-  font-size: 0.8rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  align-items: center;
-  gap: 0.25rem;
-  background-color: $whisper;
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid $indigo;
-  border-radius: 10px;
-}
-.action span {
-  background-color: $whisper;
 }
 
 .finished {
