@@ -494,10 +494,10 @@ const deleteAccount = async (userId: string) => {
           v-if="errorMsg"
           class="mt-6 flex text-sm text-red-500 items-center justify-center"
         >{{ errorMsg }}</span>
-        <div class="mt-6 flex md:flex-row px-4 items-center justify-center md:justify-end gap-x-6">
+        <div class="mt-6 flex flex-col gap-4 md:flex-row px-4 items-center justify-center md:justify-end gap-x-6">
           <button
             type="button"
-            class="min-w-48 button-cancel"
+            class="min-w-64 button-cancel"
           >
             {{ $t("user.cancel") }}
           </button>
@@ -506,7 +506,7 @@ const deleteAccount = async (userId: string) => {
             type="button"
             label="Success"
             severity="success"
-            class="min-w-48 button-action"
+            class="min-w-64 button-action"
             @click.prevent="updateUserProfile"
           >
             {{ $t("user.save") }}
@@ -525,7 +525,7 @@ const deleteAccount = async (userId: string) => {
           </div>
           <button
             type="button"
-            class="min-w-64 button-delete"
+            class="min-w-64 button-delete self-center md:self-auto"
             @click.prevent="openDeleteAlert"
           >
             {{ $t("user.delete.button") }}

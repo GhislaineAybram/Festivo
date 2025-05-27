@@ -181,7 +181,7 @@ const updateAvatarInDatabase = async (): Promise<void> => {
                 </div>
               </div>
               <div
-                class="bg-gray-50 px-4 py-3 mt-4 gap-4 sm:flex sm:flex-row-reverse sm:px-6"
+                class="bg-gray-50 px-4 py-3 mt-4 flex flex-col gap-4 sm:flex sm:flex-row-reverse sm:px-6"
               >
                 <button
                   type="button"
